@@ -1,20 +1,64 @@
 import { useState } from 'react'
 
 export default function Navbar({ navigation }) {
-  const dynamicLinks = navigation?.pages || []
-  const links = (navigation?.links || [
-    { label: 'Product', url: '#' },
-    { label: 'Developers', url: '#' },
-    { label: 'Solutions', url: '#' },
-    { label: 'Docs', url: '#' },
-  ]).concat(dynamicLinks.map(p => ({ label: p.label || p.title || p.navLabel, url: `/${p.slug}` })))
+  const dynamicPages = Array.isArray(navigation?.pages) ? navigation.pages : []
+  const pageSlugByLabel = dynamicPages.reduce((acc, p) => {
+    const lbl = (p.navLabel || p.title || p.label || '').toString().trim().toLowerCase()
+    if (lbl) acc[lbl] = p.slug
+    return acc
+  }, {})
+
+  const defaultMapping = {
+    product: 'product',
+    developers: 'developers',
+    solutions: 'solutions',
+    docs: 'docs',
+    documentation: 'docs',
+    pricing: 'pricing',
+    blog: 'blog',
+    contact: 'contact',
+    support: 'support',
+    company: 'company',
+    careers: 'careers',
+    privacy: 'privacy',
+    terms: 'terms',
+    security: 'security',
+  }
+
+  const fallback = [
+    { label: 'Product', url: '/product' },
+    { label: 'Developers', url: '/developers' },
+    { label: 'Solutions', url: '/solutions' },
+    { label: 'Docs', url: '/docs' },
+  ]
+
+  const baseLinks = Array.isArray(navigation?.links) && navigation.links.length > 0 ? navigation.links : fallback
+
+  // Normalize: if a CMS link has url '#', replace with the matching page slug if available
+  const normalized = baseLinks.map((l) => {
+    const label = l.label || l.title || ''
+    const url = l.url || ''
+    const normalizedLabel = label.toString().trim().toLowerCase()
+    const slug = pageSlugByLabel[normalizedLabel] || defaultMapping[normalizedLabel]
+    const finalUrl = (!url || url === '#') && slug ? `/${slug}` : (url || '#')
+    return { label, url: finalUrl }
+  })
+
+  // Append dynamic pages not already present
+  const existing = new Set(normalized.map((l) => l.url))
+  const appended = dynamicPages
+    .map((p) => ({ label: p.navLabel || p.title || p.label, url: `/${p.slug}` }))
+    .filter((p) => !existing.has(p.url))
+
+  const links = normalized.concat(appended)
   const [open, setOpen] = useState(false)
+  console.log(links)
 
   return (
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-100">
       <div className="mx-auto max-w-6xl flex items-center justify-between px-6 py-4">
         <div className="flex items-center gap-6">
-          <div className="text-xl font-extrabold tracking-tight">WrenAI</div>
+          <a href="/" className="text-xl font-extrabold tracking-tight">WrenAI</a>
           <nav className="hidden md:flex items-center gap-6 text-gray-700">
             {links.map((l, i) => (
               <a key={i} href={l.url} className="hover:text-gray-900 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">

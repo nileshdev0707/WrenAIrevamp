@@ -1,10 +1,31 @@
-export default function SiteFooter() {
+export default function SiteFooter({ pages = [] }) {
+  const link = (slug) => `/${slug}`
   const cols = [
-    { title: 'Company', links: ['About', 'Careers', 'Press'] },
-    { title: 'Connect', links: ['Contact', 'Support', 'Slack'] },
-    { title: 'Partners', links: ['Program', 'Solutions', 'Marketplace'] },
-    { title: 'Resources', links: ['Docs', 'Blog', 'Guides'] },
-    { title: 'Legal', links: ['Privacy', 'Terms', 'Security'] },
+    { title: 'Company', links: [
+      { label: 'Company', slug: 'company' },
+      { label: 'Careers', slug: 'careers' },
+      { label: 'Press', slug: 'press' },
+    ] },
+    { title: 'Connect', links: [
+      { label: 'Contact', slug: 'contact' },
+      { label: 'Support', slug: 'support' },
+      { label: 'Slack', slug: '#' },
+    ] },
+    { title: 'Partners', links: [
+      { label: 'Program', slug: 'partners' },
+      { label: 'Solutions', slug: 'solutions' },
+      { label: 'Marketplace', slug: '#' },
+    ] },
+    { title: 'Resources', links: [
+      { label: 'Docs', slug: 'docs' },
+      { label: 'Blog', slug: 'blog' },
+      { label: 'Guides', slug: 'guides' },
+    ] },
+    { title: 'Legal', links: [
+      { label: 'Privacy', slug: 'privacy' },
+      { label: 'Terms', slug: 'terms' },
+      { label: 'Security', slug: 'security' },
+    ] },
   ]
   return (
     <footer className="border-t border-gray-100 py-14">
@@ -15,7 +36,7 @@ export default function SiteFooter() {
               <div className="font-semibold mb-3">{col.title}</div>
               <ul className="space-y-2 text-sm text-gray-600">
                 {col.links.map((l, j) => (
-                  <li key={j}><a href="#" className="hover:text-gray-900">{l}</a></li>
+                  <li key={j}><a href={l.slug?.startsWith('#') ? l.slug : link(l.slug)} className="hover:text-gray-900">{l.label}</a></li>
                 ))}
               </ul>
             </div>

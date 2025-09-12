@@ -54,7 +54,7 @@ export default function Home({
             return null;
         }
       })}
-      <SiteFooter />
+      <SiteFooter pages={navigation?.pages || []} />
     </div>
   );
 }
