@@ -11,11 +11,22 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "produtHero": {
+    "productHero": {
       "type": "dynamiczone",
       "components": [
         "sections.hero-section"
       ]
+    },
+    "WhatIsWrenAI": {
+      "type": "dynamiczone",
+      "components": [
+        "product.whatiswrenai-block"
+      ]
+    },
+    "ContentBlock": {
+      "type": "component",
+      "component": "shared.content-block",
+      "repeatable": true
     }
   }
 }

@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_product_what_is_wren_ai_items",
+  "info": {
+    "displayName": "What Is Wren AI Item"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subTitle": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "position": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

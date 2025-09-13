@@ -225,6 +225,38 @@ export interface PricingTier extends Struct.ComponentSchema {
   };
 }
 
+export interface ProductWhatIsWrenAiItem extends Struct.ComponentSchema {
+  collectionName: 'components_product_what_is_wren_ai_items';
+  info: {
+    displayName: 'What Is Wren AI Item';
+  };
+  attributes: {
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    position: Schema.Attribute.String;
+    subTitle: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface ProductWhatiswrenaiBlock extends Struct.ComponentSchema {
+  collectionName: 'components_product_whatIsWrenAI_blocks';
+  info: {
+    displayName: 'What Is Wren AI';
+  };
+  attributes: {
+    badge: Schema.Attribute.String;
+    description: Schema.Attribute.RichText;
+    descriptionDetail: Schema.Attribute.Blocks;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    subtitle: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+    WhatisWrenAIItem: Schema.Attribute.Component<
+      'product.what-is-wren-ai-item',
+      true
+    >;
+  };
+}
+
 export interface SectionsCtaSection extends Struct.ComponentSchema {
   collectionName: 'components_sections_cta_sections';
   info: {
@@ -257,6 +289,9 @@ export interface SectionsHeroSection extends Struct.ComponentSchema {
     displayName: 'hero-section';
   };
   attributes: {
+    backgroundimage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     badge: Schema.Attribute.String;
     buttons: Schema.Attribute.Component<'shared.button', true>;
     image: Schema.Attribute.Media<'images'>;
@@ -283,7 +318,7 @@ export interface SharedBottomContentBlock extends Struct.ComponentSchema {
   };
   attributes: {
     btnBottomContentBlock: Schema.Attribute.Component<'shared.button', true>;
-    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    image: Schema.Attribute.Media<'images'>;
     subTitle: Schema.Attribute.String;
     title: Schema.Attribute.String;
     topTitle: Schema.Attribute.String;
@@ -308,6 +343,8 @@ export interface SharedContentBlock extends Struct.ComponentSchema {
   };
   attributes: {
     alignment: Schema.Attribute.Enumeration<['left', 'center', 'right']>;
+    badge: Schema.Attribute.String;
+    contentBlockButton: Schema.Attribute.Component<'shared.button', true>;
     description: Schema.Attribute.RichText;
     descriptionDetail: Schema.Attribute.Blocks;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
@@ -346,6 +383,8 @@ declare module '@strapi/strapi' {
       'pricing.price-features': PricingPriceFeatures;
       'pricing.price-hero': PricingPriceHero;
       'pricing.tier': PricingTier;
+      'product.what-is-wren-ai-item': ProductWhatIsWrenAiItem;
+      'product.whatiswrenai-block': ProductWhatiswrenaiBlock;
       'sections.cta-section': SectionsCtaSection;
       'sections.feature-grid': SectionsFeatureGrid;
       'sections.hero-section': SectionsHeroSection;

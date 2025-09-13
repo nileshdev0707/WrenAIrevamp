@@ -1,7 +1,7 @@
 {
-  "collectionName": "components_shared_content_blocks",
+  "collectionName": "components_product_whatIsWrenAI_blocks",
   "info": {
-    "displayName": "ContentBlock"
+    "displayName": "What Is Wren AI"
   },
   "options": {},
   "attributes": {
@@ -17,23 +17,6 @@
     "description": {
       "type": "richtext"
     },
-    "layout": {
-      "type": "enumeration",
-      "enum": [
-        "text",
-        "table",
-        "cards",
-        "grid"
-      ]
-    },
-    "alignment": {
-      "type": "enumeration",
-      "enum": [
-        "left",
-        "center",
-        "right"
-      ]
-    },
     "image": {
       "type": "media",
       "multiple": false,
@@ -47,9 +30,9 @@
     "descriptionDetail": {
       "type": "blocks"
     },
-    "contentBlockButton": {
+    "WhatisWrenAIItem": {
       "type": "component",
-      "component": "shared.button",
+      "component": "product.what-is-wren-ai-item",
       "repeatable": true
     }
   },

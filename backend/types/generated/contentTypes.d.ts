@@ -708,6 +708,7 @@ export interface ApiProductPageProductPage extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    ContentBlock: Schema.Attribute.Component<'shared.content-block', true>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -717,11 +718,12 @@ export interface ApiProductPageProductPage extends Struct.SingleTypeSchema {
       'api::product-page.product-page'
     > &
       Schema.Attribute.Private;
-    produtHero: Schema.Attribute.DynamicZone<['sections.hero-section']>;
+    productHero: Schema.Attribute.DynamicZone<['sections.hero-section']>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    WhatIsWrenAI: Schema.Attribute.DynamicZone<['product.whatiswrenai-block']>;
   };
 }
 
