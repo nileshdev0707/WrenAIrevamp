@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react'
 
 export default function Logos({ items }) {
-  console.log(items, 'items')
   const base = process.env.NEXT_PUBLIC_STRAPI_URL || ''
   const sliderRef = useRef(null)
   
@@ -50,7 +49,7 @@ export default function Logos({ items }) {
   }, [items.length])
 
   return (
-    <section className="pt-5 pb-25">
+    <section>
       <div className="mx-auto">
         {/* <div className="text-center text-xs uppercase tracking-wider text-gray-500">Trusted by leading teams</div> */}
         <div 

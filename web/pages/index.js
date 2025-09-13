@@ -20,7 +20,10 @@ export default function Home({
   stats,
   cta,
   homeSections,
+  homeRes,
+  homePageRes
 }) {
+  console.log(homePageRes, 'homePageRes')
   const base = process.env.NEXT_PUBLIC_STRAPI_URL || ''
   const homePageSections = (
     homeSections || [
@@ -81,6 +84,7 @@ export async function getStaticProps() {
     statsRes,
     ctaRes,
     homeRes,
+    homePageRes,
   ] = await Promise.all([
     api
       .get(`/api/hero?populate=*`)
@@ -124,20 +128,21 @@ export async function getStaticProps() {
       .get(`/api/home`)
       .then((r) => r.data)
       .catch(() => null),
+      api
+      .get(`/api/home-page?populate=*`)
+      .then((r) => r.data)
+      .catch(() => null),
   ]);
 
-  console.log(heroRes);
-  console.log(logosRes);
-  console.log(capRes);
-  console.log(navRes);
-
+  console.log(homePageRes, 'homePageRes 1111');
   return {
+
     props: {
-      hero: heroRes?.data?.attributes ?? heroRes?.data ?? null,
-      logos: Array.isArray(logosRes?.data)
-        ? logosRes.data.map((l) => l?.attributes ?? l)
+      hero: homePageRes?.data?.hero ?? homePageRes?.data?.hero ?? null,
+      logos: Array.isArray(homePageRes?.data?.TrustedBy)
+        ? homePageRes.data.TrustedBy.map((l) => l?.attributes ?? l)
         : [],
-      capabilities: capRes?.data?.attributes ?? capRes?.data ?? null,
+      capabilities: homePageRes?.data?.coreCapabilities ?? homePageRes?.data.coreCapabilities ?? null,
       navigation: {
         ...(navRes?.nav?.data?.attributes ?? navRes?.nav?.data ?? {}),
         pages: Array.isArray(navRes?.pages?.data)
@@ -152,7 +157,9 @@ export async function getStaticProps() {
       stats: statsRes?.data?.attributes ?? statsRes?.data ?? null,
       cta: ctaRes?.data?.attributes ?? ctaRes?.data ?? null,
       homeSections:
-        homeRes?.data?.attributes?.sections ?? homeRes?.data?.sections ?? null,
+        homeRes?.data?.sections ?? homeRes?.data?.sections ?? null,
+      homeRes: homeRes,
+      homePageRes: homePageRes?.data?.attributes ?? homePageRes?.data ?? null,
     },
     revalidate: 10,
   };
