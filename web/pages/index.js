@@ -60,7 +60,7 @@ export default function Home({
 }
 
 export async function getStaticProps() {
-  const STRAPI = process.env.STRAPI_URL || "http://localhost:1337";
+  const STRAPI = process.env.STRAPI_URL
   const token = process.env.STRAPI_TOKEN;
   const api = axios.create({
     baseURL: STRAPI,
