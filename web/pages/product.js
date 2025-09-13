@@ -1,33 +1,40 @@
 import axios from "axios";
 import Navbar from "../components/Navbar";
-import Capabilities from "../components/Capabilities";
 import SiteFooter from "../components/SiteFooter";
-
+import ProductHero from "../components/product/productHero";
+import WhatIsWrenAI from "../components/product/whatIsWrenAI";
+import ContentBlock from "../components/product/contentBlock";
 export default function Product({ product, navigation }) {
+  const base = process.env.NEXT_PUBLIC_STRAPI_URL || "";
+  const heroImage = product?.productHero?.[0]?.backgroundimage?.url;
+  console.log("product --------==> ", product);
   return (
     <div>
       <Navbar navigation={navigation} />
-      <main className="max-w-6xl mx-auto px-6 py-16">
-        <section className="text-center">
-          <div className="inline-block bg-blue-50 text-blue-700 px-4 py-1 rounded-full text-sm">
-            Product
-          </div>
-          <h1 className="mt-4 text-4xl font-extrabold tracking-tight">
-            {product?.title || "Product"}
-          </h1>
-          <p className="mt-3 text-gray-600 max-w-3xl mx-auto">
-            {product?.summary}
-          </p>
-        </section>
-        <div className="mt-10">
-          <Capabilities
-            data={{
-              title: "What you get",
-              subtitle: "",
-              features: product?.features || [],
-            }}
-          />
+      <main className="max-w-6xl mx-auto px-6">
+        <div
+          style={{
+            backgroundImage: `url(${
+              heroImage?.startsWith("http") ? "" : base
+            }${heroImage})`,
+          }}
+          className="bg-no-repeat pt-24 pb-10 max-w-6xl mx-auto"
+        >
+          {/* Product Hero */}
+          {product?.productHero?.length && (
+            <ProductHero product={product?.productHero?.[0]} />
+          )}
+         
+         {/* What is Wren AI */}
+         {product?.WhatIsWrenAI?.length && (
+          <WhatIsWrenAI product={product?.WhatIsWrenAI?.[0]} />
+         )}
         </div>
+       {/* Content Block */}
+       {product?.ContentBlock?.length && (
+        <ContentBlock product={product?.ContentBlock} />
+       )}
+       
       </main>
       <SiteFooter />
     </div>
@@ -35,7 +42,7 @@ export default function Product({ product, navigation }) {
 }
 
 export async function getStaticProps() {
-  const STRAPI = process.env.STRAPI_URL
+  const STRAPI = process.env.STRAPI_URL;
   const token = process.env.STRAPI_TOKEN;
   const api = axios.create({
     baseURL: STRAPI,
@@ -43,7 +50,7 @@ export async function getStaticProps() {
   });
   const [prodRes, navBundle] = await Promise.all([
     api
-      .get("/api/product?populate=*")
+      .get("/api/product-page?populate=*")
       .then((r) => r.data)
       .catch(() => null),
     Promise.all([
