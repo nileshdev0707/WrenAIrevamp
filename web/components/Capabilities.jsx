@@ -2,7 +2,7 @@ export default function Capabilities({ data }) {
   if (!data) return null
   const features = data.features || []
   return (
-    <section className="py-24 bg-gradient-to-b from-gray-50 via-white to-white">
+    <section className="">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center">
           <div className="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">Core Capabilities</div>

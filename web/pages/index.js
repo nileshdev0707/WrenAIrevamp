@@ -21,25 +21,29 @@ export default function Home({
   cta,
   homeSections,
 }) {
+  const base = process.env.NEXT_PUBLIC_STRAPI_URL || ''
+  const homePageSections = (
+    homeSections || [
+      { type: "hero" },
+      { type: "logos" },
+      { type: "capabilities" },
+      { type: "feature-showcase" },
+      { type: "work" },
+      { type: "stats" },
+      { type: "cta" },
+    ]
+  );
   return (
     <div>
       <Navbar navigation={navigation} />
-      {(
-        homeSections || [
-          { type: "hero" },
-          { type: "logos" },
-          { type: "capabilities" },
-          { type: "feature-showcase" },
-          { type: "work" },
-          { type: "stats" },
-          { type: "cta" },
-        ]
-      ).map((s, i) => {
+       {(homePageSections?.find((s) => s?.type === 'hero') || homePageSections?.find((s) => s?.type === 'logos')) && (
+         <div style={{ backgroundImage: `url(${hero?.heroImage?.url.startsWith('http') ? '' : base}${hero?.backgroundimage?.url})`,  WebkitBackgroundSize: '100%',backgroundPosition: 'center bottom' }} className="bg-cover">
+           {homePageSections?.find((s) => s?.type === 'hero') && <Hero data={hero} />}
+           {homePageSections?.find((s) => s?.type === 'logos') && <Logos items={logos} />}
+         </div>
+       )}
+      {homePageSections?.map((s, i) => {
         switch (s.type) {
-          case "hero":
-            return <Hero key={i} data={hero} />;
-          case "logos":
-            return <Logos key={i} items={logos} />;
           case "capabilities":
             return <Capabilities key={i} data={capabilities} />;
           case "feature-showcase":
