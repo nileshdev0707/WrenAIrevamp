@@ -1,2 +1,17 @@
-.idea!/.idea/vcs.xml
+# Node modules
+node_modules/
+**/node_modules/
+
+# Next.js build output
+.next/
+web/.next/
+**/.next/
+
+# IDE folders
+.idea/
+**/.idea/
+
+# OS files
+.DS_Store
+.idea/*
 web/.next/*/*
