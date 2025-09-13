@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_home_trusted_by_data_teams",
+  "info": {
+    "displayName": "Trusted by Data Teams"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subTitle": {
+      "type": "string"
+    },
+    "trustedByDataTeamsItem": {
+      "type": "component",
+      "component": "home.trusted-data-teams-list",
+      "repeatable": true
+    },
+    "teamsItem": {
+      "type": "component",
+      "component": "home.teams-list",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

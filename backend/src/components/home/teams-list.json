@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_home_teams_lists",
+  "info": {
+    "displayName": "teamsList"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,11 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_feature_showcase",
+  "info": { "displayName": "feature-showcase", "singularName": "feature-showcase", "pluralName": "feature-showcases" },
+  "options": { "draftAndPublish": true },
+  "attributes": {
+    "cards": { "type": "component", "repeatable": true, "component": "home.feature-card" }
+  }
+}
+
+

@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_pricing_frequently_asked_questions",
+  "info": {
+    "displayName": "Frequently  Asked Questions"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "detail": {
+      "type": "richtext"
+    }
+  },
+  "config": {}
+}

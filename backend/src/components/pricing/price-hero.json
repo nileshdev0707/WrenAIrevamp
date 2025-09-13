@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_pricing_price_heroes",
+  "info": {
+    "displayName": "price-hero"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

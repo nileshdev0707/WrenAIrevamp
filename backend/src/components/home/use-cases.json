@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_home_use_cases_s",
+  "info": {
+    "displayName": "Use Cases "
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subTitle": {
+      "type": "string"
+    },
+    "badge": {
+      "type": "string"
+    },
+    "htmlDescription": {
+      "type": "richtext"
+    },
+    "description": {
+      "type": "string"
+    },
+    "useCasesItems": {
+      "type": "component",
+      "component": "home.use-cases-items",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

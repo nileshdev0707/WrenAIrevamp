@@ -1,0 +1,46 @@
+{
+  "collectionName": "components_home_core_capabilities_lists",
+  "info": {
+    "displayName": "Core Capabilities List"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subTitle": {
+      "type": "string"
+    },
+    "badge": {
+      "type": "string"
+    },
+    "bullets": {
+      "type": "json"
+    },
+    "image": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "size": {
+      "type": "enumeration",
+      "enum": [
+        "sm",
+        "lg"
+      ]
+    },
+    "variant": {
+      "type": "enumeration",
+      "enum": [
+        "light",
+        "dark"
+      ]
+    }
+  },
+  "config": {}
+}

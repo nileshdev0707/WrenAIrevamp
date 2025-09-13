@@ -1,0 +1,12 @@
+{
+  "kind": "collectionType",
+  "collectionName": "home_logos",
+  "info": { "displayName": "logos", "singularName": "logos", "pluralName": "home-logos" },
+  "options": { "draftAndPublish": true },
+  "attributes": {
+    "name": { "type": "string" },
+    "image": { "type": "media", "multiple": false, "allowedTypes": ["images"] }
+  }
+}
+
+

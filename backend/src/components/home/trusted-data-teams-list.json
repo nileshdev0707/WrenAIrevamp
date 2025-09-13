@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_home_trusted_data_teams_lists",
+  "info": {
+    "displayName": "trustedDataTeamsList"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "badge": {
+      "type": "string"
+    },
+    "subTitle": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,11 @@
+{
+  "collectionName": "components_home_feature_cards",
+  "info": { "displayName": "feature-card" },
+  "attributes": {
+    "title": { "type": "string", "required": true },
+    "description": { "type": "text" },
+    "theme": { "type": "enumeration", "enum": ["dark", "light"], "default": "dark" }
+  }
+}
+
+

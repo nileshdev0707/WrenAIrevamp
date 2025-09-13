@@ -1,0 +1,17 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_capabilities",
+  "info": { "displayName": "capabilities", "singularName": "capabilities", "pluralName": "home-capabilities" },
+  "options": { "draftAndPublish": true },
+  "attributes": {
+    "title": { "type": "string" },
+    "subtitle": { "type": "string" },
+    "features": {
+      "type": "component",
+      "repeatable": true,
+      "component": "home.feature"
+    }
+  }
+}
+
+

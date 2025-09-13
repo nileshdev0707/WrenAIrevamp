@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "product_pages",
+  "info": {
+    "singularName": "product-page",
+    "pluralName": "product-pages",
+    "displayName": "Product Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "produtHero": {
+      "type": "dynamiczone",
+      "components": [
+        "sections.hero-section"
+      ]
+    }
+  }
+}

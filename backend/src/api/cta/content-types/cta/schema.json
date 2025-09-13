@@ -1,0 +1,15 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_cta",
+  "info": { "displayName": "cta", "singularName": "cta", "pluralName": "ctas" },
+  "options": { "draftAndPublish": true },
+  "attributes": {
+    "title": { "type": "string" },
+    "primaryLabel": { "type": "string" },
+    "primaryUrl": { "type": "string" },
+    "secondaryLabel": { "type": "string" },
+    "secondaryUrl": { "type": "string" }
+  }
+}
+
+
