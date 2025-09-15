@@ -1,18 +1,19 @@
 import Image from 'next/image'
 
 export default function Hero({ data }) {
+  console.log(data, 'data hero')
   const badge = data?.badge || '#1 Generative BI Solution'
   const headline = data?.headline || 'Analytics without the Wait.\nDecisions without the Bottleneck.'
   const sub = data?.subheadline || 'Trusted by 10,000+ data experts and analytics teams worldwide.'
   const buttons = data?.buttons || [{ label: 'Start Free Trial Today', url: '#' }, { label: 'Schedule a demo', url: '#' }]
   const base = process.env.NEXT_PUBLIC_STRAPI_URL || ''
-  const heroMedia = data?.heroImage
+  const heroMedia = data?.image
   const heroImage = typeof heroMedia === 'string'
     ? heroMedia
     : (heroMedia?.url || heroMedia?.data?.attributes?.url || null)
 
   return (
-    <section className="relative overflow-hidden text-center py-24 px-6">
+    <section className="relative overflow-hidden text-center md:pt-24 md:pb-24 pt-20 sm:pb-10 py-5 sm:px-6 px-4">
       {/* <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-blue-50 via-white to-white" /> */}
       <div className="relative max-w-6xl mx-auto md:mt-25 sm:mt-10 mt-5">
       <div className="inline-block text-sm sm:text-base bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-sm animate-fade-in-up">{badge}</div>

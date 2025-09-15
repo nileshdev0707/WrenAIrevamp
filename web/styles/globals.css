@@ -60,3 +60,85 @@ body { @apply bg-white text-gray-800 antialiased; }
 .animation-delay-800 {
   animation-delay: 800ms;
 }
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@scroll-timeline fadeTimeline {
+  source: auto;
+  orientation: block;
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+
+.fade-up.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-left {
+  opacity: 0;
+  transform: translateX(-118px);
+  transition: all 1s ease-out;
+} 
+
+.fade-left.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 0.8s ease-out;
+}
+
+.fade-right.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-in {
+  opacity: 0;
+  transition: all 0.6s ease-out;
+}
+
+.fade-in.show {
+  opacity: 1;
+}
+
+/* Staggered animations for words */
+.word-animate {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease-out;
+}
+
+.word-animate.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Debug: Make sure animations are visible */
+.fade-up, .fade-left, .fade-right, .word-animate {
+  will-change: transform, opacity;
+}
+
+/* Test animation - should be visible immediately */
+.test-animation {
+  background: red;
+  color: white;
+  padding: 10px;
+  margin: 10px 0;
+}
