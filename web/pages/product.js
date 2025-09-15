@@ -4,10 +4,13 @@ import SiteFooter from "../components/SiteFooter";
 import ProductHero from "../components/product/productHero";
 import WhatIsWrenAI from "../components/product/whatIsWrenAI";
 import ContentBlock from "../components/product/contentBlock";
+import WhyWrenSection from "../components/product/whyWrenSection";
+import Footer from "../components/footer";
+
 export default function Product({ product, navigation }) {
+console.log("product ==> ", product);
   const base = process.env.NEXT_PUBLIC_STRAPI_URL || "";
   const heroImage = product?.productHero?.[0]?.backgroundimage?.url;
-  console.log("product --------==> ", product);
   return (
     <div>
       <Navbar navigation={navigation} />
@@ -18,24 +21,32 @@ export default function Product({ product, navigation }) {
               heroImage?.startsWith("http") ? "" : base
             }${heroImage})`,
           }}
-          className="bg-no-repeat pt-24 pb-10 max-w-6xl mx-auto"
+          className="bg-no-repeat pt-24 pb-10 max-w-6xl mx-auto bg-contain"
         >
           {/* Product Hero */}
           {product?.productHero?.length && (
-            <ProductHero product={product?.productHero?.[0]} />
+            <ProductHero data={product?.productHero} />
           )}
          
          {/* What is Wren AI */}
          {product?.WhatIsWrenAI?.length && (
-          <WhatIsWrenAI product={product?.WhatIsWrenAI?.[0]} />
+          <WhatIsWrenAI data={product?.WhatIsWrenAI} />
          )}
         </div>
        {/* Content Block */}
        {product?.ContentBlock?.length && (
         <ContentBlock product={product?.ContentBlock} />
        )}
-       
+
       </main>
+       {/* Why Wren Section */}
+       {product?.WhyWrenSection?.length && (
+        <WhyWrenSection data={product?.WhyWrenSection} />
+       )}
+       {/* Footer */}
+       {product?.bottomContentBlock?.length && (
+          <Footer data={product?.bottomContentBlock} />
+        )}
       <SiteFooter />
     </div>
   );
