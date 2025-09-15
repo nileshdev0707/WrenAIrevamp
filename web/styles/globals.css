@@ -80,6 +80,7 @@ body { @apply bg-white text-gray-800 antialiased; }
   opacity: 0;
   transform: translateY(30px);
   transition: all 0.8s ease-out;
+  will-change: transform, opacity;
 }
 
 .fade-up.show {
@@ -131,7 +132,7 @@ body { @apply bg-white text-gray-800 antialiased; }
 }
 
 /* Debug: Make sure animations are visible */
-.fade-up, .fade-left, .fade-right, .word-animate {
+.fade-left, .fade-right, .word-animate {
   will-change: transform, opacity;
 }
 
@@ -141,4 +142,25 @@ body { @apply bg-white text-gray-800 antialiased; }
   color: white;
   padding: 10px;
   margin: 10px 0;
+}
+
+
+.fade-card {
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.fade-card.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Hide scrollbar for tab navigation */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
 }

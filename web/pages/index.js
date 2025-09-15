@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Logos from "../components/Logos";
 import Capabilities from "../components/Capabilities";
-import FeatureShowcase from "../components/FeatureShowcase";
+// import FeatureShowcase from "../components/FeatureShowcase";
 import Work from "../components/Work";
 import Stories from "../components/Stories";
 import Stats from "../components/Stats";
@@ -15,27 +15,33 @@ export default function Home({
   logos,
   capabilities,
   navigation,
-  featureShowcase,
+  // featureShowcase,
   work,
   stats,
   cta,
   homeSections,
-  homeRes,
-  homePageRes
+  // homeRes,
+  homePageRes,
+  stories,
 }) {
-  console.log(homePageRes, 'homePageRes')
+  console.log(homeSections, 'homeSections')
+
+// const stories = homePageRes?.caseStudies ?? homePageRes?.data ?? null
+// console.log(stories, 'stories 999')
   const base = process.env.NEXT_PUBLIC_STRAPI_URL || ''
   const homePageSections = (
-    homeSections || [
+  [    
       { type: "hero" },
       { type: "logos" },
       { type: "capabilities" },
-      { type: "feature-showcase" },
+      // { type: "feature-showcase" },
       { type: "work" },
+      { type: "stories"},
       { type: "stats" },
       { type: "cta" },
     ]
   );
+  console.log(homePageSections, 'homePageSections');
   return (
     <div>
       <Navbar navigation={navigation} />
@@ -49,10 +55,12 @@ export default function Home({
         switch (s.type) {
           case "capabilities":
             return <Capabilities key={i} data={capabilities} />;
-          case "feature-showcase":
-            return <FeatureShowcase key={i} data={featureShowcase} />;
+          // case "feature-showcase":
+          //   return <FeatureShowcase key={i} data={featureShowcase} />;
           case "work":
             return <Work key={i} data={work} />;
+          case "stories":
+            return <Stories key={i} data={stories}/>;
           case "stats":
             return <Stats key={i} data={stats} />;
           case "cta":
@@ -85,6 +93,7 @@ export async function getStaticProps() {
     ctaRes,
     homeRes,
     homePageRes,
+    
   ] = await Promise.all([
     api
       .get(`/api/hero?populate=*`)
@@ -128,13 +137,13 @@ export async function getStaticProps() {
       .get(`/api/home`)
       .then((r) => r.data)
       .catch(() => null),
-      api
+    api
       .get(`/api/home-page?populate=*`)
       .then((r) => r.data)
       .catch(() => null),
   ]);
 
-  console.log(homePageRes, 'homePageRes 1111');
+  
   return {
 
     props: {
@@ -152,14 +161,16 @@ export async function getStaticProps() {
               .sort((a, b) => (a.navOrder || 0) - (b.navOrder || 0))
           : [],
       },
-      featureShowcase: featureRes?.data?.attributes ?? featureRes?.data ?? null,
-      work: workRes?.data?.attributes ?? workRes?.data ?? null,
+      // featureShowcase: featureRes?.data?.attributes ?? featureRes?.data ?? null,
+      // work: workRes?.data?.attributes ?? workRes?.data ?? null,
+      work: homePageRes?.data ?? homePageRes?.data ?? null,
       stats: statsRes?.data?.attributes ?? statsRes?.data ?? null,
       cta: ctaRes?.data?.attributes ?? ctaRes?.data ?? null,
-      homeSections:
-        homeRes?.data?.sections ?? homeRes?.data?.sections ?? null,
-      homeRes: homeRes,
+      // homeSections:
+      //   homeRes?.data?.sections ?? homeRes?.data?.sections ?? null,
+      // homeRes: homeRes,
       homePageRes: homePageRes?.data?.attributes ?? homePageRes?.data ?? null,
+      stories: homePageRes?.data ?? homePageRes?.data ?? null,
     },
     revalidate: 10,
   };
