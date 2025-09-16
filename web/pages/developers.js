@@ -35,9 +35,9 @@ export default function Developers({ developers, navigation }) {
       {developers?.wrenEngine?.length && (
         <WrenEngine data={developers?.wrenEngine} />
       )}
-      {/* {developers?.whyWrenAI?.length && (
-        <WhyWrenAI data={developers?.whyWrenAI} />
-      )} */}
+        {/* {developers?.whyWrenAI?.length && (
+            <WhyWrenAI data={developers?.whyWrenAI} />
+        )} */}
       <SiteFooter />
     </div>
   );
