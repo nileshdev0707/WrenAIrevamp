@@ -98,10 +98,8 @@ export default function Capabilities({ data }) {
                      <div className="space-y-3">
                        {item.bullets.map((feature, featureIndex) => (
                          <div key={featureIndex} className="flex items-start gap-3">
-                          <div>
-                          <svg className="w-4 h-4 sm:w-5 sm:h-5 fill-[#00A5DB]" xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 256 256" enableBackground="new 0 0 256 256">
-                              <g><g><path fill="" d="M128,10C62.8,10,10,62.8,10,128c0,65.2,52.8,118,118,118c65.2,0,118-52.8,118-118C246,62.8,193.2,10,128,10L128,10z M113.8,185.5L113.8,185.5c-4.2,4.2-10.7,4.9-15.6,2c-0.9-0.5-1.8-1.2-2.6-2l0,0L43,132.8c-5-5-5-13.1,0-18.1c5-5,13.1-5,18.1,0l43.6,43.6l82.5-82.5c5-5,13.1-5,18.1,0c5,5,5,13.1,0,18.1L113.8,185.5L113.8,185.5z"/></g></g>
-                           </svg>
+                          <div className="min-w-5 w-4 h-4 sm:w-5 sm:h-5">
+                             <img src="/svg/check.svg" alt="check" className="w-4 h-4 sm:w-5 sm:h-5" />
                             </div>
                             <p className="sm:text-base text-sm text-[#F3F3F3]">{feature}</p>
                          </div>
