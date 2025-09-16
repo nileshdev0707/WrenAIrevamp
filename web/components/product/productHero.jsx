@@ -29,7 +29,7 @@ export default function ProductHero({ data }) {
             {item?.buttons?.map((btn, index) => (
               <a
                 key={btn.id}
-                href={btn.url}
+                // href={btn.url}
                 className={`px-6 py-3 rounded-md font-medium text-sm transition-all duration-200 shadow-sm
                 ${
                   index === 0

@@ -1,7 +1,7 @@
 export default function Footer({ data }) {
   const base = process.env.NEXT_PUBLIC_STRAPI_URL || "";
   return (
-    <section className="max-w-6xl mx-auto py-10 md:py-16 xl:px-0 sm:px-8">
+    <section className="max-w-6xl mx-auto py-10 md:py-16 xl:px-0 px-8">
       <div className="rounded-2xl bg-blue-600 text-white md:px-16 sm:px-8 py-10 px-5">
         {data?.map((item, index) => {
           const url = item.image?.url;
@@ -17,13 +17,13 @@ export default function Footer({ data }) {
                   </a>
                   <h3 className="text-3xl lg:text-4xl font-medium mt-8">{item?.title}</h3>
                   <p className="text-sm opacity-90 mt-4">{item?.subTitle}</p>
-                  {item?.btnBottomContentBlock?.map((btn) => (
-                    <div key={btn.id} className="flex gap-5">
-                      <button className="bg-white cursor-pointer mt-8 px-4.5 py-3 rounded-md text-blue-600 text-sm">
+                  <div className="flex gap-5">
+                    {item?.btnBottomContentBlock?.map((btn) => (
+                      <button className="bg-white cursor-pointer mt-8 px-4.5 py-3 rounded-md text-blue-600 text-sm" key={btn.id}>
                         {btn?.label}
                       </button>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
               <div className="justify-end items-center sm:flex hidden">

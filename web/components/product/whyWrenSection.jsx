@@ -23,7 +23,7 @@ export default function WhyWrenSection({ data }) {
       {data?.map((item, index) => {
         const { title, badge, WhyWrenSectionDetails } = item;
         return (
-          <div className="max-w-6xl mx-auto xl:px-0 px-10">
+          <div className="max-w-6xl mx-auto xl:px-0 px-10" key={index}>
             <div className="text-center">
               <button className="border border-blue-600 text-black px-4 py-2 rounded-full font-medium text-sm shadow-sm">
                 <div className="flex items-center gap-2">
