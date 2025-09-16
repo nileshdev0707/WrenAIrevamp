@@ -1,7 +1,6 @@
 import Image from 'next/image'
 
 export default function Hero({ data }) {
-  console.log(data, 'data hero')
   const badge = data?.badge || '#1 Generative BI Solution'
   const headline = data?.headline || 'Analytics without the Wait.\nDecisions without the Bottleneck.'
   const sub = data?.subheadline || 'Trusted by 10,000+ data experts and analytics teams worldwide.'

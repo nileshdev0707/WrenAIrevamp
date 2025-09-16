@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 
 export default function Navbar({ navigation }) {
-  console.log(navigation, 'navigation')
   const base = process.env.NEXT_PUBLIC_STRAPI_URL || ''
   const dynamicPages = Array.isArray(navigation?.pages) ? navigation.pages : []
   const pageSlugByLabel = dynamicPages.reduce((acc, p) => {
@@ -104,7 +103,7 @@ export default function Navbar({ navigation }) {
                   <nav className="hidden lg:flex items-center gap-8">
                     {links.map((l, i) => (
                       <a 
-                        key={i} 
+                        key={`desktop-${i}`} 
                         href={l.url} 
                         className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-md px-2 py-1"
                       >
@@ -136,13 +135,8 @@ export default function Navbar({ navigation }) {
                   className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200" 
                   onClick={() => setOpen(v => !v)}
                 >
-                  <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    viewBox="0 0 24 24" 
-                    fill="currentColor" 
-                    className="h-6 w-6 text-gray-600"
-                  >
-                    <path d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"/>
+                  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 256 256" enableBackground="new 0 0 256 256" className="h-6 w-6">
+                    <g><g><path fill="#000000" d="M246,210.6c0,6.5-5.4,11.8-11.7,11.8H21.7c-6.5,0-11.7-5.2-11.7-11.8c0-6.5,5.4-11.8,11.7-11.8h212.6C240.8,198.8,246,204,246,210.6z M21.7,57.2h212.6c6.3,0,11.7-5.3,11.7-11.8c0-6.6-5.2-11.8-11.7-11.8H21.7c-6.3,0-11.7,5.3-11.7,11.8C10,52,15.2,57.2,21.7,57.2z M234.3,116.2H21.7c-6.3,0-11.7,5.3-11.7,11.8c0,6.6,5.2,11.8,11.7,11.8h212.6c6.3,0,11.7-5.3,11.7-11.8C246,121.4,240.8,116.2,234.3,116.2z"/></g></g>
                   </svg>
                 </button>
               </div>
@@ -153,7 +147,7 @@ export default function Navbar({ navigation }) {
                   <nav className="px-6 py-4 space-y-2">
                     {links.map((l, i) => (
                       <a 
-                        key={i} 
+                        key={`mobile-${i}`} 
                         href={l.url} 
                         className="block py-3 px-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium transition-colors duration-200"
                         onClick={() => setOpen(false)}
