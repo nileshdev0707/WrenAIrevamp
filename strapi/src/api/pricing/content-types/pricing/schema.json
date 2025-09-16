@@ -1,0 +1,73 @@
+{
+  "kind": "singleType",
+  "collectionName": "site_pricing",
+  "info": {
+    "displayName": "Pricing Page",
+    "singularName": "pricing",
+    "pluralName": "pricings"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "hero": {
+      "type": "dynamiczone",
+      "components": [
+        "sections.hero-section"
+      ]
+    },
+    "tiers": {
+      "type": "component",
+      "component": "pricing.tier",
+      "repeatable": true
+    },
+    "faq": {
+      "type": "json"
+    },
+    "ctaTitle": {
+      "type": "string"
+    },
+    "ctaPrimaryLabel": {
+      "type": "string"
+    },
+    "ctaPrimaryUrl": {
+      "type": "string"
+    },
+    "ctaSecondaryLabel": {
+      "type": "string"
+    },
+    "ctaSecondaryUrl": {
+      "type": "string"
+    },
+    "TrustedBy": {
+      "type": "dynamiczone",
+      "components": [
+        "sections.logos-section"
+      ]
+    },
+    "ContentBlock": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.content-block"
+      ]
+    },
+    "titleFrequentlyAskedQuestions": {
+      "type": "string"
+    },
+    "frequentlyAskedQuestions": {
+      "type": "component",
+      "component": "pricing.frequently-asked-questions",
+      "repeatable": true
+    },
+    "bottomContentBlock": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.bottom-content-block"
+      ]
+    }
+  }
+}

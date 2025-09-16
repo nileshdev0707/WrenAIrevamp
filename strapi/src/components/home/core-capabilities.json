@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_home_core_capabilities",
+  "info": {
+    "displayName": "Core Capabilities"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subTitle": {
+      "type": "string"
+    },
+    "badge": {
+      "type": "string"
+    },
+    "learnMore": {
+      "type": "component",
+      "component": "shared.button",
+      "repeatable": true
+    },
+    "coreCapabilitieList": {
+      "type": "component",
+      "component": "home.core-capabilities-list",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

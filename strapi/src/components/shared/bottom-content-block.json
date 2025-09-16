@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_shared_bottom_content_blocks",
+  "info": {
+    "displayName": "Bottom ContentBlock"
+  },
+  "options": {},
+  "attributes": {
+    "topTitle": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "subTitle": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "btnBottomContentBlock": {
+      "type": "component",
+      "component": "shared.button",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

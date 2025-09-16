@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_sections_wern_engines",
+  "info": {
+    "displayName": "wernEngine"
+  },
+  "options": {},
+  "attributes": {
+    "badge": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "wrenEngineDetails": {
+      "type": "component",
+      "component": "sections.wern-engine-details",
+      "repeatable": true
+    },
+    "buttonContantBlock": {
+      "type": "component",
+      "component": "sections.button-contant-block",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

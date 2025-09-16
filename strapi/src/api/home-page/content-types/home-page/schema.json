@@ -1,0 +1,55 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_pages",
+  "info": {
+    "singularName": "home-page",
+    "pluralName": "home-pages",
+    "displayName": "Home page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "hero": {
+      "type": "component",
+      "component": "sections.hero-section",
+      "repeatable": false
+    },
+    "TrustedBy": {
+      "type": "component",
+      "component": "sections.logos-section",
+      "repeatable": true
+    },
+    "caseStudies": {
+      "type": "dynamiczone",
+      "components": [
+        "home.case-studies"
+      ]
+    },
+    "trustedByDataTeams": {
+      "type": "dynamiczone",
+      "components": [
+        "home.trusted-by-data-teams"
+      ]
+    },
+    "getStartedWithWrenAI": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.bottom-content-block"
+      ]
+    },
+    "coreCapabilities": {
+      "type": "dynamiczone",
+      "components": [
+        "home.core-capabilities"
+      ]
+    },
+    "UseCases": {
+      "type": "dynamiczone",
+      "components": [
+        "home.use-cases"
+      ]
+    }
+  }
+}

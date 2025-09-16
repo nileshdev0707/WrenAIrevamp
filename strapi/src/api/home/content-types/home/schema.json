@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "site_home",
+  "info": {
+    "displayName": "home",
+    "singularName": "home",
+    "pluralName": "homes"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "sections": {
+      "type": "json"
+    }
+  }
+}

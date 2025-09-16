@@ -1,0 +1,44 @@
+{
+  "kind": "singleType",
+  "collectionName": "product_pages",
+  "info": {
+    "singularName": "product-page",
+    "pluralName": "product-pages",
+    "displayName": "Product Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "productHero": {
+      "type": "dynamiczone",
+      "components": [
+        "sections.hero-section"
+      ]
+    },
+    "WhatIsWrenAI": {
+      "type": "dynamiczone",
+      "components": [
+        "product.whatiswrenai-block"
+      ]
+    },
+    "ContentBlock": {
+      "type": "component",
+      "component": "shared.content-block",
+      "repeatable": true
+    },
+    "WhyWrenSection": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.why-wren-section"
+      ]
+    },
+    "bottomContentBlock": {
+      "type": "dynamiczone",
+      "components": [
+        "bottom-content-block.bottom-content-block"
+      ]
+    }
+  }
+}

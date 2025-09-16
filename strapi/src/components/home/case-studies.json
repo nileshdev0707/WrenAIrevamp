@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_home_case_studies",
+  "info": {
+    "displayName": "Case Studies"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subTitle": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "caseStudieItems": {
+      "type": "component",
+      "component": "home.items",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

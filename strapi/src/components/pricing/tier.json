@@ -1,0 +1,40 @@
+{
+  "collectionName": "components_pricing_tiers",
+  "info": {
+    "displayName": "Pricing Tier"
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "price": {
+      "type": "string"
+    },
+    "annualPrice": {
+      "type": "string"
+    },
+    "ctaLabel": {
+      "type": "string"
+    },
+    "ctaUrl": {
+      "type": "string"
+    },
+    "features": {
+      "type": "text"
+    },
+    "highlight": {
+      "type": "boolean",
+      "default": false
+    },
+    "description": {
+      "type": "text"
+    },
+    "compareFeatures": {
+      "type": "json"
+    },
+    "featuresDetails": {
+      "type": "richtext"
+    }
+  }
+}

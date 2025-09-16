@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_sections_button_contant_blocks",
+  "info": {
+    "displayName": "buttonContantBlock"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "config": {}
+}

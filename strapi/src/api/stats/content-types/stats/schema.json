@@ -1,0 +1,15 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_stats",
+  "info": { "displayName": "stats", "singularName": "stats", "pluralName": "stats-list" },
+  "options": { "draftAndPublish": true },
+  "attributes": {
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "home.feature"
+    }
+  }
+}
+
+

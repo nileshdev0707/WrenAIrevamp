@@ -1,0 +1,13 @@
+{
+  "kind": "singleType",
+  "collectionName": "site_product",
+  "info": { "displayName": "product", "singularName": "product", "pluralName": "products" },
+  "options": { "draftAndPublish": true },
+  "attributes": {
+    "title": { "type": "string" },
+    "summary": { "type": "text" },
+    "features": { "type": "component", "repeatable": true, "component": "home.feature" }
+  }
+}
+
+

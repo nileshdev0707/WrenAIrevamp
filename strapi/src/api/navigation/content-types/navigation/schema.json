@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_navigation",
+  "info": {
+    "displayName": "navigation",
+    "singularName": "navigation",
+    "pluralName": "navigations"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "links": {
+      "type": "component",
+      "component": "shared.link",
+      "repeatable": true
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_home_features",
+  "info": {
+    "displayName": "feature"
+  },
+  "attributes": {
+    "title": { "type": "string", "required": true },
+    "description": { "type": "text" },
+    "badge": { "type": "string" },
+    "variant": { "type": "enumeration", "enum": ["light", "dark"], "default": "light" },
+    "size": { "type": "enumeration", "enum": ["sm", "lg"], "default": "sm" },
+    "bullets": { "type": "json" },
+    "image": { "type": "media", "multiple": false, "allowedTypes": ["images"] }
+  }
+}
+
+

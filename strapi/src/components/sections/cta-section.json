@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_sections_cta_sections",
+  "info": { "displayName": "cta-section" },
+  "attributes": {
+    "title": { "type": "string" },
+    "primaryLabel": { "type": "string" },
+    "primaryUrl": { "type": "string" },
+    "secondaryLabel": { "type": "string" },
+    "secondaryUrl": { "type": "string" }
+  }
+}
+
+

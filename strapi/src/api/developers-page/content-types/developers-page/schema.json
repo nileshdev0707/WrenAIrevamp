@@ -1,0 +1,32 @@
+{
+  "kind": "singleType",
+  "collectionName": "developers_pages",
+  "info": {
+    "singularName": "developers-page",
+    "pluralName": "developers-pages",
+    "displayName": "Developers Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "hero": {
+      "type": "dynamiczone",
+      "components": [
+        "sections.hero-section"
+      ]
+    },
+    "ContentBlock": {
+      "type": "component",
+      "component": "shared.content-block",
+      "repeatable": true
+    },
+    "wrenEngine": {
+      "type": "dynamiczone",
+      "components": [
+        "sections.wern-engine"
+      ]
+    }
+  }
+}

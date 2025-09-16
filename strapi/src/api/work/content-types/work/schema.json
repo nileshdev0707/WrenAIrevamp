@@ -1,0 +1,13 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_work",
+  "info": { "displayName": "work", "singularName": "work", "pluralName": "works" },
+  "options": { "draftAndPublish": true },
+  "attributes": {
+    "title": { "type": "string" },
+    "subtitle": { "type": "string" },
+    "visual": { "type": "media", "multiple": false, "allowedTypes": ["images"] }
+  }
+}
+
+
