@@ -1,5 +1,35 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface BottomContentBlockBottomContentBlock
+  extends Struct.ComponentSchema {
+  collectionName: 'components_bottom_content_block_bottom_content_blocks';
+  info: {
+    displayName: 'bottomContentBlock';
+  };
+  attributes: {
+    btnBottomContentBlock: Schema.Attribute.Component<
+      'bottom-content-block.btn-bottom-content-block',
+      true
+    >;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    subTitle: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+    topTitle: Schema.Attribute.String;
+  };
+}
+
+export interface BottomContentBlockBtnBottomContentBlock
+  extends Struct.ComponentSchema {
+  collectionName: 'components_bottom_content_block_btn_bottom_content_blocks';
+  info: {
+    displayName: 'btnBottomContentBlock';
+  };
+  attributes: {
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface HomeCaseStudies extends Struct.ComponentSchema {
   collectionName: 'components_home_case_studies';
   info: {
@@ -311,6 +341,21 @@ export interface SectionsLogosSection extends Struct.ComponentSchema {
   };
 }
 
+export interface SectionsWhyWrenSectionList extends Struct.ComponentSchema {
+  collectionName: 'components_sections_why_wren_section_lists';
+  info: {
+    displayName: 'WhyWrenSectionList';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    icon: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface SharedBottomContentBlock extends Struct.ComponentSchema {
   collectionName: 'components_shared_bottom_content_blocks';
   info: {
@@ -365,9 +410,26 @@ export interface SharedLink extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedWhyWrenSection extends Struct.ComponentSchema {
+  collectionName: 'components_shared_why_wren_sections';
+  info: {
+    displayName: 'WhyWrenSection';
+  };
+  attributes: {
+    badge: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+    WhyWrenSectionDetails: Schema.Attribute.Component<
+      'sections.why-wren-section-list',
+      true
+    >;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'bottom-content-block.bottom-content-block': BottomContentBlockBottomContentBlock;
+      'bottom-content-block.btn-bottom-content-block': BottomContentBlockBtnBottomContentBlock;
       'home.case-studies': HomeCaseStudies;
       'home.core-capabilities': HomeCoreCapabilities;
       'home.core-capabilities-list': HomeCoreCapabilitiesList;
@@ -389,10 +451,12 @@ declare module '@strapi/strapi' {
       'sections.feature-grid': SectionsFeatureGrid;
       'sections.hero-section': SectionsHeroSection;
       'sections.logos-section': SectionsLogosSection;
+      'sections.why-wren-section-list': SectionsWhyWrenSectionList;
       'shared.bottom-content-block': SharedBottomContentBlock;
       'shared.button': SharedButton;
       'shared.content-block': SharedContentBlock;
       'shared.link': SharedLink;
+      'shared.why-wren-section': SharedWhyWrenSection;
     }
   }
 }

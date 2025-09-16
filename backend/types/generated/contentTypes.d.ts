@@ -432,6 +432,36 @@ export interface ApiCtaCta extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiDevelopersPageDevelopersPage
+  extends Struct.SingleTypeSchema {
+  collectionName: 'developers_pages';
+  info: {
+    displayName: 'Developers Page';
+    pluralName: 'developers-pages';
+    singularName: 'developers-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    ContentBlock: Schema.Attribute.Component<'shared.content-block', true>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    hero: Schema.Attribute.DynamicZone<['sections.hero-section']>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::developers-page.developers-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiFeatureShowcaseFeatureShowcase
   extends Struct.SingleTypeSchema {
   collectionName: 'home_feature_showcase';
@@ -708,6 +738,9 @@ export interface ApiProductPageProductPage extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    bottomContentBlock: Schema.Attribute.DynamicZone<
+      ['bottom-content-block.bottom-content-block']
+    >;
     ContentBlock: Schema.Attribute.Component<'shared.content-block', true>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -724,6 +757,7 @@ export interface ApiProductPageProductPage extends Struct.SingleTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     WhatIsWrenAI: Schema.Attribute.DynamicZone<['product.whatiswrenai-block']>;
+    WhyWrenSection: Schema.Attribute.DynamicZone<['shared.why-wren-section']>;
   };
 }
 
@@ -1320,6 +1354,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::capabilities.capabilities': ApiCapabilitiesCapabilities;
       'api::cta.cta': ApiCtaCta;
+      'api::developers-page.developers-page': ApiDevelopersPageDevelopersPage;
       'api::feature-showcase.feature-showcase': ApiFeatureShowcaseFeatureShowcase;
       'api::hero.hero': ApiHeroHero;
       'api::home-page.home-page': ApiHomePageHomePage;

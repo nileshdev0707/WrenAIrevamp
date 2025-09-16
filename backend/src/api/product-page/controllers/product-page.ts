@@ -36,6 +36,29 @@ export default factories.createCoreController('api::product-page.product-page', 
             contentBlockButton: { populate: '*' },
           },
         },
+        bottomContentBlock: {
+          on: {
+            'bottom-content-block.bottom-content-block': {
+              populate: {
+                image: true,
+                btnBottomContentBlock: { populate: '*' },
+              },
+            },
+          },
+        },
+        WhyWrenSection: {
+          on: {
+            'shared.why-wren-section': {
+              populate: {
+                WhyWrenSectionDetails: {
+                  populate: {
+                    icon: true,
+                  },
+                },
+              },
+            },
+          },
+        },
       },
     }
     // @ts-ignore
@@ -71,6 +94,29 @@ export default factories.createCoreController('api::product-page.product-page', 
           populate: {
             image: true,
             contentBlockButton: { populate: '*' },
+          },
+        },
+        bottomContentBlock: {
+          on: {
+            'bottom-content-block.bottom-content-block': {
+              populate: {
+                image: true,
+                btnBottomContentBlock: { populate: '*' },
+              },
+            },
+          },
+        },
+        WhyWrenSection: {
+          on: {
+            'shared.why-wren-section': {
+              populate: {
+                WhyWrenSectionDetails: {
+                  populate: {
+                    icon: true,
+                  },
+                },
+              },
+            },
           },
         },
       },

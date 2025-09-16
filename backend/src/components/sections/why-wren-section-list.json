@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_sections_why_wren_section_lists",
+  "info": {
+    "displayName": "WhyWrenSectionList"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "icon": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  },
+  "config": {}
+}

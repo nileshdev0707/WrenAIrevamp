@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_bottom_content_block_btn_bottom_content_blocks",
+  "info": {
+    "displayName": "btnBottomContentBlock"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "config": {}
+}

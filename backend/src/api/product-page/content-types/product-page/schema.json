@@ -27,6 +27,18 @@
       "type": "component",
       "component": "shared.content-block",
       "repeatable": true
+    },
+    "WhyWrenSection": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.why-wren-section"
+      ]
+    },
+    "bottomContentBlock": {
+      "type": "dynamiczone",
+      "components": [
+        "bottom-content-block.bottom-content-block"
+      ]
     }
   }
 }

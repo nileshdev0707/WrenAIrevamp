@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_bottom_content_block_bottom_content_blocks",
+  "info": {
+    "displayName": "bottomContentBlock"
+  },
+  "options": {},
+  "attributes": {
+    "topTitle": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "subTitle": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "btnBottomContentBlock": {
+      "type": "component",
+      "component": "bottom-content-block.btn-bottom-content-block",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

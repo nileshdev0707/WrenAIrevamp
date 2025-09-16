@@ -24,6 +24,7 @@ export default factories.createCoreController('api::home-page.home-page', () => 
           on: {
             'home.core-capabilities': {
               populate: {
+                learnMore: { populate: '*' },
                 coreCapabilitieList: {
                   populate: {
                     image: true,
@@ -33,7 +34,19 @@ export default factories.createCoreController('api::home-page.home-page', () => 
             },
           },
         },
-        UseCases: { populate: '*' },
+        UseCases: {
+          on: {
+            'home.use-cases': {
+              populate: {
+                useCasesItems: {
+                  populate: {
+                    image: true,
+                  },
+                },
+              },
+            },
+          },
+        },
       },
     }
     // @ts-ignore
@@ -59,6 +72,7 @@ export default factories.createCoreController('api::home-page.home-page', () => 
           on: {
             'home.core-capabilities': {
               populate: {
+                learnMore: { populate: '*' },
                 coreCapabilitieList: {
                   populate: {
                     image: true,
@@ -68,7 +82,19 @@ export default factories.createCoreController('api::home-page.home-page', () => 
             },
           },
         },
-        UseCases: { populate: '*' },
+        UseCases: {
+          on: {
+            'home.use-cases': {
+              populate: {
+                useCasesItems: {
+                  populate: {
+                    image: true,
+                  },
+                },
+              },
+            },
+          },
+        },
       },
     }
     // @ts-ignore

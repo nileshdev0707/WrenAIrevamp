@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_shared_why_wren_sections",
+  "info": {
+    "displayName": "WhyWrenSection"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "badge": {
+      "type": "string"
+    },
+    "WhyWrenSectionDetails": {
+      "type": "component",
+      "component": "sections.why-wren-section-list",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}
