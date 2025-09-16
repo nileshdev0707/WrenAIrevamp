@@ -17,7 +17,19 @@ export default factories.createCoreController('api::home-page.home-page', () => 
         ...existingPopulate,
         hero: { populate: '*' },
         TrustedBy: { populate: '*' },
-        caseStudies: { populate: '*' },
+        caseStudies: {
+          on: {
+            'home.case-studies': {
+              populate: {
+                caseStudieItems: {
+                  populate: {
+                    image: true,
+                  },
+                },
+              },
+            },
+          },
+        },
         trustedByDataTeams: { populate: '*' },
         getStartedWithWrenAI: { populate: '*' },
         coreCapabilities: {
@@ -65,7 +77,19 @@ export default factories.createCoreController('api::home-page.home-page', () => 
         ...existingPopulate,
         hero: { populate: '*' },
         TrustedBy: { populate: '*' },
-        caseStudies: { populate: '*' },
+        caseStudies: {
+          on: {
+            'home.case-studies': {
+              populate: {
+                caseStudieItems: {
+                  populate: {
+                    image: true,
+                  },
+                },
+              },
+            },
+          },
+        },
         trustedByDataTeams: { populate: '*' },
         getStartedWithWrenAI: { populate: '*' },
         coreCapabilities: {

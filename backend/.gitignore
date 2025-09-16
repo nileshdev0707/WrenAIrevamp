@@ -121,11 +121,11 @@ coverage
 # Strapi
 ############################
 #
-#.env
-#license.txt
+.env
+license.txt
 #exports
-#.strapi
+.strapi
 dist
-#build
+build
 #.strapi-updater.json
 #.strapi-cloud.json
