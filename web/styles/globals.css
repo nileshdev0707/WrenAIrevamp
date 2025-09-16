@@ -164,3 +164,82 @@ body { @apply bg-white text-gray-800 antialiased; }
 .scrollbar-hide::-webkit-scrollbar { 
   display: none;  /* Safari and Chrome */
 }
+
+/* Slider animations */
+.slider-container {
+  position: relative;
+  overflow: hidden;
+}
+
+
+.slider-main-container .slider-slide {
+  flex: 0 0 100%;
+  width: 100%;
+}
+
+.slider-main-container .slider-nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.slider-main-container .slider-nav-button:hover {
+  background: white;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.slider-main-container .slider-nav-button:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+/* Active slide styling */
+.slider-main-container .slick-slide:not(.slick-center) .grid {
+  background-color: #f5f5f5;
+}
+
+.slider-main-container .slick-slide.slick-center .grid {
+  background: linear-gradient(135deg, #0B8EE5, #0022CB);
+  color: white;
+}
+
+.slider-main-container .slick-slide.slick-center .grid h3 {
+  color: white;
+}
+
+.slider-main-container .slick-slide.slick-center .grid p {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+
+.slider-main-container .slick-slide.slick-center .grid .text-description {
+  color: #B3B3B3;
+}
+
+/* Arrow image change for active slide */
+.slider-main-container .slick-slide:not(.slick-center) .grid .arrow-inactive {
+  display: block;
+}
+
+.slider-main-container .slick-slide:not(.slick-center) .grid .arrow-active {
+  display: none;
+}
+
+.slider-main-container .slick-slide.slick-center .grid .arrow-inactive {
+  display: none;
+}
+
+.slider-main-container .slick-slide.slick-center .grid .arrow-active {
+  display: block;
+}
