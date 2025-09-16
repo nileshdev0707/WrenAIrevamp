@@ -7,7 +7,8 @@ import Tiers from "../components/pricing/tiers";
 import ContentBlock from "../components/pricing/contantBlock";
 import ComparePlan from "../components/pricing/comparePlan";
 import FAQ from "../components/pricing/faq";
-import CTA from "../components/pricing/CTA";
+import Footer from "../components/footer";
+
 import TrustedLogos from "../components/pricing/trustedLogo";
 
 export default function Pricing({ pricing, navigation }) {
@@ -20,7 +21,7 @@ export default function Pricing({ pricing, navigation }) {
       <Navbar navigation={navigation} />
       <main className="px-6">
         {pricing?.hero?.length && (
-        <div style={{ backgroundImage: `url(${heroImage.startsWith('http') ? '' : base}${heroImage})` }} className="bg-no-repeat py-16 max-w-6xl mx-auto">
+        <div style={{ backgroundImage: `url(${heroImage.startsWith('http') ? '' : base}${heroImage})` }} className="bg-no-repeat py-16 max-w-6xl mx-auto bg-contain">
         {pricing?.hero?.length && (
           <Hero
             pricing={pricing?.hero?.[0]}
@@ -54,9 +55,9 @@ export default function Pricing({ pricing, navigation }) {
           <FAQ frequentlyAskedQuestions={pricing?.frequentlyAskedQuestions} />
         )}
 
-        {/* CTA banner */}
+        {/* Footer banner */}
         {pricing?.bottomContentBlock?.length && (
-          <CTA data={pricing?.bottomContentBlock} />
+          <Footer data={pricing?.bottomContentBlock} />
         )}
       </main>
        {/* Footer */}

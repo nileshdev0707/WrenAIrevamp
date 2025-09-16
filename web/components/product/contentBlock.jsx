@@ -11,11 +11,11 @@ export default function ProductHero({ product }) {
         return (
           <div
             key={item.id}
-            className="grid grid-cols-1 md:grid-cols-2 gap-10 py-10"
+            className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-10 md:pb-16"
           >
             <div className={`px-10 order-1 ${isRightAligned ? "md:order-2" : "md:order-1 md:text-left"}`}>
               <h2 className="text-blue-600 text-sm">{item.badge}</h2>
-              <h1 className="text-3xl md:text-4xl font-medium leading-tight mt-5">
+              <h1 className="text-3xl lg:text-4xl font-medium leading-tight mt-5">
                 {item.title}
               </h1>
               <p className="text-gray-600 text-sm mt-4 pb-8">{item.subtitle}</p>
@@ -25,7 +25,7 @@ export default function ProductHero({ product }) {
               </button>
             </div>
             
-           <div className={`order-2 ${isRightAligned ? "md:order-1" : "md:order-2"}`}>
+           <div className={`md:block hidden order-2 ${isRightAligned ? "md:order-1" : "md:order-2"}`}>
               {url ? (
                 <img
                   src={`${url.startsWith("http") ? "" : base}${url}`}
