@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react' 
-import { base } from "../components/service/axios";
+import { base } from "../service/serviceConfig";
 
 export default function Work({ data }) {
   const works = data?.UseCases?.[0] || []

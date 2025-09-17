@@ -1,7 +1,48 @@
 import { useState, useEffect } from 'react'
-import { base } from "../components/service/axios";
+import { base} from "../service/serviceConfig";
+import { navigationApi, pagesApi } from "../service/apiClient";
 
-export default function Navbar({ navigation }) {
+export default function Navbar() {
+  const [navigation, setNavigation] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+
+  useEffect(() => {
+    const fetchNavigation = async () => {
+      try {
+      
+        
+        const navResponse = await navigationApi();
+        const pagesResponse = await pagesApi();
+        
+        const navRes = navResponse.data;
+        const pagesRes = pagesResponse.data;
+
+        const navigationData = {
+          ...(navRes?.data?.attributes ?? navRes?.data ?? {}),
+          pages: Array.isArray(pagesRes?.data)
+            ? pagesRes.data
+                .map((p) => p.attributes ?? p)
+                .filter((p) => p.showInNav)
+                .sort((a, b) => (a.navOrder || 0) - (b.navOrder || 0))
+            : [],
+        };
+        setNavigation(navigationData);
+        console.log("navigation ==> ", navigationData);
+      } catch (error) {
+        console.error('Error fetching navigation:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNavigation();
+  }, []);
+
+  // if (loading) {
+  //   return <div>Loading navigation...</div>;
+  // }
+
   const dynamicPages = Array.isArray(navigation?.pages) ? navigation.pages : []
   const pageSlugByLabel = dynamicPages.reduce((acc, p) => {
     const lbl = (p.navLabel || p.title || p.label || '').toString().trim().toLowerCase()

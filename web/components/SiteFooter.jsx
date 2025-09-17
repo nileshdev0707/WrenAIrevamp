@@ -1,4 +1,4 @@
-import { base } from "../components/service/axios";
+import { base } from "../service/serviceConfig";
 
 export default function SiteFooter({ pages = [], navigation }) {
   const link = (slug) => `/${slug}`;

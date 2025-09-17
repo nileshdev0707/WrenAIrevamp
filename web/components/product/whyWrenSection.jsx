@@ -1,5 +1,5 @@
 import React from "react";
-import { base } from "../service/axios";
+import { base } from "../../service/serviceConfig";
 
 export default function WhyWrenSection({ data }) {
 

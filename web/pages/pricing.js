@@ -6,15 +6,15 @@ import ContentBlock from "../components/pricing/contantBlock";
 import ComparePlan from "../components/pricing/comparePlan";
 import FAQ from "../components/pricing/faq";
 import Footer from "../components/footer";
-import { base } from "../components/service/axios";
+import { base } from "../service/serviceConfig";
 import TrustedLogos from "../components/pricing/trustedLogo";
 import Layout from "./layout";
-export default function Pricing({ pricing, navigation }) {
+export default function Pricing({ pricing }) {
   const [billing, setBilling] = useState("Monthly");
   const heroImage = pricing?.hero?.[0]?.backgroundimage?.url
   
   return (
-    <Layout navigation={navigation}>
+    <Layout>
       <div className="px-6">
         {pricing?.hero?.length && (
         <div style={{ backgroundImage: `url(${heroImage.startsWith('http') ? '' : base}${heroImage})` }} className="bg-no-repeat py-16 max-w-6xl mx-auto bg-contain">
@@ -62,39 +62,20 @@ export default function Pricing({ pricing, navigation }) {
 
 export async function getStaticProps() {
   const STRAPI = process.env.STRAPI_URL;
-  const token = process.env.STRAPI_TOKEN;
+  const token = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
   const api = axios.create({
     baseURL: STRAPI,
     headers: token ? { Authorization: `Bearer ${token}` } : {},
   });
-  const [pricingRes, navBundle] = await Promise.all([
+  const [pricingRes] = await Promise.all([
     api
       .get("/api/pricing?populate=*")
       .then((r) => r.data)
       .catch(() => null),
-    Promise.all([
-      api
-        .get(`/api/navigation?populate=*`)
-        .then((r) => r.data)
-        .catch(() => null),
-      api
-        .get(`/api/pages?fields=slug,navLabel,title,showInNav,navOrder`)
-        .then((r) => r.data)
-        .catch(() => null),
-    ]).then(([nav, pages]) => ({ nav, pages })),
   ]);
   return {
     props: {
-      pricing: pricingRes?.data?.attributes ?? pricingRes?.data ?? null,
-      navigation: {
-        ...(navBundle?.nav?.data?.attributes ?? navBundle?.nav?.data ?? {}),
-        pages: Array.isArray(navBundle?.pages?.data)
-          ? navBundle.pages.data
-              .map((p) => p.attributes ?? p)
-              .filter((p) => p.showInNav)
-              .sort((a, b) => (a.navOrder || 0) - (b.navOrder || 0))
-          : [],
-      },
+      pricing: pricingRes?.data?.attributes ?? pricingRes?.data ?? null, 
     },
     revalidate: 10,
   };

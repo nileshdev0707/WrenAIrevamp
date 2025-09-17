@@ -4,10 +4,10 @@ import Hero from "../components/Hero";
 import FeatureShowcase from "../components/FeatureShowcase";
 import Logos from "../components/Logos";
 import Layout from "./layout";
-export default function Page({ page, navigation }) {
+export default function Page({ page }) {
   if (!page) return <div />;
   return (
-    <Layout navigation={navigation}>
+    <Layout>
       <div className="max-w-6xl mx-auto px-6 py-16">
         <h1 className="text-3xl font-bold">{page.title}</h1>
         {page.content && (
@@ -70,7 +70,7 @@ export default function Page({ page, navigation }) {
 
 export async function getStaticPaths() {
   const STRAPI = process.env.STRAPI_URL
-  const token = process.env.STRAPI_TOKEN;
+  const token = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
   const api = axios.create({
     baseURL: STRAPI,
     headers: token ? { Authorization: `Bearer ${token}` } : {},
@@ -87,7 +87,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const STRAPI = process.env.STRAPI_URL
-  const token = process.env.STRAPI_TOKEN;
+  const token = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
   const api = axios.create({
     baseURL: STRAPI,
     headers: token ? { Authorization: `Bearer ${token}` } : {},
@@ -99,10 +99,6 @@ export async function getStaticProps({ params }) {
       )
       .then((r) => r.data)
       .catch(() => null),
-    api
-      .get(`/api/navigation?populate=*`)
-      .then((r) => r.data)
-      .catch(() => null),
   ]);
   const pageData = Array.isArray(pageRes?.data)
     ? pageRes.data[0]?.attributes ?? pageRes.data[0]
@@ -111,7 +107,6 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       page: safePage,
-      navigation: navRes?.data?.attributes ?? navRes?.data ?? null,
     },
     revalidate: 10,
   };
