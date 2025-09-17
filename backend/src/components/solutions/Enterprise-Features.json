@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_solutions_Enterprise_Features_items",
+  "info": {
+    "displayName": "Enterprise Features Item"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subTitle": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "position": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

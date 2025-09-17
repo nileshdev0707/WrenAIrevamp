@@ -21,6 +21,24 @@
       "type": "component",
       "component": "shared.content-block",
       "repeatable": true
+    },
+    "wrenEngine": {
+      "type": "dynamiczone",
+      "components": [
+        "sections.wern-engine"
+      ]
+    },
+    "whyWrenAI": {
+      "type": "dynamiczone",
+      "components": [
+        "solutions.why-wren-ai"
+      ]
+    },
+    "seo": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.seo"
+      ]
     }
   }
 }

@@ -50,6 +50,12 @@
       "components": [
         "home.use-cases"
       ]
+    },
+    "se0": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.seo"
+      ]
     }
   }
 }

@@ -39,6 +39,12 @@
       "components": [
         "bottom-content-block.bottom-content-block"
       ]
+    },
+    "seo": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.seo"
+      ]
     }
   }
 }

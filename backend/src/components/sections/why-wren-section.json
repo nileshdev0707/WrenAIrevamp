@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_sections_why_wren_sections",
+  "info": {
+    "displayName": "WrenAI"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subTitle": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

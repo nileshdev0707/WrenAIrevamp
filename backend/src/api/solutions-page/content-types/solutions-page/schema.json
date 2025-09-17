@@ -1,0 +1,43 @@
+{
+  "kind": "singleType",
+  "collectionName": "solutions_pages",
+  "info": {
+    "singularName": "solutions-page",
+    "pluralName": "solutions-pages",
+    "displayName": "Solutions Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "hero": {
+      "type": "dynamiczone",
+      "components": [
+        "sections.hero-section"
+      ]
+    },
+    "SolutionsTab": {
+      "type": "component",
+      "component": "solutions.solutions-tab",
+      "repeatable": true
+    },
+    "EnterpriseFeaturesBlock": {
+      "type": "dynamiczone",
+      "components": [
+        "solutions.enterprisefeatures-block"
+      ]
+    },
+    "ContentBlock": {
+      "type": "component",
+      "component": "shared.content-block",
+      "repeatable": true
+    },
+    "seo": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.seo"
+      ]
+    }
+  }
+}

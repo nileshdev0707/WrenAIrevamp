@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_sections_wren_engine_details",
+  "info": {
+    "displayName": "wrenEngineDetails"
+  },
+  "options": {},
+  "attributes": {
+    "badge": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  },
+  "config": {}
+}

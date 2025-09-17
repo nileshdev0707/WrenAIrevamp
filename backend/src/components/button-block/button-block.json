@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_button_block_button_blocks",
+  "info": {
+    "displayName": "buttonBlock"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "config": {}
+}

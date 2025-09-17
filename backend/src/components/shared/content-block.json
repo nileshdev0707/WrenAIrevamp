@@ -51,6 +51,16 @@
       "type": "component",
       "component": "shared.button",
       "repeatable": true
+    },
+    "leftImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   },
   "config": {}
