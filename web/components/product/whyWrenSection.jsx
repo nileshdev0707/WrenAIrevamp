@@ -57,7 +57,7 @@ export default function WhyWrenSection({ data }) {
                       </div>
                     )}
                   </div>
-                  <p className="text-gray-600 pt-12">{item.description}</p>
+                  <p className="text-gray-600 md:pt-12 pt-6">{item.description}</p>
                 </div>
               ))}
             </div>

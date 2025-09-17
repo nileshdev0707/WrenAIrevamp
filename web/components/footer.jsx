@@ -10,21 +10,29 @@ export default function Footer({ data }) {
             <div key={index} className="grid sm:grid-cols-2 gap-8">
               <div className="flex flex-col justify-center">
                 <div>
-                  <a
-                    href={"#"}
-                    className="cursor-pointer text-white text-md border border-white rounded-full px-4 py-2"
+                  {item?.topTitle && (
+                    <a
+                      href={"#"}
+                      className="cursor-pointer text-white text-md border border-white rounded-full px-4 py-2"
                   >
                     {item?.topTitle}
                   </a>
-                  <h3 className="text-3xl lg:text-4xl font-medium mt-8">{item?.title}</h3>
-                  <p className="text-sm opacity-90 mt-4">{item?.subTitle}</p>
+                  )}
+                  {item?.title && (
+                    <h3 className="text-3xl lg:text-4xl font-medium mt-8">{item?.title}</h3>
+                  )}
+                  {item?.subTitle && (
+                    <p className="text-sm opacity-90 mt-4">{item?.subTitle}</p>
+                  )}
+                  {item?.btnBottomContentBlock?.length && (
                   <div className="flex gap-5">
                     {item?.btnBottomContentBlock?.map((btn) => (
-                      <button className="bg-white cursor-pointer mt-8 px-4.5 py-3 rounded-md text-blue-600 text-sm" key={btn.id}>
+                      <a href={btn?.url} className="bg-white cursor-pointer mt-8 px-4.5 py-3 rounded-md text-blue-600 text-sm" key={btn.id}>
                         {btn?.label}
-                      </button>
+                      </a>
                     ))}
                   </div>
+                  )}
                 </div>
               </div>
               <div className="justify-end items-center sm:flex hidden">

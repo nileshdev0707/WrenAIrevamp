@@ -12,7 +12,7 @@ export default function Product({ product }) {
   
   return (
    <Layout>
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto">
         <div
           style={{
             backgroundImage: `url(${

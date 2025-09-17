@@ -11,9 +11,9 @@ export default function ContentBlock({ data }) {
         return (
           <div
             key={item.id}
-            className="grid grid-cols-1 md:grid-cols-2 gap-10 md:py-15 py-8"
+            className="grid grid-cols-1 md:grid-cols-2 xl:gap-10 gap-5 md:py-15 py-8 xl:px-0 px-5"
           >
-            <div className={`px-10 order-1 ${isRightAligned ? "md:order-2" : "md:order-1 md:text-left"}`}>
+            <div className={`xl:px-10 px-5 order-1 ${isRightAligned ? "md:order-2" : "md:order-1 md:text-left"}`}>
               <h2 className="text-blue-600 text-sm font-semibold">{item.badge}</h2>
               <h1 className="text-3xl lg:text-4xl font-medium leading-tight mt-5">
                 {item.title}
@@ -22,15 +22,15 @@ export default function ContentBlock({ data }) {
               <div dangerouslySetInnerHTML={{ __html: item.description }} />
               <div className="flex gap-2">
               {item?.contentBlockButton?.map((button, index) => (
-                  <button key={button?.id} className={`btn px-4 py-1 mt-5 text-sm
+                  <a key={button?.id} href={button?.url} className={`btn px-4 py-1 mt-5 text-sm
                   ${
                     index === 0
                       ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white"
-                      : "bg-white text-gray-800 border border-gray-200 hover:bg-gray-50"
+                      : "bg-gray-100 text-black"
                   }`}
                   >
                     {button?.label}
-                  </button>
+                  </a>
               ))}
               </div>
             </div>
