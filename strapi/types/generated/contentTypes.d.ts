@@ -376,6 +376,7 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
 export interface ApiBlogPageBlogPage extends Struct.SingleTypeSchema {
   collectionName: 'blog_pages';
   info: {
+    description: 'Blog listing page configuration';
     displayName: 'Blog Page';
     pluralName: 'blog-pages';
     singularName: 'blog-page';
@@ -387,6 +388,7 @@ export interface ApiBlogPageBlogPage extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    featuredPosts: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'>;
     hero: Schema.Attribute.DynamicZone<['sections.hero-section']>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -394,7 +396,46 @@ export interface ApiBlogPageBlogPage extends Struct.SingleTypeSchema {
       'api::blog-page.blog-page'
     > &
       Schema.Attribute.Private;
+    postsPerPage: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<12>;
     publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
+  collectionName: 'blogs';
+  info: {
+    description: 'Individual blog posts';
+    displayName: 'Blog';
+    pluralName: 'blogs';
+    singularName: 'blog';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    author: Schema.Attribute.String & Schema.Attribute.Required;
+    categories: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::category.category'
+    >;
+    content: Schema.Attribute.RichText & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    excerpt: Schema.Attribute.Text & Schema.Attribute.Required;
+    featuredImage: Schema.Attribute.Media<'images'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    publishedDate: Schema.Attribute.Date & Schema.Attribute.Required;
+    readTime: Schema.Attribute.Integer;
+    relatedPosts: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'>;
+    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -425,6 +466,38 @@ export interface ApiCapabilitiesCapabilities extends Struct.SingleTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     subtitle: Schema.Attribute.String;
     title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
+  collectionName: 'categories';
+  info: {
+    description: 'Blog post categories';
+    displayName: 'Category';
+    pluralName: 'categories';
+    singularName: 'category';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    blogs: Schema.Attribute.Relation<'manyToMany', 'api::blog.blog'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::category.category'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -484,6 +557,7 @@ export interface ApiDevelopersPageDevelopersPage
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.DynamicZone<['shared.seo']>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -517,7 +591,12 @@ export interface ApiDocsPageDocsPage extends Struct.SingleTypeSchema {
       'api::docs-page.docs-page'
     > &
       Schema.Attribute.Private;
+    openSourceProject: Schema.Attribute.DynamicZone<
+      ['sections.open-source-project']
+    >;
+    publicRoadmap: Schema.Attribute.Component<'solutions.public-roadmap', true>;
     publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.DynamicZone<['shared.seo']>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -612,6 +691,7 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    se0: Schema.Attribute.DynamicZone<['shared.seo']>;
     TrustedBy: Schema.Attribute.Component<'sections.logos-section', true>;
     trustedByDataTeams: Schema.Attribute.DynamicZone<
       ['home.trusted-by-data-teams']
@@ -779,6 +859,7 @@ export interface ApiPricingPricing extends Struct.SingleTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.DynamicZone<['shared.seo']>;
     tiers: Schema.Attribute.Component<'pricing.tier', true>;
     title: Schema.Attribute.String;
     titleFrequentlyAskedQuestions: Schema.Attribute.String;
@@ -815,6 +896,7 @@ export interface ApiProductPageProductPage extends Struct.SingleTypeSchema {
       Schema.Attribute.Private;
     productHero: Schema.Attribute.DynamicZone<['sections.hero-section']>;
     publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.DynamicZone<['shared.seo']>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -879,6 +961,7 @@ export interface ApiSolutionsPageSolutionsPage extends Struct.SingleTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.DynamicZone<['shared.seo']>;
     SolutionsTab: Schema.Attribute.Component<'solutions.solutions-tab', true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1448,7 +1531,9 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::blog-page.blog-page': ApiBlogPageBlogPage;
+      'api::blog.blog': ApiBlogBlog;
       'api::capabilities.capabilities': ApiCapabilitiesCapabilities;
+      'api::category.category': ApiCategoryCategory;
       'api::cta.cta': ApiCtaCta;
       'api::developers-page.developers-page': ApiDevelopersPageDevelopersPage;
       'api::docs-page.docs-page': ApiDocsPageDocsPage;

@@ -15,3 +15,4 @@ web/.next/
 .DS_Store
 .idea/*
 web/.next/*/*
+web/.env.local

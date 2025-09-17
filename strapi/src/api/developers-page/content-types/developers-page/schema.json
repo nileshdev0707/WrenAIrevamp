@@ -33,6 +33,12 @@
       "components": [
         "solutions.why-wren-ai"
       ]
+    },
+    "seo": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.seo"
+      ]
     }
   }
 }

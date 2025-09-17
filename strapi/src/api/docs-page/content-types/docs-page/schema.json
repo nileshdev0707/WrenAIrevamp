@@ -1,0 +1,49 @@
+{
+  "kind": "singleType",
+  "collectionName": "docs_pages",
+  "info": {
+    "singularName": "docs-page",
+    "pluralName": "docs-pages",
+    "displayName": "Docs Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "hero": {
+      "type": "dynamiczone",
+      "components": [
+        "sections.hero-section"
+      ]
+    },
+    "ContentBlock": {
+      "type": "component",
+      "component": "shared.content-block",
+      "repeatable": true
+    },
+    "BottomContentBlock": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.bottom-content-block"
+      ]
+    },
+    "publicRoadmap": {
+      "type": "component",
+      "component": "solutions.public-roadmap",
+      "repeatable": true
+    },
+    "openSourceProject": {
+      "type": "dynamiczone",
+      "components": [
+        "sections.open-source-project"
+      ]
+    },
+    "seo": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.seo"
+      ]
+    }
+  }
+}

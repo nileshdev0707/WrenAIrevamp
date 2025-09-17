@@ -43,6 +43,17 @@ export interface BottomContentBlockBtnBottomContentBlock
   };
 }
 
+export interface ButtonBlockButtonBlock extends Struct.ComponentSchema {
+  collectionName: 'components_button_block_button_blocks';
+  info: {
+    displayName: 'buttonBlock';
+  };
+  attributes: {
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface HomeCaseStudies extends Struct.ComponentSchema {
   collectionName: 'components_home_case_studies';
   info: {
@@ -398,6 +409,37 @@ export interface SectionsLogosSection extends Struct.ComponentSchema {
   };
 }
 
+export interface SectionsOpenSourceProject extends Struct.ComponentSchema {
+  collectionName: 'components_sections_open_source_projects';
+  info: {
+    displayName: 'openSourceProject';
+  };
+  attributes: {
+    badge: Schema.Attribute.String;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    subTitle: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+    WrenAI: Schema.Attribute.Component<'sections.wren-ai', false>;
+    wrenEngineAI: Schema.Attribute.Component<
+      'wren-engine-ai.wren-engine-ai',
+      false
+    >;
+  };
+}
+
+export interface SectionsPublicRoadmap extends Struct.ComponentSchema {
+  collectionName: 'components_sections_public_roadmaps';
+  info: {
+    displayName: 'publicRoadmap';
+  };
+  attributes: {
+    badge: Schema.Attribute.String;
+    buttonBlock: Schema.Attribute.Component<'solutions.button-block', true>;
+    subTitle: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface SectionsWernEngine extends Struct.ComponentSchema {
   collectionName: 'components_sections_wern_engines';
   info: {
@@ -469,6 +511,18 @@ export interface SectionsWhyWrenAiDetails extends Struct.ComponentSchema {
   };
 }
 
+export interface SectionsWhyWrenSection extends Struct.ComponentSchema {
+  collectionName: 'components_sections_why_wren_sections';
+  info: {
+    displayName: 'WrenAI';
+  };
+  attributes: {
+    description: Schema.Attribute.String;
+    subTitle: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface SectionsWhyWrenSectionList extends Struct.ComponentSchema {
   collectionName: 'components_sections_why_wren_section_lists';
   info: {
@@ -480,6 +534,18 @@ export interface SectionsWhyWrenSectionList extends Struct.ComponentSchema {
       'images' | 'files' | 'videos' | 'audios',
       true
     >;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface SectionsWrenAi extends Struct.ComponentSchema {
+  collectionName: 'components_sections_wren_ais';
+  info: {
+    displayName: 'wrenAI';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    subTitle: Schema.Attribute.String;
     title: Schema.Attribute.String;
   };
 }
@@ -498,6 +564,18 @@ export interface SectionsWrenEngine extends Struct.ComponentSchema {
       'sections.wren-engine-details',
       true
     >;
+  };
+}
+
+export interface SectionsWrenEngineAi extends Struct.ComponentSchema {
+  collectionName: 'components_sections_wren_engine_ais';
+  info: {
+    displayName: 'wrenEngineAI';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    subTitle: Schema.Attribute.String;
+    title: Schema.Attribute.String;
   };
 }
 
@@ -567,6 +645,36 @@ export interface SharedLink extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedSeo extends Struct.ComponentSchema {
+  collectionName: 'components_shared_seos';
+  info: {
+    description: 'SEO metadata component';
+    displayName: 'SEO';
+  };
+  attributes: {
+    canonicalURL: Schema.Attribute.String;
+    keywords: Schema.Attribute.String;
+    metaDescription: Schema.Attribute.Text;
+    metaImage: Schema.Attribute.Media<'images'>;
+    metaRobots: Schema.Attribute.String;
+    metaTitle: Schema.Attribute.String;
+    metaViewport: Schema.Attribute.String;
+    structuredData: Schema.Attribute.JSON;
+  };
+}
+
+export interface SharedTag extends Struct.ComponentSchema {
+  collectionName: 'components_shared_tags';
+  info: {
+    description: 'Tag component for blog posts';
+    displayName: 'Tag';
+  };
+  attributes: {
+    color: Schema.Attribute.String;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface SharedWhyWrenSection extends Struct.ComponentSchema {
   collectionName: 'components_shared_why_wren_sections';
   info: {
@@ -579,6 +687,17 @@ export interface SharedWhyWrenSection extends Struct.ComponentSchema {
       'sections.why-wren-section-list',
       true
     >;
+  };
+}
+
+export interface SolutionsButtonBlock extends Struct.ComponentSchema {
+  collectionName: 'components_solutions_button_blocks';
+  info: {
+    displayName: 'buttonBlock';
+  };
+  attributes: {
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -622,6 +741,19 @@ export interface SolutionsEnterprisefeaturesBlock
     >;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     subtitle: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface SolutionsPublicRoadmap extends Struct.ComponentSchema {
+  collectionName: 'components_solutions_public_roadmaps';
+  info: {
+    displayName: 'publicRoadmap';
+  };
+  attributes: {
+    badge: Schema.Attribute.String;
+    buttonBlock: Schema.Attribute.Component<'button-block.button-block', true>;
+    subTitle: Schema.Attribute.Text;
     title: Schema.Attribute.String;
   };
 }
@@ -674,12 +806,25 @@ export interface SolutionsWhyWrenAiDetails extends Struct.ComponentSchema {
   };
 }
 
+export interface WrenEngineAiWrenEngineAi extends Struct.ComponentSchema {
+  collectionName: 'components_wren_engine_ai_wren_engine_ais';
+  info: {
+    displayName: 'wrenEngineAI';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    subTitle: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'blog-detail.blog-detail': BlogDetailBlogDetail;
       'bottom-content-block.bottom-content-block': BottomContentBlockBottomContentBlock;
       'bottom-content-block.btn-bottom-content-block': BottomContentBlockBtnBottomContentBlock;
+      'button-block.button-block': ButtonBlockButtonBlock;
       'home.case-studies': HomeCaseStudies;
       'home.core-capabilities': HomeCoreCapabilities;
       'home.core-capabilities-list': HomeCoreCapabilitiesList;
@@ -705,25 +850,35 @@ declare module '@strapi/strapi' {
       'sections.feature-grid': SectionsFeatureGrid;
       'sections.hero-section': SectionsHeroSection;
       'sections.logos-section': SectionsLogosSection;
+      'sections.open-source-project': SectionsOpenSourceProject;
+      'sections.public-roadmap': SectionsPublicRoadmap;
       'sections.wern-engine': SectionsWernEngine;
       'sections.wern-engine-details': SectionsWernEngineDetails;
       'sections.whaywren-ai': SectionsWhaywrenAi;
       'sections.why-wren-ai': SectionsWhyWrenAi;
       'sections.why-wren-ai-details': SectionsWhyWrenAiDetails;
+      'sections.why-wren-section': SectionsWhyWrenSection;
       'sections.why-wren-section-list': SectionsWhyWrenSectionList;
+      'sections.wren-ai': SectionsWrenAi;
       'sections.wren-engine': SectionsWrenEngine;
+      'sections.wren-engine-ai': SectionsWrenEngineAi;
       'sections.wren-engine-details': SectionsWrenEngineDetails;
       'shared.bottom-content-block': SharedBottomContentBlock;
       'shared.button': SharedButton;
       'shared.content-block': SharedContentBlock;
       'shared.link': SharedLink;
+      'shared.seo': SharedSeo;
+      'shared.tag': SharedTag;
       'shared.why-wren-section': SharedWhyWrenSection;
+      'solutions.button-block': SolutionsButtonBlock;
       'solutions.button-contant-block': SolutionsButtonContantBlock;
       'solutions.enterprise-features': SolutionsEnterpriseFeatures;
       'solutions.enterprisefeatures-block': SolutionsEnterprisefeaturesBlock;
+      'solutions.public-roadmap': SolutionsPublicRoadmap;
       'solutions.solutions-tab': SolutionsSolutionsTab;
       'solutions.why-wren-ai': SolutionsWhyWrenAi;
       'solutions.why-wren-ai-details': SolutionsWhyWrenAiDetails;
+      'wren-engine-ai.wren-engine-ai': WrenEngineAiWrenEngineAi;
     }
   }
 }

@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_solutions_why_wren_ai_details",
+  "info": {
+    "displayName": "whyWrenAIDetails"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  },
+  "config": {}
+}

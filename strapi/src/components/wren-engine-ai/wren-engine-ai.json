@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_wren_engine_ai_wren_engine_ais",
+  "info": {
+    "displayName": "wrenEngineAI"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subTitle": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

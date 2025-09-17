@@ -68,6 +68,12 @@
       "components": [
         "shared.bottom-content-block"
       ]
+    },
+    "seo": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.seo"
+      ]
     }
   }
 }

@@ -1,0 +1,44 @@
+{
+  "collectionName": "components_shared_seos",
+  "info": {
+    "displayName": "SEO",
+    "description": "SEO metadata component"
+  },
+  "options": {},
+  "attributes": {
+    "metaTitle": {
+      "type": "string",
+      "required": false
+    },
+    "metaDescription": {
+      "type": "text",
+      "required": false
+    },
+    "metaImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "keywords": {
+      "type": "string",
+      "required": false
+    },
+    "metaRobots": {
+      "type": "string",
+      "required": false
+    },
+    "structuredData": {
+      "type": "json",
+      "required": false
+    },
+    "metaViewport": {
+      "type": "string",
+      "required": false
+    },
+    "canonicalURL": {
+      "type": "string",
+      "required": false
+    }
+  }
+}
