@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { base } from "../service/axios";
+import { base } from "../../service/serviceConfig";
 
 export default function WrenEngine({ data }) {
   const [selected, setSelected] = useState("Before");

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { base } from "../components/service/axios";
+import { base } from "../service/serviceConfig";
 export default function Logos({ items }) {
   const sliderRef = useRef(null)
   

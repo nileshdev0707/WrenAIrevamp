@@ -1,4 +1,4 @@
-import { base } from "./service/axios";
+import { base } from "../service/serviceConfig";
 
 export default function Footer({ data }) {
   return (

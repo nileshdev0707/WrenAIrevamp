@@ -4,14 +4,14 @@ import WhatIsWrenAI from "../components/product/whatIsWrenAI";
 import ContentBlock from "../components/product/contentBlock";
 import WhyWrenSection from "../components/product/whyWrenSection";
 import Footer from "../components/footer";
-import { base } from "../components/service/axios";
+import { base } from "../service/serviceConfig";
 import Layout from "./layout";
 
-export default function Product({ product, navigation }) {
+export default function Product({ product }) {
   const heroImage = product?.productHero?.[0]?.backgroundimage?.url;
   
   return (
-   <Layout navigation={navigation}>
+   <Layout>
       <div className="max-w-6xl mx-auto px-6">
         <div
           style={{
@@ -51,39 +51,20 @@ export default function Product({ product, navigation }) {
 
 export async function getStaticProps() {
   const STRAPI = process.env.STRAPI_URL;
-  const token = process.env.STRAPI_TOKEN;
+  const token = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
   const api = axios.create({
     baseURL: STRAPI,
     headers: token ? { Authorization: `Bearer ${token}` } : {},
   });
-  const [prodRes, navBundle] = await Promise.all([
+  const [prodRes] = await Promise.all([
     api
       .get("/api/product-page?populate=*")
       .then((r) => r.data)
       .catch(() => null),
-    Promise.all([
-      api
-        .get(`/api/navigation?populate=*`)
-        .then((r) => r.data)
-        .catch(() => null),
-      api
-        .get(`/api/pages?fields=slug,navLabel,title,showInNav,navOrder`)
-        .then((r) => r.data)
-        .catch(() => null),
-    ]).then(([nav, pages]) => ({ nav, pages })),
-  ]);
+    ]);
   return {
     props: {
       product: prodRes?.data?.attributes ?? prodRes?.data ?? null,
-      navigation: {
-        ...(navBundle?.nav?.data?.attributes ?? navBundle?.nav?.data ?? {}),
-        pages: Array.isArray(navBundle?.pages?.data)
-          ? navBundle.pages.data
-              .map((p) => p.attributes ?? p)
-              .filter((p) => p.showInNav)
-              .sort((a, b) => (a.navOrder || 0) - (b.navOrder || 0))
-          : [],
-      },
     },
     revalidate: 10,
   };

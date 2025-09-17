@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { base } from "../components/service/axios";
+import { base } from "../service/serviceConfig";
 
 export default function Hero({ data }) {
   const badge = data?.badge || '#1 Generative BI Solution'

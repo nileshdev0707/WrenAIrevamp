@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { base } from "../service/axios";
+import { base } from "../../service/serviceConfig";
 
 export default function TrustedLogos({ items }) {
   const sliderRef = useRef(null)
@@ -7,7 +7,7 @@ export default function TrustedLogos({ items }) {
   if (!items || items.length === 0) return null
 
   // Duplicate items for seamless infinite scroll
-  const duplicatedItems = [...items, ...items]
+  const duplicatedItems = [...items, ...items]    
 
   useEffect(() => {
     const slider = sliderRef.current

@@ -1,10 +1,10 @@
 import Navbar from "../components/Navbar";
 import SiteFooter from "../components/SiteFooter";
 
-export default function Layout({ children, navigation }) {
+export default function Layout({ children }) {
   return (
     <div>
-      <Navbar navigation={navigation} />
+      <Navbar/>
       {children}
       <SiteFooter />
     </div>
