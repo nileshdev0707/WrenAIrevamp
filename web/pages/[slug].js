@@ -1,17 +1,14 @@
 import axios from "axios";
-import Navbar from "../components/Navbar";
-import SiteFooter from "../components/SiteFooter";
 import CTA from "../components/CTA";
 import Hero from "../components/Hero";
 import FeatureShowcase from "../components/FeatureShowcase";
 import Logos from "../components/Logos";
-
+import Layout from "./layout";
 export default function Page({ page, navigation }) {
   if (!page) return <div />;
   return (
-    <div>
-      <Navbar navigation={navigation} />
-      <main className="max-w-6xl mx-auto px-6 py-16">
+    <Layout navigation={navigation}>
+      <div className="max-w-6xl mx-auto px-6 py-16">
         <h1 className="text-3xl font-bold">{page.title}</h1>
         {page.content && (
           <div
@@ -66,9 +63,8 @@ export default function Page({ page, navigation }) {
             }
             return null;
           })}
-      </main>
-      <SiteFooter pages={navigation?.pages || []} />
-    </div>
+      </div>
+    </Layout>
   );
 }
 

@@ -1,25 +1,21 @@
 import axios from "axios";
 import React, { useState } from "react";
-import Navbar from "../components/Navbar";
-import SiteFooter from "../components/SiteFooter";
 import Hero from "../components/pricing/hero";
 import Tiers from "../components/pricing/tiers";
 import ContentBlock from "../components/pricing/contantBlock";
 import ComparePlan from "../components/pricing/comparePlan";
 import FAQ from "../components/pricing/faq";
 import Footer from "../components/footer";
-
+import { base } from "../components/service/axios";
 import TrustedLogos from "../components/pricing/trustedLogo";
-
+import Layout from "./layout";
 export default function Pricing({ pricing, navigation }) {
-  const base = process.env.NEXT_PUBLIC_STRAPI_URL || ''
   const [billing, setBilling] = useState("Monthly");
   const heroImage = pricing?.hero?.[0]?.backgroundimage?.url
   
   return (
-    <div>
-      <Navbar navigation={navigation} />
-      <main className="px-6">
+    <Layout navigation={navigation}>
+      <div className="px-6">
         {pricing?.hero?.length && (
         <div style={{ backgroundImage: `url(${heroImage.startsWith('http') ? '' : base}${heroImage})` }} className="bg-no-repeat py-16 max-w-6xl mx-auto bg-contain">
         {pricing?.hero?.length && (
@@ -59,10 +55,8 @@ export default function Pricing({ pricing, navigation }) {
         {pricing?.bottomContentBlock?.length && (
           <Footer data={pricing?.bottomContentBlock} />
         )}
-      </main>
-       {/* Footer */}
-      <SiteFooter navigation={navigation}/>
-    </div>
+      </div>
+    </Layout>
   );
 }
 

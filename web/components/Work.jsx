@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react' 
+import { base } from "../components/service/axios";
 
 export default function Work({ data }) {
   const works = data?.UseCases?.[0] || []
@@ -6,7 +7,6 @@ export default function Work({ data }) {
   const badge = works?.badge || 'Put WrenAI to Work'
   const title = works?.title || 'Empower data teams with secure, scalable access.'
   const visualUrl = data?.visual?.url || data?.visual?.data?.attributes?.url || null
-  const base = process.env.NEXT_PUBLIC_STRAPI_URL || ''
   
   // Get dynamic tabs from useCasesItems
   const useCasesItems = works?.useCasesItems || []

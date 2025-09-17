@@ -7,8 +7,10 @@ import Capabilities from "../components/Capabilities";
 import Work from "../components/Work";
 import Stories from "../components/Stories";
 import Stats from "../components/Stats";
-import SiteFooter from "../components/SiteFooter";
 import HomeCTA from "../components/homeCTA";
+import { base } from "../components/service/axios";
+import Layout from "./layout";
+
 export default function Home({
   hero,
   logos,
@@ -16,10 +18,8 @@ export default function Home({
   homePageRes,
 }) {
 
-  const base = process.env.NEXT_PUBLIC_STRAPI_URL || ''
   return (
-    <div>
-      <Navbar navigation={navigation} />
+    <Layout navigation={navigation}>
       <div style={{ backgroundImage: `url(${hero?.heroImage?.url.startsWith('http') ? '' : base}${hero?.backgroundimage?.url})`,  WebkitBackgroundSize: '100%',backgroundPosition: 'center bottom' }} className="bg-cover">
            <Hero data={hero} />
             <Logos items={logos} />
@@ -29,9 +29,7 @@ export default function Home({
          <Stories data={homePageRes} />
          <Stats data={homePageRes} />
          <HomeCTA data={homePageRes?.getStartedWithWrenAI} />
-         <SiteFooter pages={navigation?.pages || []} />
-      
-    </div>
+    </Layout>
   );
 }
 

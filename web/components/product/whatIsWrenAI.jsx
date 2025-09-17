@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import { base } from "../service/axios";
 
 export default function WhatIsWrenAI({ data }) {
-  const base = process.env.NEXT_PUBLIC_STRAPI_URL || "";
   return (
       <section>
         {data?.map((block, index) => {

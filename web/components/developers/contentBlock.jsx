@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import { base } from "../service/axios";
 
 export default function ContentBlock({ data }) {
-  const base = process.env.NEXT_PUBLIC_STRAPI_URL || "";
   return (
     <div>
       {data?.map((item) => {

@@ -1,8 +1,9 @@
 import { useRef, useEffect } from 'react';
+import { base } from "../components/service/axios";
+
 export default function Capabilities({ data }) {
   if (!data) return null
   const features = data[0] || []
-  const base = process.env.NEXT_PUBLIC_STRAPI_URL || ''
   const sectionRef = useRef(null);
 
   useEffect(() => {

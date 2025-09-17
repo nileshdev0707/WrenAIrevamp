@@ -1,5 +1,6 @@
+import { base } from "./service/axios";
+
 export default function HomeCTA({ data }) {
-    const base = process.env.NEXT_PUBLIC_STRAPI_URL || "";
     return (
       <section className="max-w-7xl mx-auto lg:px-6 sm:px-4 px-2 sm:py-10 py-8 md:py-16 ">
         <div className="rounded-2xl bg-blue-600 text-white md:px-16 sm:px-8 py-10 px-5">
