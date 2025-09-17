@@ -1,20 +1,18 @@
 import axios from "axios";
-import Navbar from "../components/Navbar";
-import SiteFooter from "../components/SiteFooter";
 import ProductHero from "../components/product/productHero";
 import WhatIsWrenAI from "../components/product/whatIsWrenAI";
 import ContentBlock from "../components/product/contentBlock";
 import WhyWrenSection from "../components/product/whyWrenSection";
 import Footer from "../components/footer";
+import { base } from "../components/service/axios";
+import Layout from "./layout";
 
 export default function Product({ product, navigation }) {
-console.log("product ==> ", product);
-  const base = process.env.NEXT_PUBLIC_STRAPI_URL || "";
   const heroImage = product?.productHero?.[0]?.backgroundimage?.url;
+  
   return (
-    <div>
-      <Navbar navigation={navigation} />
-      <main className="max-w-6xl mx-auto px-6">
+   <Layout navigation={navigation}>
+      <div className="max-w-6xl mx-auto px-6">
         <div
           style={{
             backgroundImage: `url(${
@@ -38,7 +36,7 @@ console.log("product ==> ", product);
         <ContentBlock product={product?.ContentBlock} />
        )}
 
-      </main>
+      </div>
        {/* Why Wren Section */}
        {product?.WhyWrenSection?.length && (
         <WhyWrenSection data={product?.WhyWrenSection} />
@@ -47,8 +45,7 @@ console.log("product ==> ", product);
        {product?.bottomContentBlock?.length && (
           <Footer data={product?.bottomContentBlock} />
         )}
-      <SiteFooter />
-    </div>
+    </Layout>
   );
 }
 

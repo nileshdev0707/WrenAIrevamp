@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import { base } from "../service/axios";
 
 export default function ProductHero({ product }) {
-  const base = process.env.NEXT_PUBLIC_STRAPI_URL || "";
   return (
     <div>
       {product?.map((item) => {

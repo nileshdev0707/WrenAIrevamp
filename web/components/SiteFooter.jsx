@@ -1,5 +1,6 @@
+import { base } from "../components/service/axios";
+
 export default function SiteFooter({ pages = [], navigation }) {
-  const base = process.env.NEXT_PUBLIC_STRAPI_URL || "";
   const link = (slug) => `/${slug}`;
   const cols = [
     {

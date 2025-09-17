@@ -1,19 +1,17 @@
 import axios from "axios";
-import Navbar from "../components/Navbar";
-import SiteFooter from "../components/SiteFooter";
 import DevelopersHero from "../components/developers/hero";
 import ContentBlock from "../components/developers/contentBlock";
 import WrenEngine from "../components/developers/wrenEngine";
 import WhyWrenAI from "../components/developers/whyWrenAI";
+import { base } from "../components/service/axios";
+import Layout from "./layout";
+
 export default function Developers({ developers, navigation }) {
-  console.log("developers ==> ", developers);
-  const base = process.env.NEXT_PUBLIC_STRAPI_URL || "";
   const heroImage = developers?.hero?.[0]?.backgroundimage?.url;
 
   return (
-    <div>
-      <Navbar navigation={navigation} />
-      <main className="max-w-6xl mx-auto px-6">
+    <Layout navigation={navigation}>
+      <div className="max-w-6xl mx-auto px-6">
         <div
           style={{
             backgroundImage: `url(${
@@ -31,15 +29,14 @@ export default function Developers({ developers, navigation }) {
             <ContentBlock data={developers?.ContentBlock} />
           )}
         </div>
-      </main>
+      </div>
       {developers?.wrenEngine?.length && (
         <WrenEngine data={developers?.wrenEngine} />
       )}
         {/* {developers?.whyWrenAI?.length && (
             <WhyWrenAI data={developers?.whyWrenAI} />
         )} */}
-      <SiteFooter />
-    </div>
+    </Layout>
   );
 }
 

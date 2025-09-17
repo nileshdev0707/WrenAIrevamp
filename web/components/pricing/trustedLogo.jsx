@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
+import { base } from "../service/axios";
 
 export default function TrustedLogos({ items }) {
-  const base = process.env.NEXT_PUBLIC_STRAPI_URL || ''
   const sliderRef = useRef(null)
   
   if (!items || items.length === 0) return null

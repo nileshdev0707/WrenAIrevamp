@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+import { base } from "../service/axios";
 
 export default function WrenEngine({ data }) {
   const [selected, setSelected] = useState("Before");
-  const base = process.env.NEXT_PUBLIC_STRAPI_URL || "";
 
   return (
     <section className="bg-[#F7FBFE] py-10 sm:py-20">

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
+import { base } from "../components/service/axios";
 
 export default function Navbar({ navigation }) {
-  const base = process.env.NEXT_PUBLIC_STRAPI_URL || ''
   const dynamicPages = Array.isArray(navigation?.pages) ? navigation.pages : []
   const pageSlugByLabel = dynamicPages.reduce((acc, p) => {
     const lbl = (p.navLabel || p.title || p.label || '').toString().trim().toLowerCase()

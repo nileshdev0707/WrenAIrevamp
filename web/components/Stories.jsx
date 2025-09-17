@@ -1,9 +1,8 @@
 import { useEffect } from 'react'
-
+import { base } from "../components/service/axios";
 
 export default function Stories({ data }) {
   const caseStudies = data?.caseStudies[0] || []
-  const base = process.env.NEXT_PUBLIC_STRAPI_URL || ''
   const title = caseStudies?.title || 'case studies'
   const subtitle = caseStudies?.subTitle || 'Customer Success Stories'
   

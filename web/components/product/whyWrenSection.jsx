@@ -1,7 +1,7 @@
 import React from "react";
+import { base } from "../service/axios";
 
 export default function WhyWrenSection({ data }) {
-  const base = process.env.NEXT_PUBLIC_STRAPI_URL || "";
 
   const formatTitle = (text) => {
     return text.split(/(Insights|Enterprise|\.)/g).map((part, i) => {
