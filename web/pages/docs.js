@@ -1,7 +1,7 @@
 import axios from "axios";
 import DocumentHero from "../components/document/hero";
 import ContentBlock from "../components/document/contentBlock";
-import { base } from "../components/service/axios";
+import { base } from "../service/serviceConfig";
 import Layout from "./layout";
 import OpenSourceDetails from "../components/document/openSourceDetails";
 import Footer from "../components/footer";
