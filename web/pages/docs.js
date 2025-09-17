@@ -1,17 +1,17 @@
 import axios from "axios";
-import ProductHero from "../components/product/productHero";
-import WhatIsWrenAI from "../components/product/whatIsWrenAI";
-import ContentBlock from "../components/product/contentBlock";
-import WhyWrenSection from "../components/product/whyWrenSection";
-import Footer from "../components/footer";
+import DocumentHero from "../components/document/hero";
+import ContentBlock from "../components/document/contentBlock";
 import { base } from "../components/service/axios";
 import Layout from "./layout";
+import OpenSourceDetails from "../components/document/openSourceDetails";
+import Footer from "../components/footer";
+import PublicRoadmap from "../components/document/publicRoadmap";
 
-export default function Product({ product, navigation }) {
-  const heroImage = product?.productHero?.[0]?.backgroundimage?.url;
-  
+export default function Document({ document, navigation }) {
+  const heroImage = document?.hero?.[0]?.backgroundimage?.url;
+
   return (
-   <Layout navigation={navigation}>
+    <Layout navigation={navigation}>
       <div className="max-w-6xl mx-auto">
         <div
           style={{
@@ -22,29 +22,23 @@ export default function Product({ product, navigation }) {
           className="bg-no-repeat pt-24 pb-10 max-w-6xl mx-auto bg-contain"
         >
           {/* Product Hero */}
-          {product?.productHero?.length && (
-            <ProductHero data={product?.productHero} />
+          {document?.hero?.length && <DocumentHero data={document?.hero} />}
+          {/* Content Block */}
+          {document?.ContentBlock?.length && (
+            <ContentBlock data={document?.ContentBlock} />
           )}
-         
-         {/* What is Wren AI */}
-         {product?.WhatIsWrenAI?.length && (
-          <WhatIsWrenAI data={product?.WhatIsWrenAI} />
-         )}
         </div>
-       {/* Content Block */}
-       {product?.ContentBlock?.length && (
-        <ContentBlock product={product?.ContentBlock} />
-       )}
-
       </div>
-       {/* Why Wren Section */}
-       {product?.WhyWrenSection?.length && (
-        <WhyWrenSection data={product?.WhyWrenSection} />
-       )}
-       {/* Footer */}
-       {product?.bottomContentBlock?.length && (
-          <Footer data={product?.bottomContentBlock} />
-        )}
+      {document?.openSourceProject?.length && (
+        <OpenSourceDetails data={document?.openSourceProject} />
+      )}
+      {document?.publicRoadmap?.length && (
+        <PublicRoadmap data={document?.publicRoadmap} />
+      )}
+      {/* Footer banner */}
+      {document?.BottomContentBlock?.length && (
+        <Footer data={document?.BottomContentBlock} />
+      )}
     </Layout>
   );
 }
@@ -56,9 +50,9 @@ export async function getStaticProps() {
     baseURL: STRAPI,
     headers: token ? { Authorization: `Bearer ${token}` } : {},
   });
-  const [prodRes, navBundle] = await Promise.all([
+  const [document, navBundle] = await Promise.all([
     api
-      .get("/api/product-page?populate=*")
+      .get("/api/docs-page?populate=*")
       .then((r) => r.data)
       .catch(() => null),
     Promise.all([
@@ -74,7 +68,7 @@ export async function getStaticProps() {
   ]);
   return {
     props: {
-      product: prodRes?.data?.attributes ?? prodRes?.data ?? null,
+      document: document?.data?.attributes ?? document?.data ?? null,
       navigation: {
         ...(navBundle?.nav?.data?.attributes ?? navBundle?.nav?.data ?? {}),
         pages: Array.isArray(navBundle?.pages?.data)

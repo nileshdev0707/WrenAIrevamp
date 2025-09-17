@@ -11,7 +11,7 @@ export default function Developers({ developers, navigation }) {
 
   return (
     <Layout navigation={navigation}>
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto">
         <div
           style={{
             backgroundImage: `url(${
@@ -33,9 +33,9 @@ export default function Developers({ developers, navigation }) {
       {developers?.wrenEngine?.length && (
         <WrenEngine data={developers?.wrenEngine} />
       )}
-        {/* {developers?.whyWrenAI?.length && (
-            <WhyWrenAI data={developers?.whyWrenAI} />
-        )} */}
+      {developers?.whyWrenAI?.length && (
+        <WhyWrenAI data={developers?.whyWrenAI} />
+      )}
     </Layout>
   );
 }

@@ -24,12 +24,12 @@ export default function ProductHero({ data }) {
               ))}
           </h1>
 
-          <p className="mt-5 max-w-2xl mx-auto text-black">{item?.subtitle}</p>
+          <p className="mt-5 max-w-2xl mx-auto text-black md:text-base text-sm">{item?.subtitle}</p>
           <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center">
             {item?.buttons?.map((btn, index) => (
               <a
                 key={btn.id}
-                // href={btn.url}
+                href={btn.url}
                 className={`px-6 py-3 rounded-md font-medium text-sm transition-all duration-200 shadow-sm
                 ${
                   index === 0

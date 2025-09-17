@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 export default function DevelopersHero({ data }) {
   return (
-    <section className="py-10 sm:py-16 text-center">
+    <section className="py-10 md:py-16 text-center">
       {data?.map((item, index) => {
         const words = item?.title?.split(" ");
         const firstPart = words.slice(0, 3).join(" ");
@@ -70,12 +70,12 @@ export default function DevelopersHero({ data }) {
               </div>
             </div>
 
-            <p className="mt-5 max-w-xl mx-auto text-black">{item?.subtitle}</p>
+            <p className="mt-5 max-w-xl mx-auto text-black md:text-base text-sm">{item?.subtitle}</p>
             <div className="flex gap-3 mt-14 justify-center">
               {item?.buttons?.map((btn, index) => (
-                <button
+                <a
                   key={btn.id}
-                  // href={btn.url}
+                  href={btn.url}
                   className={`px-6 py-3 rounded-md font-medium text-sm transition-all duration-200 shadow-sm
                 ${
                   index === 0
@@ -84,7 +84,7 @@ export default function DevelopersHero({ data }) {
                 }`}
                 >
                   {btn.label}
-                </button>
+                </a>
               ))}
             </div>
           </div>

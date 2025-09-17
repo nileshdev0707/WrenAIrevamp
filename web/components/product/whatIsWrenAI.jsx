@@ -31,12 +31,12 @@ export default function WhatIsWrenAI({ data }) {
                 {WhatisWrenAIItem?.map((item, i) => {
                   const isRight = item.position === "right";
                   const url = item?.icon?.url;
+                  const zIndex = `z-${40 - i * 10}`;
+                  const top = ['-top-0', '-top-13', '-top-26', '-top-39'];
                   return (
                     <div
                       key={item.id}
-                      className={`relative z-${40 - i * 10} ${
-                        i > 0 ? `-top-${i * 13}` : ""
-                      }`}
+                      className={`relative ${zIndex} ${top[i]}`}
                     >
                       <div className="relative">
                         <div className="absolute top-4 left-0 w-52 h-52 bg-blue-200 opacity-40 rotate-x-45 rotate-z-45 rounded-xl"></div>
@@ -112,7 +112,7 @@ export default function WhatIsWrenAI({ data }) {
                   );
                 })}
               </div>
-              <div className="lg:hidden grid sm:grid-cols-2 grid-cols-1 gap-4 pt-5">
+              <div className="lg:hidden grid sm:grid-cols-2 grid-cols-1 gap-4 pt-5 px-5">
               {WhatisWrenAIItem?.map((item, i) => {
                 const url = item?.icon?.url;
                 return (
