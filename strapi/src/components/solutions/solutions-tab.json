@@ -1,7 +1,7 @@
 {
-  "collectionName": "components_shared_content_blocks",
+  "collectionName": "components_solutions_blocks",
   "info": {
-    "displayName": "ContentBlock"
+    "displayName": "Solutions Tabs"
   },
   "options": {},
   "attributes": {
@@ -17,23 +17,6 @@
     "description": {
       "type": "richtext"
     },
-    "layout": {
-      "type": "enumeration",
-      "enum": [
-        "text",
-        "table",
-        "cards",
-        "grid"
-      ]
-    },
-    "alignment": {
-      "type": "enumeration",
-      "enum": [
-        "left",
-        "center",
-        "right"
-      ]
-    },
     "image": {
       "type": "media",
       "multiple": false,
@@ -47,20 +30,10 @@
     "descriptionDetail": {
       "type": "blocks"
     },
-    "contentBlockButton": {
+    "button": {
       "type": "component",
       "component": "shared.button",
       "repeatable": true
-    },
-    "leftImage": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
     }
   },
   "config": {}

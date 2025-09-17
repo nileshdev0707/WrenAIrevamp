@@ -373,6 +373,34 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiBlogPageBlogPage extends Struct.SingleTypeSchema {
+  collectionName: 'blog_pages';
+  info: {
+    displayName: 'Blog Page';
+    pluralName: 'blog-pages';
+    singularName: 'blog-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    hero: Schema.Attribute.DynamicZone<['sections.hero-section']>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::blog-page.blog-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiCapabilitiesCapabilities extends Struct.SingleTypeSchema {
   collectionName: 'home_capabilities';
   info: {
@@ -459,7 +487,40 @@ export interface ApiDevelopersPageDevelopersPage
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    whyWrenAI: Schema.Attribute.DynamicZone<['solutions.why-wren-ai']>;
     wrenEngine: Schema.Attribute.DynamicZone<['sections.wern-engine']>;
+  };
+}
+
+export interface ApiDocsPageDocsPage extends Struct.SingleTypeSchema {
+  collectionName: 'docs_pages';
+  info: {
+    displayName: 'Docs Page';
+    pluralName: 'docs-pages';
+    singularName: 'docs-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    BottomContentBlock: Schema.Attribute.DynamicZone<
+      ['shared.bottom-content-block']
+    >;
+    ContentBlock: Schema.Attribute.Component<'shared.content-block', true>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    hero: Schema.Attribute.DynamicZone<['sections.hero-section']>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::docs-page.docs-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -786,6 +847,39 @@ export interface ApiProductProduct extends Struct.SingleTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     summary: Schema.Attribute.Text;
     title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSolutionsPageSolutionsPage extends Struct.SingleTypeSchema {
+  collectionName: 'solutions_pages';
+  info: {
+    displayName: 'Solutions Page';
+    pluralName: 'solutions-pages';
+    singularName: 'solutions-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    ContentBlock: Schema.Attribute.Component<'shared.content-block', true>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    EnterpriseFeaturesBlock: Schema.Attribute.DynamicZone<
+      ['solutions.enterprisefeatures-block']
+    >;
+    hero: Schema.Attribute.DynamicZone<['sections.hero-section']>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::solutions-page.solutions-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    SolutionsTab: Schema.Attribute.Component<'solutions.solutions-tab', true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1353,9 +1447,11 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::blog-page.blog-page': ApiBlogPageBlogPage;
       'api::capabilities.capabilities': ApiCapabilitiesCapabilities;
       'api::cta.cta': ApiCtaCta;
       'api::developers-page.developers-page': ApiDevelopersPageDevelopersPage;
+      'api::docs-page.docs-page': ApiDocsPageDocsPage;
       'api::feature-showcase.feature-showcase': ApiFeatureShowcaseFeatureShowcase;
       'api::hero.hero': ApiHeroHero;
       'api::home-page.home-page': ApiHomePageHomePage;
@@ -1366,6 +1462,7 @@ declare module '@strapi/strapi' {
       'api::pricing.pricing': ApiPricingPricing;
       'api::product-page.product-page': ApiProductPageProductPage;
       'api::product.product': ApiProductProduct;
+      'api::solutions-page.solutions-page': ApiSolutionsPageSolutionsPage;
       'api::stats.stats': ApiStatsStats;
       'api::work.work': ApiWorkWork;
       'plugin::content-releases.release': PluginContentReleasesRelease;

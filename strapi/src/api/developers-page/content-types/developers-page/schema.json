@@ -27,6 +27,12 @@
       "components": [
         "sections.wern-engine"
       ]
+    },
+    "whyWrenAI": {
+      "type": "dynamiczone",
+      "components": [
+        "solutions.why-wren-ai"
+      ]
     }
   }
 }

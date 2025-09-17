@@ -1,0 +1,42 @@
+{
+  "collectionName": "components_solutions_EnterpriseFeatures_blocks",
+  "info": {
+    "displayName": "Enterprise Features"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "badge": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "EnterpriseFeaturesItems": {
+      "type": "component",
+      "component": "solutions.enterprise-features",
+      "repeatable": true
+    },
+    "button": {
+      "type": "component",
+      "component": "shared.button",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

@@ -46,6 +46,20 @@ export default factories.createCoreController('api::developers-page.developers-p
             },
           },
         },
+        whyWrenAI: {
+          on: {
+            'solutions.why-wren-ai': {
+              populate: {
+                whyWrenAIDetails: {
+                  populate: {
+                    icon: true,
+                  },
+                },
+                buttonContantBlock: { populate: '*' },
+              },
+            },
+          },
+        },
       },
     }
     // @ts-ignore
@@ -86,6 +100,20 @@ export default factories.createCoreController('api::developers-page.developers-p
                 wrenEngineDetails: {
                   populate: {
                     image: true,
+                  },
+                },
+                buttonContantBlock: { populate: '*' },
+              },
+            },
+          },
+        },
+        whyWrenAI: {
+          on: {
+            'solutions.why-wren-ai': {
+              populate: {
+                whyWrenAIDetails: {
+                  populate: {
+                    icon: true,
                   },
                 },
                 buttonContantBlock: { populate: '*' },
