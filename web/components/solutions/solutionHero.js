@@ -6,7 +6,6 @@ const SolutionHero = ({ data }) => {
   const words = hero?.title?.split(" ");
   const firstPart = words?.slice(0, 2).join(" ");
   const secondPart = words?.slice(2).join(" ");
-  console.log("hero ==> ", hero);
   return (
     <div
       className="sm:pt-23 pt-15 sm:pb-10 pb-0"
@@ -23,7 +22,7 @@ const SolutionHero = ({ data }) => {
           {hero?.badge}
         </button>
         <h1 className="animate-fade-in-up animation-delay-400 text-2xl sm:text-3xl md:text-4xl lg:text-[64px] font-medium leading-tight sm:mt-8 mt-5">
-          <span className="text-blue-600">{firstPart}</span>
+          <span className="text-[#2F54EB]">{firstPart}</span>
           <br />
           <span>{secondPart}</span>
         </h1>

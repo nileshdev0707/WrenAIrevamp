@@ -4,6 +4,9 @@ import Layout from "./layout";
 import SolutionHero from "../components/solutions/solutionHero";
 import { solutionsApi } from "../service/apiClient";
 import SolutionsTab from "../components/solutions/solutionsTab";
+import EnterPrise from "../components/solutions/enterPrise";
+import Industry from "../components/solutions/Industry";
+import PartnerEcosystem from "../components/solutions/partnerEcosystem";
 
 export default function Solutions() {
   const [solutions, setSolutions] = useState(null);
@@ -34,15 +37,15 @@ export default function Solutions() {
         <div className="max-w-7xl mx-auto lg:px-6 md:px-4 px-2">
              <SolutionHero data={solutions} />
              <SolutionsTab data={solutions} />
-            {/* Product Hero */}
-            {/* {developers?.hero?.length && (
-                <DevelopersHero data={developers?.hero} />
-            )}
-            {developers?.ContentBlock?.length && (
-                <ContentBlock data={developers?.ContentBlock} />
-            )} */}
       </div>   
-       {/* Footer */}
+        <div className="bg-[#F7FBFE]">
+          <EnterPrise data={solutions} />
+        </div>
+      <div className="max-w-7xl mx-auto lg:px-6 md:px-4 px-2">
+        <Industry data={solutions} />
+        <PartnerEcosystem data={solutions} />
+      </div>
+
     </Layout>
   );
 }

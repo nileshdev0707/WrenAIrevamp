@@ -8,7 +8,7 @@ const SolutionsTab = ({ data }) => {
   
   // Get the active tab data
   const activeTabData = solutions?.[activeTab] || {};
-  
+
   return (
       <div className="max-w-7xl mx-auto lg:mb-25 md:mb-20 sm:mb-15 mb-10">
         {/* Tab Navigation */}
@@ -46,21 +46,9 @@ const SolutionsTab = ({ data }) => {
               {/* Badge */}
             </div>            
           </div>
-
-            {/* Feature Grid */}
-           <div className="grid grid-cols-1 min-[479px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 md:gap-4 sm:gap-5 gap-2 md:mb-8 sm:mb-6 mb-4">
-             {activeTabData?.description ? 
-               activeTabData.description.split('\n').filter(item => item.trim() !== '').map((feature, index) => (
-                 <div key={index} className="flex items-start gap-2 sm:gap-3">
-                   <div className="flex-shrink-0 sm:w-6 w-4 sm:h-6 h-4  rounded-full flex items-center mt-0.5">
-                    <img src="/svg/checkblue.svg" alt="check"  />
-                   </div>
-                   <div className="text-[#757575] text-md leading-relaxed">{feature.trim()}</div>
-                 </div>
-               )) : null
-             }
-           </div>
-
+          <div dangerouslySetInnerHTML={{
+            __html: activeTabData.description
+          }} />
             {/* Call to Action Button */}
             <div className="text-center">
                 <button className="bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] hover:-translate-y-0.5  transition-all text-white font-semibold md:py-4 py-3 md:px-8 px-4 rounded-lg lg:text-lg md:text-md text-sm duration-200 shadow-lg hover:shadow-xl">

@@ -1,6 +1,7 @@
 import { base } from "../service/serviceConfig";
+import navigation from "../json/navigation.json";
 
-export default function SiteFooter({ pages = [], navigation }) {
+export default function SiteFooter() {
   const link = (slug) => `/${slug}`;
   const cols = [
     {

@@ -1,43 +1,8 @@
 import { useState, useEffect } from 'react'
 import { base} from "../service/serviceConfig";
-import { navigationApi, pagesApi } from "../service/apiClient";
+import navigation from "../json/navigation.json";
 
 export default function Navbar() {
-  const [navigation, setNavigation] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-
-  useEffect(() => {
-    const fetchNavigation = async () => {
-      try {
-      
-        
-        const navResponse = await navigationApi();
-        const pagesResponse = await pagesApi();
-        
-        const navRes = navResponse.data;
-        const pagesRes = pagesResponse.data;
-
-        const navigationData = {
-          ...(navRes?.data?.attributes ?? navRes?.data ?? {}),
-          pages: Array.isArray(pagesRes?.data)
-            ? pagesRes.data
-                .map((p) => p.attributes ?? p)
-                .filter((p) => p.showInNav)
-                .sort((a, b) => (a.navOrder || 0) - (b.navOrder || 0))
-            : [],
-        };
-        setNavigation(navigationData);
-        console.log("navigation ==> ", navigationData);
-      } catch (error) {
-        console.error('Error fetching navigation:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchNavigation();
-  }, []);
 
   // if (loading) {
   //   return <div>Loading navigation...</div>;
@@ -123,21 +88,8 @@ export default function Navbar() {
               <div className="flex items-center justify-between px-6 py-4">
                 {/* Logo and Navigation */}
                 <div className="flex items-center gap-8">
-                  {/* Logo */}
-                  {/* <a href="/" className="flex items-center gap-2 group">
-                    <div className="w-8 h-8 bg-gradient-to-br from-purple-100 to-blue-100 rounded-lg flex items-center justify-center border border-gray-300">
-                      <svg className="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                      </svg>
-                    </div>
-                    <span className="text-xl font-bold text-gray-800 group-hover:text-gray-900 transition-colors">
-                      WrenAI
-                    </span>
-                  </a> */}
                   <a href='/' className="flex items-center gap-2 group">
                   {navigation?.logo?.url && <img src={`${navigation?.logo?.url.startsWith('http') ? '' : base}${navigation?.logo?.url}`} alt={navigation?.logo?.name} className="max-h-8 object-contain" />}
-
-                    {/* <img src={`${navigation?.logo?.url}`} alt="WrenAI" className="w-10 h-10" /> */}
                   </a>
                   
                   {/* Desktop Navigation */}
