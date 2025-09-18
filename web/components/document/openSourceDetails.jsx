@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
+import { base } from "../../service/serviceConfig";
 
 export default function OpenSourceDetails({ data }) {
   return (
-    <section className="bg-[#F7FBFE] py-10 md:py-20">
+    <section className="bg-[#F7FBFE] py-10 md:pb-15 md:pt-20">
       <div className="max-w-6xl mx-auto xl:px-0 px-10">
         {data?.map((item) => {
+          const { WrenAI, wrenEngineAI, image } = item;
+          const imageUrl = image?.url;
+
           return (
             <div key={item.id}>
+              {/* Header Section */}
               <div className="text-center">
                 <button className="border border-blue-600 text-black px-4 py-2 rounded-full font-medium text-sm shadow-sm">
                   <div className="flex items-center gap-2">
@@ -23,6 +28,57 @@ export default function OpenSourceDetails({ data }) {
                 <p className="max-w-2xl mt-5 mx-auto text-gray-600">
                   {item.subTitle}
                 </p>
+              </div>
+
+              {/* Boxes + Center */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:items-center lg:gap-15 gap-8 mt-10">
+                {/* Left box */}
+                <div className="bg-white rounded-xl border border-gray-200 py-6 px-10">
+                  <h3 className="text-lg font-semibold">{WrenAI?.title}</h3>
+                  <p className="text-sm text-gray-500">{WrenAI?.subTitle}</p>
+                  <p className="mt-2 text-gray-700 text-sm leading-relaxed pt-5">
+                    {WrenAI?.description}
+                  </p>
+                </div>
+
+                {/* Center circle with image */}
+                <div className="relative items-center justify-center lg:flex hidden">
+                  <div className="flex items-center absolute -left-15">
+                    <div className="inline-block w-2 h-2 border-l-2 border-t-2 border-blue-600 -rotate-45"></div>
+                    <div className="flex-1 border-t-2 border-dashed border-blue-600 xl:w-28 w-24"></div>
+                    {/* Square (diamond style) */}
+                    <div className="w-2 h-2 bg-blue-600 rotate-45"></div>
+                  </div>
+                  {imageUrl ? (
+                    <img
+                      src={`${
+                        imageUrl.startsWith("http") ? "" : base
+                      }${imageUrl}`}
+                      alt={image?.name}
+                    />
+                  ) : (
+                    <div className="text-gray-600">{image?.name}</div>
+                  )}
+                  <div className="flex items-center absolute -right-15">
+                    <div className="w-2 h-2 bg-blue-600 rotate-45"></div>
+                    <div className="flex-1 border-t-2 border-dashed border-blue-600 xl:w-28 w-24"></div>
+
+                    <div className="inline-block w-2 h-2 border-r-2 border-b-2 border-blue-600 -rotate-45"></div>
+                  </div>
+                </div>
+
+                {/* Right box */}
+                <div className="bg-white rounded-xl border border-gray-200 py-6 px-10">
+                  <h3 className="text-lg font-semibold">
+                    {wrenEngineAI?.title}
+                  </h3>
+                  <p className="text-sm text-gray-500">
+                    {wrenEngineAI?.subTitle}
+                  </p>
+                  <p className="mt-2 text-gray-700 text-sm leading-relaxed pt-5">
+                    {wrenEngineAI?.description}
+                  </p>
+                </div>
               </div>
             </div>
           );

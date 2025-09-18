@@ -19,7 +19,7 @@ export default function Footer({ data }) {
                   </a>
                   )}
                   {item?.title && (
-                    <h3 className="text-3xl lg:text-4xl font-medium mt-8">{item?.title}</h3>
+                    <h3 className="text-3xl lg:text-4xl font-medium mt-8 leading-tight">{item?.title}</h3>
                   )}
                   {item?.subTitle && (
                     <p className="text-sm opacity-90 mt-4">{item?.subTitle}</p>

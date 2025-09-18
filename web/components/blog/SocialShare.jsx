@@ -29,7 +29,7 @@ export default function SocialShare({ title, url }) {
   };
 
   return (
-    <div className="border-t border-gray-200 pt-8 mb-12">
+    <div className="mb-12">
       <h3 className="text-lg font-semibold text-gray-900 mb-4">Share this article</h3>
       <div className="flex gap-4 flex-wrap">
         <button 

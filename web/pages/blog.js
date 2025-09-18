@@ -1,27 +1,24 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Link from "next/link";
-import Navbar from "../components/Navbar";
-import Hero from "../components/Hero";
-import SiteFooter from "../components/SiteFooter";
 import BlogGrid from "../components/blog/BlogGrid";
 import CategoryFilter from "../components/blog/CategoryFilter";
 import BlogHero from "../components/blog/BlogHero";
 import BlogCard from "../components/blog/BlogCard";
+import Layout from "./layout";
+import { base } from "../service/serviceConfig";
 
 export default function Blog({
   blogPageData,
   initialBlogs,
-  navigation,
   pagination,
   dynamicCategories,
 }) {
   const [blogs, setBlogs] = useState(initialBlogs);
+  const [allBlogs, setAllBlogs] = useState(initialBlogs);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("all");
-
-  const base = process.env.NEXT_PUBLIC_STRAPI_URL || "";
+  const heroImage = blogPageData?.hero?.[0]?.backgroundimage?.url;
 
   const loadMoreBlogs = async (page) => {
     setLoading(true);
@@ -51,9 +48,9 @@ export default function Blog({
       );
 
       if (page === 1) {
-        setBlogs(response.data.data);
+        setAllBlogs(response.data.data);
       } else {
-        setBlogs((prev) => [...prev, ...response.data.data]);
+        setAllBlogs((prev) => [...prev, ...response.data.data]);
       }
       setCurrentPage(page);
     } catch (error) {
@@ -63,10 +60,24 @@ export default function Blog({
     }
   };
 
+  useEffect(() => {
+    if (selectedCategory === "all") {
+      setBlogs(allBlogs);
+    } else {
+      const filtered = allBlogs.filter((post) => {
+        const categories = post?.categories || [];
+        return categories.some(
+          (cat) => cat?.name === selectedCategory
+        );
+      });
+      setBlogs(filtered);
+    }
+  }, [selectedCategory, allBlogs]);
+
   const filterByCategory = (category) => {
     setSelectedCategory(category);
     setCurrentPage(1);
-    loadMoreBlogs(1);
+    // loadMoreBlogs(1);
   };
 
   const formatDate = (dateString) => {
@@ -88,84 +99,62 @@ export default function Blog({
   ];
 
   return (
-    <div>
-      <Navbar navigation={navigation} />
+    <Layout>
+      <div className="max-w-6xl mx-auto">
+        <div
+          style={{
+            backgroundImage: `url(${
+              heroImage?.startsWith("http") ? "" : base
+            }${heroImage})`,
+            WebkitBackgroundSize: "100%",
+           backgroundPosition: "center top",
+          }}
+          className="bg-no-repeat pt-24 max-w-6xl mx-auto"
+        >
+          <BlogHero data={blogPageData?.hero} />
+        </div>
 
-      {/* Hero Section - Option 1: Use BlogHero with integrated categories */}
-      <BlogHero
-        title={blogPageData?.hero?.title || "Blog"}
-        subtitle={
-          blogPageData?.hero?.subtitle ||
-          "Insights, tutorials, and updates from the WrenAI team"
-        }
-        backgroundImage={blogPageData?.hero?.backgroundimage?.url}
-        showCategories={true}
-        categories={categories}
-        selectedCategory={selectedCategory}
-        onCategoryChange={filterByCategory}
-      />
-
-      {/* Hero Section - Option 2: Traditional Hero + separate CategoryFilter (commented out)
-        {blogPageData?.hero && (
-          <div
-            style={{
-              backgroundImage: `url(${
-                blogPageData.hero?.backgroundimage?.url?.startsWith("http")
-                  ? ""
-                  : base
-              }${blogPageData.hero?.backgroundimage?.url})`,
-              WebkitBackgroundSize: "100%",
-              backgroundPosition: "center bottom",
-            }}
-            className="bg-cover"
-          >
-            <Hero data={blogPageData.hero} />
-          </div>
-        )}
-        */}
-
-      {/* Blog Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Category Filter - only show if not using BlogHero with integrated categories */}
-        {/* <CategoryFilter 
+        {/* Blog Content */}
+        <div className="lg:pb-15 pb-10 px-5">
+          {/* Category Filter - only show if not using BlogHero with integrated categories */}
+          <CategoryFilter 
             categories={categories}
             selectedCategory={selectedCategory}
             onCategoryChange={filterByCategory}
-          /> */}
+          />
 
-        {/* Featured Posts */}
-        {blogPageData?.featuredPosts &&
-          blogPageData.featuredPosts.length > 0 &&
-          currentPage === 1 &&
-          selectedCategory === "all" && (
-            <div className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                Featured Posts
-              </h2>
-              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                {blogPageData.featuredPosts.slice(0, 3).map((post) => (
-                  <BlogCard key={post.id} post={post} />
-                ))}
+          {/* Featured Posts */}
+          {blogPageData?.featuredPosts &&
+            blogPageData.featuredPosts.length > 0 &&
+            currentPage === 1 &&
+            selectedCategory === "all" && (
+              <div className="mb-12">
+                <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                  Featured Posts
+                </h2>
+                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                  {blogPageData.featuredPosts.slice(0, 3).map((post) => (
+                    <BlogCard key={post.id} post={post} />
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
-        {/* All Posts */}
-        <BlogGrid
-          posts={blogs}
-          title={
-            selectedCategory === "all"
-              ? "All Posts"
-              : `${selectedCategory} Posts`
-          }
-          showLoadMore={pagination && currentPage < pagination.pageCount}
-          onLoadMore={() => loadMoreBlogs(currentPage + 1)}
-          loading={loading}
-        />
+          {/* All Posts */}
+          <BlogGrid
+            posts={blogs}
+            title={
+              selectedCategory === "all"
+                ? "All Posts"
+                : `${selectedCategory} Posts`
+            }
+            showLoadMore={pagination && currentPage < pagination.pageCount}
+            onLoadMore={() => loadMoreBlogs(currentPage + 1)}
+            loading={loading}
+          />
+        </div>
       </div>
-
-      <SiteFooter pages={navigation?.pages || []} />
-    </div>
+    </Layout>
   );
 }
 
@@ -182,10 +171,6 @@ export async function getStaticProps() {
     const [navRes, blogPageRes, blogsRes, categoriesRes] = await Promise.all([
       // Navigation data
       Promise.all([
-        api
-          .get(`/api/navigation?populate=*`)
-          .then((r) => r.data)
-          .catch(() => null),
         api
           .get(`/api/pages?fields=slug,navLabel,title,showInNav,navOrder`)
           .then((r) => r.data)
@@ -232,15 +217,6 @@ export async function getStaticProps() {
         initialBlogs: blogsRes?.data ?? [],
         pagination: blogsRes?.meta?.pagination ?? null,
         dynamicCategories,
-        navigation: {
-          ...(navRes?.nav?.data?.attributes ?? navRes?.nav?.data ?? {}),
-          pages: Array.isArray(navRes?.pages?.data)
-            ? navRes.pages.data
-                .map((p) => p.attributes ?? p)
-                .filter((p) => p.showInNav)
-                .sort((a, b) => (a.navOrder || 0) - (b.navOrder || 0))
-            : [],
-        },
       },
       revalidate: 60, // Revalidate every minute
     };
@@ -251,7 +227,6 @@ export async function getStaticProps() {
         blogPageData: null,
         initialBlogs: [],
         pagination: null,
-        navigation: { pages: [] },
       },
       revalidate: 60,
     };

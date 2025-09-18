@@ -5,8 +5,10 @@ import Navbar from "../../components/Navbar";
 import SiteFooter from "../../components/SiteFooter";
 import SocialShare from "../../components/blog/SocialShare";
 import BlogCard from "../../components/blog/BlogCard";
+import Layout from "../layout";
 
 export default function BlogPost({ post, navigation, relatedPosts }) {
+  console.log("post ==> ", post);
   const router = useRouter();
   const base = process.env.NEXT_PUBLIC_STRAPI_URL || "";
 
@@ -59,111 +61,57 @@ export default function BlogPost({ post, navigation, relatedPosts }) {
   };
 
   return (
-    <div>
-      <Navbar navigation={navigation} />
-
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Breadcrumb */}
-        <nav className="mb-8">
-          <ol className="flex items-center space-x-2 text-sm text-gray-500">
-            <li>
-              <Link href="/" className="hover:text-gray-700">
-                Home
-              </Link>
-            </li>
-            <li>
-              <span className="mx-2">/</span>
-              <Link href="/blog" className="hover:text-gray-700">
-                Blog
-              </Link>
-            </li>
-            <li>
-              <span className="mx-2">/</span>
-              <span className="text-gray-900">{post.title}</span>
-            </li>
-          </ol>
-        </nav>
-
+    <Layout>
+      <article className="max-w-6xl mx-auto px-5 py-12">
         {/* Article Header */}
-        <header className="mb-8">
-          <div className="flex items-center mb-4 flex-wrap gap-2">
-            {categories.length > 0 ? (
-              categories.map((category, index) => (
-                <span
-                  key={index}
-                  className="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full"
-                >
-                  {typeof category === "string" ? category : "Category"}
-                </span>
-              ))
-            ) : post.category ? (
-              <span className="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
-                {typeof post.category === "string" ? post.category : "Category"}
-              </span>
-            ) : null}
-            {post.readTime && (
-              <span className="text-sm text-gray-500 ml-4">
-                {post.readTime} min read
-              </span>
-            )}
-          </div>
-
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+        <div className="mb-8 pt-20 max-w-2xl ">
+          <h1 className="lg:text-4xl text-2xl font-medium text-gray-900 mb-4">
             {post.title}
           </h1>
+          <p className="text-lg text-gray-600 mb-6">{post.excerpt}</p>
+        </div>
 
-          <p className="text-xl text-gray-600 mb-6">{post.excerpt}</p>
-
-          <div className="flex items-center justify-between py-4 border-t border-b border-gray-200">
-            <div className="flex items-center">
-              <span className="text-sm text-gray-900 font-medium">
-                {post.author}
-              </span>
-              <span className="text-sm text-gray-500 ml-2">
-                • {formatDate(post.publishedDate)}
-              </span>
-            </div>
-
-            {post.tags && post.tags.length > 0 && (
-              <div className="flex gap-2">
-                {post.tags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded"
-                    style={{ backgroundColor: tag?.color || "#f3f4f6" }}
-                  >
-                    {tag?.name || `Tag ${index + 1}`}
-                  </span>
-                ))}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-15">
+          <div className="col-span-2">
+            {/* Featured Image */}
+            {post.featuredImage && (
+              <div className="mb-8">
+                <img
+                  src={`${
+                    post.featuredImage.url?.startsWith("http") ? "" : base
+                  }${post.featuredImage.url}`}
+                  alt={post.title}
+                  className="w-full h-64 md:h-96 object-cover rounded-lg"
+                />
               </div>
             )}
-          </div>
-        </header>
-
-        {/* Featured Image */}
-        {post.featuredImage && (
-          <div className="mb-8">
-            <img
-              src={`${post.featuredImage.url?.startsWith("http") ? "" : base}${
-                post.featuredImage.url
-              }`}
-              alt={post.title}
-              className="w-full h-64 md:h-96 object-cover rounded-lg"
+            {/* Article Content */}
+            <div
+              className="prose prose-lg prose-slate max-w-none mb-12"
+              dangerouslySetInnerHTML={{ __html: post.content }}
             />
           </div>
-        )}
-
-        {/* Article Content */}
-        <div
-          className="prose prose-lg prose-slate max-w-none mb-12"
-          dangerouslySetInnerHTML={{ __html: post.content }}
-        />
-
-        {/* Social Share */}
-        <SocialShare
-          title={post.title}
-          url={typeof window !== "undefined" ? window.location.href : ""}
-        />
+          <div className="col-span-1">
+            {/* Social Share */}
+            <SocialShare
+              title={post.title}
+              url={typeof window !== "undefined" ? window.location.href : ""}
+            />
+            <div className="bg-gradient-to-r from-[#2b47d3] to-[#0022CB] rounded-lg p-6">
+              <h3 className="md:text-2xl text-lg font-semibold text-white mb-4">
+                Supercharge Your <br />
+                Data with AI Today
+              </h3>
+              <p className="text-white mb-4">
+                Join thousands of data teams already using Wren AI to make
+                data-driven decisions faster and more efficiently.
+              </p>
+              <a href="/" className="btn bg-white text-blue-600 w-full">
+                Start Free Trial
+              </a>
+            </div>
+          </div>
+        </div>
 
         {/* Related Posts */}
         {relatedPosts && relatedPosts.length > 0 && (
@@ -184,9 +132,7 @@ export default function BlogPost({ post, navigation, relatedPosts }) {
           </div>
         )}
       </article>
-
-      <SiteFooter pages={navigation?.pages || []} />
-    </div>
+    </Layout>
   );
 }
 

@@ -1,5 +1,4 @@
-import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Hero from "../components/pricing/hero";
 import Tiers from "../components/pricing/tiers";
 import ContentBlock from "../components/pricing/contantBlock";
@@ -9,10 +8,29 @@ import Footer from "../components/footer";
 import { base } from "../service/serviceConfig";
 import TrustedLogos from "../components/pricing/trustedLogo";
 import Layout from "./layout";
-export default function Pricing({ pricing }) {
+import { getPricingApi } from "../service/apiClient";
+
+export default function Pricing() {
+  const [pricing, setPricing] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [billing, setBilling] = useState("Monthly");
   const heroImage = pricing?.hero?.[0]?.backgroundimage?.url
   
+  useEffect(() => {
+    const fetchPricing = async () => {
+      try {
+        const { data } = await getPricingApi();
+        const pricingData = data?.data?.attributes ?? data?.data ?? null;
+        setPricing(pricingData);
+      } catch (error) {
+        console.error('Error fetching pricing:', error);
+      } finally { 
+        setLoading(false);
+      }
+    };
+    fetchPricing();
+  }, []);
+
   return (
     <Layout>
       <div className="px-6">
@@ -58,25 +76,4 @@ export default function Pricing({ pricing }) {
       </div>
     </Layout>
   );
-}
-
-export async function getStaticProps() {
-  const STRAPI = process.env.STRAPI_URL;
-  const token = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
-  const api = axios.create({
-    baseURL: STRAPI,
-    headers: token ? { Authorization: `Bearer ${token}` } : {},
-  });
-  const [pricingRes] = await Promise.all([
-    api
-      .get("/api/pricing?populate=*")
-      .then((r) => r.data)
-      .catch(() => null),
-  ]);
-  return {
-    props: {
-      pricing: pricingRes?.data?.attributes ?? pricingRes?.data ?? null, 
-    },
-    revalidate: 10,
-  };
 }

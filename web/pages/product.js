@@ -1,4 +1,4 @@
-import axios from "axios";
+import { useState, useEffect } from "react";
 import ProductHero from "../components/product/productHero";
 import WhatIsWrenAI from "../components/product/whatIsWrenAI";
 import ContentBlock from "../components/product/contentBlock";
@@ -6,10 +6,28 @@ import WhyWrenSection from "../components/product/whyWrenSection";
 import Footer from "../components/footer";
 import { base } from "../service/serviceConfig";
 import Layout from "./layout";
+import { getProductApi } from "../service/apiClient";
 
-export default function Product({ product }) {
+export default function Product() {
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
   const heroImage = product?.productHero?.[0]?.backgroundimage?.url;
-  
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const { data } = await getProductApi();
+        const productData = data?.data?.attributes ?? data?.data ?? null;
+        setProduct(productData);
+      } catch (error) {
+        console.error('Error fetching product:', error);
+      } finally { 
+        setLoading(false);
+      }
+    };
+    fetchProduct();
+  }, []);
+
   return (
    <Layout>
       <div className="max-w-6xl mx-auto">
@@ -18,19 +36,21 @@ export default function Product({ product }) {
             backgroundImage: `url(${
               heroImage?.startsWith("http") ? "" : base
             }${heroImage})`,
+            WebkitBackgroundSize: "100% 100%",
+            backgroundPosition: "center top",
           }}
-          className="bg-no-repeat pt-24 pb-10 max-w-6xl mx-auto bg-contain"
+          className="bg-no-repeat pt-24 max-w-6xl mx-auto"
         >
           {/* Product Hero */}
           {product?.productHero?.length && (
             <ProductHero data={product?.productHero} />
           )}
          
+        </div>
          {/* What is Wren AI */}
          {product?.WhatIsWrenAI?.length && (
           <WhatIsWrenAI data={product?.WhatIsWrenAI} />
          )}
-        </div>
        {/* Content Block */}
        {product?.ContentBlock?.length && (
         <ContentBlock product={product?.ContentBlock} />
@@ -47,25 +67,4 @@ export default function Product({ product }) {
         )}
     </Layout>
   );
-}
-
-export async function getStaticProps() {
-  const STRAPI = process.env.STRAPI_URL;
-  const token = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
-  const api = axios.create({
-    baseURL: STRAPI,
-    headers: token ? { Authorization: `Bearer ${token}` } : {},
-  });
-  const [prodRes] = await Promise.all([
-    api
-      .get("/api/product-page?populate=*")
-      .then((r) => r.data)
-      .catch(() => null),
-    ]);
-  return {
-    props: {
-      product: prodRes?.data?.attributes ?? prodRes?.data ?? null,
-    },
-    revalidate: 10,
-  };
 }

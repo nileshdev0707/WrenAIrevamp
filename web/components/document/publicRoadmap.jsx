@@ -2,7 +2,7 @@ import React from "react";
 
 export default function PublicRoadmap({ data }) {
     return (
-      <section className="py-10 md:py-20">
+      <section className="py-10 lg:py-20">
         <div className="max-w-6xl mx-auto xl:px-0 px-10">
           {data?.map((item) => {
             return (
