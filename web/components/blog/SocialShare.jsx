@@ -1,21 +1,27 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function SocialShare({ title, url }) {
   const [copied, setCopied] = useState(false);
 
   const shareOnTwitter = () => {
-    const tweetUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`;
-    window.open(tweetUrl, '_blank');
+    const tweetUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+      url
+    )}&text=${encodeURIComponent(title)}`;
+    window.open(tweetUrl, "_blank");
   };
 
   const shareOnLinkedIn = () => {
-    const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
-    window.open(linkedInUrl, '_blank');
+    const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+      url
+    )}`;
+    window.open(linkedInUrl, "_blank");
   };
 
   const shareOnFacebook = () => {
-    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-    window.open(facebookUrl, '_blank');
+    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+      url
+    )}`;
+    window.open(facebookUrl, "_blank");
   };
 
   const copyToClipboard = async () => {
@@ -24,53 +30,94 @@ export default function SocialShare({ title, url }) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error('Failed to copy link: ', err);
+      console.error("Failed to copy link: ", err);
     }
   };
 
   return (
-    <div className="mb-12">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">Share this article</h3>
-      <div className="flex gap-4 flex-wrap">
-        <button 
-          onClick={shareOnTwitter}
-          className="flex items-center px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-        >
-          <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-          </svg>
-          Tweet
-        </button>
-        
-        <button 
-          onClick={shareOnLinkedIn}
-          className="flex items-center px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors"
-        >
-          <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-          </svg>
-          Share
-        </button>
+    <div className="flex flex-col gap-10 pb-15">
+      <div className="flex items-center gap-5">
+        <img
+          src="/svg/avtar.svg"
+          alt="Allison Hsieh"
+          className="w-16 h-16 rounded-full object-cover"
+        />
+        <div>
+          <p className="font-medium text-gray-900 text-lg">Allison Hsieh</p>
+          <p className="text-sm text-gray-500">
+            Updated: August 20, 2025 <br />
+            Published: August 20, 2025
+          </p>
+        </div>
+      </div>
 
-        <button 
-          onClick={shareOnFacebook}
-          className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-        >
-          <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+      {/* Share + Stay updated */}
+      <div className="grid grid-cols-2 items-center text-sm text-gray-700">
+        <div className="flex flex-col gap-5">
+          <span className="font-medium text-black text-base">Share this post</span>
+          <div className="flex gap-6 text-gray-500">
+            <div onClick={shareOnTwitter} className="cursor-pointer">
+              <svg
+                width="22"
+                height="20"
+                viewBox="0 0 22 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7 0H0L8.26086 11.0145L0.44995 19.9999H3.09998L9.4883 12.651L15 20H22L13.3917 8.5223L20.8001 0H18.1501L12.1643 6.88578L7 0ZM16 18L4 2H6L18 18H16Z"
+                  fill="#B3B3B3"
+                />
+              </svg>
+            </div>
+
+            <div onClick={shareOnLinkedIn} className="cursor-pointer">
+              <svg
+                width="20"
+                height="18"
+                viewBox="0 0 20 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M4.94146 1.99993C4.94109 2.81424 4.44706 3.54702 3.69232 3.85273C2.93758 4.15845 2.07285 3.97605 1.50588 3.39155C0.938906 2.80704 0.782926 1.93715 1.11148 1.19207C1.44004 0.44699 2.18752 -0.0245006 3.00146 -7.061e-05C4.08253 0.0323794 4.94195 0.918369 4.94146 1.99993ZM5.00146 5.47993H1.00146V17.9999H5.00146V5.47993ZM11.3215 5.47993H7.34146V17.9999H11.2815V11.4299C11.2815 7.7699 16.0515 7.4299 16.0515 11.4299V17.9999H20.0015V10.0699C20.0015 3.89993 12.9415 4.12993 11.2815 7.1599L11.3215 5.47993Z"
+                  fill="#B3B3B3"
+                />
+              </svg>
+            </div>
+
+            <div onClick={shareOnFacebook} className="cursor-pointer">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M10.002 0C4.4791 0 0.00195312 4.47715 0.00195312 10C0.00195312 14.9913 3.6588 19.1283 8.43947 19.8785V12.8906H5.90038V10H8.43947V7.79688C8.43947 5.29063 9.93237 3.90625 12.2166 3.90625C13.3107 3.90625 14.4551 4.10156 14.4551 4.10156V6.5625H13.1941C11.9519 6.5625 11.5645 7.33334 11.5645 8.1242V10H14.3379L13.8946 12.8906H11.5645V19.8785C16.3451 19.1283 20.002 14.9913 20.002 10C20.002 4.47715 15.5248 0 10.002 0Z"
+                  fill="#B3B3B3"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-5">
+          <span className="font-medium text-black text-base">Stay updated</span>
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 0C9.9411 0 18 8.0589 18 18H15C15 9.7157 8.2843 3 0 3V0ZM0 7C6.07513 7 11 11.9249 11 18H8C8 13.5817 4.41828 10 0 10V7ZM0 14C2.20914 14 4 15.7909 4 18H0V14Z"
+              fill="#B3B3B3"
+            />
           </svg>
-          Share
-        </button>
-        
-        <button 
-          onClick={copyToClipboard}
-          className="flex items-center px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
-        >
-          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-          </svg>
-          {copied ? 'Copied!' : 'Copy Link'}
-        </button>
+        </div>
       </div>
     </div>
   );

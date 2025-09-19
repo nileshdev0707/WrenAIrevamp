@@ -34,6 +34,7 @@ export default function BlogHero({ data }) {
                 <div className="flex gap-2">
                   {item.buttons.map((button, index) => (
                     <a
+                      key={index}
                       href={button?.url}
                       className="btn bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white lg:mb-5 mb-3"
                     >
@@ -44,7 +45,7 @@ export default function BlogHero({ data }) {
                 <h1 className="xl:text-4xl lg:text-3xl text-2xl font-medium lg:mb-5 mb-3 leading-tight">
                   {item?.FeaturedTitle}
                 </h1>
-                <p className="text-gray-500 lg:text-lg text-base">
+                <p className="text-gray-500 text-base">
                   {item?.description}
                 </p>
               </div>
