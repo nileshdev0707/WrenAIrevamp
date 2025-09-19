@@ -416,12 +416,12 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    author: Schema.Attribute.String & Schema.Attribute.Required;
+    author: Schema.Attribute.String;
     categories: Schema.Attribute.Relation<
       'manyToMany',
       'api::category.category'
     >;
-    content: Schema.Attribute.RichText & Schema.Attribute.Required;
+    content: Schema.Attribute.RichText;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -674,32 +674,76 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    caseStudies: Schema.Attribute.DynamicZone<['home.case-studies']>;
-    coreCapabilities: Schema.Attribute.DynamicZone<['home.core-capabilities']>;
+    caseStudies: Schema.Attribute.DynamicZone<['home.case-studies']> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    coreCapabilities: Schema.Attribute.DynamicZone<['home.core-capabilities']> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     getStartedWithWrenAI: Schema.Attribute.DynamicZone<
       ['shared.bottom-content-block']
-    >;
-    hero: Schema.Attribute.Component<'sections.hero-section', false>;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    hero: Schema.Attribute.Component<'sections.hero-section', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::home-page.home-page'
-    > &
-      Schema.Attribute.Private;
+    >;
     publishedAt: Schema.Attribute.DateTime;
-    se0: Schema.Attribute.DynamicZone<['shared.seo']>;
-    TrustedBy: Schema.Attribute.Component<'sections.logos-section', true>;
+    se0: Schema.Attribute.DynamicZone<['shared.seo']> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    TrustedBy: Schema.Attribute.Component<'sections.logos-section', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     trustedByDataTeams: Schema.Attribute.DynamicZone<
       ['home.trusted-by-data-teams']
-    >;
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    UseCases: Schema.Attribute.DynamicZone<['home.use-cases']>;
+    UseCases: Schema.Attribute.DynamicZone<['home.use-cases']> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 

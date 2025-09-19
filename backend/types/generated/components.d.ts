@@ -392,6 +392,8 @@ export interface SectionsHeroSection extends Struct.ComponentSchema {
     >;
     badge: Schema.Attribute.String;
     buttons: Schema.Attribute.Component<'shared.button', true>;
+    description: Schema.Attribute.String;
+    FeaturedTitle: Schema.Attribute.String;
     image: Schema.Attribute.Media<'images'>;
     subtitle: Schema.Attribute.String;
     title: Schema.Attribute.String;

@@ -27,17 +27,19 @@
     },
     "content": {
       "type": "richtext",
-      "required": true
+      "required": false
     },
     "featuredImage": {
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "author": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "publishedDate": {
       "type": "date",

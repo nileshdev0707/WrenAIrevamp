@@ -34,6 +34,12 @@
         "videos",
         "audios"
       ]
+    },
+    "FeaturedTitle": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
     }
   }
 }
