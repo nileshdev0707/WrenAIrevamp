@@ -24,7 +24,7 @@ export default function Blog({
     setLoading(true);
     try {
       const STRAPI =
-        process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
+        process.env.NEXT_PUBLIC_STRAPI_URL
       let categoryFilter = "";
       if (selectedCategory !== "all") {
         // We need to find the category ID first, then filter by it
@@ -160,7 +160,7 @@ export default function Blog({
 
 export async function getStaticProps() {
   const STRAPI = process.env.STRAPI_URL;
-  const token = process.env.STRAPI_TOKEN;
+  const token = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
 
   const api = axios.create({
     baseURL: STRAPI,

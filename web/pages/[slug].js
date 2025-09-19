@@ -69,7 +69,7 @@ export default function Page({ page }) {
 }
 
 export async function getStaticPaths() {
-  const STRAPI = process.env.STRAPI_URL
+  const STRAPI = process.env.NEXT_PUBLIC_STRAPI_URL
   const token = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
   const api = axios.create({
     baseURL: STRAPI,
@@ -86,7 +86,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const STRAPI = process.env.STRAPI_URL
+  const STRAPI = process.env.NEXT_PUBLIC_STRAPI_URL
   const token = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
   const api = axios.create({
     baseURL: STRAPI,

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import DocumentHero from "../components/document/hero";
 import ContentBlock from "../components/document/contentBlock";
-import { base,token } from "../service/serviceConfig";
+import { base, token } from "../service/serviceConfig";
 import Layout from "./layout";
 import OpenSourceDetails from "../components/document/openSourceDetails";
 import Footer from "../components/footer";
