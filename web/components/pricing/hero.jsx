@@ -6,7 +6,7 @@ const [selectedPlan, setSelectedPlan] = useState("Cloud");
 
   return (
     <section className="text-center">
-      <h1 className="text3xl md:text-5xl lg:text-6xl font-medium leading-tight md:mt-24 mt-16">
+      <h1 className="text-3xl sm:text-5xl lg:text-6xl font-medium leading-tight md:mt-24 mt-16">
         {title.split(" ").map((word, i) =>
           word === "Pricing" ? (
             <span key={i} className="text-blue-600">
@@ -17,7 +17,7 @@ const [selectedPlan, setSelectedPlan] = useState("Cloud");
           )
         )}
       </h1>
-      <p className="mt-3 max-w-3xl mx-auto">{pricing?.subtitle}</p>
+      <p className="mt-3 max-w-3xl mx-auto xl:text-xl lg:text-lg text-base">{pricing?.subtitle}</p>
 
       <div className="bg-white inline-flex items-center md:mt-10 mt-5 px-2.5 py-2 gap-5 rounded-2xl border border-gray-200">
         {pricing?.buttons

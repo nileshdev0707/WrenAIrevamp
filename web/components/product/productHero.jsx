@@ -8,7 +8,7 @@ export default function ProductHero({ data }) {
           <button className="btn btn-primary bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-4 py-1 !rounded-full text-sm">
             {item?.badge}
           </button>
-          <h1 className="text-3xl md:text-4xl lg:text-6xl font-medium leading-tight mt-8">
+          <h1 className="text-3xl sm:text-4xl lg:text-6xl font-medium leading-tight mt-5">
             {(item?.title || "Product")
               .split(".")
               .filter(Boolean)
@@ -24,7 +24,7 @@ export default function ProductHero({ data }) {
               ))}
           </h1>
 
-          <p className="mt-5 max-w-2xl mx-auto text-black md:text-base text-sm">{item?.subtitle}</p>
+          <p className="mt-5 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base">{item?.subtitle}</p>
           <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center">
             {item?.buttons?.map((btn, index) => (
               <a

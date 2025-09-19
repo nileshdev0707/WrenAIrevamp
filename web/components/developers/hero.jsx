@@ -12,7 +12,7 @@ export default function DevelopersHero({ data }) {
             <button className="btn btn-primary bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-4 py-1 !rounded-full text-sm">
               {item?.badge}
             </button>
-            <h1 className="text-3xl md:text-4xl lg:text-6xl font-medium leading-tight mt-8">
+            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-medium leading-tight mt-8">
               <span className="text-blue-600">{firstPart}</span>
               <br />
               <span>{secondPart}</span>
@@ -70,7 +70,7 @@ export default function DevelopersHero({ data }) {
               </div>
             </div>
 
-            <p className="mt-5 max-w-xl mx-auto text-black md:text-base text-sm">{item?.subtitle}</p>
+            <p className="mt-5 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base">{item?.subtitle}</p>
             <div className="flex gap-3 mt-14 justify-center">
               {item?.buttons?.map((btn, index) => (
                 <a

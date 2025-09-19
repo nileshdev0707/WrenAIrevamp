@@ -13,7 +13,7 @@ export default function ContentBlock({ contentBlock }) {
           return (
             <div key={block.id} className="grid gap-5 md:grid-cols-3 pb-10">
               <div className="flex flex-col justify-center col-span-1">
-                <h2 className="text-3xl md:text-5xl lg:text-6xl font-medium leading-tight pt-5">
+                <h2 className="text-3xl md:text-5xl xl:text-6xl font-medium leading-tight pt-5">
                   <span className="text-black">{firstPart}</span>{" "}
                   {secondPart && (
                     <span className="text-blue-500">{secondPart}</span>

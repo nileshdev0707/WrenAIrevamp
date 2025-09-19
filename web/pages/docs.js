@@ -1,17 +1,36 @@
-import axios from "axios";
+import { useState, useEffect } from "react";
 import DocumentHero from "../components/document/hero";
 import ContentBlock from "../components/document/contentBlock";
-import { base } from "../service/serviceConfig";
+import { base,token } from "../service/serviceConfig";
 import Layout from "./layout";
 import OpenSourceDetails from "../components/document/openSourceDetails";
 import Footer from "../components/footer";
 import PublicRoadmap from "../components/document/publicRoadmap";
+import { getDocsApi } from "../service/apiClient";
 
-export default function Document({ document, navigation }) {
+export default function Document() {
+  const [document, setDocument] = useState(null);
+  console.log("document ==> ", document);
+  const [loading, setLoading] = useState(true);
   const heroImage = document?.hero?.[0]?.backgroundimage?.url;
+  
+  useEffect(() => {
+    const fetchDocument = async () => {
+      try {   
+        const { data } = await getDocsApi();
+        const documentData = data?.data?.attributes ?? data?.data ?? null;
+        setDocument(documentData);
+      } catch (error) {
+        console.error('Error fetching document:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchDocument();
+  }, []);
 
   return (
-    <Layout navigation={navigation}>
+    <Layout>
       <div className="max-w-6xl mx-auto">
         <div
           style={{
@@ -41,44 +60,4 @@ export default function Document({ document, navigation }) {
       )}
     </Layout>
   );
-}
-
-export async function getStaticProps() {
-  const STRAPI = process.env.STRAPI_URL;
-  const token = process.env.STRAPI_TOKEN;
-  const api = axios.create({
-    baseURL: STRAPI,
-    headers: token ? { Authorization: `Bearer ${token}` } : {},
-  });
-  const [document, navBundle] = await Promise.all([
-    api
-      .get("/api/docs-page?populate=*")
-      .then((r) => r.data)
-      .catch(() => null),
-    Promise.all([
-      api
-        .get(`/api/navigation?populate=*`)
-        .then((r) => r.data)
-        .catch(() => null),
-      api
-        .get(`/api/pages?fields=slug,navLabel,title,showInNav,navOrder`)
-        .then((r) => r.data)
-        .catch(() => null),
-    ]).then(([nav, pages]) => ({ nav, pages })),
-  ]);
-  return {
-    props: {
-      document: document?.data?.attributes ?? document?.data ?? null,
-      navigation: {
-        ...(navBundle?.nav?.data?.attributes ?? navBundle?.nav?.data ?? {}),
-        pages: Array.isArray(navBundle?.pages?.data)
-          ? navBundle.pages.data
-              .map((p) => p.attributes ?? p)
-              .filter((p) => p.showInNav)
-              .sort((a, b) => (a.navOrder || 0) - (b.navOrder || 0))
-          : [],
-      },
-    },
-    revalidate: 10,
-  };
 }

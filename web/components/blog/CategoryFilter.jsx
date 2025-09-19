@@ -16,8 +16,8 @@ export default function CategoryFilter({
   const categoryList = categories || defaultCategories;
 
   return (
-    <div className={`mb-8 ${className}`}>
-      <div className="flex overflow-x-auto scrollbar-hide gap-2 px-4 sm:px-0 sm:justify-center">
+    <div className={`md:pb-12 pb-8 ${className}`}>
+      <div className="flex overflow-x-auto scrollbar-hide gap-2 px-4 sm:px-0">
         {categoryList.map((category, index) => {
           const categoryKey = typeof category === 'string' ? category : category.key;
           const categoryLabel = typeof category === 'string' ? category : category.label;
@@ -27,7 +27,7 @@ export default function CategoryFilter({
             <button
               key={categoryKey}
               onClick={() => onCategoryChange(categoryKey)}
-              className={`flex-shrink-0 px-4 py-2 rounded-2xl text-sm sm:text-md transition-all duration-200 whitespace-nowrap font-medium ${
+              className={`cursor-pointer flex-shrink-0 px-4 py-2 rounded-lg text-sm sm:text-md transition-all duration-200 whitespace-nowrap font-medium ${
                 selectedCategory === categoryKey
                   ? 'bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white font-bold shadow-lg'
                   : 'bg-[#F5F5F5] text-gray-600 hover:bg-gray-200 hover:shadow-md'
@@ -35,7 +35,7 @@ export default function CategoryFilter({
               style={{ animationDelay: `${100 + (index * 50)}ms` }}
             >
               <span className="hidden sm:inline">
-                {categoryKey === 'all' ? 'All Posts' : categoryLabel}
+                {categoryKey === 'all' ? 'All ' : categoryLabel}
               </span>
               <span className="sm:hidden">
                 {categoryKey === 'all' ? 'All' : shortLabel}

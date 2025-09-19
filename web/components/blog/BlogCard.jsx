@@ -13,7 +13,7 @@ export default function BlogCard({ post, showExcerpt = true, size = 'default' })
 
   const cardClasses = size === 'small' 
     ? 'bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow'
-    : 'bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow';
+    : 'bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-lg transition-shadow';
 
   const imageClasses = size === 'small' ? 'w-full h-32 object-cover' : 'w-full h-48 object-cover';
   const titleClasses = size === 'small' ? 'text-lg font-semibold' : 'text-xl font-bold';
@@ -54,7 +54,7 @@ export default function BlogCard({ post, showExcerpt = true, size = 'default' })
     }
     return [];
   })();
-
+  
   return (
     <article className={cardClasses}>
       {featuredImage && (
@@ -70,8 +70,8 @@ export default function BlogCard({ post, showExcerpt = true, size = 'default' })
         <div className="flex items-center mb-3">
           <div className="flex gap-2 flex-wrap">
             {categories.length > 0 ? (
-              categories.slice(0, 2).map((category, index) => (
-                <span key={index} className="text-sm text-blue-600 font-medium">
+              categories?.map((category, index) => (
+                <span key={index} className="text-sm bg-[#F5F5F5] text-gray-600 font-medium px-2 py-1 rounded-lg">
                   {typeof category === 'string' ? category : 'Category'}
                 </span>
               ))
@@ -95,7 +95,8 @@ export default function BlogCard({ post, showExcerpt = true, size = 'default' })
         )}
         <div className="flex items-center justify-between">
           <span className="text-sm text-gray-500">
-            {attributes.author} • {formatDate(attributes.publishedDate)}
+            {/* {attributes.author} •  */}
+            {formatDate(attributes.publishedDate)}
           </span>
           {attributes.tags && attributes.tags.length > 0 && (
             <div className="flex gap-2">

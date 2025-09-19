@@ -15,7 +15,7 @@ export default function ProductHero({ product }) {
           >
             <div className={`xl:px-10 px-5 order-1 ${isRightAligned ? "md:order-2" : "md:order-1 md:text-left"}`}>
               <h2 className="text-blue-600 text-sm font-semibold">{item.badge}</h2>
-              <h1 className="text-3xl lg:text-4xl font-medium leading-tight mt-5">
+              <h1 className="text-2xl md:text-3xl xl:text-4xl font-medium leading-tight mt-5">
                 {item.title}
               </h1>
               <p className="text-gray-600 text-sm mt-4 pb-8">{item.subtitle}</p>
