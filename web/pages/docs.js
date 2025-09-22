@@ -10,7 +10,6 @@ import { getDocsApi } from "../service/apiClient";
 
 export default function Document() {
   const [document, setDocument] = useState(null);
-  console.log("document ==> ", document);
   const [loading, setLoading] = useState(true);
   const heroImage = document?.hero?.[0]?.backgroundimage?.url;
   

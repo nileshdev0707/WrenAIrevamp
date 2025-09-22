@@ -29,8 +29,6 @@ export default function Solutions() {
 
     fetchSolutions();
   }, []);
-
-  console.log("solutions ==> ", solutions);
     
   return (
     <Layout>
