@@ -23,8 +23,8 @@ export default function SiteFooter() {
     {
       title: "Partners",
       links: [
-        { label: "Affiliate Program", slug: "elite-partners" },
-        { label: "Elite Partners", slug: "elite-partners" },
+        { label: "Affiliate Program", slug: "affiliate-program" },
+        { label: "Elite Partners", slug: "/" },
       ],
     },
     {

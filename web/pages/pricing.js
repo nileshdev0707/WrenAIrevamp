@@ -21,6 +21,7 @@ export default function Pricing() {
       try {
         const { data } = await getPricingApi();
         const pricingData = data?.data?.attributes ?? data?.data ?? null;
+        console.log(pricingData,'pricingData');
         setPricing(pricingData);
       } catch (error) {
         console.error('Error fetching pricing:', error);

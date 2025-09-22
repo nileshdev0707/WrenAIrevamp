@@ -6,7 +6,7 @@ node_modules/
 .next/
 web/.next/
 **/.next/
-
+.history/
 # IDE folders
 .idea/
 **/.idea/
