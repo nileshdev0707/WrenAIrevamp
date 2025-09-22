@@ -109,14 +109,18 @@ export default function Navbar() {
                 {/* Right Side Actions */}
                 <div className="hidden lg:flex items-center gap-4">
                   <a 
-                    href="#" 
+                    href="https://cloud.getwren.ai/" 
                     className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200 px-3 py-2 rounded-md hover:bg-gray-50"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     Sign in
                   </a>
                   <a 
-                    href="#" 
+                    href="https://cloud.getwren.ai/" 
                     className="bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white font-medium px-6 py-2.5 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 transform hover:-translate-y-0.5"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     Get Started
                   </a>

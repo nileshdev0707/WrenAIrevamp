@@ -44,6 +44,7 @@ export default function Hero({ data }) {
                   ? 'bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] transition-all duration-200 transform hover:-translate-y-0.5 text-white' 
                   : 'bg-[#060A1F] text-white transition-all duration-200 transform hover:-translate-y-0.5 hover:text-[#060A1F] hover:bg-gray-50 hover:border-gray-300'
               }`}
+              target={b.url.startsWith("http") ? "_blank" : "_self"}
               style={{ animationDelay: `${400 + (i * 100)}ms` }}
             >
               {b.label}

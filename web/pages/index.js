@@ -54,9 +54,6 @@ export default function Home() {
          {homePageRes?.coreCapabilities?.length > 0 && (
           <Capabilities data={homePageRes?.coreCapabilities} />
          )}
-         {homePageRes?.UseCases?.length > 0 && (
-         <Capabilities data={homePageRes?.coreCapabilities} />
-         )}
          {homePageRes && (
           <>
                <Work data={homePageRes} />

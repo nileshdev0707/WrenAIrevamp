@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { base } from "../../service/serviceConfig";
 
 export default function ContentBlock({ data }) {
+  const [activeIndex, setActiveIndex] = useState(0);
   return (
     <div>
       {data?.map((item) => {
@@ -22,7 +23,11 @@ export default function ContentBlock({ data }) {
               <div dangerouslySetInnerHTML={{ __html: item.description }} />
               <div className="flex gap-2">
               {item?.contentBlockButton?.map((button, index) => (
-                  <a key={button?.id} href={button?.url} className={`btn px-4 py-1 mt-5 text-sm
+                  <a 
+                  key={button?.id} 
+                  href={button?.url} 
+                  target={button?.url?.startsWith("http") ? "_blank" : "_self"}
+                  className={`btn px-4 py-1 mt-5 text-sm
                   ${
                     index === 0
                       ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white"

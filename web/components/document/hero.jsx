@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function DocumentHero({ data }) {
+  const [activeIndex, setActiveIndex] = useState(0);
   return (
     <section className="py-10 md:py-16 text-center">
       {data?.map((item, index) => {
@@ -21,11 +22,13 @@ export default function DocumentHero({ data }) {
                 <a
                   key={btn.id}
                   href={btn.url}
+                  target={btn.url?.startsWith("http") ? "_blank" : "_self"}
+                  onClick={() => setActiveIndex(index)}
                   className={`px-6 py-3 rounded-md font-medium text-sm transition-all duration-200 shadow-sm
                 ${
-                  index === 0
+                  activeIndex === index
                     ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white"
-                    : "bg-white text-gray-800 border border-gray-200 hover:bg-gray-50"
+                    : "bg-white text-gray-800 border border-gray-200 hover:bg-gray-100"
                 }`}
                 >
                   {btn.label}

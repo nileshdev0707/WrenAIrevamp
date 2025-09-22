@@ -31,7 +31,8 @@ export default function Tiers({ tiers, billing }) {
         </div>
         <div className="mt-6">
           <a
-            href={item.ctaUrl}
+            href={item?.ctaUrl}
+            target={item?.ctaUrl?.startsWith("http") ? "_blank" : "_self"}
             className={`btn mt-6 inline-block text-white w-full !py-3 ${
               item.ctaLabel === "Talk to sales"
                 ? "bg-black hover:bg-black"

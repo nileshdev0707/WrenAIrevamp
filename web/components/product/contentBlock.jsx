@@ -22,7 +22,11 @@ export default function ProductHero({ product }) {
               <div dangerouslySetInnerHTML={{ __html: item.description }} />
               <div className="flex gap-2">
               {item?.contentBlockButton?.map((button) => (
-                <a key={button?.id} href={button?.url} className="btn btn-primary bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-4 py-1 mt-5 text-sm">
+                <a
+                  key={button?.id}
+                  href={button?.url}
+                  target={button?.url?.startsWith("http") ? "_blank" : "_self"}
+                  className="btn btn-primary bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-4 py-1 mt-5 text-sm">
                   {button?.label}
                 </a>
                ))}

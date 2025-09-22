@@ -24,6 +24,7 @@ export default function PublicRoadmap({ data }) {
                     <a
                       key={btn.id}
                       href={btn.url}
+                      target={btn.url?.startsWith("http") ? "_blank" : "_self"}
                       className={`px-6 py-3 rounded-md font-medium text-sm transition-all duration-200 shadow-sm
                         ${
                           index === 0

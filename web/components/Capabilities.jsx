@@ -147,7 +147,8 @@ export default function Capabilities({ data }) {
    
             <a 
               // key={i} 
-              href={'/'} 
+              href={features.learnMore[0].url}
+              rel="noopener noreferrer"
               className={`px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg shadow-sm text-sm sm:text-base text-center bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] transition-all duration-200 transform hover:-translate-y-0.5 text-white`}
             >
               {features.learnMore[0].label}

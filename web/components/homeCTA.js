@@ -31,12 +31,15 @@ export default function HomeCTA({ data }) {
                     <div className="text-gray-600">{item?.name}</div>
                   )}
                 </div>
-                      <div  className="sm:flex sm:gap-5 gap-2">
+                      <div  className="sm:flex sm:gap-5 gap-2 md:mt-8 sm:mt-4 mt-3 ">
                     {item?.btnBottomContentBlock?.map((btn) => (
-                       <div key={btn.id}> 
-                         <button className="bg-white w-full sm:w-fit cursor-pointer md:mt-8 sm:mt-4 mt-3 px-4.5 py-3 rounded-md text-blue-600 text-sm">
-                          {btn?.label}
-                        </button>
+                       <div key={btn.id} > 
+                         <a 
+                            href={btn.url}
+                            target={btn.url?.startsWith("http") ? "_blank" : "_self"}
+                            className="bg-white w-full sm:w-fit cursor-pointer px-4.5 py-3 rounded-md text-blue-600 text-sm">
+                            {btn?.label}
+                          </a>
                         </div>
                     ))}
                       </div>

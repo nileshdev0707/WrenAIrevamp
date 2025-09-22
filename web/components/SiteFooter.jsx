@@ -2,14 +2,13 @@ import { base } from "../service/serviceConfig";
 import navigation from "../json/navigation.json";
 
 export default function SiteFooter() {
-  const link = (slug) => `/${slug}`;
   const cols = [
     {
       title: "Company",
       links: [
-        { label: "Careers", slug: "careers" },
+        // { label: "Careers", slug: "careers" },
         { label: "Press", slug: "press" },
-        { label: "Security", slug: "security" },
+        { label: "Security", slug: "https://cannerdata.com/terms/security" },
         { label: "Case Studies", slug: "case-studies" },
       ],
     },
@@ -17,20 +16,20 @@ export default function SiteFooter() {
       title: "Connect",
       links: [
         { label: "Contact", slug: "contact" },
-        { label: "Discord", slug: "discord" },
-        { label: "Merch", slug: "merch" },
+        { label: "Discord", slug: "https://discord.gg/5DvshJqG8Z" },
+        // { label: "Merch", slug: "merch" },
       ],
     },
     {
       title: "Partners",
       links: [
-        { label: "Affiliate Program", slug: "affiliate-program" },
+        { label: "Affiliate Program", slug: "elite-partners" },
         { label: "Elite Partners", slug: "elite-partners" },
       ],
     },
     {
       title: "Resources",
-      links: [{ label: "Public Roadmap", slug: "public-roadmap" }],
+      links: [{ label: "Public Roadmap", slug: "https://wrenai.notion.site/" }],
     },
     {
       title: "Legal",
@@ -40,6 +39,14 @@ export default function SiteFooter() {
       ],
     },
   ];
+  const link = (slug) => {
+    if (!slug) return "/";
+    if (slug.startsWith("http") || slug.startsWith("https") || slug.startsWith("#")) {
+      return slug; // return absolute URLs or hash links as-is
+    }
+    return `/${slug}`; // relative internal links
+  };
+  
   return (
     <footer className="border-t border-gray-100 py-16">
       <div className="max-w-6xl mx-auto px-6">
@@ -53,6 +60,8 @@ export default function SiteFooter() {
                     <a
                       href={l.slug?.startsWith("#") ? l.slug : link(l.slug)}
                       className="hover:text-gray-900"
+                      target={l.slug.startsWith("http") ? "_blank" : "_self"}
+                      rel={l.slug.startsWith("http") ? "noopener noreferrer" : undefined}
                     >
                       {l.label}
                     </a>
