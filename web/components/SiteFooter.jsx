@@ -9,7 +9,7 @@ export default function SiteFooter() {
         // { label: "Careers", slug: "careers" },
         { label: "Press", slug: "press" },
         { label: "Security", slug: "https://cannerdata.com/terms/security" },
-        { label: "Case Studies", slug: "case-studies" },
+        { label: "Case Studies", slug: "solutions-industries" },
       ],
     },
     {

@@ -16,7 +16,7 @@ export default function BlogCard({ post, showExcerpt = true, size = 'default' })
     : 'bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-lg transition-shadow';
 
   const imageClasses = size === 'small' ? 'w-full h-32 object-cover' : 'w-full h-48 object-cover';
-  const titleClasses = size === 'small' ? 'text-lg font-semibold' : 'text-xl font-bold';
+  const titleClasses = size === 'small' ? 'text-lg font-semibold' : 'lg:text-xl md:text-lg text-base font-bold';
   const padding = size === 'small' ? 'p-4' : 'p-6';
 
   // Handle both API response formats (with and without attributes wrapper)
@@ -91,7 +91,7 @@ export default function BlogCard({ post, showExcerpt = true, size = 'default' })
           </Link>
         </h3>
         {showExcerpt && (
-          <p className="text-gray-600 mb-4">{attributes.excerpt}</p>
+          <p className="text-gray-600 mb-4 md:text-base text-sm">{attributes.excerpt}</p>
         )}
         <div className="flex items-center justify-between">
           <span className="text-sm text-gray-500">

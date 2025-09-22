@@ -42,7 +42,7 @@ export default function BlogHero({ data }) {
                     </a>
                   ))}
                 </div>
-                <h1 className="xl:text-4xl lg:text-3xl text-2xl font-medium lg:mb-5 mb-3 leading-tight">
+                <h1 className="xl:text-4xl lg:text-3xl md:text-2xl text-xl font-medium lg:mb-5 mb-3 leading-tight">
                   {item?.FeaturedTitle}
                 </h1>
                 <p className="text-gray-500 text-base">

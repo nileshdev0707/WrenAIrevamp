@@ -1,11 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function DevelopersHero({ data }) {
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const [stars, setStars] = useState(null);
+
+  useEffect(() => {
+    fetch(`https://api.github.com/repos/Canner/WrenAI`)
+      .then((res) => res.json())
+      .then((data) => setStars(data.stargazers_count));
+  }, []);
+
   return (
     <section className="py-10 md:py-16 text-center">
       {data?.map((item, index) => {
-      console.log("item ==> ", item);
         const words = item?.title?.split(" ");
         const firstPart = words.slice(0, 3).join(" ");
         const secondPart = words.slice(3).join(" ");
@@ -67,7 +75,7 @@ export default function DevelopersHero({ data }) {
                       fill="black"
                     />
                   </svg>{" "}
-                  <span className="font-bold">11,691</span>
+                  <span className="font-bold">{stars?.toLocaleString()}</span>
                 </button>
               </div>
             </div>

@@ -27,7 +27,7 @@ export default function BlogGrid({
   return (
     <div>
       {title && (
-        <h2 className="text-3xl font-bold text-gray-900 mb-6">{title}</h2>
+        <h2 className="lg:text-3xl md:text-2xl text-xl font-bold text-gray-900 mb-6">{title}</h2>
       )}
       
       <div className={gridClasses[columns] || gridClasses[3]}>
