@@ -1,177 +1,81 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import FrequentlyQuestions from './frequentlyQuestions'
+import HomeCTA from '../homeCTA'
+import { base } from '../../service/serviceConfig'
 
-const ElitePartner = () => {
-  const [activeTab, setActiveTab] = useState('elite')
+const ElitePartner = ({data}) => {
+  const elitePartnerData = data
+  console.log(elitePartnerData,'elitePartnerData---251');
+  const [activeTab, setActiveTab] = useState(elitePartnerData?.CloudElitePartners?.[0]?.title)
 
-  const elitePerks = [
-    {
-      icon: "/svg/user.svg",
-      title: "Exclusive Lead Sharing",
-      description: "As an Elite Partner, you'll receive qualified leads directly from the Wren AI team. These are businesses actively exploring GenBI solutions, giving you a warm starting point to accelerate your outreach and close deals faster. No cold calling—just real opportunities."
-    },
-    {
-      icon: "/svg/bigger.svg", 
-      title: "Bigger Revenue Opportunities",
-      description: "Elite Partners gain access to enhanced commission structures, performance-based bonuses, and exclusive upsell opportunities. The more you grow with us, the more you earn—because we believe in rewarding high impact."
-    },
-    {
-      icon: "/svg/megaphone-fill.svg",
-      title: "Co-Marketing & Brand Visibility", 
-      description: "Build your reputation and grow your audience through joint marketing efforts. From social media features and newsletter spotlights to co-hosted webinars and blog collaborations, we amplify your presence while you promote Wren AI."
-    },
-    {
-      icon: "/svg/bookmarked.svg",
-      title: "Training & Resources",
-      description: "You'll have access to tailored training sessions, detailed product walkthroughs, and a rich library of partner enablement materials. Whether you're onboarding new team members or refining your pitch, we've got you covered every step of the way."
-    },
-    {
-      icon: "/svg/weekly.svg",
-      title: "Weekly Partner Syncs",
-      description: "Stay connected and in the know with our weekly Elite Partner sync meetings. Get updates on product roadmap, sales strategies, and market insights, plus the chance to share feedback and collaborate with the Wren AI team directly."
-    },
-    {
-      icon: "/svg/feature.svg",
-      title: "Early Feature Access",
-      description: "Be among the first to test-drive our latest innovations in Generative BI. Elite Partners get priority access to new features and tools before they launch publicly, giving you a competitive edge in the market."
-    }
-  ]
+  const words = elitePartnerData?.CloudElitePartners?.[0]?.subtitle?.split(" ");
+  const firstPart1 = words?.slice(0, 2).join(" ");
+  const secondPart1 = words?.slice(2).join(" ");
 
-  const affiliatePerks = [
-    {
-      icon: "/svg/signup.svg",
-      title: "1. Sign Up",
-      description: "Register with our program to obtain your unique referral link."
-    },
-    {
-      icon: "/svg/megaphone-fill.svg", 
-      title: "2. Spread the Word",
-      description: "Share your unique link with friends, family, and colleagues."
-    },
-    {
-      icon: "/svg/bigger.svg",
-      title: "3. Earn Commission", 
-      description: "Enjoy a 20% commission from every successful referral made."
-    },
-  ]
+  const words2 = elitePartnerData?.CloudElitePartners?.[1]?.subtitle?.split(" ") || [];
+  const firstPart2 = words2.slice(0, 1).join(" ");; 
+  const centerPart2 = words2.slice(1, 3).join(" "); // "20% commission"
+  const lastPart2 = words2.slice(3).join(" ");      // "as an affiliate"
 
-  const frequentlyAskedQuestions = [
-    {
-      id: 407,
-      title: 'What is the minimum payout?',
-      detail: 'The minimum payout is $100.',
-    },
-    {
-      id: 408,
-      title: 'When are payouts?',
-      detail:
-        'Payouts are sent out on the first Monday of every month, at least 30 days after the total commissions amount to the minimum of $100 (to account for refunds).',
-    },
-    {
-      id: 409,
-      title: 'How are payouts received?',
-      detail:
-        'Payouts are distributed via PayPal. You can connect your PayPal account after signing up to the program.',
-    },
-    {
-      id: 410,
-      title: 'Who can be an affiliate?',
-      detail: "Anyone! Just signup and you'll get a personal link you can share for referrals.",
-    },
-    {
-      id: 411,
-      title: 'How much can I earn as an affiliate?',
-      detail:
-        "You'll earn 20% commission for every successful referral that leads to a sale. The more customers you refer, the more you earn – it's as simple as that.",
-    },
-    {
-      id: 412,
-      title: 'Can I run my own ads with my affiliate link?',
-      detail:
-        "No, you can't run search engine ads (especially on branded terms or domain names), Facebook ads, or other ads that would compete with our own marketing and cause potential confusion for customers.",
-    },
-    {
-      id: 413,
-      title: 'Are self-referrals allowed?',
-      detail:
-        'No, self-referrals are not allowed. If you want to purchase a product from Wren AI, please do so without using your affiliate link.',
-    },
-    {
-      id: 414,
-      title: 'What are the terms and conditions of the program?',
-      detail: 'Please refer to our Terms and Conditions for the full details.',
-    },
-    {
-      id: 415,
-      title: 'Are there any other rules I should know about?',
-      detail:
-        'Abuse, gaming, or attempting to mislead (i.e., posting fake discounts to coupon-sharing websites) will result in your account being permanently banned. This includes pretending to be acting on our behalf (i.e., as an employee). We also reserve the right to change the terms of the program at any time. Check the full Wren AI Cloud Affiliate Program Terms And Conditions.',
-    },
-  ]
+  const elitePerks = data?.CloudElitePartners[0]?.CloudElitePartnersItems;
 
-  const eliteFrequentlyAskedQuestions = [
-    {
-      id: 416,
-      title: 'Who can be an Elite Partner?',
-      detail: 'Wren AI Elite Partners are forward-thinking consultants, agencies, data experts, and business professionals who are passionate about bringing AI-driven analytics to the world. If you have a strong network, a track record in SaaS or data tools, and the drive to grow with us—this program is for you.',
-    },
-    {
-      id: 417,
-      title: 'How to join the Elite Partner Program?',
-      detail: 'Please contact us and our team will reach back to you.',
-    },
-    
-  ]
-  const currentPerks = activeTab === 'elite' ? elitePerks : affiliatePerks
+  const affiliatePerks = data?.CloudElitePartners[1]?.CloudElitePartnersItems;
+const frequentlyAskedQuestions = data?.CloudElitePartners[1]?.FrequentlyAskedQuestions;
+const eliteFrequentlyAskedQuestions = data?.CloudElitePartners[0]?.FrequentlyAskedQuestions;
 
+useEffect(() => {
+  setActiveTab(elitePartnerData?.CloudElitePartners?.[0]?.title)
+}, [elitePartnerData])
+
+  const currentPerks = activeTab === elitePartnerData?.CloudElitePartners?.[0]?.title ? elitePerks : affiliatePerks
+  const affiliatePartner = elitePartnerData?.AffiliatePartner[0]
   return (
     <div className="bg-white md:py-16 py-10 px-4 sm:px-6 lg:px-0">
-      <div className="max-w-7xl mx-auto">
+      <div className="">
         {/* Tab Buttons */}
         <div className="flex justify-center md:mb-12 mb-6">
           <div className="flex border-gray-100 border rounded-lg md:p-2 p-1 gap-2">
-            <button
-              onClick={() => setActiveTab('elite')}
-              className={`md:px-6 sm:px-3 px-2 py-3  font-regular transition-all duration-200 ${
-                activeTab === 'elite'
-                  ? 'bg-blue-600 text-white rounded-lg shadow-lg text-normal'
-                  : 'text-gray-600 hover:text-gray-800'
-              }`}
-            >
-              Cloud Elite Partners
-            </button>
-            <button
-              onClick={() => setActiveTab('affiliate')}
-              className={`md:px-6 sm:px-3 px-2 py-3 rounded-lg font-regular transition-all duration-200 text-normal ${
-                activeTab === 'affiliate'
-                  ? 'bg-blue-600 text-white shadow-lg'
-                  : 'text-gray-600 hover:text-gray-800'
-              }`}
-            >
-              Cloud Affiliate Program
-            </button>
+            {elitePartnerData?.CloudElitePartners?.map((item, index) => (
+              <button
+              key={index}
+                onClick={() => setActiveTab(item?.title)}
+                className={`md:px-6 sm:px-3 px-2 py-3  font-regular transition-all duration-200 ${
+                  activeTab === item?.title
+                    ? 'bg-blue-600 text-white rounded-lg shadow-lg text-normal'
+                    : 'text-gray-600 hover:text-gray-800'
+                }`}
+              >
+                {item?.title}
+              </button>
+            ))}
           </div>
         </div>
 
         {/* Title */}
         <div className="text-center mb-16">
-          <h1 className="lg:text-5xl md:text-4xl sm:text-3xl text-2xl font-bold text-gray-900">
-            {activeTab === 'elite' ? (
-              <>Elite Partner <span className="text-blue-600">Perks</span></>
-            ) : (
-              <>Earn   
-              <span className="text-blue-600"> 20% commission</span> as an affiliate</>
-            )}
-          </h1>
+            <h1 className="lg:text-5xl md:text-4xl sm:text-3xl text-2xl font-bold text-gray-900">
+              { activeTab === elitePartnerData?.CloudElitePartners?.[0]?.title ? (
+                <>
+                      <span>{firstPart1}</span>
+                      <span className="text-blue-600"> {secondPart1}</span>
+               </>
+              ) : (
+                <>
+                  <span>{firstPart2}</span>
+                  <span className="text-blue-600"> {centerPart2}</span>
+                  <span> {lastPart2}</span>
+                </>
+              )}
+            </h1>
         </div>
 
         {/* Perks */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {currentPerks.map((perk, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {currentPerks?.map((perk, index) => (
             <PerkCard key={index} perk={perk} />
           ))}
         </div>
-        {activeTab === 'affiliate' && (
+        {activeTab === elitePartnerData?.CloudElitePartners?.[1]?.title && (
           <>
             <div className="flex justify-center gap-4 md:my-15 sm:my-10 my-5">
               <button
@@ -190,33 +94,54 @@ const ElitePartner = () => {
             <FrequentlyQuestions frequentlyAskedQuestions={frequentlyAskedQuestions} />
           </>
         )}
-        {activeTab === 'elite' && (
+          {activeTab === elitePartnerData?.CloudElitePartners?.[0]?.title && (
          <div>
+          <div className='bg-[#F7FBFE] lg:mt-20 sm:mt-10 mt-5'>
+            <div className='max-w-6xl mx-auto lg:py-20 md:py-10 py-5'>
+
+              <div className='text-center max-w-2xl mx-auto'>
+              <h2 className='md:text-[42px] text-[32px] font-medium text-[#1E1E1E]'>
+                 {affiliatePartner?.headline}
+              </h2>
+              </div>
+              <div className="flex flex-wrap justify-center md:gap-6 gap-3 md:my-20 sm:my-10 my-5">
+                      <div>
+                      <img src={`${base}${affiliatePartner?.image?.url}`} alt={affiliatePartner?.title}/>
+                      </div>
+              </div>
+              <div className='flex justify-center'>
+                <button className='bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] hover:-translate-y-0.5 transition-all text-white font-semibold md:py-4 py-3 md:px-8 px-4 rounded-lg lg:text-lg md:text-md text-sm duration-200 shadow-lg hover:shadow-xl'>
+                  {affiliatePartner?.button?.label}
+                </button>
+                </div>
+            </div>
+              
+          </div>
           <FrequentlyQuestions frequentlyAskedQuestions={eliteFrequentlyAskedQuestions} />
          </div>
         )}
+          <HomeCTA data={elitePartnerData?.bottomBlock} />
       </div>
     </div>
   )
 }
 
 const PerkCard = ({ perk }) => {
-
   return (
     <div className="bg-white transition-shadow duration-300">
       {/* Icon */}
       <div className="md:w-12 md:h-12 w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center sm:mb-8.5 mb-4">
-        <img src={perk.icon} alt={perk.title} className="w-6 h-6 text-white" />
+      <img src={`${base}${perk.logo[0]?.url}`} alt={perk?.title} />
       </div>
 
       {/* Title */}
       <h3 className="text-2xl font-bold text-[#1E1E1E] md:mb-4 mb-2">
-        {perk.title}
+        {perk?.title}
       </h3>
 
       {/* Description */}
       <p className="text-[#757575] leading-relaxed">
-        {perk.description}
+        {perk.detail}
       </p>
     </div>
   )

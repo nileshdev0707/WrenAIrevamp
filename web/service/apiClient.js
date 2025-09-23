@@ -26,4 +26,6 @@ const getPricingApi = () => axiosApi.get(`/api/pricing?populate=*`);
 {/* Get Product Page */}
 const getProductApi = () => axiosApi.get(`/api/product-page?populate=*`);
 
-export { solutionsApi,homePageApi, navigationApi, pagesApi, getDocsApi, getDevelopersApi, getPricingApi, getProductApi };
+const getAffiliateProgramApi = () => axiosApi.get(`/api/affiliate-program?populate=*`);
+
+export { solutionsApi,homePageApi, navigationApi, pagesApi, getDocsApi, getDevelopersApi, getPricingApi, getProductApi,getAffiliateProgramApi };
