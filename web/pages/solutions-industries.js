@@ -47,13 +47,13 @@ export default function Product() {
 
                   <div className="flex gap-5">
                     <a
-                      href={"#"}
+                      href={"/product"}
                       className="bg-white cursor-pointer mt-8 px-4.5 py-3 rounded-md text-blue-600 text-sm"
                     >
                       Explore Platform
                     </a>
                     <a
-                      href={"#"}
+                      href={"/contact"}
                       className="bg-white cursor-pointer mt-8 px-4.5 py-3 rounded-md text-blue-600 text-sm"
                     >
                       Talk to our team

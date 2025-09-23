@@ -26,4 +26,16 @@ const getPricingApi = () => axiosApi.get(`/api/pricing?populate=*`);
 {/* Get Product Page */}
 const getProductApi = () => axiosApi.get(`/api/product-page?populate=*`);
 
-export { solutionsApi,homePageApi, navigationApi, pagesApi, getDocsApi, getDevelopersApi, getPricingApi, getProductApi };
+{/* Get Contact Page */}
+const getContactApi = () => axiosApi.get(`/api/contact-page?populate=*`);
+
+{/* Get Privacy Policy Page */}
+const getPrivacyPolicyApi = () => axiosApi.get(`/api/privacy-policy-page?populate=*`);
+
+{/* Get Request Demo Page */}
+const getRequestDemoApi = () => axiosApi.get(`/api/request-page?populate=*`);
+
+{/* Get Terms of Use Page */}
+const getTermsOfUseApi = () => axiosApi.get(`/api/terms-page?populate=*`);
+
+export { solutionsApi,homePageApi, navigationApi, pagesApi, getDocsApi, getDevelopersApi, getPricingApi, getProductApi, getContactApi, getPrivacyPolicyApi, getRequestDemoApi, getTermsOfUseApi };

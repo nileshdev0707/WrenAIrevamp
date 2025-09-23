@@ -7,7 +7,7 @@ export default function SiteFooter() {
       title: "Company",
       links: [
         // { label: "Careers", slug: "careers" },
-        { label: "Press", slug: "press" },
+        // { label: "Press", slug: "press" },
         { label: "Security", slug: "https://cannerdata.com/terms/security" },
         { label: "Case Studies", slug: "solutions-industries" },
       ],
@@ -24,7 +24,7 @@ export default function SiteFooter() {
       title: "Partners",
       links: [
         { label: "Affiliate Program", slug: "affiliate-program" },
-        { label: "Elite Partners", slug: "/" },
+        { label: "Elite Partners", slug: "#" },
       ],
     },
     {

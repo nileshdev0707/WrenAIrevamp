@@ -227,10 +227,10 @@ export default function ContentBlock() {
                 <p className="text-gray-600 text-sm mt-6 pb-8">
                   {item.subtitle}
                 </p>
-                {item?.moreInfo?.map((info) => (
-                  <div class="space-y-6">
-                    <div class="border-b border-gray-200 py-5">
-                      <div class="flex gap-4  items-center">
+                {item?.moreInfo?.map((info, index) => (
+                  <div className="space-y-6" key={index}>
+                    <div className="border-b border-gray-200 py-5">
+                      <div className="flex gap-4  items-center">
                         <svg
                           width="20"
                           height="20"
@@ -244,21 +244,21 @@ export default function ContentBlock() {
                           />
                         </svg>
 
-                        <h3 class="font-semibold text-gray-900">
+                        <h3 className="font-semibold text-gray-900">
                           {info.title}
                         </h3>
                       </div>
-                      <p class="text-gray-600 text-sm mt-1">
+                      <p className="text-gray-600 text-sm mt-1">
                         {info.description}
                       </p>
                     </div>
                   </div>
                 ))}
-                {item?.contentBlockButton?.length > 0 && (
+                {/* {item?.contentBlockButton?.length > 0 && (
                 <div className="flex gap-2 mt-10">
-                  {item?.contentBlockButton?.map((button) => (
+                  {item?.contentBlockButton?.map((button, index) => (
                     <a
-                      key={button?.id}
+                      key={index}
                       href={button?.url}
                       target={
                         button?.url?.startsWith("http") ? "_blank" : "_self"
@@ -269,7 +269,7 @@ export default function ContentBlock() {
                     </a>
                   ))}
                 </div>
-                )}
+                )} */}
               </div>
 
               <div

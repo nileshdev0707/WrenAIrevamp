@@ -33,7 +33,7 @@ const SolutionHero = ({ data }) => {
               {hero?.buttons?.map((btn, index) => (
                 <button
                   key={btn.id}
-                  // href={btn.url}
+                  onClick={() => window.open(btn.url, "_self", "noopener,noreferrer")}
                   className={`px-6 py-3 rounded-md font-medium text-sm transition-all duration-200 shadow-sm
                 ${
                   index === 0

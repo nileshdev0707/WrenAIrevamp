@@ -20,14 +20,14 @@ export default function SolutionsIndustriesHero() {
         </p>
         <div className="flex flex-col sm:flex-row gap-3 pt-14 justify-center">
           <a
-            href="#"
+            href="/request-demo"
             target="_self"
             className={`px-6 py-3 rounded-md font-medium text-sm transition-all duration-200 shadow-sm bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white`}
           >
             Request Enterprise Demo
           </a>
           <a
-            href="#"
+            href="/contact"
             target="_self"
             className={`px-6 py-3 rounded-md font-medium text-sm transition-all duration-200 shadow-sm bg-white text-gray-800 border border-gray-200 hover:bg-gray-100`}
           >

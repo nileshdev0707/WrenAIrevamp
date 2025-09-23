@@ -4,13 +4,13 @@ import { base } from "../../service/serviceConfig";
 export default function ContentBlock({ data }) {
   return (
     <div>
-      {data?.map((item) => {
+      {data?.map((item, index) => {
         const url = item?.image?.url;
         const image = item?.image;
         const isRightAligned = item?.alignment === "right";
         return (
           <div
-            key={item.id}
+            key={index} 
             className="grid grid-cols-1 md:grid-cols-2 xl:gap-10 gap-5 md:py-15 py-8 xl:px-0 px-5"
           >
             <div className={`xl:px-10 px-5 order-1 ${isRightAligned ? "md:order-2" : "md:order-1 md:text-left"}`}>
@@ -22,7 +22,7 @@ export default function ContentBlock({ data }) {
               <div dangerouslySetInnerHTML={{ __html: item.description }} />
               <div className="flex gap-2">
               {item?.contentBlockButton?.map((button, index) => (
-                  <a key={button?.id} href={button?.url} 
+                  <a key={index} href={button?.url} 
                   target={button?.url?.startsWith("http") ? "_blank" : "_self"}
                   className={`btn px-4 py-1 mt-5 text-sm
                   ${
