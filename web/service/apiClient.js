@@ -38,4 +38,6 @@ const getRequestDemoApi = () => axiosApi.get(`/api/request-page?populate=*`);
 {/* Get Terms of Use Page */}
 const getTermsOfUseApi = () => axiosApi.get(`/api/terms-page?populate=*`);
 
-export { solutionsApi,homePageApi, navigationApi, pagesApi, getDocsApi, getDevelopersApi, getPricingApi, getProductApi, getContactApi, getPrivacyPolicyApi, getRequestDemoApi, getTermsOfUseApi };
+const getAffiliateProgramApi = () => axiosApi.get(`/api/affiliate-program?populate=*`);
+
+export { solutionsApi,homePageApi, navigationApi, pagesApi, getDocsApi, getDevelopersApi, getPricingApi, getProductApi, getContactApi, getPrivacyPolicyApi, getRequestDemoApi, getTermsOfUseApi, getAffiliateProgramApi };
