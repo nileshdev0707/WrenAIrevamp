@@ -81,7 +81,7 @@ const EnterPrise = (data) => {
             ))}
         </div>
         <div className="flex justify-center md:mt-20 sm:mt-10 mt-5 animate-fade-in-up animation-delay-200" onClick={() => window.open(enterPrise?.button?.[0]?.url, "_blank", "noopener,noreferrer")}>
-            <button className="bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] hover:-translate-y-0.5   transition-all text-white font-semibold md:py-4 py-3 md:px-8 px-4 rounded-lg lg:text-lg md:text-md text-sm duration-200 shadow-lg hover:shadow-xl">
+            <button className="cursor-pointer bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] hover:-translate-y-0.5   transition-all text-white font-semibold md:py-4 py-3 md:px-8 px-4 rounded-lg lg:text-lg md:text-md text-sm duration-200 shadow-lg hover:shadow-xl">
                 {enterPrise?.button?.[0]?.label}
             </button>
         </div>

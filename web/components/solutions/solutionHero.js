@@ -34,7 +34,7 @@ const SolutionHero = ({ data }) => {
                 <button
                   key={btn.id}
                   onClick={() => window.open(btn.url, "_self", "noopener,noreferrer")}
-                  className={`px-6 py-3 rounded-md font-medium text-sm transition-all duration-200 shadow-sm
+                  className={`cursor-pointer px-6 py-3 rounded-md font-medium text-sm transition-all duration-200 shadow-sm
                 ${
                   index === 0
                     ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] transition-all duration-200 transform hover:-translate-y-0.5 text-white"

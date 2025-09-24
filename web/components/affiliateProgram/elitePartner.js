@@ -5,7 +5,6 @@ import { base } from '../../service/serviceConfig'
 
 const ElitePartner = ({data}) => {
   const elitePartnerData = data
-  console.log(elitePartnerData,'elitePartnerData---251');
   const [activeTab, setActiveTab] = useState(elitePartnerData?.CloudElitePartners?.[0]?.title)
 
   const words = elitePartnerData?.CloudElitePartners?.[0]?.subtitle?.split(" ");
@@ -80,13 +79,13 @@ useEffect(() => {
             <div className="flex justify-center gap-4 md:my-15 sm:my-10 my-5">
               <button
                 onClick={() => window.open('https://partners.getwren.ai/signup', '_blank')}
-                className="bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] hover:-translate-y-0.5 transition-all text-white font-semibold md:py-4 py-3 md:px-8 px-4 rounded-lg lg:text-lg md:text-md text-sm duration-200 shadow-lg hover:shadow-xl"
+                className="cursor-pointer bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] hover:-translate-y-0.5 transition-all text-white font-semibold md:py-4 py-3 md:px-8 px-4 rounded-lg lg:text-lg md:text-md text-sm duration-200 shadow-lg hover:shadow-xl"
               >
                 Register Now
               </button>
               <button
                 onClick={() => window.open('https://partners.getwren.ai/', '_blank')}
-                className="bg-[#F5F5F5] text-black hover:-translate-y-0.5 transition-all font-semibold md:py-4 py-3 md:px-8 px-4 rounded-lg lg:text-lg md:text-md text-sm duration-200 shadow-lg hover:shadow-xl"
+                className="cursor-pointer bg-[#F5F5F5] text-black hover:-translate-y-0.5 transition-all font-semibold md:py-4 py-3 md:px-8 px-4 rounded-lg lg:text-lg md:text-md text-sm duration-200 shadow-lg hover:shadow-xl"
               >
                 Affiliate Dashboard
               </button>
@@ -110,7 +109,7 @@ useEffect(() => {
                       </div>
               </div>
               <div className='flex justify-center'>
-                <button className='bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] hover:-translate-y-0.5 transition-all text-white font-semibold md:py-4 py-3 md:px-8 px-4 rounded-lg lg:text-lg md:text-md text-sm duration-200 shadow-lg hover:shadow-xl'>
+                <button onClick={() => window.open(affiliatePartner?.button?.url, '_self')} className='cursor-pointer bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] hover:-translate-y-0.5 transition-all text-white font-semibold md:py-4 py-3 md:px-8 px-4 rounded-lg lg:text-lg md:text-md text-sm duration-200 shadow-lg hover:shadow-xl'>
                   {affiliatePartner?.button?.label}
                 </button>
                 </div>

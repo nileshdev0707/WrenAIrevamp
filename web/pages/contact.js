@@ -9,7 +9,6 @@ export default function Contact() {
   const [contact, setContact] = useState(null);
   const [loading, setLoading] = useState(true);
   const heroImage = contact?.hero?.[0]?.backgroundimage?.url;
-  const formId = "5b6cded2-dcbe-4661-9855-aa29246a6a4e";
 
   useEffect(() => {
     const fetchContact = async () => {
@@ -43,7 +42,7 @@ export default function Contact() {
             <ContactHero contact={contact?.hero} />
           </div>
         )}
-        <HubspotEmbedForm formId={formId} />
+        <HubspotEmbedForm formId={contact?.formId} />
       </div>
     </Layout>
   );

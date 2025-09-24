@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ComparePlan({ tiers }) {
+export default function ComparePlan({ tiers, selectedPlan }) {
 
   return (
     <div>
@@ -13,7 +13,7 @@ export default function ComparePlan({ tiers }) {
                 const parsed = tiers.map((t) => ({
                   name: t.name,
                   featuresByCategory: Object.entries(
-                    t.compareFeatures || {}
+                     selectedPlan === "Cloud" ? t.compareFeatures || {} : t.selfHostedCompareFeatures || {}
                   ).map(([category, feats]) => [
                     category,
                     Array.isArray(feats)

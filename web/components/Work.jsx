@@ -3,7 +3,6 @@ import { base } from "../service/serviceConfig";
 
 export default function Work({ data }) {
   const works = data?.UseCases?.[0] || []
-  console.log(works.useCasesItems, 'data work')
   const badge = works?.badge || 'Put WrenAI to Work'
   const title = works?.title || 'Empower data teams with secure, scalable access.'
   const visualUrl = data?.visual?.url || data?.visual?.data?.attributes?.url || null

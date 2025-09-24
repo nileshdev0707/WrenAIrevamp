@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Tiers({ tiers, billing }) {
+export default function Tiers({ tiers, billing, selectedPlan }) {
 
   return (
     <div className="mt-10 grid md:grid-cols-3 gap-6">
@@ -17,7 +17,7 @@ export default function Tiers({ tiers, billing }) {
         <div className="flex items-baseline mb-4">
           <span className="text-4xl font-semibold mt-1 text-blue-600">
             {billing === "Annually"
-              ? item.annualPrice || item.price
+              ? item.annualPrice
               : item.price}
           </span>
           <span className="text-gray-500 ml-2 text-sm">
@@ -25,9 +25,29 @@ export default function Tiers({ tiers, billing }) {
           </span>
         </div>
         <div className="mt-6">
-          <span className="text-sm bg-gray-100 p-2 rounded-full text-black font-medium">
-            {item.features}
-          </span>
+          {selectedPlan === "Cloud" && (
+            <span className="text-sm bg-gray-100 p-2 rounded-full text-black font-medium capitalize">
+              {billing === "Annually" ? item.annualFeatures : item.features}
+            </span>
+          )}
+          {selectedPlan === "Self-hosted" && (
+            <div className="flex flex-col gap-5 min-h-17">
+              {item.selfHostedSeat && (
+                <div>
+                  <span className="text-sm bg-gray-100 p-2 rounded-full text-black font-medium capitalize">
+                    {item.selfHostedSeat}
+                  </span>
+                </div>
+              )}
+              {item?.selfHostedFeatures && (
+                <div>
+                  <span className="text-sm bg-gray-100 p-2 rounded-full text-black font-medium capitalize">
+                    {item?.selfHostedFeatures}
+                  </span>
+                </div>
+              )}
+            </div>
+          )}
         </div>
         <div className="mt-6">
           <a
@@ -42,10 +62,18 @@ export default function Tiers({ tiers, billing }) {
             {item.ctaLabel || "Choose plan"}
           </a>
         </div>
-        <div
-          className="mt-4 text-sm leading-6"
-          dangerouslySetInnerHTML={{ __html: item.featuresDetails }}
-        />
+        {selectedPlan === "Cloud" && (
+          <div
+            className="mt-4 text-sm leading-6"
+            dangerouslySetInnerHTML={{ __html: item.featuresDetails }}
+          />
+        )}
+        {selectedPlan === "Self-hosted" && (
+          <div
+            className="mt-4 text-sm leading-6"
+            dangerouslySetInnerHTML={{ __html: item.selfHostedFeaturesDetails }}
+          />
+        )}
       </div>
     ))}
   </div>

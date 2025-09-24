@@ -38,6 +38,9 @@ const getRequestDemoApi = () => axiosApi.get(`/api/request-page?populate=*`);
 {/* Get Terms of Use Page */}
 const getTermsOfUseApi = () => axiosApi.get(`/api/terms-page?populate=*`);
 
+{/* Get Solutions Industries Page */}
+const getSolutionsIndustriesApi = () => axiosApi.get(`/api/solutions-industries-page?populate=*`);
+
 const getAffiliateProgramApi = () => axiosApi.get(`/api/affiliate-program?populate=*`);
 
-export { solutionsApi,homePageApi, navigationApi, pagesApi, getDocsApi, getDevelopersApi, getPricingApi, getProductApi, getContactApi, getPrivacyPolicyApi, getRequestDemoApi, getTermsOfUseApi, getAffiliateProgramApi };
+export { solutionsApi,homePageApi, navigationApi, pagesApi, getDocsApi, getDevelopersApi, getPricingApi, getProductApi, getContactApi, getPrivacyPolicyApi, getRequestDemoApi, getTermsOfUseApi, getAffiliateProgramApi, getSolutionsIndustriesApi };

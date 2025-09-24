@@ -53,7 +53,7 @@ const SolutionsTab = ({ data }) => {
             <div className="text-center">
                 <button  
                 onClick={() => window.open(activeTabData?.button?.[0]?.url, activeTabData?.button?.[0]?.url?.startsWith("http") ? "_blank" : "_self", "noopener,noreferrer")}
-                 className="bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] hover:-translate-y-0.5  transition-all text-white font-semibold md:py-4 py-3 md:px-8 px-4 rounded-lg lg:text-lg md:text-md text-sm duration-200 shadow-lg hover:shadow-xl">
+                 className="cursor-pointer bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] hover:-translate-y-0.5  transition-all text-white font-semibold md:py-4 py-3 md:px-8 px-4 rounded-lg lg:text-lg md:text-md text-sm duration-200 shadow-lg hover:shadow-xl">
                 {activeTabData?.button?.[0]?.label || activeTabData?.buttonText || 'Start with Enterprise Cloud'}
                 </button>
             </div>

@@ -13,7 +13,8 @@ import { getPricingApi } from "../service/apiClient";
 export default function Pricing() {
   const [pricing, setPricing] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [billing, setBilling] = useState("Monthly");
+  const [billing, setBilling] = useState("Annually");
+  const [selectedPlan, setSelectedPlan] = useState("Cloud");
   const heroImage = pricing?.hero?.[0]?.backgroundimage?.url
   
   useEffect(() => {
@@ -21,7 +22,6 @@ export default function Pricing() {
       try {
         const { data } = await getPricingApi();
         const pricingData = data?.data?.attributes ?? data?.data ?? null;
-        console.log(pricingData,'pricingData');
         setPricing(pricingData);
       } catch (error) {
         console.error('Error fetching pricing:', error);
@@ -42,16 +42,18 @@ export default function Pricing() {
             pricing={pricing?.hero?.[0]}
             billing={billing}
             setBilling={setBilling}
+            selectedPlan={selectedPlan}
+            setSelectedPlan={setSelectedPlan}
           />
           )}
           {pricing?.tiers?.length && (
-            <Tiers tiers={pricing?.tiers} billing={billing} />
+            <Tiers tiers={pricing?.tiers} billing={billing} selectedPlan={selectedPlan} />
           )}
         </div>
         )}
 
         {/* Content Block */}
-        {pricing?.ContentBlock?.length && (
+        {selectedPlan === "Cloud" && pricing?.ContentBlock?.length && (
           <ContentBlock contentBlock={pricing?.ContentBlock} />
         )}
 
@@ -62,7 +64,7 @@ export default function Pricing() {
 
         {/* Feature comparison */}
         {pricing?.tiers?.length && (
-          <ComparePlan tiers={pricing?.tiers} />
+          <ComparePlan tiers={pricing?.tiers} selectedPlan={selectedPlan} />
         )}
 
         {/* FAQ */}

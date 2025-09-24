@@ -5,7 +5,6 @@ import { base } from "../service/serviceConfig";
 
 export default function TermsOfUse() {
   const [termsOfUse, setTermsOfUse] = useState(null);
-  console.log("termsOfUse ==> ", termsOfUse);
   const [loading, setLoading] = useState(true);
   const heroImage = termsOfUse?.hero?.[0]?.backgroundimage?.url;
 
