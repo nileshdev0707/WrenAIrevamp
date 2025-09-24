@@ -9,7 +9,7 @@ const axiosApi = axios.create({
   },
   timeout: 10000, // 10 seconds timeout
 });
-const homePageApi = () => axiosApi.get(`/api/home-page?populate=*`);
+const homePageApi = (lang) => axiosApi.get(`/api/home-page?populate=*&lang=${lang}`);
 const solutionsApi = () => axiosApi.get(`/api/solutions-page?populate=*`);
 const navigationApi = () => axiosApi.get(`/api/navigation?populate=*`);
 const pagesApi = () => axiosApi.get(`/api/pages?fields=slug,navLabel,title,showInNav,navOrder`);
