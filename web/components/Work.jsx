@@ -9,8 +9,9 @@ export default function Work({ data }) {
   
   // Get dynamic tabs from useCasesItems
   const useCasesItems = works?.useCasesItems || []
-  const [activeTab, setActiveTab] = useState(useCasesItems[0]?.badge || '')
-  
+  const [activeTab, setActiveTab] = useState(0) // Set index 0 as default active
+  console.log(useCasesItems,'useCasesItems 855885');
+
   // Create tabs array from dynamic data
   const tabs = useCasesItems.map(item => item.badge).filter(Boolean)
 
@@ -79,9 +80,8 @@ export default function Work({ data }) {
     }
   }, [activeTab])
 
-  const getTabContent = (tabBadge) => {
-    // Find the matching use case item by badge
-    const useCaseItem = useCasesItems.find(item => item.badge === tabBadge)
+  const getTabContent = (tabIndex) => {
+    const useCaseItem = useCasesItems[tabIndex]
     
     if (useCaseItem) {
       return {
@@ -127,9 +127,9 @@ export default function Work({ data }) {
             {tabs.map((tab, index) => (
               <button
                 key={`tab-${index}`}
-                onClick={() => setActiveTab(tab)}
+                onClick={() => setActiveTab(index)}
                 className={`flex-shrink-0 px-4 py-2 rounded-2xl text-md transition-all duration-200 whitespace-nowrap ${
-                  activeTab === tab
+                  activeTab === index
                     ? 'bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white font-bold'
                     : 'bg-[#F5F5F5] text-gray-600 hover:bg-gray-200 font-medium'
                 }`}

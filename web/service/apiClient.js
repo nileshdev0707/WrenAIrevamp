@@ -41,6 +41,7 @@ const getTermsOfUseApi = () => axiosApi.get(`/api/terms-page?populate=*`);
 {/* Get Solutions Industries Page */}
 const getSolutionsIndustriesApi = () => axiosApi.get(`/api/solutions-industries-page?populate=*`);
 
+{/* Get Affiliate Program Page */}
 const getAffiliateProgramApi = () => axiosApi.get(`/api/affiliate-program?populate=*`);
 
 export { solutionsApi,homePageApi, navigationApi, pagesApi, getDocsApi, getDevelopersApi, getPricingApi, getProductApi, getContactApi, getPrivacyPolicyApi, getRequestDemoApi, getTermsOfUseApi, getAffiliateProgramApi, getSolutionsIndustriesApi };

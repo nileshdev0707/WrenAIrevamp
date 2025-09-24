@@ -9,17 +9,23 @@ import { base } from "../service/serviceConfig";
 import Layout from "./layout";
 import { homePageApi } from "../service/apiClient";
 import { useState, useEffect } from "react";
+import { useLanguageData } from "../hooks/useLanguageData";
 
 export default function Home() {
   const [homePageRes, setHomePageRes] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const { languageData } = useLanguageData();
   useEffect(() => {
     const fetchHomePage = async () => {
       try {
-        const { data } = await homePageApi();
-        const homePageData = data?.data?.attributes ?? data?.data ?? null;
-        setHomePageRes(homePageData);
+        setLoading(true);
+        if (languageData) {
+          setHomePageRes(languageData.data);
+        } else {
+          const { data } = await homePageApi();
+          const homePageData = data?.data?.attributes ?? data?.data ?? null;
+          setHomePageRes(homePageData);
+        }
       } catch (error) {
         console.error('Error fetching home page:', error);
       } finally { 
@@ -27,9 +33,12 @@ export default function Home() {
       }
     };
     fetchHomePage();
-  }, []);
+  }, [languageData]);
 
   const hero = homePageRes?.hero;
+  console.log(hero,'hero 111');
+
+
   const logos = Array.isArray(homePageRes?.TrustedBy)
     ? homePageRes.TrustedBy.map((l) => l?.attributes ?? l)
     : [];
