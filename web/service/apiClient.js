@@ -9,7 +9,7 @@ const axiosApi = axios.create({
   },
   timeout: 10000, // 10 seconds timeout
 });
-const homePageApi = () => axiosApi.get(`/api/home-page?populate=*`);
+const homePageApi = (lang) => axiosApi.get(`/api/home-page?populate=*&lang=${lang}`);
 const solutionsApi = () => axiosApi.get(`/api/solutions-page?populate=*`);
 const navigationApi = () => axiosApi.get(`/api/navigation?populate=*`);
 const pagesApi = () => axiosApi.get(`/api/pages?fields=slug,navLabel,title,showInNav,navOrder`);
@@ -41,7 +41,4 @@ const getTermsOfUseApi = () => axiosApi.get(`/api/terms-page?populate=*`);
 {/* Get Affiliate Program Page */}
 const getAffiliateProgramApi = () => axiosApi.get(`/api/affiliate-program?populate=*`);
 
-{/* Get Language Page */}
-const getLanguageApi = (lang) => axiosApi.get(`/api/home-page?populate=*&lang=${lang}`);
-
-export { solutionsApi,homePageApi, navigationApi, pagesApi, getDocsApi, getDevelopersApi, getPricingApi, getProductApi, getContactApi, getPrivacyPolicyApi, getRequestDemoApi, getTermsOfUseApi, getAffiliateProgramApi, getLanguageApi };
+export { solutionsApi,homePageApi, navigationApi, pagesApi, getDocsApi, getDevelopersApi, getPricingApi, getProductApi, getContactApi, getPrivacyPolicyApi, getRequestDemoApi, getTermsOfUseApi, getAffiliateProgramApi };
