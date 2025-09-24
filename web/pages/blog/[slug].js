@@ -4,8 +4,10 @@ import SocialShare from "../../components/blog/SocialShare";
 import BlogCard from "../../components/blog/BlogCard";
 import Layout from "../layout";
 import Footer from "../../components/footer";
+import { HubspotEmbedForm } from "../../components/hubspotEmbedForm";
 
 export default function BlogPost({ post, relatedPosts, blogPageData }) {
+console.log("blogPageData ==> ", blogPageData);
   const router = useRouter();
   const base = process.env.NEXT_PUBLIC_STRAPI_URL || "";
 
@@ -111,8 +113,12 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
                 dangerouslySetInnerHTML={{ __html: post.rightContent }}
               />
             )}
-
-            <div className="rounded-xl border border-gray-200 shadow-sm p-6 bg-white mt-5">
+            {blogPageData?.formId && (
+              <div className="mt-5">
+                <HubspotEmbedForm formId={blogPageData?.formId} hideClass />
+              </div>
+            )}
+            {/* <div className="rounded-xl border border-gray-200 shadow-sm p-6 bg-white mt-5">
               <h2 className="xl:text-2xl lg:text-xl text-base font-semibold text-gray-900 mb-2">
                 Stay in the loop
               </h2>
@@ -133,7 +139,7 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
                   Subscribe to our newsletter
                 </button>
               </form>
-            </div>
+            </div> */}
           </div>
         </div>
 
