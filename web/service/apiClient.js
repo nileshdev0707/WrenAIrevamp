@@ -38,6 +38,10 @@ const getRequestDemoApi = () => axiosApi.get(`/api/request-page?populate=*`);
 {/* Get Terms of Use Page */}
 const getTermsOfUseApi = () => axiosApi.get(`/api/terms-page?populate=*`);
 
+{/* Get Affiliate Program Page */}
 const getAffiliateProgramApi = () => axiosApi.get(`/api/affiliate-program?populate=*`);
 
-export { solutionsApi,homePageApi, navigationApi, pagesApi, getDocsApi, getDevelopersApi, getPricingApi, getProductApi, getContactApi, getPrivacyPolicyApi, getRequestDemoApi, getTermsOfUseApi, getAffiliateProgramApi };
+{/* Get Language Page */}
+const getLanguageApi = (lang) => axiosApi.get(`/api/home-page?populate=*&lang=${lang}`);
+
+export { solutionsApi,homePageApi, navigationApi, pagesApi, getDocsApi, getDevelopersApi, getPricingApi, getProductApi, getContactApi, getPrivacyPolicyApi, getRequestDemoApi, getTermsOfUseApi, getAffiliateProgramApi, getLanguageApi };

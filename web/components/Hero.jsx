@@ -3,8 +3,8 @@ import { base } from "../service/serviceConfig";
 
 export default function Hero({ data }) {
   const badge = data?.badge || '#1 Generative BI Solution'
-  const headline = data?.headline || 'Analytics without the Wait.\nDecisions without the Bottleneck.'
-  const sub = data?.subheadline || 'Trusted by 10,000+ data experts and analytics teams worldwide.'
+  const headline = data?.title || 'Analytics without the Wait.\nDecisions without the Bottleneck.'
+  const sub = data?.subtitle || 'Trusted by 10,000+ data experts and analytics teams worldwide.'
   const buttons = data?.buttons || [{ label: 'Start Free Trial Today', url: '#' }, { label: 'Schedule a demo', url: '#' }]
   const heroMedia = data?.image
   const heroImage = typeof heroMedia === 'string'
