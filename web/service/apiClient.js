@@ -10,7 +10,7 @@ const axiosApi = axios.create({
   timeout: 10000, // 10 seconds timeout
 });
 const homePageApi = (lang) => axiosApi.get(`/api/home-page?populate=*&lang=${lang}`);
-const solutionsApi = () => axiosApi.get(`/api/solutions-page?populate=*`);
+const solutionsApi = (lang) => axiosApi.get(`/api/solutions-page?populate=*&lang=${lang}`);
 const navigationApi = () => axiosApi.get(`/api/navigation?populate=*`);
 const pagesApi = () => axiosApi.get(`/api/pages?fields=slug,navLabel,title,showInNav,navOrder`);
 
@@ -18,13 +18,13 @@ const pagesApi = () => axiosApi.get(`/api/pages?fields=slug,navLabel,title,showI
 const getDocsApi = () => axiosApi.get(`/api/docs-page?populate=*`);
 
 {/* Get Developers Page */}
-const getDevelopersApi = () => axiosApi.get(`/api/developers-page?populate=*`);
+const getDevelopersApi = (lang) => axiosApi.get(`/api/developers-page?populate=*&lang=${lang}`);
 
 {/* Get Pricing Page */}
 const getPricingApi = () => axiosApi.get(`/api/pricing?populate=*`);
 
 {/* Get Product Page */}
-const getProductApi = () => axiosApi.get(`/api/product-page?populate=*`);
+const getProductApi = (lang) => axiosApi.get(`/api/product-page?populate=*&lang=${lang}`);
 
 {/* Get Contact Page */}
 const getContactApi = () => axiosApi.get(`/api/contact-page?populate=*`);

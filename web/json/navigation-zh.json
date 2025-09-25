@@ -1,0 +1,61 @@
+{
+    "id": 3,
+    "documentId": "bgabeklmkqplcspehjqwwm86",
+    "createdAt": "2025-09-11T08:34:33.303Z",
+    "updatedAt": "2025-09-12T08:56:55.733Z",
+    "publishedAt": "2025-09-12T08:56:55.745Z",
+    "links": [
+        {
+            "id": 13,
+            "label": "产品",
+            "url": "#"
+        },
+        {
+            "id": 14,
+            "label": "开发者",
+            "url": "#"
+        },
+        {
+            "id": 15,
+            "label": "解决方案",
+            "url": "#"
+        },
+        {
+            "id": 16,
+            "label": "文档",
+            "url": "#"
+        },
+        {
+            "id": 17,
+            "label": "定价",
+            "url": "#"
+        },
+        {
+            "id": 18,
+            "label": "博客",
+            "url": "#"
+        }
+    ],
+    "logo": {
+        "id": 4,
+        "documentId": "hbhflityo9kqabagbo4mpk8v",
+        "name": "Logo.png",
+        "alternativeText": null,
+        "caption": null,
+        "width": 120,
+        "height": 30,
+        "formats": null,
+        "hash": "Logo_b130950efe",
+        "ext": ".png",
+        "mime": "image/png",
+        "size": 0.92,
+        "url": "/uploads/Logo_b130950efe.png",
+        "previewUrl": null,
+        "provider": "local",
+        "provider_metadata": null,
+        "createdAt": "2025-09-12T08:56:48.724Z",
+        "updatedAt": "2025-09-12T08:56:48.724Z",
+        "publishedAt": "2025-09-12T08:56:48.724Z"
+    },
+    "pages": []
+}

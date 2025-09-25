@@ -1,41 +1,46 @@
 import { base } from "../service/serviceConfig";
 import navigation from "../json/navigation.json";
+import { translate } from "../service/lang";
 
 export default function SiteFooter() {
   const cols = [
     {
-      title: "Company",
+      title: translate("company"),
       links: [
         // { label: "Careers", slug: "careers" },
         // { label: "Press", slug: "press" },
-        { label: "Security", slug: "https://cannerdata.com/terms/security" },
-        { label: "Case Studies", slug: "solutions-industries" },
+        { label: `${translate("security")}`, slug: "https://cannerdata.com/terms/security" },
+        { label: `${translate("caseStudies")}`, slug: "solutions-industries" },
       ],
     },
     {
-      title: "Connect",
+      title: translate("contact"),
       links: [
-        { label: "Contact", slug: "contact" },
-        { label: "Discord", slug: "https://discord.gg/5DvshJqG8Z" },
+        { label: `${translate("contact")}`, slug: "contact" },
+        { label: `${translate("discord")}`, slug: "https://discord.gg/5DvshJqG8Z" },
         // { label: "Merch", slug: "merch" },
       ],
     },
     {
-      title: "Partners",
+      title: `${translate("partners")}`,
       links: [
-        { label: "Affiliate Program", slug: "affiliate-program" },
-        { label: "Elite Partners", slug: "#" },
+        { label: `${translate("affiliateProgram")}`, slug: "affiliate-program" },
+        { label: `${translate("elitePartners")}`, slug: "#" },
       ],
     },
     {
-      title: "Resources",
-      links: [{ label: "Public Roadmap", slug: "https://wrenai.notion.site/" }],
+      title: `${translate("resources")}`, 
+      links: [
+        { label: `${translate("publicRoadmap")}`, slug: "https://wrenai.notion.site/" },
+        { label: `${translate("sla")}`, slug: "sla" },
+        { label: `${translate("status")}`, slug: "https://wrenaicloud.statuspage.io/" }
+      ],
     },
     {
-      title: "Legal",
+      title: `${translate("legal")}`,
       links: [
-        { label: "Privacy Policy", slug: "privacy-policy" },
-        { label: "Terms of Use", slug: "terms-of-use" },
+        { label: `${translate("privacyPolicy")}`, slug: "privacy-policy" },
+        { label: `${translate("termsOfUse")}`, slug: "terms-of-use" },
       ],
     },
   ];
@@ -88,19 +93,19 @@ export default function SiteFooter() {
           </a>
           <div className="flex gap-5 justify-end">
           <a href="https://twitter.com" className="group">
-              <img src="/svg/twitter.svg" alt="twitter" className="w-5 h-5" />
+              <img src="/svg/twitter.svg" target="_blank" alt="twitter" className="w-5 h-5" />
             </a>
             <a href="https://linkedin.com" className="group">
-              <img src="/svg/linkedin.svg" alt="linkedin" className="w-5 h-5" />
+              <img src="/svg/linkedin.svg" target="_blank" alt="linkedin" className="w-5 h-5" />
             </a>
             <a href="https://medium.com" className="group">
-              <img src="/svg/medium.svg" alt="medium" className="w-5 h-5" />
+              <img src="/svg/medium.svg" target="_blank" alt="medium" className="w-5 h-5" />
             </a>
             <a href="https://discord.com" className="group">
-              <img src="/svg/discord.svg" alt="discord" className="w-5 h-5" />
+              <img src="/svg/discord.svg" target="_blank" alt="discord" className="w-5 h-5" />
             </a>
             <a href="https://github.com" className="group">
-              <img src="/svg/github.svg" alt="github" className="w-5 h-5" />
+              <img src="/svg/github.svg" target="_blank" alt="github" className="w-5 h-5" />
             </a>
           </div>
         </div>

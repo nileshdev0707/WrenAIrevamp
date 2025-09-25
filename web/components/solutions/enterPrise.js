@@ -70,7 +70,7 @@ const EnterPrise = (data) => {
                       <h3 className="xl:text-3xl lg:text-2xl sm:text-xl font-medium">{item?.title}</h3>
                     </div>
                     <div className="max-w-20 sm:w-12 w-8">
-                        <img src={`${base}${item?.icon?.url}`} alt={item?.title} className="w-full  object-cover"/>
+                        <img src={`${item?.icon?.url.startsWith('http') ? '' : base} ${item?.icon?.url}`} alt={item?.title} className="w-full  object-cover"/>
                     </div>
                 </div>
                 <div className="md:text-base text-sm">

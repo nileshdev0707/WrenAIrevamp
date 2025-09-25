@@ -3,6 +3,7 @@ import { base} from "../service/serviceConfig";
 import navigation from "../json/navigation.json";
 import LanguageDropdown from "./LanguageDropdown";
 import { getStoredLanguage, saveLanguage } from "../utils/languageUtils";
+import { translate } from "../service/lang";
 
 // Language Context for global language state
 const LanguageContext = createContext();
@@ -17,14 +18,16 @@ export const useLanguage = () => {
 
 // Language Provider Component
 export const LanguageProvider = ({ children }) => {
-  const [currentLanguage, setCurrentLanguage] = useState('en'); // Default to English for SSR
+  const [currentLanguage, setCurrentLanguage] = useState('en'); // Always start with 'en' for SSR
   const [isClient, setIsClient] = useState(false);
 
   // Handle client-side hydration
   useEffect(() => {
     setIsClient(true);
-    // Set the actual language from localStorage after hydration
-    setCurrentLanguage(getStoredLanguage());
+    const storedLanguage = getStoredLanguage();
+    if (storedLanguage !== 'en') {
+      setCurrentLanguage(storedLanguage);
+    }
   }, []);
 
   const changeLanguage = (langCode) => {
@@ -41,10 +44,6 @@ export const LanguageProvider = ({ children }) => {
 
 
 export default function Navbar() {
-
-  // if (loading) {
-  //   return <div>Loading navigation...</div>;
-  // }
 
   const dynamicPages = Array.isArray(navigation?.pages) ? navigation.pages : []
   const pageSlugByLabel = dynamicPages.reduce((acc, p) => {
@@ -71,10 +70,10 @@ export default function Navbar() {
   }
 
   const fallback = [
-    { label: 'Product', url: '/product' },
-    { label: 'Developers', url: '/developers' },
-    { label: 'Solutions', url: '/solutions' },
-    { label: 'Docs', url: '/docs' },
+    { label: translate("product"), url: '/product' },
+    { label: translate("developers"), url: '/developers' },
+    { label: translate("solutions"), url: '/solutions' },
+    { label: translate("docs"), url: '/docs' },
   ]
 
   const baseLinks = Array.isArray(navigation?.links) && navigation.links.length > 0 ? navigation.links : fallback
@@ -202,14 +201,14 @@ export default function Navbar() {
                         className="px-4 py-3 text-gray-600 hover:text-gray-900 font-medium text-center rounded-lg hover:bg-gray-50 transition-colors duration-200"
                         onClick={() => setOpen(false)}
                       >
-                        Sign in
+                        {translate("signIn")}
                       </a>
                       <a 
                         href="#" 
                         className="px-4 py-3 hover:bg-gradient-to-r hover:from-[#0B8EE5] hover:to-[#0022CB] bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white font-medium text-center rounded-lg shadow-sm hover:shadow-md transition-all duration-200"
                         onClick={() => setOpen(false)}
                       >
-                        Get Started
+                        {translate("getStarted")}
                       </a>
                     </div>
                   </nav>

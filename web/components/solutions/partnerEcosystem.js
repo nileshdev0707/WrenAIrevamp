@@ -5,6 +5,7 @@ const PartnerEcosystem = ({data}) => {
     const industry = data?.ContentBlock || [];
     const partnerEcosystem = industry[2];
     const title = partnerEcosystem?.title ?? '';
+    const partnerEcosystemUrl = partnerEcosystem?.image?.url;
 
     return (
         <div>
@@ -29,7 +30,7 @@ const PartnerEcosystem = ({data}) => {
                             {partnerEcosystem?.subtitle}
                         </p>
                         <div className="fade-up lg:my-19 md:my-15 sm:my-10 my-5 show">
-                            <img src={`${base}${partnerEcosystem?.image?.url}`} alt={partnerEcosystem?.title} />
+                            <img src={`${partnerEcosystemUrl.startsWith('http') ? '' : base} ${partnerEcosystemUrl}`} alt={partnerEcosystem?.title} />
                         </div>
                         <div className="fade-up lg:my-19 md:my-15 sm:my-10 my-5 show flex justify-center">
                             <button onClick={() => window.open(partnerEcosystem?.contentBlockButton?.[0]?.url, "_self", "noopener,noreferrer")} className="cursor-pointer bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] hover:-translate-y-0.5   transition-all text-white font-semibold md:py-4 py-3 md:px-8 px-4 rounded-lg lg:text-lg md:text-md text-sm duration-200 shadow-lg hover:shadow-xl">

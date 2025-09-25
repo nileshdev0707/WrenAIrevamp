@@ -13,11 +13,12 @@ import { useLanguage } from "../components/Navbar";
 export default function Home() {
   const [homePageRes, setHomePageRes] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { currentLanguage } = useLanguage();
+  const { currentLanguage, isClient } = useLanguage();
 
   const heroImage = homePageRes?.hero?.backgroundimage?.url;
 
   useEffect(() => {
+    if (!isClient) return;
     const fetchHomePage = async () => {
       try {
         const { data } = await homePageApi(currentLanguage);
@@ -30,7 +31,7 @@ export default function Home() {
       }
     };
     fetchHomePage();
-  }, [currentLanguage]);
+  }, [currentLanguage, isClient]);
   
 
   const hero = homePageRes?.hero;
@@ -53,7 +54,8 @@ export default function Home() {
   
   return (
     <Layout>
-      <div style={{ backgroundImage: `url(${hero?.heroImage?.url.startsWith('http') ? '' : base}${heroImage})`,  WebkitBackgroundSize: '100%',backgroundPosition: 'center bottom' }} className="bg-cover">
+
+      <div style={{ backgroundImage: `url(${heroImage.startsWith('http') ? '' : base} ${heroImage})`,  WebkitBackgroundSize: '100%',backgroundPosition: 'center bottom' }} className="bg-cover">
            <Hero data={hero} />
             <Logos items={logos} />
          </div>

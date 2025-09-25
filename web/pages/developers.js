@@ -6,17 +6,20 @@ import WhyWrenAI from "../components/developers/whyWrenAI";
 import { base } from "../service/serviceConfig";
 import Layout from "./layout";
 import { getDevelopersApi } from "../service/apiClient";
-
+import { useLanguage } from "../components/Navbar";
 export default function Developers() {
   
   const [developers, setDevelopers] = useState(null);
   const [loading, setLoading] = useState(true);
   const heroImage = developers?.hero?.[0]?.backgroundimage?.url;
-
+  const { currentLanguage, isClient } = useLanguage();
+  
   useEffect(() => {
+    if (!isClient) return;
+    
     const fetchDevelopers = async () => {
       try {
-        const { data } = await getDevelopersApi();
+        const { data } = await getDevelopersApi(currentLanguage);
         const developersData = data?.data?.attributes ?? data?.data ?? null;
         setDevelopers(developersData);
       } catch (error) {
@@ -26,7 +29,7 @@ export default function Developers() {
       }
     };
     fetchDevelopers();
-  }, []);
+  }, [currentLanguage, isClient]);
 
   return (
     <Layout>

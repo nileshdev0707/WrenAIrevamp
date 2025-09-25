@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 export default function ProductHero({ data }) {
+  console.log(data,'data2525');
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (

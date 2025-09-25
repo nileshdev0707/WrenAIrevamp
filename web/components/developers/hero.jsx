@@ -15,7 +15,7 @@ export default function DevelopersHero({ data }) {
     <section className="py-10 md:py-16 text-center">
       {data?.map((item, index) => {
         const words = item?.title?.split(" ");
-        const firstPart = words.slice(0, 3).join(" ");
+        const firstPart = words?.slice(0, 3).join(" ");
         const secondPart = words.slice(3).join(" ");
         return (
           <div key={index}>

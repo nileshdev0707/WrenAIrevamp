@@ -7,6 +7,8 @@ const Industry = ({ data }) => {
     const industry0 = industry[0] || {};
     const industry1 = industry[1] || {};
 
+    const industry0Url = industry0?.image?.url;
+    const industry1Url = industry1?.image?.url;
     const title = industry0?.title ?? '';
 
     return (
@@ -31,7 +33,7 @@ const Industry = ({ data }) => {
                     <div className="grid sm:grid-cols-2 grid-cols-1 gap-4 md:my-15 sm:my-10 my-5">
                             <div>
                                  <div>
-                                <img src={`${base}${industry0?.image?.url}`} alt={industry0?.title} />
+                                <img src={`${industry0Url.startsWith('http') ? '' : base} ${industry0Url}`} alt={industry0?.title} />
                                 </div> 
                                 <div dangerouslySetInnerHTML={{
             __html: industry0.description
@@ -40,7 +42,7 @@ const Industry = ({ data }) => {
                             
                         <div>
                             <div>
-                               <img src={`${base}${industry1?.image?.url}`} alt={industry1?.title} />
+                               <img src={`${industry1Url.startsWith('http') ? '' : base} ${industry1Url}`} alt={industry1?.title} />
                             </div> 
                             <div dangerouslySetInnerHTML={{
             __html: industry1.description

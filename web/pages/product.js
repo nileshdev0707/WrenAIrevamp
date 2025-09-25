@@ -7,16 +7,21 @@ import Footer from "../components/footer";
 import { base } from "../service/serviceConfig";
 import Layout from "./layout";
 import { getProductApi } from "../service/apiClient";
+import { useLanguage } from "../components/Navbar";
 
 export default function Product() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const heroImage = product?.productHero?.[0]?.backgroundimage?.url;
+  const { currentLanguage, isClient } = useLanguage();
 
   useEffect(() => {
+    // Only fetch after client-side hydration to prevent hydration mismatch
+    if (!isClient) return;
+    
     const fetchProduct = async () => {
       try {
-        const { data } = await getProductApi();
+        const { data } = await getProductApi(currentLanguage);
         const productData = data?.data?.attributes ?? data?.data ?? null;
         setProduct(productData);
       } catch (error) {
@@ -26,7 +31,7 @@ export default function Product() {
       }
     };
     fetchProduct();
-  }, []);
+  }, [currentLanguage, isClient]);
 
   return (
    <Layout>

@@ -7,16 +7,17 @@ import SolutionsTab from "../components/solutions/solutionsTab";
 import EnterPrise from "../components/solutions/enterPrise";
 import Industry from "../components/solutions/Industry";
 import PartnerEcosystem from "../components/solutions/partnerEcosystem";
+import { useLanguage } from "../components/Navbar";
 
 export default function Solutions() {
   const [solutions, setSolutions] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const { isClient, currentLanguage } = useLanguage();
   useEffect(() => {
     const fetchSolutions = async () => {
+      if (!isClient) return;
       try {
-        
-        const response = await solutionsApi();
+        const response = await solutionsApi(currentLanguage);
         const solutionsRes = response.data;
         const solutionsData = solutionsRes?.data?.attributes ?? solutionsRes?.data ?? null;
         setSolutions(solutionsData);
@@ -28,7 +29,7 @@ export default function Solutions() {
     };
 
     fetchSolutions();
-  }, []);
+  }, [isClient, currentLanguage]);
     
   return (
     <Layout>
