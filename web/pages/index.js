@@ -15,6 +15,8 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const { currentLanguage } = useLanguage();
 
+  const heroImage = homePageRes?.hero?.backgroundimage?.url;
+
   useEffect(() => {
     const fetchHomePage = async () => {
       try {
@@ -32,7 +34,6 @@ export default function Home() {
   
 
   const hero = homePageRes?.hero;
-  console.log(hero,'hero 111');
 
 
   const logos = Array.isArray(homePageRes?.TrustedBy)
@@ -52,7 +53,7 @@ export default function Home() {
   
   return (
     <Layout>
-      <div style={{ backgroundImage: `url(${hero?.heroImage?.url.startsWith('http') ? '' : base}${hero?.backgroundimage?.url})`,  WebkitBackgroundSize: '100%',backgroundPosition: 'center bottom' }} className="bg-cover">
+      <div style={{ backgroundImage: `url(${hero?.heroImage?.url.startsWith('http') ? '' : base}${heroImage})`,  WebkitBackgroundSize: '100%',backgroundPosition: 'center bottom' }} className="bg-cover">
            <Hero data={hero} />
             <Logos items={logos} />
          </div>

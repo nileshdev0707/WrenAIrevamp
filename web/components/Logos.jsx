@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { base } from "../service/serviceConfig";
 export default function Logos({ items }) {
-  console.log(items,'items 855885');
   const sliderRef = useRef(null)
   
   if (!items || items.length === 0) return;

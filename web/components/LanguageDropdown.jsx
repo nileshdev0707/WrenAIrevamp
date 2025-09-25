@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { getLanguageApi } from "../service/apiClient";
 import { getAvailableLanguages, getLanguageByCode } from "../utils/languageUtils";
 import { useLanguage } from "./Navbar";
 
 // Language Dropdown Component
 const LanguageDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [languageData, setLanguageData] = useState(null);
   const [loading, setLoading] = useState(false);
   
   // Use context for global language state
@@ -14,34 +12,20 @@ const LanguageDropdown = () => {
   const languages = getAvailableLanguages();
   const currentLanguage = getLanguageByCode(selectedLang);
 
-  // Fetch language data from API
-  useEffect(() => {
-    const fetchLanguages = async () => {
-      try {
-        setLoading(true);
-        const res = await getLanguageApi(selectedLang);
-        setLanguageData(res.data);
-      } catch (error) {
-        console.error('Error fetching language data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    
-    fetchLanguages();
-  }, [selectedLang]);
-
+  const onhandleClick = () => {
+    setIsOpen(!isOpen);
+  };
+  
   // Handle language change using context
   const handleLanguageChange = (langCode) => {
     changeLanguage(langCode);
     setIsOpen(false);
-    console.log('Language changed to:', langCode);
   };
 
   return (
     <div className="relative">
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={onhandleClick}
         disabled={loading}
         className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
       >

@@ -10,7 +10,6 @@ export default function Work({ data }) {
   // Get dynamic tabs from useCasesItems
   const useCasesItems = works?.useCasesItems || []
   const [activeTab, setActiveTab] = useState(0) // Set index 0 as default active
-  console.log(useCasesItems,'useCasesItems 855885');
 
   // Create tabs array from dynamic data
   const tabs = useCasesItems.map(item => item.badge).filter(Boolean)
