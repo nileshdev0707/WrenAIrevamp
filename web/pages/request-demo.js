@@ -1,5 +1,6 @@
 import React from "react";
 import Layout from "./layout";
+import { safeBackgroundImage } from "../utils/ssrHelpers";
 import { getRequestDemoApi } from "../service/apiClient";
 import { base } from "../service/serviceConfig";
 import { HubspotEmbedForm } from "../components/hubspotEmbedForm";
@@ -27,9 +28,7 @@ export default function RequestDemo() {
         {requestDemo?.hero?.length && (
           <div
             style={{
-              backgroundImage: `url(${
-                heroImage?.startsWith("http") ? "" : base
-              }${heroImage})`,
+              backgroundImage: safeBackgroundImage(heroImage),
               WebkitBackgroundSize: "100% 100%",
               backgroundPosition: "center top",
             }}

@@ -8,25 +8,13 @@ import Footer from "../components/footer";
 import { base } from "../service/serviceConfig";
 import TrustedLogos from "../components/pricing/trustedLogo";
 import Layout from "./layout";
-import { getPricingApi } from "../service/apiClient";
-import { useLanguage } from "../components/Navbar";
-import LoadingSpinner from "../components/LoadingSpinner";
-import { useApiDataWithLanguage } from "../hooks/useApiData";
+import { safeBackgroundImage } from "../utils/ssrHelpers";
+import { createServerSideProps } from "../utils/ssrHelpers";
 
-export default function Pricing() {
+export default function Pricing({ pricing }) {
   const [billing, setBilling] = useState("Annually");
   const [selectedPlan, setSelectedPlan] = useState("Cloud");
-  const { currentLanguage, isClient } = useLanguage();
-  const { data: pricing, loading } = useApiDataWithLanguage(getPricingApi, {
-    currentLanguage,
-    isClient,
-  });
   const heroImage = pricing?.hero?.[0]?.backgroundimage?.url;
-
-  // Loading state
-  if (loading) {
-    return <LoadingSpinner />;
-  }
 
   return (
     <Layout>
@@ -34,9 +22,7 @@ export default function Pricing() {
         {pricing?.hero?.length && (
           <div
             style={{
-              backgroundImage: `url(${
-                heroImage.startsWith("http") ? "" : base
-              }${heroImage})`,
+              backgroundImage: safeBackgroundImage(heroImage),
             }}
             className="bg-no-repeat py-16 max-w-6xl mx-auto bg-contain"
           >
@@ -87,3 +73,9 @@ export default function Pricing() {
     </Layout>
   );
 }
+
+// Server-side rendering function
+export const getServerSideProps = createServerSideProps(
+  "/api/pricing",
+  "pricing"
+);

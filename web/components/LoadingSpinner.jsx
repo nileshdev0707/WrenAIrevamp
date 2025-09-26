@@ -25,7 +25,8 @@ export default function LoadingSpinner({
   );
 
   if (fullPage) {
-    return <Layout>{spinner}</Layout>;
+    return '';
+    // return <Layout>{spinner}</Layout>;
   }
 
   return spinner;

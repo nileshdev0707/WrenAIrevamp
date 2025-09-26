@@ -3,7 +3,7 @@ import { base} from "../service/serviceConfig";
 import navigation from "../json/navigation.json";
 import LanguageDropdown from "./LanguageDropdown";
 import { getStoredLanguage, saveLanguage, detectBrowserLanguage } from "../utils/languageUtils";
-import { translate } from "../service/lang";
+import { translate, safeTranslate } from "../service/lang";
 
 // Language Context for global language state
 const LanguageContext = createContext();
@@ -11,33 +11,42 @@ const LanguageContext = createContext();
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
   if (!context) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
+    // Return default values for SSR or when provider is not available
+    return {
+      currentLanguage: 'en',
+      changeLanguage: () => {},
+      isClient: false
+    };
   }
   return context;
 };
 
 // Language Provider Component
-export const LanguageProvider = ({ children }) => {
-  const [currentLanguage, setCurrentLanguage] = useState('en'); // Always start with 'en' for SSR
+export const LanguageProvider = ({ children, serverLanguage = 'en' }) => {
+  const [currentLanguage, setCurrentLanguage] = useState(serverLanguage); // Use server language for SSR
   const [isClient, setIsClient] = useState(false);
 
-  // Handle client-side hydration with browser language detection
+  // Handle client-side hydration with server language preference
   useEffect(() => {
     setIsClient(true);
     
-    // Get stored language or detect from browser
-    const detectedLanguage = getStoredLanguage();
+    // Get stored language or use server detected language
+    const storedLanguage = typeof window !== 'undefined' 
+      ? localStorage.getItem('selectedLanguage') 
+      : null;
     
-    // Only update if different from default
-    if (detectedLanguage !== 'en') {
-      setCurrentLanguage(detectedLanguage);
+    const finalLanguage = storedLanguage || serverLanguage;
+    
+    // Only update if different from current
+    if (finalLanguage !== currentLanguage) {
+      setCurrentLanguage(finalLanguage);
     }
     
     // Set document language attribute
-    document.documentElement.lang = detectedLanguage;
+    document.documentElement.lang = finalLanguage;
     
-    console.log(`Language initialized: ${detectedLanguage}`);
-  }, []);
+    console.log(`Language initialized: ${finalLanguage} (server: ${serverLanguage}, stored: ${storedLanguage})`);
+  }, [serverLanguage, currentLanguage]);
 
   const changeLanguage = (langCode) => {
     setCurrentLanguage(langCode);
@@ -52,7 +61,23 @@ export const LanguageProvider = ({ children }) => {
 };
 
 
-export default function Navbar() {
+export default function Navbar({ serverLanguage }) {
+  // Use language context to avoid hydration mismatches
+  const { currentLanguage, isClient } = useLanguage();
+  const [hydrated, setHydrated] = useState(false);
+  
+  // Use server language as fallback if context is not available
+  const effectiveLanguage = currentLanguage || serverLanguage || 'en';
+
+  // Only enable translations after hydration is complete
+  useEffect(() => {
+    // Add a small delay to ensure hydration is fully complete
+    const timer = setTimeout(() => {
+      setHydrated(true);
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   const dynamicPages = Array.isArray(navigation?.pages) ? navigation.pages : []
   const pageSlugByLabel = dynamicPages.reduce((acc, p) => {
@@ -79,10 +104,10 @@ export default function Navbar() {
   }
 
   const fallback = [
-    { label: translate("product"), url: '/product' },
-    { label: translate("developers"), url: '/developers' },
-    { label: translate("solutions"), url: '/solutions' },
-    { label: translate("docs"), url: '/docs' },
+    { label: safeTranslate("product", hydrated && isClient, effectiveLanguage), url: '/product' },
+    { label: safeTranslate("developers", hydrated && isClient, effectiveLanguage), url: '/developers' },
+    { label: safeTranslate("solutions", hydrated && isClient, effectiveLanguage), url: '/solutions' },
+    { label: safeTranslate("docs", hydrated && isClient, effectiveLanguage), url: '/docs' },
   ]
 
   const baseLinks = Array.isArray(navigation?.links) && navigation.links.length > 0 ? navigation.links : fallback
@@ -94,13 +119,22 @@ export default function Navbar() {
     const normalizedLabel = label.toString().trim().toLowerCase()
     const slug = pageSlugByLabel[normalizedLabel] || defaultMapping[normalizedLabel]
     const finalUrl = (!url || url === '#') && slug ? `/${slug}` : (url || '#')
-    return { label, url: finalUrl }
+    
+    // Use safeTranslate for navigation labels to prevent hydration mismatch
+    const translatedLabel = safeTranslate(normalizedLabel, hydrated && isClient, effectiveLanguage) || label
+    
+    return { label: translatedLabel, url: finalUrl }
   })
 
   // Append dynamic pages not already present
   const existing = new Set(normalized.map((l) => l.url))
   const appended = dynamicPages
-    .map((p) => ({ label: p.navLabel || p.title || p.label, url: `/${p.slug}` }))
+    .map((p) => {
+      const label = p.navLabel || p.title || p.label || ''
+      const normalizedLabel = label.toString().trim().toLowerCase()
+      const translatedLabel = safeTranslate(normalizedLabel, hydrated && isClient, effectiveLanguage) || label
+      return { label: translatedLabel, url: `/${p.slug}` }
+    })
     .filter((p) => !existing.has(p.url))
 
   const links = normalized.concat(appended)
@@ -137,10 +171,10 @@ export default function Navbar() {
                   </a>
                   
                   {/* Desktop Navigation */}
-                  <nav className="hidden lg:flex items-center xl:gap-8 gap-4">
+                  <nav className="hidden lg:flex items-center xl:gap-8 gap-4" key={`nav-${effectiveLanguage}-${hydrated}`}>
                     {links.map((l, i) => (
                       <a 
-                        key={`desktop-${i}`} 
+                        key={`desktop-${i}-${hydrated ? effectiveLanguage : 'default'}`} 
                         href={l.url} 
                         className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-md xl:px-2 px-1 py-1"
                       >
@@ -188,10 +222,10 @@ export default function Navbar() {
               {/* Mobile Menu */}
               {open && (
                 <div className="lg:hidden border-t border-gray-200 bg-white/95 backdrop-blur-sm rounded-b-2xl">
-                  <nav className="px-6 py-4 space-y-2">
+                  <nav className="px-6 py-4 space-y-2" key={`mobile-nav-${effectiveLanguage}-${hydrated}`}>
                     {links.map((l, i) => (
                       <a 
-                        key={`mobile-${i}`} 
+                        key={`mobile-${i}-${hydrated ? effectiveLanguage : 'default'}`} 
                         href={l.url} 
                         className="block py-3 px-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium transition-colors duration-200"
                         onClick={() => setOpen(false)}
@@ -210,14 +244,14 @@ export default function Navbar() {
                         className="px-4 py-3 text-gray-600 hover:text-gray-900 font-medium text-center rounded-lg hover:bg-gray-50 transition-colors duration-200"
                         onClick={() => setOpen(false)}
                       >
-                        {translate("signIn")}
+                        {safeTranslate("signIn", hydrated && isClient, effectiveLanguage)}
                       </a>
                       <a 
                         href="#" 
                         className="px-4 py-3 hover:bg-gradient-to-r hover:from-[#0B8EE5] hover:to-[#0022CB] bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white font-medium text-center rounded-lg shadow-sm hover:shadow-md transition-all duration-200"
                         onClick={() => setOpen(false)}
                       >
-                        {translate("getStarted")}
+                        {safeTranslate("getStarted", hydrated && isClient, effectiveLanguage)}
                       </a>
                     </div>
                   </nav>

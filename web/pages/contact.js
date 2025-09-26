@@ -1,5 +1,6 @@
 import React from "react";
 import Layout from "./layout";
+import { safeBackgroundImage } from "../utils/ssrHelpers";
 import { getContactApi } from "../service/apiClient";
 import ContactHero from "../components/contact/hero";
 import { base } from "../service/serviceConfig";
@@ -28,9 +29,7 @@ export default function Contact() {
         {contact?.hero?.length && (
           <div
             style={{
-              backgroundImage: `url(${
-                heroImage?.startsWith("http") ? "" : base
-              }${heroImage})`,
+              backgroundImage: safeBackgroundImage(heroImage),
               WebkitBackgroundSize: "100% 100%",
               backgroundPosition: "center top",
             }}

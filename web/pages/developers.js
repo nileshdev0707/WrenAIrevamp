@@ -4,6 +4,7 @@ import WrenEngine from "../components/developers/wrenEngine";
 import WhyWrenAI from "../components/developers/whyWrenAI";
 import { base } from "../service/serviceConfig";
 import Layout from "./layout";
+import { safeBackgroundImage } from "../utils/ssrHelpers";
 import { getDevelopersApi } from "../service/apiClient";
 import { useLanguage } from "../components/Navbar";
 import LoadingSpinner from "../components/LoadingSpinner";
@@ -18,18 +19,16 @@ export default function Developers() {
   const heroImage = developers?.hero?.[0]?.backgroundimage?.url;
 
   // Loading state
-  if (loading) {
-    return <LoadingSpinner />;
-  }
+  // if (loading) {
+  //   return <LoadingSpinner />;
+  // }
 
   return (
     <Layout>
       <div className="max-w-6xl mx-auto">
         <div
           style={{
-            backgroundImage: `url(${
-              heroImage?.startsWith("http") ? "" : base
-            }${heroImage})`,
+            backgroundImage: safeBackgroundImage(heroImage),
             WebkitBackgroundSize: "100% 100%",
             backgroundPosition: "center top",
           }}

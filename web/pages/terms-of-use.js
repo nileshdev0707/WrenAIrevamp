@@ -1,5 +1,6 @@
 import React from "react";
 import Layout from "./layout";
+import { safeBackgroundImage } from "../utils/ssrHelpers";
 import { getTermsOfUseApi } from "../service/apiClient";
 import { base } from "../service/serviceConfig";
 import { useLanguage } from "../components/Navbar";
@@ -26,9 +27,7 @@ export default function TermsOfUse() {
         {termsOfUse?.hero?.length && (
           <div
             style={{
-              backgroundImage: `url(${
-                heroImage?.startsWith("http") ? "" : base
-              }${heroImage})`,
+              backgroundImage: safeBackgroundImage(heroImage),
               WebkitBackgroundSize: "100% 100%",
               backgroundPosition: "center top",
             }}

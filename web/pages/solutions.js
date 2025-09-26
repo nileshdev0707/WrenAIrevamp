@@ -1,27 +1,13 @@
 import React from "react";
 import Layout from "./layout";
 import SolutionHero from "../components/solutions/solutionHero";
-import { solutionsApi } from "../service/apiClient";
 import SolutionsTab from "../components/solutions/solutionsTab";
 import EnterPrise from "../components/solutions/enterPrise";
 import Industry from "../components/solutions/Industry";
 import PartnerEcosystem from "../components/solutions/partnerEcosystem";
-import { useLanguage } from "../components/Navbar";
-import LoadingSpinner from "../components/LoadingSpinner";
-import { useApiDataWithLanguage } from "../hooks/useApiData";
+import { createServerSideProps } from "../utils/ssrHelpers";
 
-export default function Solutions() {
-  const { isClient, currentLanguage } = useLanguage();
-  const { data: solutions, loading } = useApiDataWithLanguage(solutionsApi, {
-    currentLanguage,
-    isClient,
-  });
-
-  // Loading state
-  if (loading) {
-    return <LoadingSpinner />;
-  }
-
+export default function Solutions({ solutions }) {
   return (
     <Layout>
       {solutions?.hero.length > 0 && (
@@ -44,3 +30,9 @@ export default function Solutions() {
     </Layout>
   );
 }
+
+// Server-side rendering function
+export const getServerSideProps = createServerSideProps(
+  "/api/solutions-page",
+  "solutions"
+);

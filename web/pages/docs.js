@@ -2,6 +2,7 @@ import DocumentHero from "../components/document/hero";
 import ContentBlock from "../components/document/contentBlock";
 import { base, token } from "../service/serviceConfig";
 import Layout from "./layout";
+import { safeBackgroundImage } from "../utils/ssrHelpers";
 import OpenSourceDetails from "../components/document/openSourceDetails";
 import Footer from "../components/footer";
 import PublicRoadmap from "../components/document/publicRoadmap";
@@ -29,9 +30,7 @@ export default function Document() {
       <div className="max-w-6xl mx-auto">
         <div
           style={{
-            backgroundImage: `url(${
-              heroImage?.startsWith("http") ? "" : base
-            }${heroImage})`,
+            backgroundImage: safeBackgroundImage(heroImage),
           }}
           className="bg-no-repeat pt-24 pb-10 max-w-6xl mx-auto bg-contain"
         >

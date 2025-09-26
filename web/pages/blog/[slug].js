@@ -5,9 +5,10 @@ import BlogCard from "../../components/blog/BlogCard";
 import Layout from "../layout";
 import Footer from "../../components/footer";
 import { HubspotEmbedForm } from "../../components/hubspotEmbedForm";
+import { safeImageSrc } from "../../utils/ssrHelpers";
 
 export default function BlogPost({ post, relatedPosts, blogPageData }) {
-console.log("blogPageData ==> ", blogPageData);
+  console.log("blogPageData ==> ", blogPageData);
   const router = useRouter();
   const base = process.env.NEXT_PUBLIC_STRAPI_URL || "";
 
@@ -67,7 +68,9 @@ console.log("blogPageData ==> ", blogPageData);
           <h1 className="lg:text-4xl text-2xl font-medium text-gray-900 mb-4">
             {post.title}
           </h1>
-          <p className="lg:text-lg text-base text-gray-600 mb-6">{post.excerpt}</p>
+          <p className="lg:text-lg text-base text-gray-600 mb-6">
+            {post.excerpt}
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-20 pt-5">
@@ -76,9 +79,10 @@ console.log("blogPageData ==> ", blogPageData);
             {post.featuredImage && (
               <div className="mb-5">
                 <img
-                  src={`${
-                    post.featuredImage.url?.startsWith("http") ? "" : base
-                  }${post.featuredImage.url}`}
+                  src={
+                    safeImageSrc(post.featuredImage.url) ||
+                    `${base}${post.featuredImage.url}`
+                  }
                   alt={post.title}
                   className="w-full h-64 md:h-96 object-cover rounded-lg"
                 />
@@ -102,7 +106,11 @@ console.log("blogPageData ==> ", blogPageData);
                 Join thousands of data teams already using Wren AI to make
                 data-driven decisions faster and more efficiently.
               </p>
-              <a href="https://cloud.getwren.ai/" target="_blank" className="btn bg-white text-blue-600 w-full">
+              <a
+                href="https://cloud.getwren.ai/"
+                target="_blank"
+                className="btn bg-white text-blue-600 w-full"
+              >
                 Start Free Trial
               </a>
             </div>
@@ -144,8 +152,8 @@ console.log("blogPageData ==> ", blogPageData);
         </div>
 
         {blogPageData?.bottomContentBlock?.length && (
-        <Footer data={blogPageData?.bottomContentBlock} />
-      )}
+          <Footer data={blogPageData?.bottomContentBlock} />
+        )}
         {/* Related Posts */}
         {relatedPosts && relatedPosts.length > 0 && (
           <div className="border-t border-gray-200 pt-12">
@@ -226,7 +234,7 @@ export async function getStaticProps({ params }) {
           .then((r) => r.data)
           .catch(() => null),
       ]).then(([nav, pages]) => ({ nav, pages })),
-        api
+      api
         .get(`/api/blog-page?populate=*`)
         .then((r) => r.data)
         .catch(() => null),

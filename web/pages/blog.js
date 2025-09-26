@@ -6,6 +6,7 @@ import BlogHero from "../components/blog/BlogHero";
 import BlogCard from "../components/blog/BlogCard";
 import Layout from "./layout";
 import { base } from "../service/serviceConfig";
+import { safeBackgroundImage } from "../utils/ssrHelpers";
 
 export default function Blog({
   blogPageData,
@@ -23,8 +24,7 @@ export default function Blog({
   const loadMoreBlogs = async (page) => {
     setLoading(true);
     try {
-      const STRAPI =
-        process.env.NEXT_PUBLIC_STRAPI_URL
+      const STRAPI = process.env.NEXT_PUBLIC_STRAPI_URL;
       let categoryFilter = "";
       if (selectedCategory !== "all") {
         // We need to find the category ID first, then filter by it
@@ -66,9 +66,7 @@ export default function Blog({
     } else {
       const filtered = allBlogs.filter((post) => {
         const categories = post?.categories || [];
-        return categories.some(
-          (cat) => cat?.name === selectedCategory
-        );
+        return categories.some((cat) => cat?.name === selectedCategory);
       });
       setBlogs(filtered);
     }
@@ -103,11 +101,9 @@ export default function Blog({
       <div className="max-w-6xl mx-auto">
         <div
           style={{
-            backgroundImage: `url(${
-              heroImage?.startsWith("http") ? "" : base
-            }${heroImage})`,
+            backgroundImage: safeBackgroundImage(heroImage),
             WebkitBackgroundSize: "100%",
-           backgroundPosition: "center top",
+            backgroundPosition: "center top",
           }}
           className="bg-no-repeat pt-24 max-w-6xl mx-auto"
         >
@@ -117,7 +113,7 @@ export default function Blog({
         {/* Blog Content */}
         <div className="lg:pb-15 pb-10 px-5">
           {/* Category Filter - only show if not using BlogHero with integrated categories */}
-          <CategoryFilter 
+          <CategoryFilter
             categories={categories}
             selectedCategory={selectedCategory}
             onCategoryChange={filterByCategory}
@@ -159,7 +155,7 @@ export default function Blog({
 }
 
 export async function getStaticProps() {
-  const STRAPI = process.env.STRAPI_URL;
+  const STRAPI = process.env.NEXT_PUBLIC_STRAPI_URL;
   const token = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
 
   const api = axios.create({

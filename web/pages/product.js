@@ -5,33 +5,18 @@ import WhyWrenSection from "../components/product/whyWrenSection";
 import Footer from "../components/footer";
 import { base } from "../service/serviceConfig";
 import Layout from "./layout";
-import { getProductApi } from "../service/apiClient";
-import { useLanguage } from "../components/Navbar";
-import LoadingSpinner from "../components/LoadingSpinner";
-import { useApiDataWithLanguage } from "../hooks/useApiData";
+import { safeBackgroundImage } from "../utils/ssrHelpers";
+import { createServerSideProps } from "../utils/ssrHelpers";
 
-export default function Product() {
-  const { currentLanguage, isClient } = useLanguage();
-  const { data: product, loading } = useApiDataWithLanguage(getProductApi, {
-    currentLanguage,
-    isClient,
-  });
-
+export default function Product({ product }) {
   const heroImage = product?.productHero?.[0]?.backgroundimage?.url;
-
-  // Loading state
-  if (loading) {
-    return <LoadingSpinner />;
-  }
 
   return (
     <Layout>
       <div className="max-w-6xl mx-auto">
         <div
           style={{
-            backgroundImage: `url(${
-              heroImage?.startsWith("http") ? "" : base
-            }${heroImage})`,
+            backgroundImage: safeBackgroundImage(heroImage),
             WebkitBackgroundSize: "100% 100%",
             backgroundPosition: "center top",
           }}
@@ -62,3 +47,9 @@ export default function Product() {
     </Layout>
   );
 }
+
+// Server-side rendering function
+export const getServerSideProps = createServerSideProps(
+  "/api/product-page",
+  "product"
+);

@@ -7,35 +7,21 @@ import Stats from "../components/Stats";
 import HomeCTA from "../components/homeCTA";
 import { base } from "../service/serviceConfig";
 import Layout from "./layout";
-import { homePageApi } from "../service/apiClient";
-import { useLanguage } from "../components/Navbar";
-import LoadingSpinner from "../components/LoadingSpinner";
-import { useApiDataWithLanguage } from "../hooks/useApiData";
-export default function Home() {
-  const { currentLanguage, isClient } = useLanguage();
-  const { data: homePageRes, loading } = useApiDataWithLanguage(homePageApi, {
-    currentLanguage,
-    isClient,
-  });
+import { safeBackgroundImage } from "../utils/ssrHelpers";
+import axios from "axios";
 
+export default function Home({ homePageRes }) {
   const heroImage = homePageRes?.hero?.backgroundimage?.url;
   const hero = homePageRes?.hero;
   const logos = Array.isArray(homePageRes?.TrustedBy)
     ? homePageRes.TrustedBy.map((l) => l?.attributes ?? l)
     : [];
 
-  // Loading state
-  if (loading) {
-    return <LoadingSpinner />;
-  }
-
   return (
     <Layout>
       <div
         style={{
-          backgroundImage: `url(${
-            heroImage.startsWith("http") ? "" : base
-          } ${heroImage})`,
+          backgroundImage: safeBackgroundImage(heroImage),
           WebkitBackgroundSize: "100%",
           backgroundPosition: "center bottom",
         }}
@@ -57,4 +43,43 @@ export default function Home() {
       )}
     </Layout>
   );
+}
+
+// Server-side rendering function
+export async function getServerSideProps(context) {
+  const { req } = context;
+
+  // Detect language from Accept-Language header or use default
+  const acceptLanguage = req.headers["accept-language"] || "en";
+  const detectedLang = acceptLanguage.startsWith("zh") ? "zh" : "en";
+
+  try {
+    const STRAPI = process.env.NEXT_PUBLIC_STRAPI_URL;
+    const token = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
+
+    const api = axios.create({
+      baseURL: STRAPI,
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
+    });
+
+    const { data } = await api.get(
+      `/api/home-page?populate=*&lang=${detectedLang}`
+    );
+    const homePageData = data?.data?.attributes ?? data?.data ?? null;
+
+    return {
+      props: {
+        homePageRes: homePageData,
+        serverLanguage: detectedLang,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching home page data:", error);
+    return {
+      props: {
+        homePageRes: null,
+        serverLanguage: detectedLang,
+      },
+    };
+  }
 }

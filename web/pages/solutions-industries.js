@@ -1,4 +1,5 @@
 import Layout from "./layout";
+import { safeBackgroundImage } from "../utils/ssrHelpers";
 import { base } from "../service/serviceConfig";
 import SolutionsIndustriesHero from "../components/solutionsIndustries/hero";
 import ContentBlock from "../components/solutionsIndustries/contentBlock";
@@ -27,9 +28,7 @@ export default function SolutionsIndustries() {
       <div className="max-w-6xl mx-auto">
         <div
           style={{
-            backgroundImage: `url(${
-              heroImage?.startsWith("http") ? "" : base
-            }${heroImage})`,
+            backgroundImage: safeBackgroundImage(heroImage),
             WebkitBackgroundSize: "100%",
             backgroundPosition: "center top",
           }}
