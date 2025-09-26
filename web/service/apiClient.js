@@ -44,4 +44,6 @@ const getSolutionsIndustriesApi = () => axiosApi.get(`/api/solutions-industries-
 {/* Get Affiliate Program Page */}
 const getAffiliateProgramApi = () => axiosApi.get(`/api/affiliate-program?populate=*`);
 
-export { solutionsApi,homePageApi, navigationApi, pagesApi, getDocsApi, getDevelopersApi, getPricingApi, getProductApi, getContactApi, getPrivacyPolicyApi, getRequestDemoApi, getTermsOfUseApi, getAffiliateProgramApi, getSolutionsIndustriesApi };
+const getSlaApi = () => axiosApi.get(`/api/sla-page?populate=*`);
+
+export { getSlaApi,  solutionsApi,homePageApi, navigationApi, pagesApi, getDocsApi, getDevelopersApi, getPricingApi, getProductApi, getContactApi, getPrivacyPolicyApi, getRequestDemoApi, getTermsOfUseApi, getAffiliateProgramApi, getSolutionsIndustriesApi };
