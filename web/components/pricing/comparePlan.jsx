@@ -13,7 +13,7 @@ export default function ComparePlan({ tiers, selectedPlan }) {
                 const parsed = tiers.map((t) => ({
                   name: t.name,
                   featuresByCategory: Object.entries(
-                     selectedPlan === "Cloud" ? t.compareFeatures || {} : t.selfHostedCompareFeatures || {}
+                     selectedPlan === 0 ? t.compareFeatures || {} : t.selfHostedCompareFeatures || {}
                   ).map(([category, feats]) => [
                     category,
                     Array.isArray(feats)

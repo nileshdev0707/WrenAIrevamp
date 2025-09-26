@@ -12,8 +12,8 @@ import { safeBackgroundImage } from "../utils/ssrHelpers";
 import { createServerSideProps } from "../utils/ssrHelpers";
 
 export default function Pricing({ pricing }) {
-  const [billing, setBilling] = useState("Annually");
-  const [selectedPlan, setSelectedPlan] = useState("Cloud");
+  const [billing, setBilling] = useState(0);
+  const [selectedPlan, setSelectedPlan] = useState(0);
   const heroImage = pricing?.hero?.[0]?.backgroundimage?.url;
 
   return (
@@ -46,7 +46,7 @@ export default function Pricing({ pricing }) {
         )}
 
         {/* Content Block */}
-        {selectedPlan === "Cloud" && pricing?.ContentBlock?.length && (
+        {selectedPlan === 0 && pricing?.ContentBlock?.length && (
           <ContentBlock contentBlock={pricing?.ContentBlock} />
         )}
 

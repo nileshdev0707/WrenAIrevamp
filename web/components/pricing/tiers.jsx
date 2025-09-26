@@ -16,7 +16,7 @@ export default function Tiers({ tiers, billing, selectedPlan }) {
 
         <div className="flex items-baseline mb-4">
           <span className="text-4xl font-semibold mt-1 text-blue-600">
-            {billing === "Annually"
+            {billing === 0
               ? item.annualPrice
               : item.price}
           </span>
@@ -25,12 +25,12 @@ export default function Tiers({ tiers, billing, selectedPlan }) {
           </span>
         </div>
         <div className="mt-6">
-          {selectedPlan === "Cloud" && (
+          {selectedPlan === 0 && (
             <span className="text-sm bg-gray-100 p-2 rounded-full text-black font-medium capitalize">
-              {billing === "Annually" ? item.annualFeatures : item.features}
+              {billing === 0 ? item.annualFeatures : item.features}
             </span>
           )}
-          {selectedPlan === "Self-hosted" && (
+          {selectedPlan === 1 && (
             <div className="flex flex-col gap-5 min-h-17">
               {item.selfHostedSeat && (
                 <div>
@@ -62,13 +62,13 @@ export default function Tiers({ tiers, billing, selectedPlan }) {
             {item.ctaLabel || "Choose plan"}
           </a>
         </div>
-        {selectedPlan === "Cloud" && (
+        {selectedPlan === 0 && (
           <div
             className="mt-4 text-sm leading-6"
             dangerouslySetInnerHTML={{ __html: item.featuresDetails }}
           />
         )}
-        {selectedPlan === "Self-hosted" && (
+        {selectedPlan === 1 && (
           <div
             className="mt-4 text-sm leading-6"
             dangerouslySetInnerHTML={{ __html: item.selfHostedFeaturesDetails }}
