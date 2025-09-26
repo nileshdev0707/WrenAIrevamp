@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import DocumentHero from "../components/document/hero";
 import ContentBlock from "../components/document/contentBlock";
 import { base, token } from "../service/serviceConfig";
@@ -7,26 +6,23 @@ import OpenSourceDetails from "../components/document/openSourceDetails";
 import Footer from "../components/footer";
 import PublicRoadmap from "../components/document/publicRoadmap";
 import { getDocsApi } from "../service/apiClient";
+import { useLanguage } from "../components/Navbar";
+import LoadingSpinner from "../components/LoadingSpinner";
+import { useApiDataWithLanguage } from "../hooks/useApiData";
 
 export default function Document() {
-  const [document, setDocument] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { currentLanguage, isClient } = useLanguage();
+  const { data: document, loading } = useApiDataWithLanguage(getDocsApi, {
+    currentLanguage,
+    isClient,
+  });
+
   const heroImage = document?.hero?.[0]?.backgroundimage?.url;
-  
-  useEffect(() => {
-    const fetchDocument = async () => {
-      try {   
-        const { data } = await getDocsApi();
-        const documentData = data?.data?.attributes ?? data?.data ?? null;
-        setDocument(documentData);
-      } catch (error) {
-        console.error('Error fetching document:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchDocument();
-  }, []);
+
+  // Loading state
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <Layout>

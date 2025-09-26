@@ -1,27 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Layout from "./layout";
 import { getTermsOfUseApi } from "../service/apiClient";
 import { base } from "../service/serviceConfig";
+import { useLanguage } from "../components/Navbar";
+import LoadingSpinner from "../components/LoadingSpinner";
+import { useApiDataWithLanguage } from "../hooks/useApiData";
 
 export default function TermsOfUse() {
-  const [termsOfUse, setTermsOfUse] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { currentLanguage, isClient } = useLanguage();
+  const { data: termsOfUse, loading } = useApiDataWithLanguage(
+    getTermsOfUseApi,
+    { currentLanguage, isClient }
+  );
+
   const heroImage = termsOfUse?.hero?.[0]?.backgroundimage?.url;
 
-  useEffect(() => {
-    const fetchTermsOfUse = async () => {
-      try {
-        const { data } = await getTermsOfUseApi();
-        const termsOfUseData = data?.data?.attributes ?? data?.data ?? null;
-        setTermsOfUse(termsOfUseData);
-      } catch (error) {
-        console.error("Error fetching terms of use:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchTermsOfUse();
-  }, []);
+  // Loading state
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <Layout>
@@ -41,17 +38,15 @@ export default function TermsOfUse() {
               {termsOfUse?.hero?.map((item, index) => (
                 <div key={index}>
                   <h1 className="text-3xl sm:text-4xl lg:text-6xl font-medium leading-tight xl:pt-25 lg:pt-20 md:pt-15 pt-10">
-                    {item?.title
-                      ?.split("EULA")
-                      .map((part, idx) =>
-                        idx === 0 ? (
-                          <span key={idx}>
-                            {part} <br />
-                          </span>
-                        ) : (
-                          <span key={idx}>EULA</span>
-                        )
-                      )}
+                    {item?.title?.split("EULA").map((part, idx) =>
+                      idx === 0 ? (
+                        <span key={idx}>
+                          {part} <br />
+                        </span>
+                      ) : (
+                        <span key={idx}>EULA</span>
+                      )
+                    )}
                   </h1>
                   <p className="pt-10 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base">
                     {item?.subtitle}

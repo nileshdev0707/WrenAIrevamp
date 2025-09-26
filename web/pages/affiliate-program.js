@@ -1,43 +1,39 @@
-import React, { useEffect, useState } from 'react'
-import Layout from './layout'
-import PartnerWrenAis from '../components/affiliateProgram/partnerWrenAis'
-import TrustedLogo from '../components/affiliateProgram/TrustedLogo'
-import ElitePartner from '../components/affiliateProgram/elitePartner'
-import { getAffiliateProgramApi } from '../service/apiClient'
+import React from "react";
+import Layout from "./layout";
+import PartnerWrenAis from "../components/affiliateProgram/partnerWrenAis";
+import TrustedLogo from "../components/affiliateProgram/TrustedLogo";
+import ElitePartner from "../components/affiliateProgram/elitePartner";
+import { getAffiliateProgramApi } from "../service/apiClient";
+import { useLanguage } from "../components/Navbar";
+import LoadingSpinner from "../components/LoadingSpinner";
+import { useApiDataWithLanguage } from "../hooks/useApiData";
 const affiliateProgram = () => {
-  const [loading, setLoading] = useState(true);
-  const [affiliateProgram, setAffiliateProgram] = useState(null);
+  const { currentLanguage, isClient } = useLanguage();
+  const { data: affiliateProgram, loading } = useApiDataWithLanguage(
+    getAffiliateProgramApi,
+    { currentLanguage, isClient }
+  );
 
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const { data } = await getAffiliateProgramApi();
-        const affiliateProgramData = data?.data ?? data ?? null;
-        setAffiliateProgram(affiliateProgramData);
-      } catch (error) {
-        console.error('Error fetching product:', error);
-      } finally { 
-        setLoading(false);
-      }
-    };
-    fetchProduct();
-  }, []);
+  // Loading state
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
-        <Layout>
-            <div> 
-              {affiliateProgram?.heroBlock?.length > 0 && (
-                 <PartnerWrenAis data={affiliateProgram}/>
-                 )}
-                 {affiliateProgram?.trustedBy?.length > 0 && (
-                 <div className='max-w-6xl mx-auto'>
-                 <TrustedLogo data={affiliateProgram}/>
-                 </div>
-                 )}
-                 <ElitePartner data={affiliateProgram}/>
-            </div>
-        </Layout>
-  )
-}
+    <Layout>
+      <div>
+        {affiliateProgram?.heroBlock?.length > 0 && (
+          <PartnerWrenAis data={affiliateProgram} />
+        )}
+        {affiliateProgram?.trustedBy?.length > 0 && (
+          <div className="max-w-6xl mx-auto">
+            <TrustedLogo data={affiliateProgram} />
+          </div>
+        )}
+        <ElitePartner data={affiliateProgram} />
+      </div>
+    </Layout>
+  );
+};
 
-export default affiliateProgram
+export default affiliateProgram;

@@ -1,37 +1,80 @@
 // Language utility functions
 
-export const LANGUAGE_STORAGE_KEY = 'selectedLanguage';
-export const LANGUAGE_DATA_KEY = 'languageData';
+export const LANGUAGE_STORAGE_KEY = "selectedLanguage";
+export const LANGUAGE_DATA_KEY = "languageData";
 
-// Get language from localStorage
-export const getStoredLanguage = () => {
-  if (typeof window !== 'undefined') {
-    return localStorage.getItem(LANGUAGE_STORAGE_KEY) || 'en';
+// Language configuration
+export const LANGUAGES = {
+  en: {
+    code: "en",
+    name: "English",
+    flag: "🇺🇸",
+    direction: "ltr",
+  },
+  zh: {
+    code: "zh",
+    name: "中文",
+    flag: "🇨🇳",
+    direction: "ltr",
+  },
+};
+
+// Detect browser language
+export const detectBrowserLanguage = () => {
+  if (typeof window !== "undefined") {
+    // Get browser language preference
+    const browserLang = navigator.language || navigator.languages?.[0] || "en";
+
+    // Extract language code (e.g., 'en-US' -> 'en', 'zh-CN' -> 'zh')
+    const langCode = browserLang.split("-")[0].toLowerCase();
+
+    // Check if we support this language, otherwise default to English
+    return LANGUAGES[langCode] ? langCode : "en";
   }
-  return 'en';
+  return "en";
+};
+
+// Get language from localStorage with browser detection fallback
+export const getStoredLanguage = () => {
+  if (typeof window !== "undefined") {
+    const stored = localStorage.getItem(LANGUAGE_STORAGE_KEY);
+
+    // If no stored language, detect from browser
+    if (!stored) {
+      const detected = detectBrowserLanguage();
+      // Save the detected language for future use
+      saveLanguage(detected);
+      return detected;
+    }
+
+    return stored;
+  }
+  return "en";
 };
 
 // Save language to localStorage
 export const saveLanguage = (langCode) => {
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     localStorage.setItem(LANGUAGE_STORAGE_KEY, langCode);
     document.documentElement.lang = langCode;
-    
+
     // Trigger custom event for language change
-    window.dispatchEvent(new CustomEvent('languageChanged', { 
-      detail: { language: langCode } 
-    }));
+    window.dispatchEvent(
+      new CustomEvent("languageChanged", {
+        detail: { language: langCode },
+      })
+    );
   }
 };
 
 // Get cached language data from localStorage
 export const getCachedLanguageData = (langCode) => {
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     try {
       const cached = localStorage.getItem(`${LANGUAGE_DATA_KEY}_${langCode}`);
       return cached ? JSON.parse(cached) : null;
     } catch (error) {
-      console.error('Error parsing cached language data:', error);
+      console.error("Error parsing cached language data:", error);
       return null;
     }
   }
@@ -40,19 +83,22 @@ export const getCachedLanguageData = (langCode) => {
 
 // Save language data to localStorage cache
 export const cacheLanguageData = (langCode, data) => {
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     try {
-      localStorage.setItem(`${LANGUAGE_DATA_KEY}_${langCode}`, JSON.stringify(data));
+      localStorage.setItem(
+        `${LANGUAGE_DATA_KEY}_${langCode}`,
+        JSON.stringify(data)
+      );
     } catch (error) {
-      console.error('Error caching language data:', error);
+      console.error("Error caching language data:", error);
     }
   }
 };
 
 // Clear all language cache
 export const clearLanguageCache = () => {
-  if (typeof window !== 'undefined') {
-    Object.keys(localStorage).forEach(key => {
+  if (typeof window !== "undefined") {
+    Object.keys(localStorage).forEach((key) => {
       if (key.startsWith(LANGUAGE_DATA_KEY)) {
         localStorage.removeItem(key);
       }
@@ -66,24 +112,8 @@ export const fetchLanguageData = async (langCode, apiFunction) => {
     const response = await apiFunction(langCode);
     return response.data;
   } catch (error) {
-    console.error('Error fetching language data:', error);
+    console.error("Error fetching language data:", error);
     throw error;
-  }
-};
-
-// Language configuration
-export const LANGUAGES = {
-  en: {
-    code: 'en',
-    name: 'English',
-    flag: '🇺🇸',
-    direction: 'ltr'
-  },
-  zh: {
-    code: 'zh',
-    name: '中文',
-    flag: '🇨🇳',
-    direction: 'ltr'
   }
 };
 
@@ -99,17 +129,17 @@ export const getLanguageByCode = (code) => {
 
 // Check if language is RTL
 export const isRTL = (langCode) => {
-  return getLanguageByCode(langCode).direction === 'rtl';
+  return getLanguageByCode(langCode).direction === "rtl";
 };
 
 // Format date based on language
 export const formatDate = (date, langCode) => {
   const options = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   };
-  
+
   return new Intl.DateTimeFormat(langCode, options).format(new Date(date));
 };
 
@@ -117,4 +147,3 @@ export const formatDate = (date, langCode) => {
 export const formatNumber = (number, langCode) => {
   return new Intl.NumberFormat(langCode).format(number);
 };
-

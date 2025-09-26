@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAvailableLanguages, getLanguageByCode } from "../utils/languageUtils";
+import { getAvailableLanguages, getLanguageByCode, detectBrowserLanguage } from "../utils/languageUtils";
 import { useLanguage } from "./Navbar";
 
 // Language Dropdown Component
@@ -8,22 +8,44 @@ const LanguageDropdown = () => {
   const [loading, setLoading] = useState(false);
   
   // Use context for global language state
-  const { currentLanguage: selectedLang, changeLanguage } = useLanguage();
+  const { currentLanguage: selectedLang, changeLanguage, isClient } = useLanguage();
   const languages = getAvailableLanguages();
   const currentLanguage = getLanguageByCode(selectedLang);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isOpen && !event.target.closest('.language-dropdown')) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isOpen]);
 
   const onhandleClick = () => {
     setIsOpen(!isOpen);
   };
   
   // Handle language change using context
-  const handleLanguageChange = (langCode) => {
-    changeLanguage(langCode);
-    setIsOpen(false);
+  const handleLanguageChange = async (langCode) => {
+    setLoading(true);
+    try {
+      changeLanguage(langCode);
+      setIsOpen(false);
+      
+      // Optional: Add a small delay to show loading state
+      await new Promise(resolve => setTimeout(resolve, 300));
+    } catch (error) {
+      console.error('Error changing language:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="relative">
+    <div className="relative language-dropdown">
       <button
         onClick={onhandleClick}
         disabled={loading}
@@ -34,7 +56,9 @@ const LanguageDropdown = () => {
         ) : (
           <span className="text-lg">{currentLanguage?.flag}</span>
         )}
-        <span className="sm:text-base text-sm sm:block hidden">{currentLanguage?.name}</span>
+        <span className="sm:text-base text-sm sm:block hidden">
+          {loading ? 'Switching...' : currentLanguage?.name}
+        </span>
         <svg 
           className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
           fill="none" 

@@ -1,28 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Layout from "./layout";
 import { getRequestDemoApi } from "../service/apiClient";
 import { base } from "../service/serviceConfig";
 import { HubspotEmbedForm } from "../components/hubspotEmbedForm";
+import { useLanguage } from "../components/Navbar";
+import LoadingSpinner from "../components/LoadingSpinner";
+import { useApiDataWithLanguage } from "../hooks/useApiData";
 
 export default function RequestDemo() {
-  const [requestDemo, setRequestDemo] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { currentLanguage, isClient } = useLanguage();
+  const { data: requestDemo, loading } = useApiDataWithLanguage(
+    getRequestDemoApi,
+    { currentLanguage, isClient }
+  );
+
   const heroImage = requestDemo?.hero?.[0]?.backgroundImage?.url;
 
-  useEffect(() => {
-    const fetchRequestDemo = async () => {
-      try {
-        const { data } = await getRequestDemoApi();
-        const requestDemoData = data?.data?.attributes ?? data?.data ?? null;
-        setRequestDemo(requestDemoData);
-      } catch (error) {
-        console.error("Error fetching request demo:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchRequestDemo();
-  }, []);
+  // Loading state
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <Layout>

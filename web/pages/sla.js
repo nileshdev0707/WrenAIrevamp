@@ -1,27 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Layout from "./layout";
 import { getSlaApi } from "../service/apiClient";
 import { base } from "../service/serviceConfig";
+import { useLanguage } from "../components/Navbar";
+import LoadingSpinner from "../components/LoadingSpinner";
+import { useApiDataWithLanguage } from "../hooks/useApiData";
 
 export default function Sla() {
-  const [sla, setSla] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { currentLanguage, isClient } = useLanguage();
+  const { data: sla, loading } = useApiDataWithLanguage(getSlaApi, {
+    currentLanguage,
+    isClient,
+  });
+
   const heroImage = sla?.hero?.[0]?.backgroundimage?.url;
 
-  useEffect(() => {
-    const fetchSla = async () => {
-      try {
-        const { data } = await getSlaApi();
-        const slaData = data?.data?.attributes ?? data?.data ?? null;
-        setSla(slaData);
-      } catch (error) {
-        console.error("Error fetching terms of use:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchSla();
-  }, []);
+  // Loading state
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <Layout>
@@ -41,17 +38,15 @@ export default function Sla() {
               {sla?.hero?.map((item, index) => (
                 <div key={index}>
                   <h1 className="text-3xl sm:text-4xl lg:text-6xl font-medium leading-tight xl:pt-25 lg:pt-20 md:pt-15 pt-10">
-                    {item?.title
-                      ?.split("SLA")
-                      .map((part, idx) =>
-                        idx === 0 ? (
-                          <span key={idx}>
-                            {part} <br />
-                          </span>
-                        ) : (
-                          <span key={idx}>SLA</span>
-                        )
-                      )}
+                    {item?.title?.split("SLA").map((part, idx) =>
+                      idx === 0 ? (
+                        <span key={idx}>
+                          {part} <br />
+                        </span>
+                      ) : (
+                        <span key={idx}>SLA</span>
+                      )
+                    )}
                   </h1>
                   <p className="pt-10 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base">
                     {item?.subtitle}

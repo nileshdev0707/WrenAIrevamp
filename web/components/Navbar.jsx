@@ -2,7 +2,7 @@ import { useState, useEffect, createContext, useContext } from 'react'
 import { base} from "../service/serviceConfig";
 import navigation from "../json/navigation.json";
 import LanguageDropdown from "./LanguageDropdown";
-import { getStoredLanguage, saveLanguage } from "../utils/languageUtils";
+import { getStoredLanguage, saveLanguage, detectBrowserLanguage } from "../utils/languageUtils";
 import { translate } from "../service/lang";
 
 // Language Context for global language state
@@ -21,13 +21,22 @@ export const LanguageProvider = ({ children }) => {
   const [currentLanguage, setCurrentLanguage] = useState('en'); // Always start with 'en' for SSR
   const [isClient, setIsClient] = useState(false);
 
-  // Handle client-side hydration
+  // Handle client-side hydration with browser language detection
   useEffect(() => {
     setIsClient(true);
-    const storedLanguage = getStoredLanguage();
-    if (storedLanguage !== 'en') {
-      setCurrentLanguage(storedLanguage);
+    
+    // Get stored language or detect from browser
+    const detectedLanguage = getStoredLanguage();
+    
+    // Only update if different from default
+    if (detectedLanguage !== 'en') {
+      setCurrentLanguage(detectedLanguage);
     }
+    
+    // Set document language attribute
+    document.documentElement.lang = detectedLanguage;
+    
+    console.log(`Language initialized: ${detectedLanguage}`);
   }, []);
 
   const changeLanguage = (langCode) => {

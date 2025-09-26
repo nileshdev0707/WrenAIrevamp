@@ -1,29 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Layout from "./layout";
 import { getContactApi } from "../service/apiClient";
 import ContactHero from "../components/contact/hero";
 import { base } from "../service/serviceConfig";
 import { HubspotEmbedForm } from "../components/hubspotEmbedForm";
+import { useLanguage } from "../components/Navbar";
+import LoadingSpinner from "../components/LoadingSpinner";
+import { useApiDataWithLanguage } from "../hooks/useApiData";
 
 export default function Contact() {
-  const [contact, setContact] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { currentLanguage, isClient } = useLanguage();
+  const { data: contact, loading } = useApiDataWithLanguage(getContactApi, {
+    currentLanguage,
+    isClient,
+  });
+
   const heroImage = contact?.hero?.[0]?.backgroundimage?.url;
 
-  useEffect(() => {
-    const fetchContact = async () => {
-      try {
-        const { data } = await getContactApi();
-        const contactData = data?.data?.attributes ?? data?.data ?? null;
-        setContact(contactData);
-      } catch (error) {
-        console.error("Error fetching contact:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchContact();
-  }, []);
+  // Loading state
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <Layout>

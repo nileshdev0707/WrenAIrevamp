@@ -1,30 +1,26 @@
-import { useState, useEffect } from "react";
 import Layout from "./layout";
 import { base } from "../service/serviceConfig";
 import SolutionsIndustriesHero from "../components/solutionsIndustries/hero";
 import ContentBlock from "../components/solutionsIndustries/contentBlock";
 import Footer from "../components/footer";
 import { getSolutionsIndustriesApi } from "../service/apiClient";
+import { useLanguage } from "../components/Navbar";
+import LoadingSpinner from "../components/LoadingSpinner";
+import { useApiDataWithLanguage } from "../hooks/useApiData";
 
 export default function SolutionsIndustries() {
-  const [solutionsIndustries, setSolutionsIndustries] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const heroImage = solutionsIndustries?.hero?.[0]?.backgroundImage?.url
+  const { currentLanguage, isClient } = useLanguage();
+  const { data: solutionsIndustries, loading } = useApiDataWithLanguage(
+    getSolutionsIndustriesApi,
+    { currentLanguage, isClient }
+  );
 
-  useEffect(() => {
-    const fetchPricing = async () => {
-      try {
-        const { data } = await getSolutionsIndustriesApi();
-        const solutionsIndustriesData = data?.data?.attributes ?? data?.data ?? null;
-        setSolutionsIndustries(solutionsIndustriesData);
-      } catch (error) {
-        console.error('Error fetching solutions industries:', error);
-      } finally { 
-        setLoading(false);
-      }
-    };
-    fetchPricing();
-  }, []);
+  const heroImage = solutionsIndustries?.hero?.[0]?.backgroundImage?.url;
+
+  // Loading state
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <Layout>
@@ -41,16 +37,20 @@ export default function SolutionsIndustries() {
         >
           {/* Solutions Industries Hero */}
           {solutionsIndustries?.hero?.length > 0 && (
-            <SolutionsIndustriesHero solutionsIndustries={solutionsIndustries?.hero} />
+            <SolutionsIndustriesHero
+              solutionsIndustries={solutionsIndustries?.hero}
+            />
           )}
         </div>
         {/* Solutions Industries Content Block */}
-        {solutionsIndustries?.solutionIndustriesTab?.length > 0 && (  
-          <ContentBlock solutionsIndustries={solutionsIndustries?.solutionIndustriesTab} />
+        {solutionsIndustries?.solutionIndustriesTab?.length > 0 && (
+          <ContentBlock
+            solutionsIndustries={solutionsIndustries?.solutionIndustriesTab}
+          />
         )}
         {/* Solutions Industries Footer */}
         {solutionsIndustries?.bottomContentBlock?.length > 0 && (
-          <Footer data={solutionsIndustries?.bottomContentBlock}/>
+          <Footer data={solutionsIndustries?.bottomContentBlock} />
         )}
       </div>
     </Layout>
