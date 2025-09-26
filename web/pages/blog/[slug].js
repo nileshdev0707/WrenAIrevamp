@@ -190,11 +190,21 @@ export async function getStaticPaths() {
     const res = await api.get(
       "/api/blogs?fields=slug&pagination[pageSize]=100"
     );
-    const paths = Array.isArray(res?.data?.data)
-      ? res.data.data.map((post) => ({
-          params: { slug: post.attributes?.slug || post.slug },
-        }))
-      : [];
+
+    // Generate paths for all locales
+    const locales = ["en", "zh"];
+    const paths = [];
+
+    if (Array.isArray(res?.data?.data)) {
+      res.data.data.forEach((post) => {
+        const slug = post.attributes?.slug || post.slug;
+        if (slug) {
+          locales.forEach((locale) => {
+            paths.push({ params: { slug }, locale });
+          });
+        }
+      });
+    }
 
     return {
       paths,
@@ -209,7 +219,7 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params, locale }) {
   const STRAPI = process.env.NEXT_PUBLIC_STRAPI_URL;
   const token = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
 
@@ -219,23 +229,28 @@ export async function getStaticProps({ params }) {
   });
 
   try {
+    const selectedLang = locale || "en";
     const [postRes, navRes, blogPageRes] = await Promise.all([
       // Fetch the blog post
-      api.get(`/api/blogs?filters[slug][$eq]=${params.slug}&populate=*`),
+      api.get(
+        `/api/blogs?filters[slug][$eq]=${params.slug}&populate=*&lang=${selectedLang}`
+      ),
 
       // Fetch navigation
       Promise.all([
         api
-          .get(`/api/navigation?populate=*`)
+          .get(`/api/navigation?populate=*&lang=${selectedLang}`)
           .then((r) => r.data)
           .catch(() => null),
         api
-          .get(`/api/pages?fields=slug,navLabel,title,showInNav,navOrder`)
+          .get(
+            `/api/pages?fields=slug,navLabel,title,showInNav,navOrder&lang=${selectedLang}`
+          )
           .then((r) => r.data)
           .catch(() => null),
       ]).then(([nav, pages]) => ({ nav, pages })),
       api
-        .get(`/api/blog-page?populate=*`)
+        .get(`/api/blog-page?populate=*&lang=${selectedLang}`)
         .then((r) => r.data)
         .catch(() => null),
     ]);

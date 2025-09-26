@@ -1,46 +1,49 @@
+import Link from 'next/link';
 import { base } from "../service/serviceConfig";
 import navigation from "../json/navigation.json";
-import { translate } from "../service/lang";
+import { useTranslation } from "../hooks/useTranslation";
 
 export default function SiteFooter() {
+  const { t } = useTranslation();
+  
   const cols = [
     {
-      title: translate("company"),
+      title: t("company"),
       links: [
         // { label: "Careers", slug: "careers" },
         // { label: "Press", slug: "press" },
-        { label: `${translate("security")}`, slug: "https://cannerdata.com/terms/security" },
-        { label: `${translate("caseStudies")}`, slug: "solutions-industries" },
+        { label: t("security"), slug: "https://cannerdata.com/terms/security" },
+        { label: t("caseStudies"), slug: "solutions-industries" },
       ],
     },
     {
-      title: translate("contact"),
+      title: t("contact"),
       links: [
-        { label: `${translate("contact")}`, slug: "contact" },
-        { label: `${translate("discord")}`, slug: "https://discord.gg/5DvshJqG8Z" },
+        { label: t("contact"), slug: "contact" },
+        { label: t("discord"), slug: "https://discord.gg/5DvshJqG8Z" },
         // { label: "Merch", slug: "merch" },
       ],
     },
     {
-      title: `${translate("partners")}`,
+      title: t("partners"),
       links: [
-        { label: `${translate("affiliateProgram")}`, slug: "affiliate-program" },
-        { label: `${translate("elitePartners")}`, slug: "#" },
+        { label: t("affiliateProgram"), slug: "affiliate-program" },
+        { label: t("elitePartners"), slug: "#" },
       ],
     },
     {
-      title: `${translate("resources")}`, 
+      title: t("resources"), 
       links: [
-        { label: `${translate("publicRoadmap")}`, slug: "https://wrenai.notion.site/" },
-        { label: `${translate("sla")}`, slug: "sla" },
-        { label: `${translate("status")}`, slug: "https://wrenaicloud.statuspage.io/" }
+        { label: t("publicRoadmap"), slug: "https://wrenai.notion.site/" },
+        { label: t("sla"), slug: "sla" },
+        { label: t("status"), slug: "https://wrenaicloud.statuspage.io/" }
       ],
     },
     {
-      title: `${translate("legal")}`,
+      title: t("legal"),
       links: [
-        { label: `${translate("privacyPolicy")}`, slug: "privacy-policy" },
-        { label: `${translate("termsOfUse")}`, slug: "terms-of-use" },
+        { label: t("privacyPolicy"), slug: "privacy-policy" },
+        { label: t("termsOfUse"), slug: "terms-of-use" },
       ],
     },
   ];
@@ -60,18 +63,31 @@ export default function SiteFooter() {
             <div key={i}>
               <div className="font-semibold mb-3">{col.title}</div>
               <ul className="space-y-2 text-sm text-gray-600">
-                {col.links.map((l, j) => (
-                  <li key={j}>
-                    <a
-                      href={l.slug?.startsWith("#") ? l.slug : link(l.slug)}
-                      className="hover:text-gray-900"
-                      target={l.slug.startsWith("http") ? "_blank" : "_self"}
-                      rel={l.slug.startsWith("http") ? "noopener noreferrer" : undefined}
-                    >
-                      {l.label}
-                    </a>
-                  </li>
-                ))}
+                {col.links.map((l, j) => {
+                  const isExternal = l.slug?.startsWith("http") || l.slug?.startsWith("https") || l.slug?.startsWith("#");
+                  
+                  return (
+                    <li key={j}>
+                      {isExternal ? (
+                        <a
+                          href={l.slug?.startsWith("#") ? l.slug : link(l.slug)}
+                          className="hover:text-gray-900"
+                          target={l.slug.startsWith("http") ? "_blank" : "_self"}
+                          rel={l.slug.startsWith("http") ? "noopener noreferrer" : undefined}
+                        >
+                          {l.label}
+                        </a>
+                      ) : (
+                        <Link
+                          href={link(l.slug)}
+                          className="hover:text-gray-900"
+                        >
+                          {l.label}
+                        </Link>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}

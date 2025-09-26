@@ -4,18 +4,11 @@ import WrenEngine from "../components/developers/wrenEngine";
 import WhyWrenAI from "../components/developers/whyWrenAI";
 import { base } from "../service/serviceConfig";
 import Layout from "./layout";
-import { safeBackgroundImage } from "../utils/ssrHelpers";
-import { getDevelopersApi } from "../service/apiClient";
-import { useLanguage } from "../components/Navbar";
-import LoadingSpinner from "../components/LoadingSpinner";
-import { useApiDataWithLanguage } from "../hooks/useApiData";
-export default function Developers() {
-  const { currentLanguage, isClient } = useLanguage();
-  const { data: developers, loading } = useApiDataWithLanguage(
-    getDevelopersApi,
-    { currentLanguage, isClient }
-  );
-
+import {
+  safeBackgroundImage,
+  createServerSideProps,
+} from "../utils/ssrHelpers";
+export default function Developers({ developers }) {
   const heroImage = developers?.hero?.[0]?.backgroundimage?.url;
 
   // Loading state
@@ -53,3 +46,9 @@ export default function Developers() {
     </Layout>
   );
 }
+
+// Server-side rendering function
+export const getServerSideProps = createServerSideProps(
+  "/api/developers-page",
+  "developers"
+);

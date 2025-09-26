@@ -61,11 +61,10 @@ export const createPageStyle = ({
  * @returns {Object} Props object for the page
  */
 export async function fetchPageData(context, endpoint) {
-  const { req } = context;
+  const { locale, defaultLocale } = context;
 
-  // Detect language from Accept-Language header or use default
-  const acceptLanguage = req.headers["accept-language"] || "en";
-  const detectedLang = acceptLanguage.startsWith("zh") ? "zh" : "en";
+  // Use Next.js i18n locale
+  const selectedLang = locale || defaultLocale || "en";
 
   try {
     const STRAPI = process.env.NEXT_PUBLIC_STRAPI_URL;
@@ -77,14 +76,14 @@ export async function fetchPageData(context, endpoint) {
     });
 
     const { data } = await api.get(
-      `${endpoint}?populate=*&lang=${detectedLang}`
+      `${endpoint}?populate=*&lang=${selectedLang}`
     );
     const pageData = data?.data?.attributes ?? data?.data ?? null;
 
     return {
       props: {
         data: pageData,
-        serverLanguage: detectedLang,
+        serverLanguage: selectedLang,
       },
     };
   } catch (error) {
@@ -92,7 +91,7 @@ export async function fetchPageData(context, endpoint) {
     return {
       props: {
         data: null,
-        serverLanguage: detectedLang,
+        serverLanguage: selectedLang,
       },
     };
   }

@@ -47,11 +47,10 @@ export default function Home({ homePageRes }) {
 
 // Server-side rendering function
 export async function getServerSideProps(context) {
-  const { req } = context;
+  const { locale, defaultLocale } = context;
 
-  // Detect language from Accept-Language header or use default
-  const acceptLanguage = req.headers["accept-language"] || "en";
-  const detectedLang = acceptLanguage.startsWith("zh") ? "zh" : "en";
+  // Use Next.js i18n locale
+  const selectedLang = locale || defaultLocale || "en";
 
   try {
     const STRAPI = process.env.NEXT_PUBLIC_STRAPI_URL;
@@ -63,14 +62,14 @@ export async function getServerSideProps(context) {
     });
 
     const { data } = await api.get(
-      `/api/home-page?populate=*&lang=${detectedLang}`
+      `/api/home-page?populate=*&lang=${selectedLang}`
     );
     const homePageData = data?.data?.attributes ?? data?.data ?? null;
 
     return {
       props: {
         homePageRes: homePageData,
-        serverLanguage: detectedLang,
+        serverLanguage: selectedLang,
       },
     };
   } catch (error) {
@@ -78,7 +77,7 @@ export async function getServerSideProps(context) {
     return {
       props: {
         homePageRes: null,
-        serverLanguage: detectedLang,
+        serverLanguage: selectedLang,
       },
     };
   }

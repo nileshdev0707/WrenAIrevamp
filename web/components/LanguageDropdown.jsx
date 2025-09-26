@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { getAvailableLanguages, getLanguageByCode, detectBrowserLanguage } from "../utils/languageUtils";
-import { useLanguage } from "./Navbar";
+import { useRouter } from 'next/router';
+import { getAvailableLanguages, getLanguageByCode } from "../utils/languageUtils";
 
 // Language Dropdown Component
 const LanguageDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
   
-  // Use context for global language state
-  const { currentLanguage: selectedLang, changeLanguage, isClient } = useLanguage();
+  // Use Next.js router locale instead of context
+  const { locale, locales, asPath, pathname, query } = router;
   const languages = getAvailableLanguages();
-  const currentLanguage = getLanguageByCode(selectedLang);
+  const currentLanguage = getLanguageByCode(locale || 'en');
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -28,11 +29,12 @@ const LanguageDropdown = () => {
     setIsOpen(!isOpen);
   };
   
-  // Handle language change using context
+  // Handle language change using Next.js router
   const handleLanguageChange = async (langCode) => {
     setLoading(true);
     try {
-      changeLanguage(langCode);
+      // Use Next.js router.push with locale option to maintain all route information
+      await router.push({ pathname, query }, asPath, { locale: langCode });
       setIsOpen(false);
       
       // Optional: Add a small delay to show loading state
@@ -76,7 +78,7 @@ const LanguageDropdown = () => {
               key={lang.code}
               onClick={() => handleLanguageChange(lang.code)}
               className={`w-full flex items-center gap-3 px-4 py-2 text-sm hover:bg-gray-50 transition-colors duration-200 ${
-                selectedLang === lang.code ? 'bg-blue-50 text-blue-600' : 'text-gray-700'
+                locale === lang.code ? 'bg-blue-50 text-blue-600' : 'text-gray-700'
               }`}
             >
               <span className="text-lg">{lang.flag}</span>

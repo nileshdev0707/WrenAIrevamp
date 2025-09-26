@@ -81,3 +81,18 @@ export function useApiDataWithLanguage(
     options
   );
 }
+
+/**
+ * Hook specifically for pages using Next.js i18n with router locale
+ * @param {Function} apiFunction - The API function to call (should accept language parameter)
+ * @param {string} locale - The locale from Next.js router
+ * @param {Object} options - Additional options
+ * @returns {Object} { data, loading, error, refetch }
+ */
+export function useApiDataWithLocale(apiFunction, locale, options = {}) {
+  return useApiData(
+    locale ? () => apiFunction(locale) : null,
+    [locale],
+    options
+  );
+}

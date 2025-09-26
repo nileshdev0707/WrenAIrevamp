@@ -4,20 +4,9 @@ import PartnerWrenAis from "../components/affiliateProgram/partnerWrenAis";
 import TrustedLogo from "../components/affiliateProgram/TrustedLogo";
 import ElitePartner from "../components/affiliateProgram/elitePartner";
 import { getAffiliateProgramApi } from "../service/apiClient";
-import { useLanguage } from "../components/Navbar";
-import LoadingSpinner from "../components/LoadingSpinner";
-import { useApiDataWithLanguage } from "../hooks/useApiData";
-const affiliateProgram = () => {
-  const { currentLanguage, isClient } = useLanguage();
-  const { data: affiliateProgram, loading } = useApiDataWithLanguage(
-    getAffiliateProgramApi,
-    { currentLanguage, isClient }
-  );
+import { createServerSideProps } from "../utils/ssrHelpers";
 
-  // Loading state
-  if (loading) {
-    return <LoadingSpinner />;
-  }
+const affiliateProgram = () => {
 
   return (
     <Layout>
@@ -37,3 +26,9 @@ const affiliateProgram = () => {
 };
 
 export default affiliateProgram;
+
+// Server-side rendering function
+export const getServerSideProps = createServerSideProps(
+  "/api/affiliate-program",
+  "affiliateProgram"
+);

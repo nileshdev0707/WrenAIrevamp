@@ -1,26 +1,14 @@
 import React from "react";
 import Layout from "./layout";
-import { safeBackgroundImage } from "../utils/ssrHelpers";
-import { getRequestDemoApi } from "../service/apiClient";
+import {
+  safeBackgroundImage,
+  createServerSideProps,
+} from "../utils/ssrHelpers";
 import { base } from "../service/serviceConfig";
 import { HubspotEmbedForm } from "../components/hubspotEmbedForm";
-import { useLanguage } from "../components/Navbar";
-import LoadingSpinner from "../components/LoadingSpinner";
-import { useApiDataWithLanguage } from "../hooks/useApiData";
 
-export default function RequestDemo() {
-  const { currentLanguage, isClient } = useLanguage();
-  const { data: requestDemo, loading } = useApiDataWithLanguage(
-    getRequestDemoApi,
-    { currentLanguage, isClient }
-  );
-
+export default function RequestDemo({ requestDemo }) {
   const heroImage = requestDemo?.hero?.[0]?.backgroundImage?.url;
-
-  // Loading state
-  if (loading) {
-    return <LoadingSpinner />;
-  }
 
   return (
     <Layout>
@@ -54,3 +42,9 @@ export default function RequestDemo() {
     </Layout>
   );
 }
+
+// Server-side rendering function
+export const getServerSideProps = createServerSideProps(
+  "/api/request-page",
+  "requestDemo"
+);

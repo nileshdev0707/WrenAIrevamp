@@ -1,27 +1,14 @@
 import Layout from "./layout";
-import { safeBackgroundImage } from "../utils/ssrHelpers";
+import {
+  safeBackgroundImage,
+  createServerSideProps,
+} from "../utils/ssrHelpers";
 import { base } from "../service/serviceConfig";
 import SolutionsIndustriesHero from "../components/solutionsIndustries/hero";
 import ContentBlock from "../components/solutionsIndustries/contentBlock";
 import Footer from "../components/footer";
-import { getSolutionsIndustriesApi } from "../service/apiClient";
-import { useLanguage } from "../components/Navbar";
-import LoadingSpinner from "../components/LoadingSpinner";
-import { useApiDataWithLanguage } from "../hooks/useApiData";
-
-export default function SolutionsIndustries() {
-  const { currentLanguage, isClient } = useLanguage();
-  const { data: solutionsIndustries, loading } = useApiDataWithLanguage(
-    getSolutionsIndustriesApi,
-    { currentLanguage, isClient }
-  );
-
+export default function SolutionsIndustries({ solutionsIndustries }) {
   const heroImage = solutionsIndustries?.hero?.[0]?.backgroundImage?.url;
-
-  // Loading state
-  if (loading) {
-    return <LoadingSpinner />;
-  }
 
   return (
     <Layout>
@@ -55,3 +42,9 @@ export default function SolutionsIndustries() {
     </Layout>
   );
 }
+
+// Server-side rendering function
+export const getServerSideProps = createServerSideProps(
+  "/api/solutions-industries-page",
+  "solutionsIndustries"
+);

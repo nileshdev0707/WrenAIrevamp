@@ -1,24 +1,34 @@
 import { useState, useEffect, createContext, useContext } from 'react'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 import { base} from "../service/serviceConfig";
 import navigation from "../json/navigation.json";
 import LanguageDropdown from "./LanguageDropdown";
 import { getStoredLanguage, saveLanguage, detectBrowserLanguage } from "../utils/languageUtils";
-import { translate, safeTranslate } from "../service/lang";
+import { useTranslation } from "../hooks/useTranslation";
 
 // Language Context for global language state
 const LanguageContext = createContext();
 
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
+  const router = useRouter();
+  
   if (!context) {
     // Return default values for SSR or when provider is not available
+    // Use Next.js locale if available
     return {
-      currentLanguage: 'en',
+      currentLanguage: router?.locale || 'en',
       changeLanguage: () => {},
       isClient: false
     };
   }
-  return context;
+  
+  // Prefer Next.js locale over context
+  return {
+    ...context,
+    currentLanguage: router?.locale || context.currentLanguage
+  };
 };
 
 // Language Provider Component
@@ -62,21 +72,17 @@ export const LanguageProvider = ({ children, serverLanguage = 'en' }) => {
 
 
 export default function Navbar({ serverLanguage }) {
-  // Use language context to avoid hydration mismatches
-  const { currentLanguage, isClient } = useLanguage();
+  // Use Next.js i18n translation hook
+  const { t, locale, isClient } = useTranslation();
   const [hydrated, setHydrated] = useState(false);
   
-  // Use server language as fallback if context is not available
-  const effectiveLanguage = currentLanguage || serverLanguage || 'en';
+  // Use router locale as the effective language
+  const effectiveLanguage = locale || serverLanguage || 'en';
 
   // Only enable translations after hydration is complete
   useEffect(() => {
-    // Add a small delay to ensure hydration is fully complete
-    const timer = setTimeout(() => {
-      setHydrated(true);
-    }, 100);
-    
-    return () => clearTimeout(timer);
+    // Immediate hydration for better UX
+    setHydrated(true);
   }, []);
 
   const dynamicPages = Array.isArray(navigation?.pages) ? navigation.pages : []
@@ -104,10 +110,10 @@ export default function Navbar({ serverLanguage }) {
   }
 
   const fallback = [
-    { label: safeTranslate("product", hydrated && isClient, effectiveLanguage), url: '/product' },
-    { label: safeTranslate("developers", hydrated && isClient, effectiveLanguage), url: '/developers' },
-    { label: safeTranslate("solutions", hydrated && isClient, effectiveLanguage), url: '/solutions' },
-    { label: safeTranslate("docs", hydrated && isClient, effectiveLanguage), url: '/docs' },
+    { label: isClient ? t("product") : "Product", url: '/product' },
+    { label: isClient ? t("developers") : "Developers", url: '/developers' },
+    { label: isClient ? t("solutions") : "Solutions", url: '/solutions' },
+    { label: isClient ? t("docs") : "Docs", url: '/docs' },
   ]
 
   const baseLinks = Array.isArray(navigation?.links) && navigation.links.length > 0 ? navigation.links : fallback
@@ -120,8 +126,8 @@ export default function Navbar({ serverLanguage }) {
     const slug = pageSlugByLabel[normalizedLabel] || defaultMapping[normalizedLabel]
     const finalUrl = (!url || url === '#') && slug ? `/${slug}` : (url || '#')
     
-    // Use safeTranslate for navigation labels to prevent hydration mismatch
-    const translatedLabel = safeTranslate(normalizedLabel, hydrated && isClient, effectiveLanguage) || label
+    // Use translation hook for navigation labels to prevent hydration mismatch
+    const translatedLabel = isClient ? t(normalizedLabel, label) : label
     
     return { label: translatedLabel, url: finalUrl }
   })
@@ -132,7 +138,7 @@ export default function Navbar({ serverLanguage }) {
     .map((p) => {
       const label = p.navLabel || p.title || p.label || ''
       const normalizedLabel = label.toString().trim().toLowerCase()
-      const translatedLabel = safeTranslate(normalizedLabel, hydrated && isClient, effectiveLanguage) || label
+      const translatedLabel = isClient ? t(normalizedLabel, label) : label
       return { label: translatedLabel, url: `/${p.slug}` }
     })
     .filter((p) => !existing.has(p.url))
@@ -166,21 +172,40 @@ export default function Navbar({ serverLanguage }) {
               <div className="flex items-center justify-between px-6 py-4">
                 {/* Logo and Navigation */}
                 <div className="flex items-center xl:gap-8 gap-4">
-                  <a href='/' className="flex items-center gap-2 group">
-                  {navigation?.logo?.url && <img src={`${navigation?.logo?.url.startsWith('http') ? '' : base}${navigation?.logo?.url}`} alt={navigation?.logo?.name} className="max-h-8 object-contain" />}
-                  </a>
+                  <Link href='/' className="flex items-center gap-2 group">
+                    {navigation?.logo?.url && <img src={`${navigation?.logo?.url.startsWith('http') ? '' : base}${navigation?.logo?.url}`} alt={navigation?.logo?.name} className="max-h-8 object-contain" />}
+                  </Link>
                   
                   {/* Desktop Navigation */}
-                  <nav className="hidden lg:flex items-center xl:gap-8 gap-4" key={`nav-${effectiveLanguage}-${hydrated}`}>
-                    {links.map((l, i) => (
-                      <a 
-                        key={`desktop-${i}-${hydrated ? effectiveLanguage : 'default'}`} 
-                        href={l.url} 
-                        className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-md xl:px-2 px-1 py-1"
-                      >
-                        {l.label}
-                      </a>
-                    ))}
+                  <nav className={`hidden lg:flex items-center xl:gap-8 gap-4 ${!isClient ? 'opacity-0' : 'opacity-100'} transition-opacity duration-200`} key={`nav-${effectiveLanguage}-${isClient}`}>
+                    {links.map((l, i) => {
+                      // Check if it's an external link
+                      const isExternal = l.url.startsWith('http') || l.url.startsWith('https') || l.url === '#';
+                      
+                      if (isExternal) {
+                        return (
+                          <a 
+                            key={`desktop-${i}-${isClient ? effectiveLanguage : 'default'}`} 
+                            href={l.url} 
+                            className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-md xl:px-2 px-1 py-1"
+                            target={l.url.startsWith('http') ? '_blank' : '_self'}
+                            rel={l.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+                          >
+                            {l.label}
+                          </a>
+                        );
+                      }
+                      
+                      return (
+                        <Link 
+                          key={`desktop-${i}-${isClient ? effectiveLanguage : 'default'}`} 
+                          href={l.url}
+                          className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-md xl:px-2 px-1 py-1"
+                        >
+                          {l.label}
+                        </Link>
+                      );
+                    })}
                   </nav>
                 </div>
 
@@ -222,17 +247,37 @@ export default function Navbar({ serverLanguage }) {
               {/* Mobile Menu */}
               {open && (
                 <div className="lg:hidden border-t border-gray-200 bg-white/95 backdrop-blur-sm rounded-b-2xl">
-                  <nav className="px-6 py-4 space-y-2" key={`mobile-nav-${effectiveLanguage}-${hydrated}`}>
-                    {links.map((l, i) => (
-                      <a 
-                        key={`mobile-${i}-${hydrated ? effectiveLanguage : 'default'}`} 
-                        href={l.url} 
-                        className="block py-3 px-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium transition-colors duration-200"
-                        onClick={() => setOpen(false)}
-                      >
-                        {l.label}
-                      </a>
-                    ))}
+                  <nav className="px-6 py-4 space-y-2" key={`mobile-nav-${effectiveLanguage}-${isClient}`}>
+                    {links.map((l, i) => {
+                      // Check if it's an external link
+                      const isExternal = l.url.startsWith('http') || l.url.startsWith('https') || l.url === '#';
+                      
+                      if (isExternal) {
+                        return (
+                          <a 
+                            key={`mobile-${i}-${isClient ? effectiveLanguage : 'default'}`} 
+                            href={l.url} 
+                            className="block py-3 px-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium transition-colors duration-200"
+                            target={l.url.startsWith('http') ? '_blank' : '_self'}
+                            rel={l.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+                            onClick={() => setOpen(false)}
+                          >
+                            {l.label}
+                          </a>
+                        );
+                      }
+                      
+                      return (
+                        <Link 
+                          key={`mobile-${i}-${isClient ? effectiveLanguage : 'default'}`} 
+                          href={l.url}
+                          className="block py-3 px-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium transition-colors duration-200"
+                          onClick={() => setOpen(false)}
+                        >
+                          {l.label}
+                        </Link>
+                      );
+                    })}
                     <div className="pt-4 border-t border-gray-200">
                       <div className="px-3 py-2">
                         <LanguageDropdown />

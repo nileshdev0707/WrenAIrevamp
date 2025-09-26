@@ -1,25 +1,12 @@
 import React from "react";
 import Layout from "./layout";
-import { safeBackgroundImage } from "../utils/ssrHelpers";
+import { safeBackgroundImage, createServerSideProps } from "../utils/ssrHelpers";
 import { getSlaApi } from "../service/apiClient";
 import { base } from "../service/serviceConfig";
-import { useLanguage } from "../components/Navbar";
-import LoadingSpinner from "../components/LoadingSpinner";
-import { useApiDataWithLanguage } from "../hooks/useApiData";
 
-export default function Sla() {
-  const { currentLanguage, isClient } = useLanguage();
-  const { data: sla, loading } = useApiDataWithLanguage(getSlaApi, {
-    currentLanguage,
-    isClient,
-  });
+export default function Sla({ sla }) {
 
   const heroImage = sla?.hero?.[0]?.backgroundimage?.url;
-
-  // Loading state
-  if (loading) {
-    return <LoadingSpinner />;
-  }
 
   return (
     <Layout>
@@ -66,3 +53,9 @@ export default function Sla() {
     </Layout>
   );
 }
+
+// Server-side rendering function
+export const getServerSideProps = createServerSideProps(
+  "/api/sla-page",
+  "sla"
+);

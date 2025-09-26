@@ -1,25 +1,13 @@
 import React from "react";
 import Layout from "./layout";
-import { safeBackgroundImage } from "../utils/ssrHelpers";
+import { safeBackgroundImage, createServerSideProps } from "../utils/ssrHelpers";
 import { getPrivacyPolicyApi } from "../service/apiClient";
 import { base } from "../service/serviceConfig";
-import { useLanguage } from "../components/Navbar";
-import LoadingSpinner from "../components/LoadingSpinner";
-import { useApiDataWithLanguage } from "../hooks/useApiData";
 
-export default function PrivacyPolicy() {
-  const { currentLanguage, isClient } = useLanguage();
-  const { data: privacyPolicy, loading } = useApiDataWithLanguage(
-    getPrivacyPolicyApi,
-    { currentLanguage, isClient }
-  );
+
+export default function PrivacyPolicy({ privacyPolicy }) {
 
   const heroImage = privacyPolicy?.hero?.[0]?.backgroundimage?.url;
-
-  // Loading state
-  if (loading) {
-    return <LoadingSpinner />;
-  }
 
   return (
     <Layout>
@@ -63,3 +51,9 @@ export default function PrivacyPolicy() {
     </Layout>
   );
 }
+
+// Server-side rendering function
+export const getServerSideProps = createServerSideProps(
+  "/api/privacy-policy-page",
+  "privacyPolicy"
+);

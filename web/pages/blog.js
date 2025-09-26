@@ -154,7 +154,7 @@ export default function Blog({
   );
 }
 
-export async function getStaticProps() {
+export async function getStaticProps({ locale }) {
   const STRAPI = process.env.NEXT_PUBLIC_STRAPI_URL;
   const token = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
 
@@ -164,32 +164,35 @@ export async function getStaticProps() {
   });
 
   try {
+    const selectedLang = locale || "en";
     const [navRes, blogPageRes, blogsRes, categoriesRes] = await Promise.all([
       // Navigation data
       Promise.all([
         api
-          .get(`/api/pages?fields=slug,navLabel,title,showInNav,navOrder`)
+          .get(
+            `/api/pages?fields=slug,navLabel,title,showInNav,navOrder&lang=${selectedLang}`
+          )
           .then((r) => r.data)
           .catch(() => null),
       ]).then(([nav, pages]) => ({ nav, pages })),
 
       // Blog page configuration
       api
-        .get(`/api/blog-page?populate=*`)
+        .get(`/api/blog-page?populate=*&lang=${selectedLang}`)
         .then((r) => r.data)
         .catch(() => null),
 
       // Initial blog posts
       api
         .get(
-          `/api/blogs?populate=*&pagination[page]=1&pagination[pageSize]=12&sort[0]=publishedDate:desc`
+          `/api/blogs?populate=*&pagination[page]=1&pagination[pageSize]=12&sort[0]=publishedDate:desc&lang=${selectedLang}`
         )
         .then((r) => r.data)
         .catch(() => ({ data: [], meta: { pagination: { pageCount: 0 } } })),
 
       // Fetch categories
       api
-        .get(`/api/categories`)
+        .get(`/api/categories?lang=${selectedLang}`)
         .then((r) => r.data)
         .catch(() => ({ data: [] })),
     ]);

@@ -2,28 +2,15 @@ import DocumentHero from "../components/document/hero";
 import ContentBlock from "../components/document/contentBlock";
 import { base, token } from "../service/serviceConfig";
 import Layout from "./layout";
-import { safeBackgroundImage } from "../utils/ssrHelpers";
+import {
+  safeBackgroundImage,
+  createServerSideProps,
+} from "../utils/ssrHelpers";
 import OpenSourceDetails from "../components/document/openSourceDetails";
 import Footer from "../components/footer";
 import PublicRoadmap from "../components/document/publicRoadmap";
-import { getDocsApi } from "../service/apiClient";
-import { useLanguage } from "../components/Navbar";
-import LoadingSpinner from "../components/LoadingSpinner";
-import { useApiDataWithLanguage } from "../hooks/useApiData";
-
-export default function Document() {
-  const { currentLanguage, isClient } = useLanguage();
-  const { data: document, loading } = useApiDataWithLanguage(getDocsApi, {
-    currentLanguage,
-    isClient,
-  });
-
+export default function Document({ document }) {
   const heroImage = document?.hero?.[0]?.backgroundimage?.url;
-
-  // Loading state
-  if (loading) {
-    return <LoadingSpinner />;
-  }
 
   return (
     <Layout>
@@ -55,3 +42,9 @@ export default function Document() {
     </Layout>
   );
 }
+
+// Server-side rendering function
+export const getServerSideProps = createServerSideProps(
+  "/api/docs-page",
+  "document"
+);

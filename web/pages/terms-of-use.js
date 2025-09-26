@@ -1,25 +1,13 @@
 import React from "react";
 import Layout from "./layout";
-import { safeBackgroundImage } from "../utils/ssrHelpers";
+import { safeBackgroundImage, createServerSideProps } from "../utils/ssrHelpers";
 import { getTermsOfUseApi } from "../service/apiClient";
 import { base } from "../service/serviceConfig";
-import { useLanguage } from "../components/Navbar";
-import LoadingSpinner from "../components/LoadingSpinner";
-import { useApiDataWithLanguage } from "../hooks/useApiData";
 
-export default function TermsOfUse() {
-  const { currentLanguage, isClient } = useLanguage();
-  const { data: termsOfUse, loading } = useApiDataWithLanguage(
-    getTermsOfUseApi,
-    { currentLanguage, isClient }
-  );
+
+export default function TermsOfUse({ termsOfUse }) {
 
   const heroImage = termsOfUse?.hero?.[0]?.backgroundimage?.url;
-
-  // Loading state
-  if (loading) {
-    return <LoadingSpinner />;
-  }
 
   return (
     <Layout>
@@ -66,3 +54,9 @@ export default function TermsOfUse() {
     </Layout>
   );
 }
+
+// Server-side rendering function
+export const getServerSideProps = createServerSideProps(
+  "/api/terms-page",
+  "termsOfUse"
+);

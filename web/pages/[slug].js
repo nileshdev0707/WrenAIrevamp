@@ -69,7 +69,7 @@ export default function Page({ page }) {
 }
 
 export async function getStaticPaths() {
-  const STRAPI = process.env.NEXT_PUBLIC_STRAPI_URL
+  const STRAPI = process.env.NEXT_PUBLIC_STRAPI_URL;
   const token = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
   const api = axios.create({
     baseURL: STRAPI,
@@ -79,23 +79,36 @@ export async function getStaticPaths() {
     .get("/api/pages?fields=slug")
     .then((r) => r.data)
     .catch(() => null);
-  const paths = Array.isArray(res?.data)
-    ? res.data.map((p) => ({ params: { slug: p.attributes?.slug || p.slug } }))
-    : [];
+  // Generate paths for all locales
+  const locales = ["en", "zh"];
+  const paths = [];
+
+  if (Array.isArray(res?.data)) {
+    res.data.forEach((page) => {
+      const slug = page.attributes?.slug || page.slug;
+      if (slug) {
+        locales.forEach((locale) => {
+          paths.push({ params: { slug }, locale });
+        });
+      }
+    });
+  }
+
   return { paths, fallback: "blocking" };
 }
 
-export async function getStaticProps({ params }) {
-  const STRAPI = process.env.NEXT_PUBLIC_STRAPI_URL
+export async function getStaticProps({ params, locale }) {
+  const STRAPI = process.env.NEXT_PUBLIC_STRAPI_URL;
   const token = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
   const api = axios.create({
     baseURL: STRAPI,
     headers: token ? { Authorization: `Bearer ${token}` } : {},
   });
+  const selectedLang = locale || "en";
   const [pageRes, navRes] = await Promise.all([
     api
       .get(
-        `/api/pages?filters[slug][$eq]=${params.slug}&populate=sections.items,sections.buttons,sections.image`
+        `/api/pages?filters[slug][$eq]=${params.slug}&populate=sections.items,sections.buttons,sections.image&lang=${selectedLang}`
       )
       .then((r) => r.data)
       .catch(() => null),

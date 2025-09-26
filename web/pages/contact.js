@@ -1,27 +1,13 @@
 import React from "react";
 import Layout from "./layout";
 import { safeBackgroundImage } from "../utils/ssrHelpers";
-import { getContactApi } from "../service/apiClient";
+import { createServerSideProps } from "../utils/ssrHelpers";
 import ContactHero from "../components/contact/hero";
 import { base } from "../service/serviceConfig";
 import { HubspotEmbedForm } from "../components/hubspotEmbedForm";
-import { useLanguage } from "../components/Navbar";
-import LoadingSpinner from "../components/LoadingSpinner";
-import { useApiDataWithLanguage } from "../hooks/useApiData";
 
-export default function Contact() {
-  const { currentLanguage, isClient } = useLanguage();
-  const { data: contact, loading } = useApiDataWithLanguage(getContactApi, {
-    currentLanguage,
-    isClient,
-  });
-
+export default function Contact({ contact }) {
   const heroImage = contact?.hero?.[0]?.backgroundimage?.url;
-
-  // Loading state
-  if (loading) {
-    return <LoadingSpinner />;
-  }
 
   return (
     <Layout>
@@ -43,3 +29,9 @@ export default function Contact() {
     </Layout>
   );
 }
+
+// Server-side rendering function
+export const getServerSideProps = createServerSideProps(
+  "/api/contact-page",
+  "contact"
+);
