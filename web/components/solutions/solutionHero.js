@@ -1,11 +1,15 @@
 import React from "react";
+
 import { base } from "../../service/serviceConfig";
+import { useLocalizedUrl } from "../../utils/languageUtils";
 
 const SolutionHero = ({ data }) => {
+  const getUrl = useLocalizedUrl();
   const hero = data?.hero[0];
   const words = hero?.title?.split(" ");
   const firstPart = words?.slice(0, 2).join(" ");
   const secondPart = words?.slice(2).join(" ");
+
   return (
     <div
       className="sm:pt-23 pt-15 sm:pb-10 pb-0"
@@ -30,21 +34,23 @@ const SolutionHero = ({ data }) => {
           {hero?.subtitle}
         </p>
         <div className="animate-fade-in-up  animation-delay-400 flex flex-col sm:flex-row gap-3 md:mt-14 mt-8 justify-center">
-              {hero?.buttons?.map((btn, index) => (
-                <button
-                  key={btn.id}
-                  onClick={() => window.open(btn.url, "_self", "noopener,noreferrer")}
-                  className={`cursor-pointer px-6 py-3 rounded-md font-medium text-sm transition-all duration-200 shadow-sm
+          {hero?.buttons?.map((btn, index) => (
+            <button
+              key={btn.id}
+              onClick={() => {
+                window.open(getUrl(btn.url), "_self", "noopener,noreferrer");
+              }}
+              className={`cursor-pointer px-6 py-3 rounded-md font-medium text-sm transition-all duration-200 shadow-sm
                 ${
                   index === 0
                     ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] transition-all duration-200 transform hover:-translate-y-0.5 text-white"
                     : "bg-white text-gray-800 border border-gray-200 hover:bg-[#060A1F] transition-all duration-200 transform hover:-translate-y-0.5 hover:border-[#060A1F] hover:text-white"
                 }`}
-                >
-                  {btn.label}
-                </button>
-              ))}
-            </div>
+            >
+              {btn.label}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,8 @@
 import React from "react";
+import { useLocalizedUrl } from "../../utils/languageUtils";
 
 export default function Tiers({ tiers, billing, selectedPlan }) {
+  const getUrl = useLocalizedUrl();
 
   return (
     <div className="mt-10 grid md:grid-cols-3 gap-6">
@@ -51,7 +53,7 @@ export default function Tiers({ tiers, billing, selectedPlan }) {
         </div>
         <div className="mt-6">
           <a
-            href={item?.ctaUrl}
+            href={getUrl(item?.ctaUrl)}
             target={item?.ctaUrl?.startsWith("http") ? "_blank" : "_self"}
             className={`btn mt-6 inline-block text-white w-full !py-3 ${
               item.ctaLabel === "Talk to sales"
