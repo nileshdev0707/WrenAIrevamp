@@ -15,7 +15,7 @@ export default function Hero({ data }) {
     <section className="relative overflow-hidden text-center md:pt-24 md:pb-24 pt-20 sm:pb-10 py-5 sm:px-6 px-4">
       {/* <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-blue-50 via-white to-white" /> */}
       <div className="relative max-w-6xl mx-auto md:mt-25 sm:mt-10 mt-5">
-      <div className="inline-block text-sm sm:text-base bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-sm animate-fade-in-up">{badge}</div>
+      <div className="inline-block text-sm sm:text-base bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-sm animate-fade-in-up glow-effect">{badge}</div>
       <h1 className="my-6 sm:my-8 md:my-10 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[64px] font-medium leading-tight animate-fade-in-up animation-delay-200">
           {headline.split('\n').map((line, i) => (
             <div key={i} className="mb-1 sm:mb-2">
@@ -39,10 +39,10 @@ export default function Hero({ data }) {
             <a 
               key={i} 
               href={b.url} 
-              className={`px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg shadow-sm text-sm sm:text-base text-center transition-all duration-300 animate-fade-in-up ${
+              className={`glow-effect px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg shadow-sm text-sm sm:text-base text-center transition-all duration-300 ${
                 i===0 
                   ? 'bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] transition-all duration-200 transform hover:-translate-y-0.5 text-white' 
-                  : 'bg-[#060A1F] text-white transition-all duration-200 transform hover:-translate-y-0.5 hover:text-[#060A1F] hover:bg-gray-50 hover:border-gray-300'
+                  : 'bg-[#060A1F] text-white transition-all duration-200 transform  hover:border-[#060A1F] hover:text-white'
               }`}
               target={b.url.startsWith("http") ? "_blank" : "_self"}
               style={{ animationDelay: `${400 + (i * 100)}ms` }}
@@ -56,16 +56,6 @@ export default function Hero({ data }) {
 
         {/* Hero mock image area */}
         <div className="relative md:pt-12 sm:pt-10 pt-8 animate-fade-in-up animation-delay-800">
-          {/* <div className="mx-auto max-w-[980px] bg-white rounded-2xl shadow-2xl p-6 ring-1 ring-gray-100">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="col-span-2 p-4">
-                <div className="h-40 bg-gray-50 rounded-lg" />
-              </div>
-              <div className="p-4">
-                <div className="h-40 bg-gray-50 rounded-lg" />
-              </div>
-            </div>
-          </div> */}
           {heroImage && (
             <img 
               src={`${heroImage.startsWith('http') ? '' : base}${heroImage}`} 

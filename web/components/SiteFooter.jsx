@@ -69,14 +69,14 @@ export default function SiteFooter() {
                   return (
                     <li key={j}>
                       {isExternal ? (
-                        <a
+                        <Link
                           href={l.slug?.startsWith("#") ? l.slug : link(l.slug)}
                           className="hover:text-gray-900"
                           target={l.slug.startsWith("http") ? "_blank" : "_self"}
                           rel={l.slug.startsWith("http") ? "noopener noreferrer" : undefined}
                         >
                           {l.label}
-                        </a>
+                        </Link>
                       ) : (
                         <Link
                           href={link(l.slug)}
@@ -96,7 +96,7 @@ export default function SiteFooter() {
           <div className="font-semibold text-gray-400">
             © 2025 Canner. All right reserved.
           </div>
-          <a href="/" className="flex items-center gap-2 group justify-center">
+          <Link href="/" className="flex items-center gap-2 group justify-center">
             {navigation?.logo?.url && (
               <img
                 src={`${navigation?.logo?.url.startsWith("http") ? "" : base}${
@@ -106,23 +106,23 @@ export default function SiteFooter() {
                 className="max-h-8 object-contain"
               />
             )}
-          </a>
+          </Link>
           <div className="flex gap-5 justify-end">
-          <a href="https://twitter.com" className="group">
+          <Link href="https://twitter.com" className="group">
               <img src="/svg/twitter.svg" target="_blank" alt="twitter" className="w-5 h-5" />
-            </a>
-            <a href="https://linkedin.com" className="group">
+            </Link>
+            <Link href="https://linkedin.com" className="group">
               <img src="/svg/linkedin.svg" target="_blank" alt="linkedin" className="w-5 h-5" />
-            </a>
-            <a href="https://medium.com" className="group">
+              </Link>
+            <Link href="https://medium.com" className="group">
               <img src="/svg/medium.svg" target="_blank" alt="medium" className="w-5 h-5" />
-            </a>
-            <a href="https://discord.com" className="group">
+            </Link>
+            <Link href="https://discord.com" className="group">
               <img src="/svg/discord.svg" target="_blank" alt="discord" className="w-5 h-5" />
-            </a>
-            <a href="https://github.com" className="group">
+            </Link>
+            <Link href="https://github.com" className="group">
               <img src="/svg/github.svg" target="_blank" alt="github" className="w-5 h-5" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

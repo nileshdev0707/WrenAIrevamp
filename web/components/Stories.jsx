@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { base } from "../service/serviceConfig";
 
 export default function Stories({ data }) {
@@ -7,6 +7,8 @@ export default function Stories({ data }) {
   const subtitle = caseStudies?.subTitle || 'Customer Success Stories'
   
   const caseStudieItems = caseStudies?.caseStudieItems || []
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [totalSlides, setTotalSlides] = useState(0)
 
 
   useEffect(() => {
@@ -17,6 +19,54 @@ export default function Stories({ data }) {
         link.rel = 'stylesheet'
         link.href = 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css'
         document.head.appendChild(link)
+      }
+
+      // Add custom styles for navigation buttons
+      if (!document.querySelector('#slick-custom-styles')) {
+        const style = document.createElement('style')
+        style.id = 'slick-custom-styles'
+        style.textContent = `
+          .slick-prev-custom, .slick-next-custom {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.7);
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+          }
+          .slick-prev-custom:hover, .slick-next-custom:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: translateY(-50%) scale(1.1);
+          }
+          .slick-prev-custom {
+            left: 20px;
+          }
+          .slick-next-custom {
+            right: 20px;
+          }
+          @media (max-width: 768px) {
+            .slick-prev-custom, .slick-next-custom {
+              width: 40px;
+              height: 40px;
+            }
+            .slick-prev-custom {
+              left: 10px;
+            }
+            .slick-next-custom {
+              right: 10px;
+            }
+          }
+        `
+        document.head.appendChild(style)
       }
 
       if (!window.jQuery) {
@@ -45,7 +95,7 @@ export default function Stories({ data }) {
               slidesToShow: 1,
               arrows: false,
               infinite: true,
-              autoplay: true,
+              autoplay: false,
               autoplaySpeed: 3000,
               responsive: [
                 { 
@@ -77,6 +127,12 @@ export default function Stories({ data }) {
                 }
               ]
             })
+
+            sliderElement.on('afterChange', function(event, slick, currentSlide) {
+              setCurrentSlide(currentSlide)
+            })
+                        setTotalSlides(sliderElement.slick('getSlick').slideCount)
+            
           } catch (error) {
             console.log('Slick initialization error:', error)
           }
@@ -100,7 +156,7 @@ export default function Stories({ data }) {
     <section className="lg:py-20 md:py-15 py-10">
       <div className="mx-auto lg:px-6 md:px-4 px-2">
         <div className="text-center">
-          <div className="my-4 inline-flex text-base items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-white px-4 py-2 font-medium text-blue-700">
+          <div className="my-4 glow-effect inline-flex text-base items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-white px-4 py-2 font-medium text-blue-700">
               <div className="w-2 h-2 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] rounded-full"></div>
               <span className="text-black ">{title}</span>
             </div>
@@ -125,11 +181,11 @@ export default function Stories({ data }) {
         </div>
 
         {/* Slick Slider Container */}
-        <div className="mt-8 md:mt-12 lg:mt-16 slider-main-container">
+        <div className="mt-8 md:mt-12 lg:mt-16 slider-main-container relative">
           <div className="center">
             {caseStudieItems.map((story, index) => (
-              <div key={index} className="px-2 md:px-4">
-                <div className='grid 2xl:grid-cols-3 xl:grid-cols-5 p-4 md:p-5 gap-4 bg-[#F5F5F5] rounded-xl [.active]:bg-gradient-to-r [.active]:from-[#0B8EE5] [.active]:to-[#0022CB]'>
+              <div key={index} className="px-2 md:px-4 md:py-4 py-2">
+                <div className='grid 2xl:grid-cols-3 xl:grid-cols-5 p-4 md:p-5 gap-4 bg-[#F5F5F5]  rounded-xl [.active]:bg-gradient-to-r [.active]:from-[#0B8EE5] [.active]:to-[#0022CB]'>
                    <div className='2xl:col-span-1 xl:col-span-2'>
                    <p className='xl:hidden sm:pb-2 pb-1 text-center 2xl:text-7xl xl:text-4xl md:text-4xl lg:text-5xl  text-3xl bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-clip-text text-transparent font-bold'>{story.title}</p> 
                    <p className='text-[#1E1E1E] xl:hidden text-center sm:pb-3 pb-2 md:pb-5  sm:pt-2 font-bold text-lg md:text-xl'>{story.subTitle}</p>
@@ -178,6 +234,42 @@ export default function Stories({ data }) {
                 
               </div>
             ))}
+          </div>
+          
+          {/* Custom Navigation Buttons */}
+          <div className="glow-effect flex justify-center  mx-auto rounded-full  p-1 w-fit items-center mt-8 gap-4 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB]">
+            {/* Left Arrow */}
+            <button 
+              onClick={() => {
+                if (window.jQuery?.fn?.slick) {
+                  window.jQuery('.center').slick('slickPrev')
+                }
+              }}
+              className="flex items-center justify-center text-white rounded-full shadow-lg"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>
+              </svg>
+            </button>
+            
+            {/* Pagination */}
+            <div className="flex items-center gap-2 px-4 py-2  rounded-full text-white">
+              <span className="text-sm font-medium">{currentSlide + 1}/{totalSlides}</span>
+            </div>
+            
+            {/* Right Arrow */}
+            <button 
+              onClick={() => {
+                if (window.jQuery?.fn?.slick) {
+                  window.jQuery('.center').slick('slickNext')
+                }
+              }}
+               className="flex items-center justify-center  text-white rounded-full "
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </button>
           </div>
         </div>
       </div>

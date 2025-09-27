@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { base } from "../../service/serviceConfig";
+import Link from "next/link";
 
 export default function ProductHero({ product }) {
   return (
@@ -22,23 +23,26 @@ export default function ProductHero({ product }) {
               <div dangerouslySetInnerHTML={{ __html: item.description }} />
               <div className="flex gap-2">
               {item?.contentBlockButton?.map((button, index) => (
-                <a
+                <Link
                   key={index}
                   href={button?.url}
                   target={button?.url?.startsWith("http") ? "_blank" : "_self"}
-                  className="btn btn-primary bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-4 py-1 mt-5 text-sm">
+                  className="glow-effect btn btn-primary bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-4 py-1 mt-5 text-sm">
                   {button?.label}
-                </a>
+                </Link>
                ))}
-              </div>
+              </div>  
             </div>
             
-           <div className={`md:block hidden order-2 ${isRightAligned ? "md:order-1" : "md:order-2"}`}>
+           <div className={`md:block hidden order-2  ${isRightAligned ? "md:order-1" : "md:order-2"}`}>
               {url ? (
+                <div className="glow-effect">
                 <img
                   src={`${url.startsWith("http") ? "" : base}${url}`}
-                  alt={image?.name}
-                />
+                    alt={image?.name}
+                    className=""
+                  />
+                </div>
               ) : (
                 <div className="text-gray-600">{image?.name}</div>
               )}

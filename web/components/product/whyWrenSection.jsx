@@ -25,12 +25,14 @@ export default function WhyWrenSection({ data }) {
         return (
           <div className="max-w-6xl mx-auto xl:px-0 px-10" key={index}>
             <div className="text-center">
-              <button className="border border-blue-600 text-black px-4 py-2 rounded-full font-medium text-sm shadow-sm">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-blue-600" />
-                  {badge}
-                </div>
-              </button>
+              <div className="">
+                <button className="before:bg-transparent border border-blue-600 text-black px-4 py-2 rounded-full font-medium text-sm shadow-sm">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-blue-600" />
+                    {badge}
+                  </div>
+                </button>
+              </div>
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mt-5">
                 {formatTitle(title)}
               </h1>
@@ -39,8 +41,9 @@ export default function WhyWrenSection({ data }) {
               {WhyWrenSectionDetails.map((item) => (
                 <div
                   key={item.id}
-                  className="bg-white px-8 py-9 rounded-xl border border-gray-300"
+                  className="glow-effect bg-glow-effect"
                 >
+                  <div className="bg-white px-8 py-9 rounded-xl border border-gray-300 h-full">
                   <div className="grid grid-cols-3 gap-8">
                     <h2 className="text-xl lg:text-2xl font-medium col-span-2">
                       {item.title}
@@ -58,6 +61,7 @@ export default function WhyWrenSection({ data }) {
                     )}
                   </div>
                   <p className="text-gray-600 md:pt-12 pt-6">{item.description}</p>
+                  </div>
                 </div>
               ))}
             </div>

@@ -214,22 +214,22 @@ export default function Navbar({ serverLanguage }) {
                     <LanguageDropdown />
                     {/* Right Side Actions */}
                     <div className="hidden lg:flex items-center gap-4">
-                      <a 
+                      <Link 
                         href="https://cloud.getwren.ai/" 
                         className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200 px-3 py-2 rounded-md hover:bg-gray-50"
                         // target="_blank"
                         rel="noopener noreferrer"
                       >
-                        Sign in
-                      </a>
-                      <a 
+                        {t("signIn")}
+                      </Link>
+                      <Link 
                         href="https://cloud.getwren.ai/" 
-                        className="bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white font-medium px-6 py-2.5 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 transform hover:-translate-y-0.5"
+                        className="glow-effect bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white font-medium px-6 py-2.5 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 transform hover:-translate-y-0.5"
                         // target="_blank"
                         rel="noopener noreferrer"
                       >
-                        Get Started
-                      </a>
+                        {t("getStarted")}
+                      </Link>
                     </div>
                 {/* Mobile Menu Button */}
                 <button 
@@ -237,9 +237,7 @@ export default function Navbar({ serverLanguage }) {
                   className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200" 
                   onClick={() => setOpen(v => !v)}
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 256 256" enableBackground="new 0 0 256 256" className="sm:h-6 sm:w-6 h-4 w-4">
-                    <g><g><path fill="#000000" d="M246,210.6c0,6.5-5.4,11.8-11.7,11.8H21.7c-6.5,0-11.7-5.2-11.7-11.8c0-6.5,5.4-11.8,11.7-11.8h212.6C240.8,198.8,246,204,246,210.6z M21.7,57.2h212.6c6.3,0,11.7-5.3,11.7-11.8c0-6.6-5.2-11.8-11.7-11.8H21.7c-6.3,0-11.7,5.3-11.7,11.8C10,52,15.2,57.2,21.7,57.2z M234.3,116.2H21.7c-6.3,0-11.7,5.3-11.7,11.8c0,6.6,5.2,11.8,11.7,11.8h212.6c6.3,0,11.7-5.3,11.7-11.8C246,121.4,240.8,116.2,234.3,116.2z"/></g></g>
-                  </svg>
+                  <img src="/svg/menu.svg" alt="Menu" className="sm:w-6 sm:h-6 h-4 w-4" />
                 </button>
                   </div>    
               </div>
@@ -254,7 +252,7 @@ export default function Navbar({ serverLanguage }) {
                       
                       if (isExternal) {
                         return (
-                          <a 
+                          <Link 
                             key={`mobile-${i}-${isClient ? effectiveLanguage : 'default'}`} 
                             href={l.url} 
                             className="block py-3 px-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium transition-colors duration-200"
@@ -263,7 +261,7 @@ export default function Navbar({ serverLanguage }) {
                             onClick={() => setOpen(false)}
                           >
                             {l.label}
-                          </a>
+                          </Link>
                         );
                       }
                       
@@ -284,20 +282,20 @@ export default function Navbar({ serverLanguage }) {
                       </div>
                     </div>
                     <div className="flex flex-col gap-3 pt-4 border-t border-gray-200">
-                      <a 
+                      <Link 
                         href="#" 
                         className="px-4 py-3 text-gray-600 hover:text-gray-900 font-medium text-center rounded-lg hover:bg-gray-50 transition-colors duration-200"
                         onClick={() => setOpen(false)}
                       >
                         {safeTranslate("signIn", hydrated && isClient, effectiveLanguage)}
-                      </a>
-                      <a 
+                      </Link>
+                      <Link 
                         href="#" 
                         className="px-4 py-3 hover:bg-gradient-to-r hover:from-[#0B8EE5] hover:to-[#0022CB] bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white font-medium text-center rounded-lg shadow-sm hover:shadow-md transition-all duration-200"
                         onClick={() => setOpen(false)}
                       >
                         {safeTranslate("getStarted", hydrated && isClient, effectiveLanguage)}
-                      </a>
+                      </Link>
                     </div>
                   </nav>
                 </div>

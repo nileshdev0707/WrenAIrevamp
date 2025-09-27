@@ -4,6 +4,7 @@ import HomeCTA from '../homeCTA'
 import { base } from '../../service/serviceConfig'
 
 const ElitePartner = ({data}) => {
+  console.log(data,'elitePartnerData');
   const elitePartnerData = data
   const [activeTab, setActiveTab] = useState(elitePartnerData?.CloudElitePartners?.[0]?.title)
 
@@ -16,18 +17,18 @@ const ElitePartner = ({data}) => {
   const centerPart2 = words2.slice(1, 3).join(" "); // "20% commission"
   const lastPart2 = words2.slice(3).join(" ");      // "as an affiliate"
 
-  const elitePerks = data?.CloudElitePartners[0]?.CloudElitePartnersItems;
+  const elitePerks = data?.CloudElitePartners?.[0]?.CloudElitePartnersItems;
 
-  const affiliatePerks = data?.CloudElitePartners[1]?.CloudElitePartnersItems;
-const frequentlyAskedQuestions = data?.CloudElitePartners[1]?.FrequentlyAskedQuestions;
-const eliteFrequentlyAskedQuestions = data?.CloudElitePartners[0]?.FrequentlyAskedQuestions;
+  const affiliatePerks = data?.CloudElitePartners?.[1]?.CloudElitePartnersItems;
+const frequentlyAskedQuestions = data?.CloudElitePartners?.[1]?.FrequentlyAskedQuestions;
+const eliteFrequentlyAskedQuestions = data?.CloudElitePartners?.[0]?.FrequentlyAskedQuestions;
 
 useEffect(() => {
   setActiveTab(elitePartnerData?.CloudElitePartners?.[0]?.title)
 }, [elitePartnerData])
 
   const currentPerks = activeTab === elitePartnerData?.CloudElitePartners?.[0]?.title ? elitePerks : affiliatePerks
-  const affiliatePartner = elitePartnerData?.AffiliatePartner[0]
+  const affiliatePartner = elitePartnerData?.AffiliatePartner?.[0]
 const affiliatePartnerUrl = affiliatePartner?.image?.url;
 
   return (

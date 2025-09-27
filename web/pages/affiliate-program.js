@@ -6,7 +6,7 @@ import ElitePartner from "../components/affiliateProgram/elitePartner";
 import { getAffiliateProgramApi } from "../service/apiClient";
 import { createServerSideProps } from "../utils/ssrHelpers";
 
-const affiliateProgram = () => {
+const affiliateProgram = ({affiliateProgram}) => {
 
   return (
     <Layout>

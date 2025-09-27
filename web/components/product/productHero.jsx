@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-
+import Link from "next/link";
 export default function ProductHero({ data }) {
-  console.log(data,'data2525');
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
     <section className="py-10 sm:py-16 text-center">
       {data?.map((item, index) => (
         <div key={item.id}>
-          <button className="btn btn-primary bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-4 py-1 !rounded-full text-sm">
+          <button className="btn btn-primary glow-effect bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-4 py-1 !rounded-full text-sm">
             {item?.badge}
           </button>
           <h1 className="text-3xl sm:text-4xl lg:text-6xl font-medium leading-tight mt-5">
@@ -30,12 +29,13 @@ export default function ProductHero({ data }) {
           <p className="mt-5 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base">{item?.subtitle}</p>
           <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center">
             {item?.buttons?.map((btn, index) => (
-              <a
+              <Link
+
                 key={btn.id}
                 href={btn.url}
                 target={btn.url?.startsWith("http") ? "_blank" : "_self"}
                 onClick={() => setActiveIndex(index)} // set active button
-                className={`px-6 py-3 rounded-md font-medium text-sm transition-all duration-200 shadow-sm
+                className={`px-6 py-3 rounded-md font-medium text-sm transition-all duration-200 shadow-sm glow-effect 
                   ${
                     activeIndex === index
                       ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white"
@@ -43,7 +43,7 @@ export default function ProductHero({ data }) {
                   }`}
               >
                 {btn.label}
-              </a>
+              </Link>
             ))}
           </div>
         </div>

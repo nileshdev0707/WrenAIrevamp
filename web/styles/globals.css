@@ -243,3 +243,36 @@ body { @apply bg-white text-gray-800 antialiased; }
 .slider-main-container .slick-slide.slick-center .grid .arrow-active {
   display: block;
 }
+
+.glow-effect {
+  position: relative;
+  cursor: pointer;   
+  /* overflow: visible; */
+  transition: background 0.5s ease; /* smooth bg change */
+}
+
+.glow-effect::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  background: linear-gradient(27deg, #0B8EE5 0%, #2D50FF 50%, #8F3BFF 100%);
+  filter: blur(16px);
+  opacity: 0;
+  z-index: -1;
+  background-clip: content-box !important;
+  transition: all 0.5s ease; /* smooth hover animation */
+}
+
+.glow-effect:hover::before {
+  opacity: 0.8;
+}
+
+.glow-effect * {
+  position: relative;
+  z-index: 1;
+}  
+
+.bg-glow-effect::before {
+  z-index: 0 !important;
+}
