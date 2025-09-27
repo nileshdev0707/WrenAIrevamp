@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { useLocalizedUrl } from "../../utils/languageUtils";
 
 export default function ProductHero({ data }) {
-  console.log(data,'data2525');
+  const getUrl = useLocalizedUrl();
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
@@ -27,12 +28,14 @@ export default function ProductHero({ data }) {
               ))}
           </h1>
 
-          <p className="mt-5 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base">{item?.subtitle}</p>
+          <p className="mt-5 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base">
+            {item?.subtitle}
+          </p>
           <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center">
             {item?.buttons?.map((btn, index) => (
               <a
                 key={btn.id}
-                href={btn.url}
+                href={getUrl(btn.url)}
                 target={btn.url?.startsWith("http") ? "_blank" : "_self"}
                 onClick={() => setActiveIndex(index)} // set active button
                 className={`px-6 py-3 rounded-md font-medium text-sm transition-all duration-200 shadow-sm

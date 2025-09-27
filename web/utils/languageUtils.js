@@ -1,5 +1,7 @@
 // Language utility functions
 
+import { useTranslation } from "../hooks/useTranslation";
+
 export const LANGUAGE_STORAGE_KEY = "selectedLanguage";
 export const LANGUAGE_DATA_KEY = "languageData";
 
@@ -17,6 +19,21 @@ export const LANGUAGES = {
     flag: "🇨🇳",
     direction: "ltr",
   },
+};
+
+
+export const useLocalizedUrl = () => {
+  const { locale } = useTranslation();
+
+  // Return a function to generate URLs
+  const getUrl = (url) => {
+    if (!url) return "#";
+    if (url.startsWith("http")) return url;
+    if (url.startsWith(`/${locale}`)) return url;
+    return `/${locale}${url}`;
+  };
+
+  return getUrl;
 };
 
 // Detect browser language

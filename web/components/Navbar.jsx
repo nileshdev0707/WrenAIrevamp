@@ -74,8 +74,7 @@ export const LanguageProvider = ({ children, serverLanguage = 'en' }) => {
 export default function Navbar({ serverLanguage }) {
   // Use Next.js i18n translation hook
   const { t, locale, isClient } = useTranslation();
-  const [hydrated, setHydrated] = useState(false);
-  
+  const [hydrated, setHydrated] = useState(false);  
   // Use router locale as the effective language
   const effectiveLanguage = locale || serverLanguage || 'en';
 
@@ -184,7 +183,7 @@ export default function Navbar({ serverLanguage }) {
                       
                       if (isExternal) {
                         return (
-                          <a 
+                          <Link 
                             key={`desktop-${i}-${isClient ? effectiveLanguage : 'default'}`} 
                             href={l.url} 
                             className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-md xl:px-2 px-1 py-1"
@@ -192,7 +191,7 @@ export default function Navbar({ serverLanguage }) {
                             rel={l.url.startsWith('http') ? 'noopener noreferrer' : undefined}
                           >
                             {l.label}
-                          </a>
+                          </Link>
                         );
                       }
                       
@@ -214,22 +213,22 @@ export default function Navbar({ serverLanguage }) {
                     <LanguageDropdown />
                     {/* Right Side Actions */}
                     <div className="hidden lg:flex items-center gap-4">
-                      <a 
+                      <Link
                         href="https://cloud.getwren.ai/" 
                         className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200 px-3 py-2 rounded-md hover:bg-gray-50"
                         // target="_blank"
                         rel="noopener noreferrer"
                       >
-                        Sign in
-                      </a>
-                      <a 
+                         {t("signIn")}
+                      </Link>
+                      <Link
                         href="https://cloud.getwren.ai/" 
                         className="bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white font-medium px-6 py-2.5 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 transform hover:-translate-y-0.5"
                         // target="_blank"
                         rel="noopener noreferrer"
                       >
-                        Get Started
-                      </a>
+                        {t("getStarted")}
+                      </Link>
                     </div>
                 {/* Mobile Menu Button */}
                 <button 
@@ -254,7 +253,7 @@ export default function Navbar({ serverLanguage }) {
                       
                       if (isExternal) {
                         return (
-                          <a 
+                          <Link
                             key={`mobile-${i}-${isClient ? effectiveLanguage : 'default'}`} 
                             href={l.url} 
                             className="block py-3 px-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium transition-colors duration-200"
@@ -263,7 +262,7 @@ export default function Navbar({ serverLanguage }) {
                             onClick={() => setOpen(false)}
                           >
                             {l.label}
-                          </a>
+                          </Link>
                         );
                       }
                       
@@ -284,20 +283,20 @@ export default function Navbar({ serverLanguage }) {
                       </div>
                     </div>
                     <div className="flex flex-col gap-3 pt-4 border-t border-gray-200">
-                      <a 
-                        href="#" 
+                      <Link
+                        href="https://cloud.getwren.ai/" 
                         className="px-4 py-3 text-gray-600 hover:text-gray-900 font-medium text-center rounded-lg hover:bg-gray-50 transition-colors duration-200"
                         onClick={() => setOpen(false)}
                       >
-                        {safeTranslate("signIn", hydrated && isClient, effectiveLanguage)}
-                      </a>
-                      <a 
-                        href="#" 
+                        {t("signIn")}
+                      </Link>
+                      <Link
+                        href="https://cloud.getwren.ai/" 
                         className="px-4 py-3 hover:bg-gradient-to-r hover:from-[#0B8EE5] hover:to-[#0022CB] bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white font-medium text-center rounded-lg shadow-sm hover:shadow-md transition-all duration-200"
                         onClick={() => setOpen(false)}
                       >
-                        {safeTranslate("getStarted", hydrated && isClient, effectiveLanguage)}
-                      </a>
+                        {t("getStarted")}
+                      </Link>
                     </div>
                   </nav>
                 </div>
