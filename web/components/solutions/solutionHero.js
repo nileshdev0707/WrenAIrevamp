@@ -2,6 +2,7 @@ import React from "react";
 
 import { base } from "../../service/serviceConfig";
 import { useLocalizedUrl } from "../../utils/languageUtils";
+import Button from "../common/Button";
 
 const SolutionHero = ({ data }) => {
   const getUrl = useLocalizedUrl();
@@ -22,7 +23,7 @@ const SolutionHero = ({ data }) => {
       }}
     >
       <div className="bg-cover pt-10 pb-5 sm:py-12 md:py-16 lg:py-26 text-center">
-        <button className="animate-fade-in-up btn btn-primary bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-4 py-1 !rounded-full text-sm">
+        <button className="glow-effect animate-fade-in-up btn btn-primary bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-4 py-1 !rounded-full text-sm">
           {hero?.badge}
         </button>
         <h1 className="animate-fade-in-up animation-delay-400 text-2xl sm:text-3xl md:text-4xl lg:text-[64px] font-medium leading-tight sm:mt-8 mt-5">
@@ -35,20 +36,16 @@ const SolutionHero = ({ data }) => {
         </p>
         <div className="animate-fade-in-up  animation-delay-400 flex flex-col sm:flex-row gap-3 md:mt-14 mt-8 justify-center">
           {hero?.buttons?.map((btn, index) => (
-            <button
-              key={btn.id}
-              onClick={() => {
-                window.open(getUrl(btn.url), "_self", "noopener,noreferrer");
-              }}
-              className={`cursor-pointer px-6 py-3 rounded-md font-medium text-sm transition-all duration-200 shadow-sm
-                ${
-                  index === 0
-                    ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] transition-all duration-200 transform hover:-translate-y-0.5 text-white"
-                    : "bg-white text-gray-800 border border-gray-200 hover:bg-[#060A1F] transition-all duration-200 transform hover:-translate-y-0.5 hover:border-[#060A1F] hover:text-white"
-                }`}
-            >
-              {btn.label}
-            </button>
+        <Button
+          key={btn.id}
+          onClick={() => {
+            window.open(getUrl(btn.url), "_self", "noopener,noreferrer");
+          }}
+          variant={index === 0 ? "primary" : "light"}
+          label={btn.label}
+        >
+          {btn.label}
+        </Button>
           ))}
         </div>
       </div>

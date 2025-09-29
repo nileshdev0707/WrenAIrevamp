@@ -67,7 +67,7 @@ export default function Logos({ items }) {
                   <img 
                     src={`${url.startsWith('http') ? '' : base}${url}`} 
                     alt={it.name} 
-                    className="max-h-12 object-contain" 
+                    className="max-h-12 object-contain grayscale" 
                   />
                 ) : (
                   <div className="text-gray-600">{it.name}</div>

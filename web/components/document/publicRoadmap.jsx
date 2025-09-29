@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "../common/Button";
 
 export default function PublicRoadmap({ data }) {
     return (
@@ -21,19 +22,17 @@ export default function PublicRoadmap({ data }) {
                   </p>
                    <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center">
                   {item?.buttonBlock?.map((btn, index) => (
-                    <a
+                    <Button
                       key={btn.id}
                       href={btn.url}
                       target={btn.url?.startsWith("http") ? "_blank" : "_self"}
-                      className={`px-6 py-3 rounded-md font-medium text-sm transition-all duration-200 shadow-sm
-                        ${
-                          index === 0
-                            ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white"
-                            : "bg-white text-gray-800 border border-gray-200 hover:bg-gray-50"
-                        }`}
+                      variant={index === 0 ? "primary" : "gray"}
+                      label={btn.label}
+                        className={`transition-all duration-200 
+                        `}
                     >
-                      {btn.label}
-                    </a>
+                      {btn.label} 
+                    </Button>
                   ))}
                 </div>
                 </div>

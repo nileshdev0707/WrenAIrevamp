@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { base } from "../../service/serviceConfig";
 import { useLocalizedUrl } from "../../utils/languageUtils";
+import Button from "../common/Button";
 
 const SolutionsTab = ({ data, isClient }) => {
     const solutions = data?.SolutionsTab;
@@ -17,17 +18,15 @@ const SolutionsTab = ({ data, isClient }) => {
         <div className="flex justify-center">
           <div className="bg-white flex overflow-x-auto scrollbar-hide gap-2 rounded-xl p-2 border border-gray-200">
             {solutions?.map((tab,index) => (
-              <button
+              <Button
                 key={index}
                 onClick={() => setActiveTab(index)}
-                className={`md:px-8.5 w-full md:py-4 sm:px-4 whitespace-nowrap sm:py-2 px-3 py-1.5 sm:rounded-xl rounded-lg text-md font-medium transition-all duration-200 ${
-                  activeTab === index
-                    ? 'bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white shadow-sm'
-                    : 'text-[#757575] hover:text-gray-900 hover:bg-gray-100'
-                }`}
+                variant={activeTab === index ? "primary" : "light"}
+                label={tab.badge}
+                className="whitespace-nowrap min-w-max"
               >
                 {tab.badge}
-              </button>
+              </Button>
             ))}
           </div>
         </div>
@@ -53,11 +52,12 @@ const SolutionsTab = ({ data, isClient }) => {
           }} />
             {/* Call to Action Button */}
             <div className="text-center">
-                  <button  
+                  <Button  
+                  variant="primary"
                 onClick={() => window.open(getUrl(activeTabData?.button?.[0]?.url), activeTabData?.button?.[0]?.url?.startsWith("http") ? "_blank" : "_self", "noopener,noreferrer")}
-                 className="cursor-pointer bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] hover:-translate-y-0.5  transition-all text-white font-semibold md:py-4 py-3 md:px-8 px-4 rounded-lg lg:text-lg md:text-md text-sm duration-200 shadow-lg hover:shadow-xl">
+                 className="cursor-pointer hover:-translate-y-0.5  transition-all   duration-200">
                 {activeTabData?.button?.[0]?.label || activeTabData?.buttonText || 'Start with Enterprise Cloud'}
-                </button>
+                </Button>
             </div>
         </div>
               {activeTabData?.image?.url ? (

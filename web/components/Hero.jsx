@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { base } from "../service/serviceConfig";
 import { useLocalizedUrl } from "../utils/languageUtils";
+import Button from "./common/Button";
 
 export default function Hero({ data }) {
   const getUrl = useLocalizedUrl();
@@ -55,21 +56,14 @@ export default function Hero({ data }) {
         </h1>
         <div className="my-4 sm:my-6 md:my-8 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4 sm:px-0 animate-fade-in-up animation-delay-400">
           {buttons.map((b,i) => (
-            <a 
-              key={i}
-              href={getUrl(b.url)}
-              className={`glow-effect px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg shadow-sm text-sm sm:text-base text-center transition-all duration-300 animate-fade-in-up ${
-                i===0 
-                  ? 'bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] transition-all duration-200 transform hover:-translate-y-0.5 text-white' 
-                  : 'bg-[#060A1F] text-white transition-all duration-200 transform  hover:border-[#060A1F] hover:text-white hover:-translate-y-0.5 hover:text-[#060A1F] hover:bg-gray-50 hover:border-gray-300'
-              }`}
-              target={b.url.startsWith("http") ? "_blank" : "_self"}
-              style={{ animationDelay: `${400 + i * 100}ms` }}
-            >
+       <>
+            <Button key={i} href={getUrl(b.url)} variant={i===0 ? "primary" : "secondary"}>
               {b.label}
-            </a>
+            </Button>
+       </>
           ))}
         </div>
+        
         <p className="text-sm font-semibold sm:text-base uppercase tracking-wider text-[#060A1F] max-w-2xl sm:max-w-3xl mx-auto px-4 sm:px-0 animate-fade-in-up animation-delay-600">
           {sub}
         </p>

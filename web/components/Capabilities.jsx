@@ -1,8 +1,7 @@
 import { useRef, useEffect } from "react";
 import { base } from "../service/serviceConfig";
-import Link from 'next/link';
 import { useLocalizedUrl } from "../utils/languageUtils";
-
+import Button from "./common/Button";
 export default function Capabilities({ data }) {
   if (!data) return null;
   const features = data[0] || [];
@@ -39,11 +38,11 @@ export default function Capabilities({ data }) {
       <div className="max-w-7xl mx-auto lg:px-6 sm:px-4 px-2" ref={sectionRef}>
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="fade-up">
-            <div className="inline-flex text-base bg-white items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] px-4 py-2 font-medium text-blue-700 glow-effect">
-            <div className="w-2 h-2 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] rounded-full"></div>
-            <span className="text-black">{features.badge}</span>
-          </div>
+          <div className="">
+                <div className="inline-flex text-base  items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] px-4 py-2 font-medium text-blue-700 glow-effect">
+                <div className="w-2 h-2 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] rounded-full"></div>
+                  <span className="text-black">{features.badge}</span>
+                </div>
             </div>
           <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight md:py-4 py-2 leading-tight">
             {features.title && typeof features.title === "string" ? (
@@ -169,16 +168,7 @@ export default function Capabilities({ data }) {
             </div>
         </div>
         <div className='flex justify-center md:mt-20 sm:mt-10 mt-5'>
-
-            <Link
-              // key={i}
-              href={getUrl(features.learnMore[0].url)}
-              rel="noopener noreferrer"
-              className={`glow-effect px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg shadow-sm text-sm sm:text-base text-center bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] transition-all duration-200 transform hover:-translate-y-0.5 text-white`}
-            >
-              {features.learnMore[0].label}
-            </Link>
-
+            <Button href={getUrl(features.learnMore[0].url)} variant="primary">{features.learnMore[0].label}</Button>
         </div>
     </section>
   );

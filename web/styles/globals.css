@@ -276,3 +276,20 @@ body { @apply bg-white text-gray-800 antialiased; }
 .bg-glow-effect::before {
   z-index: 0 !important;
 }
+
+.gradient-text-button {
+  position: relative;
+}
+
+.gradient-text-button::before {
+  content: attr(data-label); /* Show the button text */
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600; 
+  background: linear-gradient(90deg, #0B8EE5 0%, #0022CB 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  pointer-events: none;
+}

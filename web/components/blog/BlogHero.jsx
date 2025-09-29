@@ -1,4 +1,5 @@
 import { base } from "../../service/serviceConfig";
+import Button from "../common/Button";
 
 export default function BlogHero({ data }) {
   return (
@@ -19,27 +20,32 @@ export default function BlogHero({ data }) {
                 {item?.subtitle}
               </p>
             </div>
-            <div className="grid md:grid-cols-2 xl:gap-10 gap-5 lg:pt-22 pt-10 px-5">
-              <div className="md:block hidden">
+            <div className="sm:flex sm:gap-8 gap-5 lg:pt-22 pt-10 px-5">
+              <div className="md:block hidden  w-1/2">
                 {url ? (
-                  <img
+                <div className="w-full h-full flex flex-none">
+                    <img
                     src={`${url.startsWith("http") ? "" : base}${url}`}
                     alt={item?.image?.name}
+                    className="w-auto object-contain h-full"
                   />
+                  </div>
                 ) : (
                   <div className="text-gray-600">{item?.image?.name}</div>
                 )}
               </div>
-              <div>
+              <div className="w-1/2">
                 <div className="flex gap-2">
                   {item.buttons.map((button, index) => (
-                    <a
+                    <Button
                       key={index}
                       href={button?.url}
-                      className="btn bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white lg:mb-5 mb-3"
+                      className="lg:mb-5 mb-3" 
+                      variant={index === 0 ? "primary" : "gray"}
+                      label={button?.label}
                     >
                       {button?.label}
-                    </a>
+                    </Button>
                   ))}
                 </div>
                 <h1 className="xl:text-4xl lg:text-3xl md:text-2xl text-xl font-medium lg:mb-5 mb-3 leading-tight">

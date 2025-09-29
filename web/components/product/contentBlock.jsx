@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { base } from "../../service/serviceConfig";
-import Link from "next/link";
+import Button from "../common/Button";
 import { useLocalizedUrl } from "../../utils/languageUtils";
 
 export default function ProductHero({ product }) {
@@ -31,16 +31,16 @@ export default function ProductHero({ product }) {
               <div dangerouslySetInnerHTML={{ __html: item.description }} />
               <div className="flex gap-2">
                 {item?.contentBlockButton?.map((button, index) => (
-                  <Link
+                  <Button
                     key={index}
                     href={getUrl(button?.url)}
                     target={
                       button?.url?.startsWith("http") ? "_blank" : "_self"
                     }
-                    className="glow-effect btn btn-primary bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-4 py-1 mt-5 text-sm"
+                    className="mt-5"
                   >
                     {button?.label}
-                  </Link>
+                  </Button>
                 ))}
               </div>
             </div>

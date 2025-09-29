@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { safeBackgroundImage } from "../../utils/ssrHelpers";
+import Button from "../common/Button";
 
 export default function DocumentHero({ data }) {
   const heroImage = data?.[0]?.backgroundimage?.url;
@@ -31,20 +32,17 @@ export default function DocumentHero({ data }) {
               </p>
               <div className="flex gap-3 mt-14 justify-center">
                 {item?.buttons?.map((btn, index) => (
-                  <a
+                  <Button
                     key={btn.id}
                     href={btn.url}
                     target={btn.url?.startsWith("http") ? "_blank" : "_self"}
                     onClick={() => setActiveIndex(index)}
-                    className={`px-6 py-3 rounded-md font-medium text-sm transition-all duration-200 shadow-sm
-                ${
-                  activeIndex === index
-                    ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white"
-                    : "bg-white text-gray-800 border border-gray-200 hover:bg-gray-100"
-                }`}
+                  variant={activeIndex === index ? "primary" : "light"}
+                  label={btn.label}
+                    className="transition-all duration-200"
                   >
                     {btn.label}
-                  </a>
+                  </Button>
                 ))}
               </div>
             </div>
