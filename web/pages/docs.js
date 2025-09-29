@@ -10,24 +10,15 @@ import OpenSourceDetails from "../components/document/openSourceDetails";
 import Footer from "../components/footer";
 import PublicRoadmap from "../components/document/publicRoadmap";
 export default function Document({ document }) {
-  const heroImage = document?.hero?.[0]?.backgroundimage?.url;
-
   return (
     <Layout>
       <div className="max-w-6xl mx-auto">
-        <div
-          style={{
-            backgroundImage: safeBackgroundImage(heroImage),
-          }}
-          className="bg-no-repeat pt-24 pb-10 max-w-6xl mx-auto bg-contain"
-        >
-          {/* Product Hero */}
-          {document?.hero?.length && <DocumentHero data={document?.hero} />}
-          {/* Content Block */}
-          {document?.ContentBlock?.length && (
-            <ContentBlock data={document?.ContentBlock} />
-          )}
-        </div>
+        {/* Product Hero */}
+        {document?.hero?.length && <DocumentHero data={document?.hero} />}
+        {/* Content Block */}
+        {document?.ContentBlock?.length && (
+          <ContentBlock data={document?.ContentBlock} />
+        )}
       </div>
       {document?.openSourceProject?.length && (
         <OpenSourceDetails data={document?.openSourceProject} />

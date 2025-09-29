@@ -24,6 +24,8 @@ export default function Pricing({ pricing }) {
           <div
             style={{
               backgroundImage: safeBackgroundImage(heroImage),
+              WebkitBackgroundSize: "100% 100%",
+              backgroundPosition: "center top",
             }}
             className="bg-no-repeat py-16 max-w-6xl mx-auto bg-contain"
           >
@@ -37,7 +39,7 @@ export default function Pricing({ pricing }) {
               />
             )}
 
-            {selectedPlan === 0 ? 
+            {selectedPlan === 0 ?
               pricing?.tiers?.length ? (
               <Tiers
                 tiers={pricing?.tiers}

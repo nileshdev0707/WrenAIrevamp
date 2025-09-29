@@ -102,7 +102,7 @@ export default function Blog({
         <div
           style={{
             backgroundImage: safeBackgroundImage(heroImage),
-            WebkitBackgroundSize: "100%",
+            WebkitBackgroundSize: "100% 100%",
             backgroundPosition: "center top",
           }}
           className="bg-no-repeat pt-24 max-w-6xl mx-auto"
