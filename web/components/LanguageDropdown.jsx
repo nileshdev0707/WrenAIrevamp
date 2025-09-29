@@ -53,10 +53,8 @@ const LanguageDropdown = () => {
         disabled={loading}
         className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {loading ? (
+        {loading && (
           <div className="w-4 h-4 border-2 border-gray-300 border-t-blue-600 rounded-full animate-spin"></div>
-        ) : (
-          <span className="text-lg">{currentLanguage?.flag}</span>
         )}
         <span className="sm:text-base text-sm sm:block hidden">
           {loading ? 'Switching...' : currentLanguage?.name}
@@ -81,7 +79,6 @@ const LanguageDropdown = () => {
                 locale === lang.code ? 'bg-blue-50 text-blue-600' : 'text-gray-700'
               }`}
             >
-              <span className="text-lg">{lang.flag}</span>
               <span className="sm:text-base font-medium text-sm">{lang.name}</span>
             </button>
           ))}

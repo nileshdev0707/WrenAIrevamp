@@ -16,7 +16,7 @@ export default function CategoryFilter({
   const categoryList = categories || defaultCategories;
 
   return (
-    <div className={`md:pb-12 pb-8 ${className}`}>
+    <div className={`md:py-20 sm:py-10 py-5 ${className}`}>
       <div className="flex overflow-x-auto scrollbar-hide gap-2 px-4 sm:px-0">
         {categoryList.map((category, index) => {
           const categoryKey = typeof category === 'string' ? category : category.key;

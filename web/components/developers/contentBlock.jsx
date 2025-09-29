@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { base } from "../../service/serviceConfig";
+import Button from "../common/Button";
 
 export default function ContentBlock({ data }) {
   return (
     <div>
       {data?.map((item, index) => {
+        console.log(index, 'index');
         const url = item?.image?.url;
         const image = item?.image;
         const isRightAligned = item?.alignment === "right";
@@ -22,22 +24,19 @@ export default function ContentBlock({ data }) {
               <div dangerouslySetInnerHTML={{ __html: item.description }} />
               <div className="flex gap-2">
               {item?.contentBlockButton?.map((button, index) => (
-                  <a key={index} href={button?.url} 
+                  <Button key={index} href={button?.url} 
+                  variant={index === 0 ? "primary" : "gray"}
                   target={button?.url?.startsWith("http") ? "_blank" : "_self"}
-                  className={`btn px-4 py-1 mt-5 text-sm
-                  ${
-                    index === 0
-                      ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white"
-                      : "bg-gray-100 text-black"
-                  }`}
+                
                   >
                     {button?.label}
-                  </a>
+                  </Button>
               ))}
               </div>
             </div>
             
            <div className={`md:block hidden order-2 ${isRightAligned ? "md:order-1" : "md:order-2"}`}>
+              <div className="glow-effect">
               {url ? (
                 <img
                   src={`${url.startsWith("http") ? "" : base}${url}`}
@@ -46,6 +45,7 @@ export default function ContentBlock({ data }) {
               ) : (
                 <div className="text-gray-600">{image?.name}</div>
               )}
+                </div>
             </div>
           </div>
         );

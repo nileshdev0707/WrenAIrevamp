@@ -6,7 +6,7 @@ import navigation from "../json/navigation.json";
 import LanguageDropdown from "./LanguageDropdown";
 import { getStoredLanguage, saveLanguage, detectBrowserLanguage } from "../utils/languageUtils";
 import { useTranslation } from "../hooks/useTranslation";
-
+import Button from './common/Button';
 // Language Context for global language state
 const LanguageContext = createContext();
 
@@ -168,7 +168,7 @@ export default function Navbar({ serverLanguage }) {
           {/* Floating Navigation Bar */}
           <div className="relative">
             <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200/50">
-              <div className="flex items-center justify-between px-6 py-4">
+              <div className="flex items-center justify-between xl:px-6 px-4 py-2.5">
                 {/* Logo and Navigation */}
                 <div className="flex items-center xl:gap-8 gap-4">
                   <Link href='/' className="flex items-center gap-2 group">
@@ -199,7 +199,7 @@ export default function Navbar({ serverLanguage }) {
                         <Link 
                           key={`desktop-${i}-${isClient ? effectiveLanguage : 'default'}`} 
                           href={l.url}
-                          className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-md xl:px-2 px-1 py-1"
+                          className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-md xl:px-2 px-1"
                         >
                           {l.label}
                         </Link>
@@ -221,14 +221,9 @@ export default function Navbar({ serverLanguage }) {
                       >
                          {t("signIn")}
                       </Link>
-                      <Link
-                        href="https://cloud.getwren.ai/" 
-                        className="glow-effect bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white font-medium px-6 py-2.5 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 transform hover:-translate-y-0.5"
-                        // target="_blank"
-                        rel="noopener noreferrer"
-                      >
+                      <Button href="https://cloud.getwren.ai/" variant="primary" >
                         {t("getStarted")}
-                      </Link>
+                      </Button>
                     </div>
                 {/* Mobile Menu Button */}
                 <button 

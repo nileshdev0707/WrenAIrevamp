@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useLocalizedUrl } from "../../utils/languageUtils";
+import Button from "../common/Button";
 
 export default function ProductHero({ data }) {
   const getUrl = useLocalizedUrl();
@@ -34,21 +35,18 @@ export default function ProductHero({ data }) {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center">
             {item?.buttons?.map((btn, index) => (
-              <Link
-
+              // <div key={btn.id} className="glow-effect bg-glow-effect">
+              <Button
+                variant={activeIndex === index ? "primary" : "light"}
                 key={btn.id}
                 href={getUrl(btn.url)}
                 target={btn.url?.startsWith("http") ? "_blank" : "_self"}
+                label={btn.label}
                 onClick={() => setActiveIndex(index)} // set active button
-                className={`px-6 py-3 rounded-md font-medium text-sm transition-all duration-200 shadow-sm glow-effect 
-                  ${
-                    activeIndex === index
-                      ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white"
-                      : "bg-white text-gray-800 border border-gray-200 hover:bg-gray-100"
-                  }`}
               >
                 {btn.label}
-              </Link>
+              </Button>
+              // </div>
             ))}
           </div>
         </div>

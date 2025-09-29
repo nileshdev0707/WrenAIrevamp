@@ -13,7 +13,7 @@ export default function WhatIsWrenAI({ data }) {
               <div className="flex items-center justify-center mb-8">
                 <div className="text-center">
                   <button className="glow-effect border bg-white border-blue-600 text-black px-4 py-2 rounded-full font-medium text-sm shadow-sm">
-                    <div className="flex items-center gap-2 glow-effect">
+                    <div className="flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-blue-600" />
                       {badge}
                     </div>

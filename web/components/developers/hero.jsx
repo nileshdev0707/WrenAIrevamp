@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Button from "../common/Button";
 
 export default function DevelopersHero({ data }) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -19,7 +20,7 @@ export default function DevelopersHero({ data }) {
         const secondPart = words.slice(3).join(" ");
         return (
           <div key={index}>
-            <button className="btn btn-primary bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-4 py-1 !rounded-full text-sm">
+            <button className="btn btn-primary bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-4 py-1 !rounded-full text-sm glow-effect">
               {item?.badge}
             </button>
             <h1 className="text-3xl sm:text-4xl lg:text-6xl font-medium leading-tight mt-8">
@@ -30,7 +31,7 @@ export default function DevelopersHero({ data }) {
             <div className="flex flex-wrap justify-center gap-4 mt-8">
               {/* First button */}
               <div className="flex items-center justify-center gap-2">
-                <button className="flex items-center gap-2 bg-white border border-blue-400 text-black px-4 py-3 rounded-full font-medium text-sm">
+                <button className="glow-effect flex items-center gap-2 bg-white border border-blue-400 text-black px-4 py-3 rounded-full font-medium text-sm">
                   <svg
                     width="16"
                     height="22"
@@ -49,7 +50,7 @@ export default function DevelopersHero({ data }) {
 
               {/* Second button */}
               <div className="flex items-center justify-center gap-2">
-                <button className="flex items-center gap-2 bg-white border border-blue-400 text-black px-4 py-3 rounded-full font-medium text-sm">
+                <button className="glow-effect flex items-center gap-2 bg-white border border-blue-400 text-black px-4 py-3 rounded-full font-medium text-sm">
                   <svg
                     width="19"
                     height="21"
@@ -83,20 +84,16 @@ export default function DevelopersHero({ data }) {
             <p className="mt-5 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base">{item?.subtitle}</p>
             <div className="flex gap-3 mt-14 justify-center">
               {item?.buttons?.map((btn, index) => (
-                <a
+                <Button
                   key={btn.id}
                   href={btn.url}
+                  variant={activeIndex === index ? "primary" : "light"}
                   target={btn.url?.startsWith("http") ? "_blank" : "_self"}
                   onClick={() => setActiveIndex(index)}
-                  className={`px-6 py-3 rounded-md font-medium text-sm transition-all duration-200 shadow-sm
-                ${
-                  activeIndex === index
-                    ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white"
-                    : "bg-white text-gray-800 border border-gray-200 hover:bg-gray-100"
-                }`}
+                  label={btn.label}
                 >
                   {btn.label}
-                </a>
+                </Button>
               ))}
             </div>
           </div>
