@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { base } from "../../service/serviceConfig";
 
-export default function TrustedLogos({ items }) {
+export default function TrustedLogos({ items, title }) {
   const sliderRef = useRef(null)
   
   if (!items || items.length === 0) return null
@@ -51,6 +51,7 @@ export default function TrustedLogos({ items }) {
   return (
     <section className="py-20">
       <div className="mx-auto">
+        <h2 className="text-2xl font-medium text-center uppercase pb-6 text-gray-500">{title}</h2>
         <div 
           ref={sliderRef}
           className="flex overflow-hidden gap-8 items-center logo-slider"
@@ -67,7 +68,7 @@ export default function TrustedLogos({ items }) {
                   <img 
                     src={`${url?.startsWith('http') ? '' : base}${url}`} 
                     alt={item.name} 
-                    className="max-h-12 object-contain" 
+                    className="max-h-12 object-contain grayscale" 
                   />
                 ) : (
                   <div className="text-gray-600">{item.name}</div>

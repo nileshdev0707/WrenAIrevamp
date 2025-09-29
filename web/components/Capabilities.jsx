@@ -40,7 +40,7 @@ export default function Capabilities({ data }) {
         {/* Header */}
         <div className="text-center mb-16">
           <div className="fade-up">
-            <div className="inline-flex text-base bg-white items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-white px-4 py-2 font-medium text-blue-700 glow-effect">
+            <div className="inline-flex text-base bg-white items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] px-4 py-2 font-medium text-blue-700 glow-effect">
             <div className="w-2 h-2 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] rounded-full"></div>
             <span className="text-black">{features.badge}</span>
           </div>
@@ -65,7 +65,7 @@ export default function Capabilities({ data }) {
                 </div>
 
                 {/* Second line */}
-                <div className="fade-right">
+                <div className="md:fade-right">
                   {features.title
                     .split(" ")
                     .slice(2) // Rest of the words
@@ -76,7 +76,7 @@ export default function Capabilities({ data }) {
                           word.includes("Fast") ||
                           word.includes("Intelligent") ||
                           word.includes("Secure")
-                            ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-clip-text text-transparent"
+                            ? "text-[#2F54EB] bg-clip-text"
                             : "text-slate-900"
                         }`}
                         style={{ transitionDelay: `${(index + 2) * 0.1}s` }}

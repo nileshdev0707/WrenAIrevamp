@@ -9,8 +9,9 @@ export default function Stats({ data }) {
             return (
               <span 
                 key={index} 
-                className={`${isWorldwide ? 'bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-clip-text text-transparent' : 'text-black'}`}
+                className={`${isWorldwide ? 'text-[#2F54EB] bg-clip-text' : 'text-black'}`}
               >
+                {word === "Worldwide" && <br />}
                 {word}{index < stats.title.split(' ').length - 1 ? ' ' : ''}
               </span>
             )

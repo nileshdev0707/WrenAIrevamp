@@ -28,18 +28,18 @@ export default function Hero({
 
       <div className="bg-white inline-flex items-center md:mt-10 mt-5 px-2.5 py-2 gap-5 rounded-2xl border border-gray-200">
         {pricing?.buttons
-          .filter((p) => p.label === "Cloud" || p.label === "Self-hosted")
+          .filter((p, index) => index === 0 || index === 1)
           .map((plan, index) => (
             <button
               key={plan.id}
               onClick={() => setSelectedPlan(index)}
-              className={`cursor-pointer flex items-center gap-2 px-4.5 py-2.5 rounded-md font-medium text-sm ${
+              className={`cursor-pointer flex items-center gap-2 px-8 py-4 rounded-md font-semibold text-sm ${
                 selectedPlan === index
                   ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white"
                   : "text-gray-600"
               }`}
             >
-              {plan.label === "Cloud" && (
+              {index === 0 && (
                 <svg
                   width="20"
                   height="20"
@@ -53,19 +53,18 @@ export default function Hero({
                   />
                 </svg>
               )}
-              {plan.label === "Self-hosted" && (
-                <svg
-                  width="22"
-                  height="16"
-                  viewBox="0 0 22 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M18.3034 1.33716C16.9344 0.71103 15.4805 0.2547 13.9629 0C13.7719 0.32899 13.5596 0.77471 13.411 1.12492C11.7969 0.89144 10.1944 0.89144 8.60255 1.12492C8.45397 0.77471 8.2311 0.32899 8.05068 0C6.52251 0.2547 5.06861 0.71103 3.70915 1.33716C0.960529 5.39111 0.217659 9.3495 0.589099 13.2549C2.41443 14.5815 4.17612 15.388 5.90701 15.9187C6.33151 15.3456 6.71356 14.73 7.04255 14.0827C6.41641 13.8492 5.82211 13.5627 5.24904 13.2231C5.39762 13.117 5.5462 13.0003 5.68416 12.8835C9.1438 14.4648 12.8911 14.4648 16.3082 12.8835C16.4568 13.0003 16.5948 13.117 16.7434 13.2231C16.1703 13.5627 15.576 13.8492 14.9499 14.0827C15.2789 14.73 15.6609 15.3456 16.0854 15.9187C17.8152 15.388 19.5875 14.5815 21.4033 13.2549C21.8596 8.7341 20.6806 4.80747 18.3034 1.33716ZM7.5201 10.8459C6.48007 10.8459 5.63107 9.9014 5.63107 8.7447C5.63107 7.5879 6.45884 6.6434 7.5201 6.6434C8.57071 6.6434 9.4303 7.5879 9.4091 8.7447C9.4091 9.9014 8.57071 10.8459 7.5201 10.8459ZM14.4936 10.8459C13.4535 10.8459 12.6034 9.9014 12.6034 8.7447C12.6034 7.5879 13.4323 6.6434 14.4936 6.6434C15.5442 6.6434 16.4038 7.5879 16.3825 8.7447C16.3825 9.9014 15.5548 10.8459 14.4936 10.8459Z"
-                    fill={selectedPlan === index ? "white" : "gray"}
-                  />
-                </svg>
+              {index === 1 && (
+               <svg 
+                  width="21" 
+                  height="18" 
+                  viewBox="0 0 21 18" 
+                  fill="none" 
+                  xmlns="http://www.w3.org/2000/svg">
+                <path 
+                  d="M9.5 4V1C9.5 0.44772 9.9477 0 10.5 0H19.5C20.0523 0 20.5 0.44772 20.5 1V17C20.5 17.5523 20.0523 18 19.5 18H1.5C0.94772 18 0.5 17.5523 0.5 17V5C0.5 4.44772 0.94772 4 1.5 4H9.5ZM3.5 13V15H8.5V13H3.5ZM12.5 13V15H17.5V13H12.5ZM12.5 10V12H17.5V10H12.5ZM12.5 7V9H17.5V7H12.5ZM3.5 10V12H8.5V10H3.5Z"
+                  fill={selectedPlan === index ? "white" : "#767676"}
+                 />
+               </svg>
               )}
               {plan.label}
             </button>
@@ -74,12 +73,12 @@ export default function Hero({
       <div className="flex justify-center mt-10">
         <div className="bg-white mt-6 px-2.5 py-2 rounded-full border border-gray-200">
           {pricing?.buttons
-            .filter((p) => p.label === "Annually" || p.label === "Monthly")
+            .filter((p, index) => index === 2 || index === 3)
             .map((plan, index) => (
               <button
                 key={plan.id}
                 onClick={() => setBilling(index)}
-                className={`cursor-pointer px-4 py-2 rounded-full text-sm ${
+                className={`cursor-pointer px-4 py-2 rounded-full text-sm font-semibold ${
                   billing === index
                     ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white"
                     : "text-gray-700"

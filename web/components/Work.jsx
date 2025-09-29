@@ -109,7 +109,7 @@ export default function Work({ data }) {
                   return (
                     <span 
                       key={`word-${i}-${j}`} 
-                      className={`${isHighlighted ? 'bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-clip-text text-transparent font-semibold' : 'text-[#060A1F]'} word-animate`}
+                      className={`${isHighlighted ? 'text-[#2F54EB]  bg-clip-text' : 'text-[#060A1F]'} word-animate font-medium`}
                       style={{ animationDelay: `${200 + (i * 100) + (j * 50)}ms` }}
                     >
                       {word}{j < line.split(' ').length - 1 ? ' ' : ''}

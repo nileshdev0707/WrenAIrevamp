@@ -177,7 +177,7 @@ export default function Stories({ data }) {
                       key={`word-${i}-${j}`}
                       className={`${
                         isHighlighted
-                          ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-clip-text text-transparent font-semibold"
+                          ? "text-[#2F54EB] bg-clip-text font-medium"
                           : "text-[#060A1F]"
                       }`}
                     >

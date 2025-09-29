@@ -10,12 +10,13 @@ import TrustedLogos from "../components/pricing/trustedLogo";
 import Layout from "./layout";
 import { safeBackgroundImage } from "../utils/ssrHelpers";
 import { createServerSideProps } from "../utils/ssrHelpers";
+import TiersHosted from "../components/pricing/tiresHosted";
 
 export default function Pricing({ pricing }) {
   const [billing, setBilling] = useState(0);
   const [selectedPlan, setSelectedPlan] = useState(0);
   const heroImage = pricing?.hero?.[0]?.backgroundimage?.url;
-
+  const tiers = selectedPlan === 0 ? pricing?.tiers : pricing?.tiersHosted;
   return (
     <Layout>
       <div className="px-6">
@@ -35,30 +36,46 @@ export default function Pricing({ pricing }) {
                 setSelectedPlan={setSelectedPlan}
               />
             )}
-            {pricing?.tiers?.length && (
+
+            {selectedPlan === 0 ? 
+              pricing?.tiers?.length ? (
               <Tiers
                 tiers={pricing?.tiers}
                 billing={billing}
                 selectedPlan={selectedPlan}
               />
+            ) : (
+              <></>
+            ) : (
+              pricing?.tiersHosted?.length && (
+                <TiersHosted
+                  tiers={pricing?.tiersHosted}
+                  billing={billing}
+                  selectedPlan={selectedPlan}
+                />
+              )
             )}
           </div>
         )}
 
         {/* Content Block */}
-        {selectedPlan === 0 && pricing?.ContentBlock?.length && (
+        {selectedPlan === 0 ? pricing?.ContentBlock?.length && (
           <ContentBlock contentBlock={pricing?.ContentBlock} />
+        ) : (
+         <></>
         )}
 
         {/* Trusted Logos */}
         {pricing?.TrustedBy?.length && (
-          <TrustedLogos items={pricing?.TrustedBy} />
+          <TrustedLogos items={pricing?.TrustedBy} title={pricing?.TrustedByTitle}/>
         )}
 
         {/* Feature comparison */}
-        {pricing?.tiers?.length && (
-          <ComparePlan tiers={pricing?.tiers} selectedPlan={selectedPlan} />
-        )}
+
+      {tiers?.length > 0 && (
+        <ComparePlan tiers={tiers} selectedPlan={selectedPlan} />
+      )}
+
 
         {/* FAQ */}
         {pricing?.frequentlyAskedQuestions?.length && (
