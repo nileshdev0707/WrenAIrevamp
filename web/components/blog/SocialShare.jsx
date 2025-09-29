@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function SocialShare({ title, url }) {
+export default function SocialShare({ title, url, blogPageData, post }) {
   const [copied, setCopied] = useState(false);
 
   const shareOnTwitter = () => {
@@ -40,13 +40,30 @@ export default function SocialShare({ title, url }) {
         <img
           src="/svg/avtar.svg"
           alt="Allison Hsieh"
-          className="w-16 h-16 rounded-full object-cover"
+          className="w-14 h-14 rounded-full object-cover"
         />
         <div>
-          <p className="font-medium text-gray-900 text-lg">Allison Hsieh</p>
+          <p className="font-medium text-gray-900 text-lg">
+            {post?.author || ""}
+          </p>
           <p className="text-sm text-gray-500">
-            Updated: August 20, 2025 <br />
-            Published: August 20, 2025
+            Updated:{" "}
+            {blogPageData?.updatedAt
+              ? new Date(blogPageData.updatedAt).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "2-digit",
+                  year: "numeric",
+                })
+              : ""}
+            <br />
+            Published:{" "}
+            {blogPageData?.publishedAt
+              ? new Date(blogPageData.publishedAt).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "2-digit",
+                  year: "numeric",
+                })
+              : ""}
           </p>
         </div>
       </div>
@@ -54,7 +71,9 @@ export default function SocialShare({ title, url }) {
       {/* Share + Stay updated */}
       <div className="grid grid-cols-2 items-center text-sm text-gray-700">
         <div className="flex flex-col gap-5">
-          <span className="font-medium text-black text-base">Share this post</span>
+          <span className="font-medium text-black text-base">
+            Share this post
+          </span>
           <div className="flex gap-6 text-gray-500">
             <div onClick={shareOnTwitter} className="cursor-pointer">
               <svg

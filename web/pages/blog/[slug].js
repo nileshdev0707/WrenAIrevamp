@@ -8,7 +8,7 @@ import { HubspotEmbedForm } from "../../components/hubspotEmbedForm";
 import { safeImageSrc } from "../../utils/ssrHelpers";
 
 export default function BlogPost({ post, relatedPosts, blogPageData }) {
-  console.log("blogPageData ==> ", blogPageData);
+  console.log("post --------==> ", post.relatedPosts);
   const router = useRouter();
   const base = process.env.NEXT_PUBLIC_STRAPI_URL || "";
 
@@ -96,6 +96,8 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
             <SocialShare
               title={post.title}
               url={typeof window !== "undefined" ? window.location.href : ""}
+              blogPageData={blogPageData}
+              post={post}
             />
             <div className="bg-gradient-to-r from-[#2b47d3] to-[#0022CB] rounded-lg p-6">
               <h3 className="md:text-2xl text-lg font-semibold text-white mb-4">
@@ -114,13 +116,34 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
                 Start Free Trial
               </a>
             </div>
+              {post.relatedPosts.length > 0 && (
+            <div class="bg-white rounded-lg mt-5">
+              <h2 class="xl:text-2xl md:text-xl text-lg font-semibold mb-6">
+                Releases
+              </h2>
+                <div class="space-y-8">
+                {post.relatedPosts.map((post) => (
+                  <div class="space-y-2">
+                    <span class="inline-block px-3 py-2 text-xs font-medium bg-gray-100 text-gray-700 rounded-md">
+                      {post?.publishedAt
+                        ? new Date(post.publishedAt).toLocaleDateString(
+                            "en-US",
+                            {
+                              month: "short",
+                              day: "2-digit",
+                              year: "numeric",
+                            }
+                          )
+                        : ""}
+                    </span>
+                    <h3 class="font-semibold text-gray-900">{post.title}</h3>
+                    <p class="text-sm text-gray-600">{post.excerpt}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+              )}
 
-            {post?.rightContent && (
-              <div
-                className="py-10"
-                dangerouslySetInnerHTML={{ __html: post.rightContent }}
-              />
-            )}
             {blogPageData?.formId && (
               <div className="mt-5">
                 <HubspotEmbedForm formId={blogPageData?.formId} hideClass />
