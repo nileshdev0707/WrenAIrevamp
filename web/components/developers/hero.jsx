@@ -30,7 +30,16 @@ export default function DevelopersHero({ data }) {
             <div className="flex flex-wrap justify-center gap-4 mt-8">
               {/* First button */}
               <div className="flex items-center justify-center gap-2">
-                <button className="flex items-center gap-2 bg-white border border-blue-400 text-black px-4 py-3 rounded-full font-medium text-sm">
+                <button
+                  className="flex items-center gap-2 bg-white border border-blue-400 text-black px-4 py-3 rounded-full font-medium text-sm cursor-pointer"
+                  onClick={() => {
+                    window.open(
+                      "https://github.com/repos/Canner/WrenAI",
+                      "_blank",
+                      "noopener,noreferrer"
+                    );
+                  }}
+                >
                   <svg
                     width="16"
                     height="22"
@@ -49,7 +58,16 @@ export default function DevelopersHero({ data }) {
 
               {/* Second button */}
               <div className="flex items-center justify-center gap-2">
-                <button className="flex items-center gap-2 bg-white border border-blue-400 text-black px-4 py-3 rounded-full font-medium text-sm">
+                <button
+                  className="flex items-center gap-2 bg-white border border-blue-400 text-black px-4 py-3 rounded-full font-medium text-sm cursor-pointer"
+                  onClick={() => {
+                    window.open(
+                      "https://github.com/repos/Canner/WrenAI",
+                      "_blank",
+                      "noopener,noreferrer"
+                    );
+                  }}
+                >
                   <svg
                     width="19"
                     height="21"
@@ -80,7 +98,9 @@ export default function DevelopersHero({ data }) {
               </div>
             </div>
 
-            <p className="mt-5 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base">{item?.subtitle}</p>
+            <p className="mt-5 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base">
+              {item?.subtitle}
+            </p>
             <div className="flex gap-3 mt-14 justify-center">
               {item?.buttons?.map((btn, index) => (
                 <a

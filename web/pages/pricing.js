@@ -19,30 +19,30 @@ export default function Pricing({ pricing }) {
   return (
     <Layout>
       <div className="px-6">
-        {pricing?.hero?.length && (
-          <div
-            style={{
-              backgroundImage: safeBackgroundImage(heroImage),
-            }}
-            className="bg-no-repeat py-16 max-w-6xl mx-auto bg-contain"
-          >
-            {pricing?.hero?.length && (
-              <Hero
-                pricing={pricing?.hero?.[0]}
-                billing={billing}
-                setBilling={setBilling}
-                selectedPlan={selectedPlan}
-                setSelectedPlan={setSelectedPlan}
-              />
-            )}
-            {pricing?.tiers?.length && (
-              <Tiers
-                tiers={pricing?.tiers}
-                billing={billing}
-                selectedPlan={selectedPlan}
-              />
-            )}
-          </div>
+        <div
+          style={{
+            backgroundImage: safeBackgroundImage(heroImage),
+            WebkitBackgroundSize: "100% 100%",
+            backgroundPosition: "center top",
+          }}
+          className="bg-no-repeat py-16 max-w-6xl mx-auto bg-contain"
+        >
+          {pricing?.hero?.length && (
+            <Hero
+              pricing={pricing?.hero?.[0]}
+              billing={billing}
+              setBilling={setBilling}
+              selectedPlan={selectedPlan}
+              setSelectedPlan={setSelectedPlan}
+            />
+          )}
+        </div>
+        {pricing?.tiers?.length && (
+          <Tiers
+            tiers={pricing?.tiers}
+            billing={billing}
+            selectedPlan={selectedPlan}
+          />
         )}
 
         {/* Content Block */}

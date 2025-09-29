@@ -15,7 +15,7 @@ export default function Solutions({ solutions }) {
   }, []);
   
   if (!isClient) return null;
-
+  
   return (
     <Layout>
       {solutions?.hero.length > 0 && (

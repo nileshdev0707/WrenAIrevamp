@@ -17,7 +17,7 @@ const SolutionHero = ({ data }) => {
         backgroundImage: `url(${
           hero?.backgroundimage?.url.startsWith("http") ? "" : base
         }${hero?.backgroundimage?.url})`,
-        WebkitBackgroundSize: "100%",
+        WebkitBackgroundSize: "100% 100%",
         backgroundPosition: "center top",
       }}
     >

@@ -14,7 +14,7 @@ export default function ProductHero({ product }) {
         return (
           <div
             key={index}
-            className="grid grid-cols-1 md:grid-cols-2 xl:gap-10 gap-5 pt-10 md:pb-16 xl:px-0 px-5"
+            className="grid grid-cols-1 md:grid-cols-2 xl:gap-10 gap-5 pt-20 md:pb-16 xl:px-0 px-5"
           >
             <div
               className={`xl:px-10 px-5 order-1 ${
