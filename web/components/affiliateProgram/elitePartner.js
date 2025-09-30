@@ -3,10 +3,12 @@ import FrequentlyQuestions from './frequentlyQuestions'
 import HomeCTA from '../homeCTA'
 import { base } from '../../service/serviceConfig'
 
-const ElitePartner = ({data}) => {
+const ElitePartner = ({data, tab}) => {
+console.log("tab ==> ", tab);
   console.log(data,'elitePartnerData');
   const elitePartnerData = data
   const [activeTab, setActiveTab] = useState(elitePartnerData?.CloudElitePartners?.[0]?.title)
+  console.log("activeTab ==> ", activeTab);
 
   const words = elitePartnerData?.CloudElitePartners?.[0]?.subtitle?.split(" ");
   const firstPart1 = words?.slice(0, 2).join(" ");
@@ -31,6 +33,14 @@ useEffect(() => {
   const affiliatePartner = elitePartnerData?.AffiliatePartner?.[0]
 const affiliatePartnerUrl = affiliatePartner?.image?.url;
 
+useEffect(() => {
+  if(tab === 'elite'){
+    setActiveTab(elitePartnerData?.CloudElitePartners?.[0]?.title)
+  }
+  if(tab === 'affiliate'){
+    setActiveTab(elitePartnerData?.CloudElitePartners?.[1]?.title)
+  }
+}, [tab])
   return (
     <div className="bg-white md:py-16 py-10 px-4 sm:px-6 lg:px-0">
       <div className="">
@@ -41,7 +51,7 @@ const affiliatePartnerUrl = affiliatePartner?.image?.url;
               <button
               key={index}
                 onClick={() => setActiveTab(item?.title)}
-                className={`md:px-6 sm:px-3 px-2 py-3  font-regular transition-all duration-200 ${
+                className={`cursor-pointer md:px-6 sm:px-3 px-2 py-3  font-regular transition-all duration-200 ${
                   activeTab === item?.title
                     ? 'bg-blue-600 text-white rounded-lg shadow-lg text-normal'
                     : 'text-gray-600 hover:text-gray-800'

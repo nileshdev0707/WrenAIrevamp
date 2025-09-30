@@ -33,7 +33,7 @@ export default function Hero({
             <button
               key={plan.id}
               onClick={() => setSelectedPlan(index)}
-              className={`cursor-pointer flex items-center gap-2 px-8 py-4 rounded-md font-semibold text-sm ${
+              className={`cursor-pointer flex items-center gap-2 md:px-8 px-6 py-4 rounded-md font-semibold text-sm ${
                 selectedPlan === index
                   ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white"
                   : "text-gray-600"
@@ -54,40 +54,45 @@ export default function Hero({
                 </svg>
               )}
               {index === 1 && (
-               <svg 
-                  width="21" 
-                  height="18" 
-                  viewBox="0 0 21 18" 
-                  fill="none" 
-                  xmlns="http://www.w3.org/2000/svg">
-                <path 
-                  d="M9.5 4V1C9.5 0.44772 9.9477 0 10.5 0H19.5C20.0523 0 20.5 0.44772 20.5 1V17C20.5 17.5523 20.0523 18 19.5 18H1.5C0.94772 18 0.5 17.5523 0.5 17V5C0.5 4.44772 0.94772 4 1.5 4H9.5ZM3.5 13V15H8.5V13H3.5ZM12.5 13V15H17.5V13H12.5ZM12.5 10V12H17.5V10H12.5ZM12.5 7V9H17.5V7H12.5ZM3.5 10V12H8.5V10H3.5Z"
-                  fill={selectedPlan === index ? "white" : "#767676"}
-                 />
-               </svg>
+                <svg
+                  width="21"
+                  height="18"
+                  viewBox="0 0 21 18"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9.5 4V1C9.5 0.44772 9.9477 0 10.5 0H19.5C20.0523 0 20.5 0.44772 20.5 1V17C20.5 17.5523 20.0523 18 19.5 18H1.5C0.94772 18 0.5 17.5523 0.5 17V5C0.5 4.44772 0.94772 4 1.5 4H9.5ZM3.5 13V15H8.5V13H3.5ZM12.5 13V15H17.5V13H12.5ZM12.5 10V12H17.5V10H12.5ZM12.5 7V9H17.5V7H12.5ZM3.5 10V12H8.5V10H3.5Z"
+                    fill={selectedPlan === index ? "white" : "#767676"}
+                  />
+                </svg>
               )}
               {plan.label}
             </button>
           ))}
       </div>
       <div className="flex justify-center mt-10">
-        <div className="bg-white mt-6 px-2.5 py-2 rounded-full border border-gray-200">
-          {pricing?.buttons
-            .filter((p, index) => index === 2 || index === 3)
-            .map((plan, index) => (
-              <button
-                key={plan.id}
-                onClick={() => setBilling(index)}
-                className={`cursor-pointer px-4 py-2 rounded-full text-sm font-semibold ${
-                  billing === index
-                    ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white"
-                    : "text-gray-700"
-                }`}
-              >
-                {plan.label}
-              </button>
-            ))}
-        </div>
+        {selectedPlan === 0 ? (
+          <div className="bg-white mt-6 px-2.5 py-2 rounded-full border border-gray-200">
+            {pricing?.buttons
+              .filter((p, index) => index === 2 || index === 3)
+              .map((plan, index) => (
+                <button
+                  key={plan.id}
+                  onClick={() => setBilling(index)}
+                  className={`cursor-pointer px-4 py-2 rounded-full text-sm font-semibold ${
+                    billing === index
+                      ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white"
+                      : "text-gray-700"
+                  }`}
+                >
+                  {plan.label}
+                </button>
+              ))}
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </section>
   );

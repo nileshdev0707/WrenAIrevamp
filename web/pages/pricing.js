@@ -52,8 +52,6 @@ export default function Pricing({ pricing }) {
               pricing?.tiersHosted?.length && (
                 <TiersHosted
                   tiers={pricing?.tiersHosted}
-                  billing={billing}
-                  selectedPlan={selectedPlan}
                 />
               )
             )}

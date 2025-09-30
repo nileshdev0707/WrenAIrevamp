@@ -1,15 +1,14 @@
 import axios from "axios";
 import { useRouter } from "next/router";
-import ReactMarkdown from "react-markdown";
 import SocialShare from "../../components/blog/SocialShare";
 import BlogCard from "../../components/blog/BlogCard";
 import Layout from "../layout";
 import Footer from "../../components/footer";
 import { HubspotEmbedForm } from "../../components/hubspotEmbedForm";
 import { safeImageSrc } from "../../utils/ssrHelpers";
+import Link from 'next/link';
 
 export default function BlogPost({ post, relatedPosts, blogPageData }) {
-  console.log("post --------==> ", post.relatedPosts);
   const router = useRouter();
   const base = process.env.NEXT_PUBLIC_STRAPI_URL || "";
 
@@ -79,9 +78,9 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
       pageTitle={attributes.title}
       pageDescription={attributes.excerpt}
     >
-      <article className="max-w-6xl mx-auto px-5 py-12">
+      <article className="max-w-6xl mx-auto py-12">
         {/* Article Header */}
-        <div className="mb-8 pt-20 max-w-2xl ">
+        <div className="mb-8 pt-20 max-w-2xl px-5">
           <h1 className="lg:text-4xl text-2xl font-medium text-gray-900 mb-4">
             {post.title}
           </h1>
@@ -90,7 +89,7 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-20 pt-5">
+        <div className="md:grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-20 pt-5 px-5">
           <div className="col-span-2">
             {/* Featured Image */}
             {post.featuredImage && (
@@ -136,12 +135,13 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
               {post.relatedPosts.length > 0 && (
             <div class="bg-white rounded-lg mt-5">
               <h2 class="xl:text-2xl md:text-xl text-lg font-semibold mb-6">
-                Releases
+                Related Posts
               </h2>
                 <div class="space-y-8">
                 {post.relatedPosts.map((post) => (
                   <div class="space-y-2">
-                    <span class="inline-block px-3 py-2 text-xs font-medium bg-gray-100 text-gray-700 rounded-md">
+                    <Link href={`/post/${post.slug}`}>
+                    <span class="mb-4 inline-block px-3 py-2 text-xs font-medium bg-gray-100 text-gray-700 rounded-md">
                       {post?.publishedAt
                         ? new Date(post.publishedAt).toLocaleDateString(
                             "en-US",
@@ -155,7 +155,8 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
                     </span>
                     <h3 class="font-semibold text-gray-900">{post.title}</h3>
                     <p class="text-sm text-gray-600">{post.excerpt}</p>
-                  </div>
+                    </Link>
+                    </div>
                 ))}
               </div>
             </div>
@@ -191,12 +192,14 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
           </div>
         </div>
 
-        {blogPageData?.bottomContentBlock?.length && (
-          <Footer data={blogPageData?.bottomContentBlock} />
-        )}
+        <div className="md:block hidden">
+          {blogPageData?.bottomContentBlock?.length && (
+            <Footer data={blogPageData?.bottomContentBlock} />
+          )}
+        </div>   
         {/* Related Posts */}
         {relatedPosts && relatedPosts.length > 0 && (
-          <div className="border-t border-gray-200 pt-12">
+          <div className="border-t border-gray-200 pt-12 xl:px-0 px-5">
             <h3 className="text-2xl font-bold text-gray-900 mb-6">
               Related Posts
             </h3>

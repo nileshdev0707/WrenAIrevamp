@@ -15,7 +15,7 @@ export default function Tiers({ tiers, billing }) {
           <p className="text-gray-500 mb-4 text-sm pt-4">{item.description}</p>
 
           <div className="flex items-baseline mb-4">
-            <span className="xl:text-5xl lg:text-4xl text-3xl font-semibold mt-1 bg-gradient-to-r from-[#0B8EE5] via-61%  via-[#044CD5] to-[#0222CB] text-transparent bg-clip-text">
+            <span className="lg:text-4xl text-3xl font-semibold mt-1 bg-gradient-to-r from-[#0B8EE5] via-61%  via-[#044CD5] to-[#0222CB] text-transparent bg-clip-text">
               {billing === 0 ? item.annualPrice : item.price}
             </span>
             <span className="text-gray-500 ml-2 text-sm">

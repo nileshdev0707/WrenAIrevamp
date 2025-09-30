@@ -1,12 +1,10 @@
 import React from "react";
-import ReactMarkdown from "react-markdown";
 import Layout from "./layout";
 import {
   safeBackgroundImage,
   createServerSideProps,
 } from "../utils/ssrHelpers";
-import { getPrivacyPolicyApi } from "../service/apiClient";
-import { base } from "../service/serviceConfig";
+import ReactMarkdownDetails from "../components/reactMarkDown";
 
 export default function PrivacyPolicy({ privacyPolicy }) {
   const heroImage = privacyPolicy?.hero?.[0]?.backgroundimage?.url;
@@ -50,8 +48,8 @@ export default function PrivacyPolicy({ privacyPolicy }) {
           </div>
         )}
         {privacyPolicy?.descriptionDetails && (
-          <div className="prose prose-slate max-w-none py-12">
-            <ReactMarkdown>{privacyPolicy?.descriptionDetails}</ReactMarkdown>
+          <div className="max-w-4xl mx-auto md:py-12 py-6">
+          <ReactMarkdownDetails data={privacyPolicy?.descriptionDetails} />
           </div>
         )}
       </div>

@@ -27,8 +27,8 @@ export default function SiteFooter() {
     {
       title: t("partners"),
       links: [
-        { label: t("affiliateProgram"), slug: "affiliate-program" },
-        { label: t("elitePartners"), slug: "#" },
+        { label: t("affiliateProgram"), slug: "affiliate-program?tab=affiliate" },
+        { label: t("elitePartners"), slug: "affiliate-program?tab=elite" },
       ],
     },
     {

@@ -5,8 +5,11 @@ import TrustedLogo from "../components/affiliateProgram/TrustedLogo";
 import ElitePartner from "../components/affiliateProgram/elitePartner";
 import { getAffiliateProgramApi } from "../service/apiClient";
 import { createServerSideProps } from "../utils/ssrHelpers";
-
+import { useRouter } from "next/router";
 const affiliateProgram = ({ affiliateProgram }) => {
+  const router = useRouter();
+  const { tab } = router.query
+  
   return (
     <Layout>
       <div>
@@ -18,7 +21,7 @@ const affiliateProgram = ({ affiliateProgram }) => {
             <TrustedLogo data={affiliateProgram} />
           </div>
         )}
-        <ElitePartner data={affiliateProgram} />
+        <ElitePartner data={affiliateProgram} tab={tab}/>
       </div>
     </Layout>
   );

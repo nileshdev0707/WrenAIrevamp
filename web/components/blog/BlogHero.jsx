@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { base } from "../../service/serviceConfig";
 import Button from "../common/Button";
 
@@ -20,6 +21,7 @@ export default function BlogHero({ data }) {
                 {item?.subtitle}
               </p>
             </div>
+            <Link href={`/`}>
             <div className="sm:flex sm:gap-8 gap-5 lg:pt-22 pt-10 px-5">
               <div className="md:block hidden  w-1/2">
                 {url ? (
@@ -34,7 +36,7 @@ export default function BlogHero({ data }) {
                   <div className="text-gray-600">{item?.image?.name}</div>
                 )}
               </div>
-              <div className="w-1/2">
+              <div className="sm:w-1/2">
                 <div className="flex gap-2">
                   {item.buttons.map((button, index) => (
                     <Button
@@ -56,6 +58,7 @@ export default function BlogHero({ data }) {
                 </p>
               </div>
             </div>
+            </Link>
           </div>
         );
       })}
