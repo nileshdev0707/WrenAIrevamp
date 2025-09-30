@@ -1,16 +1,25 @@
 import React from "react";
+import ReactMarkdown from "react-markdown";
 import Layout from "./layout";
-import { safeBackgroundImage, createServerSideProps } from "../utils/ssrHelpers";
+import {
+  safeBackgroundImage,
+  createServerSideProps,
+} from "../utils/ssrHelpers";
 import { getTermsOfUseApi } from "../service/apiClient";
 import { base } from "../service/serviceConfig";
 
-
 export default function TermsOfUse({ termsOfUse }) {
-
   const heroImage = termsOfUse?.hero?.[0]?.backgroundimage?.url;
 
+  // Extract SEO data from terms page data
+  const seoData = termsOfUse?.seo?.[0] || termsOfUse?.seo;
+
   return (
-    <Layout>
+    <Layout
+      seoData={seoData}
+      pageTitle="Terms of Use - Wren AI"
+      pageDescription="Wren AI Terms of Use - End User License Agreement and terms of service"
+    >
       <div className="px-6 max-w-6xl mx-auto">
         {termsOfUse?.hero?.length && (
           <div
@@ -44,11 +53,9 @@ export default function TermsOfUse({ termsOfUse }) {
           </div>
         )}
         {termsOfUse?.descriptionDetails && (
-          <div
-            dangerouslySetInnerHTML={{
-              __html: termsOfUse?.descriptionDetails,
-            }}
-          />
+          <div className="prose prose-slate max-w-none py-12">
+            <ReactMarkdown>{termsOfUse?.descriptionDetails}</ReactMarkdown>
+          </div>
         )}
       </div>
     </Layout>

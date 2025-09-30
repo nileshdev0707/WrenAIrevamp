@@ -1,14 +1,27 @@
 import Navbar from "../components/Navbar";
 import SiteFooter from "../components/SiteFooter";
+import SEO from "../components/SEO";
 
-export default function Layout({ children }) {
+export default function Layout({
+  children,
+  seoData,
+  pageTitle,
+  pageDescription,
+}) {
   return (
-    <div className="max-h-screen h-full justify-between flex flex-col">
+    <>
+      <SEO
+        seoData={seoData}
+        fallbackTitle={pageTitle}
+        fallbackDescription={pageDescription}
+      />
+      <div className="max-h-screen h-full justify-between flex flex-col">
         <div>
-          <Navbar/>
+          <Navbar />
           {children}
         </div>
-      <SiteFooter />
-    </div>
+        <SiteFooter />
+      </div>
+    </>
   );
 }

@@ -11,8 +11,15 @@ import { createServerSideProps } from "../utils/ssrHelpers";
 export default function Product({ product }) {
   const heroImage = product?.productHero?.[0]?.backgroundimage?.url;
 
+  // Extract SEO data from product page data
+  const seoData = product?.seo;
+
   return (
-    <Layout>
+    <Layout
+      seoData={seoData}
+      pageTitle="Product - Wren AI"
+      pageDescription="Discover Wren AI's powerful features and capabilities for data analytics and business intelligence."
+    >
       <div className="max-w-6xl mx-auto">
         <div
           style={{

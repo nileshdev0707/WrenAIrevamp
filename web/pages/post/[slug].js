@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useRouter } from "next/router";
+import ReactMarkdown from "react-markdown";
 import SocialShare from "../../components/blog/SocialShare";
 import BlogCard from "../../components/blog/BlogCard";
 import Layout from "../layout";
@@ -19,6 +20,9 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
   if (!post) {
     return <div>Post not found</div>;
   }
+
+  // Extract post attributes
+  const attributes = post.attributes || post;
 
   // Handle categories - they can be relation objects or simple strings
   const categories = (() => {
@@ -52,6 +56,15 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
     return [];
   })();
 
+  // Create SEO data for individual blog post
+  const seoData = attributes.seo || {
+    metaTitle: attributes.title,
+    metaDescription: attributes.excerpt,
+    metaImage:
+      attributes.featuredImage?.data?.attributes || attributes.featuredImage,
+    keywords: categories.join(", "),
+  };
+
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString("en-US", {
       year: "numeric",
@@ -61,7 +74,11 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
   };
 
   return (
-    <Layout>
+    <Layout
+      seoData={seoData}
+      pageTitle={attributes.title}
+      pageDescription={attributes.excerpt}
+    >
       <article className="max-w-6xl mx-auto px-5 py-12">
         {/* Article Header */}
         <div className="mb-8 pt-20 max-w-2xl ">

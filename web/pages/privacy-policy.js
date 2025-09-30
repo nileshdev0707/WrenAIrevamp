@@ -1,16 +1,25 @@
 import React from "react";
+import ReactMarkdown from "react-markdown";
 import Layout from "./layout";
-import { safeBackgroundImage, createServerSideProps } from "../utils/ssrHelpers";
+import {
+  safeBackgroundImage,
+  createServerSideProps,
+} from "../utils/ssrHelpers";
 import { getPrivacyPolicyApi } from "../service/apiClient";
 import { base } from "../service/serviceConfig";
 
-
 export default function PrivacyPolicy({ privacyPolicy }) {
-
   const heroImage = privacyPolicy?.hero?.[0]?.backgroundimage?.url;
 
+  // Extract SEO data from privacy policy page data
+  const seoData = privacyPolicy?.seo?.[0] || privacyPolicy?.seo;
+
   return (
-    <Layout>
+    <Layout
+      seoData={seoData}
+      pageTitle="Privacy Policy - Wren AI"
+      pageDescription="Wren AI Privacy Policy - How we collect, use, and protect your personal information"
+    >
       <div className="px-6 max-w-6xl mx-auto">
         {privacyPolicy?.hero?.length && (
           <div
@@ -41,11 +50,9 @@ export default function PrivacyPolicy({ privacyPolicy }) {
           </div>
         )}
         {privacyPolicy?.descriptionDetails && (
-          <div
-            dangerouslySetInnerHTML={{
-              __html: privacyPolicy?.descriptionDetails,
-            }}
-          />
+          <div className="prose prose-slate max-w-none py-12">
+            <ReactMarkdown>{privacyPolicy?.descriptionDetails}</ReactMarkdown>
+          </div>
         )}
       </div>
     </Layout>

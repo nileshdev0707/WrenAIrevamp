@@ -98,7 +98,7 @@ export default function Navbar({ serverLanguage }) {
     docs: 'docs',
     documentation: 'docs',
     pricing: 'pricing',
-    blog: 'blog',
+    blog: 'post',
     contact: 'contact',
     support: 'support',
     company: 'company',

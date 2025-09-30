@@ -1,15 +1,26 @@
 import React from "react";
+import ReactMarkdown from "react-markdown";
 import Layout from "./layout";
-import { safeBackgroundImage, createServerSideProps } from "../utils/ssrHelpers";
+import {
+  safeBackgroundImage,
+  createServerSideProps,
+} from "../utils/ssrHelpers";
 import { getSlaApi } from "../service/apiClient";
 import { base } from "../service/serviceConfig";
 
 export default function Sla({ sla }) {
-
   const heroImage = sla?.hero?.[0]?.backgroundimage?.url;
 
+  // Extract SEO data from SLA page data
+  const seoData = sla?.seo?.[0] || sla?.seo;
+
+  console.log({ sla });
   return (
-    <Layout>
+    <Layout
+      seoData={seoData}
+      pageTitle="Service Level Agreement - Wren AI"
+      pageDescription="Wren AI Service Level Agreement - Terms and conditions for our services"
+    >
       <div className="px-6 max-w-6xl mx-auto">
         {sla?.hero?.length && (
           <div
@@ -43,11 +54,9 @@ export default function Sla({ sla }) {
           </div>
         )}
         {sla?.html && (
-          <div
-            dangerouslySetInnerHTML={{
-              __html: sla?.html,
-            }}
-          />
+          <div className="prose prose-slate max-w-none py-12">
+            <ReactMarkdown>{sla?.html}</ReactMarkdown>
+          </div>
         )}
       </div>
     </Layout>
@@ -55,7 +64,4 @@ export default function Sla({ sla }) {
 }
 
 // Server-side rendering function
-export const getServerSideProps = createServerSideProps(
-  "/api/sla-page",
-  "sla"
-);
+export const getServerSideProps = createServerSideProps("/api/sla-page", "sla");

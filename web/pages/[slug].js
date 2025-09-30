@@ -1,4 +1,5 @@
 import axios from "axios";
+import ReactMarkdown from "react-markdown";
 import CTA from "../components/CTA";
 import Hero from "../components/Hero";
 import FeatureShowcase from "../components/FeatureShowcase";
@@ -6,15 +7,24 @@ import Logos from "../components/Logos";
 import Layout from "./layout";
 export default function Page({ page }) {
   if (!page) return <div />;
+
+  // Extract SEO data from page sections
+  const seoData = page.sections?.find(
+    (section) => section.__component === "shared.seo"
+  );
+
   return (
-    <Layout>
+    <Layout
+      seoData={seoData}
+      pageTitle={page.title}
+      pageDescription={page.excerpt || `${page.title} - Wren AI`}
+    >
       <div className="max-w-6xl mx-auto px-6 py-16">
         <h1 className="text-3xl font-bold">{page.title}</h1>
         {page.content && (
-          <div
-            className="prose prose-slate mt-6"
-            dangerouslySetInnerHTML={{ __html: page.content }}
-          />
+          <div className="prose prose-slate mt-6">
+            <ReactMarkdown>{page.content}</ReactMarkdown>
+          </div>
         )}
         {Array.isArray(page.sections) &&
           page.sections.map((sec, i) => {
@@ -108,7 +118,7 @@ export async function getStaticProps({ params, locale }) {
   const [pageRes, navRes] = await Promise.all([
     api
       .get(
-        `/api/pages?filters[slug][$eq]=${params.slug}&populate=sections.items,sections.buttons,sections.image&lang=${selectedLang}`
+        `/api/pages?filters[slug][$eq]=${params.slug}&populate=sections.items,sections.buttons,sections.image,sections.metaImage&lang=${selectedLang}`
       )
       .then((r) => r.data)
       .catch(() => null),

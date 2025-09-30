@@ -17,8 +17,15 @@ export default function Home({ homePageRes }) {
     ? homePageRes.TrustedBy.map((l) => l?.attributes ?? l)
     : [];
 
+  // Extract SEO data from home page data
+  const seoData = homePageRes?.seo;
+
   return (
-    <Layout>
+    <Layout
+      seoData={seoData}
+      pageTitle="Wren AI - AI-Powered Data Analytics Platform"
+      pageDescription="Transform your data into insights with Wren AI's intelligent analytics platform. Get started with AI-powered data analysis today."
+    >
       <div
         style={{
           backgroundImage: safeBackgroundImage(heroImage),

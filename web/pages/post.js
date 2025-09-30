@@ -8,7 +8,7 @@ import Layout from "./layout";
 import { base } from "../service/serviceConfig";
 import { safeBackgroundImage } from "../utils/ssrHelpers";
 
-export default function Blog({
+export default function Post({
   blogPageData,
   initialBlogs,
   pagination,
@@ -96,8 +96,15 @@ export default function Blog({
     { key: "Data Analytics", label: "Data Analytics", shortLabel: "Insight" },
   ];
 
+  // Extract SEO data from blog page data
+  const seoData = blogPageData?.seo;
+
   return (
-    <Layout>
+    <Layout
+      seoData={seoData}
+      pageTitle="Blog - Wren AI"
+      pageDescription="Latest insights, tutorials, and updates from Wren AI"
+    >
       <div className="max-w-6xl mx-auto">
         <div
           style={{
