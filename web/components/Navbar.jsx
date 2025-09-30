@@ -161,8 +161,8 @@ export default function Navbar({ serverLanguage }) {
       {/* Main Header */}
       <header className={`z-50 fixed w-full transition-transform duration-700 ease-out ${
         isScrolled 
-          ? 'translate-y-0' 
-          : 'translate-y-2 md:translate-y-3'
+          ? 'translate-y-3' 
+          : 'translate-y-4 md:translate-y-5'
       }`}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Floating Navigation Bar */}
