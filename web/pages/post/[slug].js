@@ -7,6 +7,7 @@ import Footer from "../../components/footer";
 import { HubspotEmbedForm } from "../../components/hubspotEmbedForm";
 import { safeImageSrc } from "../../utils/ssrHelpers";
 import Link from 'next/link';
+import ReactMarkdownDetails from "../../components/reactMarkDown";
 
 export default function BlogPost({ post, relatedPosts, blogPageData }) {
   const router = useRouter();
@@ -104,8 +105,9 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
                 />
               </div>
             )}
-            {/* Article Content */}
-            <div dangerouslySetInnerHTML={{ __html: post.content }} />
+            {/* Article Content
+            <div dangerouslySetInnerHTML={{ __html: post.content }} /> */}
+            <ReactMarkdownDetails data={post.content} />
           </div>
           <div className="col-span-1">
             {/* Social Share */}
