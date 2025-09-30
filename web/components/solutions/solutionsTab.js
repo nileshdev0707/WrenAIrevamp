@@ -51,8 +51,8 @@ const SolutionsTab = ({ data, isClient }) => {
             __html: activeTabData.description
           }} />
             {/* Call to Action Button */}
-            <div className="text-center">
-                  <Button  
+            <div className="flex flex-col sm:flex-row justify-center px-10">
+                  <Button
                   variant="primary"
                 onClick={() => window.open(getUrl(activeTabData?.button?.[0]?.url), activeTabData?.button?.[0]?.url?.startsWith("http") ? "_blank" : "_self", "noopener,noreferrer")}
                  className="cursor-pointer hover:-translate-y-0.5  transition-all   duration-200">

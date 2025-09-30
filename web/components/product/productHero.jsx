@@ -30,10 +30,10 @@ export default function ProductHero({ data }) {
               ))}
           </h1>
 
-          <p className="mt-5 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base">
+          <p className="mt-5 px-10 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base">
             {item?.subtitle}
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center px-10">
             {item?.buttons?.map((btn, index) => (
               // <div key={btn.id} className="glow-effect bg-glow-effect">
               <Button

@@ -22,7 +22,7 @@ export default function ContentBlock({ data }) {
               </h1>
               <p className="text-gray-600 text-sm mt-4 pb-8">{item.subtitle}</p>
               <div dangerouslySetInnerHTML={{ __html: item.description }} />
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2">
               {item?.contentBlockButton?.map((button, index) => (
                   <Button key={index} href={button?.url} 
                   variant={index === 0 ? "primary" : "gray"}

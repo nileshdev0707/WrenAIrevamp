@@ -35,7 +35,7 @@ export default function DevelopersHero({ data }) {
                   className="glow-effect flex items-center gap-2 bg-white border border-blue-400 text-black px-4 py-3 rounded-full font-medium text-sm cursor-pointer"
                   onClick={() => {
                     window.open(
-                      "https://github.com/repos/Canner/WrenAI",
+                      "https://github.com/Canner/WrenAI",
                       "_blank",
                       "noopener,noreferrer"
                     );
@@ -63,7 +63,7 @@ export default function DevelopersHero({ data }) {
                   className="glow-effect flex items-center gap-2 bg-white border border-blue-400 text-black px-4 py-3 rounded-full font-medium text-sm cursor-pointer"
                   onClick={() => {
                     window.open(
-                      "https://github.com/repos/Canner/WrenAI",
+                      "https://github.com/Canner/WrenAI",
                       "_blank",
                       "noopener,noreferrer"
                     );
@@ -99,10 +99,10 @@ export default function DevelopersHero({ data }) {
               </div>
             </div>
 
-            <p className="mt-5 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base">
+            <p className="mt-5 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base px-10">
               {item?.subtitle}
             </p>
-            <div className="flex gap-3 mt-14 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center px-10">
               {item?.buttons?.map((btn, index) => (
                 <Button
                   key={btn.id}
