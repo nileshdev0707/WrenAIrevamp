@@ -17,7 +17,6 @@ export default function ProductHero({ product }) {
   return (
     <div>
       {product?.map((item, index) => {
-      console.log("item ==> ", item?.cmsListItesm);
         const url = item?.image?.url;
         const image = item?.image;
         const isRightAligned = item?.alignment === "right";

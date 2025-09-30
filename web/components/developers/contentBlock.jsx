@@ -72,7 +72,7 @@ console.log("data ==> ", data);
               ) : (
                 <div dangerouslySetInnerHTML={{ __html: item.description }} />
               )}
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2">
               {item?.contentBlockButton?.map((button, index) => (
                   <Button key={index} href={button?.url} 
                   variant={index === 0 ? "primary" : "gray"}

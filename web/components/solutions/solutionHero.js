@@ -31,10 +31,10 @@ const SolutionHero = ({ data }) => {
           <br />
           <span>{secondPart}</span>
         </h1>
-        <p className="animate-fade-in-up animation-delay-600 text-lg sm:text-xl mx-auto max-w-3xl text-medium text-[#1E1E1E] md:mt-8 sm:mt-5 mt-3 md:mb-8 sm:mb-5 mb-3">
+        <p className="px-10 animate-fade-in-up animation-delay-600 text-lg sm:text-xl mx-auto max-w-3xl text-medium text-[#1E1E1E] md:mt-8 sm:mt-5 mt-3 md:mb-8 sm:mb-5 mb-3">
           {hero?.subtitle}
         </p>
-        <div className="animate-fade-in-up  animation-delay-400 flex flex-col sm:flex-row gap-3 md:mt-14 mt-8 justify-center">
+        <div className="animate-fade-in-up animation-delay-400 flex flex-col sm:flex-row gap-3 md:mt-14 mt-8 justify-center px-10">
           {hero?.buttons?.map((btn, index) => (
         <Button
           key={btn.id}
