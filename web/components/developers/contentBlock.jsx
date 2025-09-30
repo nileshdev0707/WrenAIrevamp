@@ -3,10 +3,19 @@ import { base } from "../../service/serviceConfig";
 import Button from "../common/Button";
 
 export default function ContentBlock({ data }) {
+console.log("data ==> ", data);
+  const [openIds, setOpenIds] = useState([]);
+
+  const toggle = (id) => {
+    if (openIds.includes(id)) {
+      setOpenIds(openIds.filter((openId) => openId !== id));
+    } else {
+      setOpenIds([...openIds, id]);
+    }
+  };
   return (
     <div>
       {data?.map((item, index) => {
-        console.log(index, 'index');
         const url = item?.image?.url;
         const image = item?.image;
         const isRightAligned = item?.alignment === "right";
@@ -21,7 +30,48 @@ export default function ContentBlock({ data }) {
                 {item.title}
               </h1>
               <p className="text-gray-600 text-sm mt-4 pb-8">{item.subtitle}</p>
-              <div dangerouslySetInnerHTML={{ __html: item.description }} />
+              {item?.cmsListItesm?.length > 0 ? (
+                <div className="space-y-4 mb-8">
+                  {item?.cmsListItesm.map((listItem) => {
+                    const isOpen = openIds.includes(listItem.id);
+                    return (
+                      <div
+                        key={listItem.id}
+                        className="border-b border-gray-200 py-3"
+                      >
+                        <div
+                          onClick={() => toggle(listItem.id)}
+                          className="cursor-pointer flex items-center justify-between w-full text-left gap-5"
+                        >
+                         <div className="flex items-center gap-5">
+                         {listItem?.icon?.url && (
+                              <img
+                                src={listItem.icon.url}
+                                alt={listItem.icon.name}
+                                className="w-5 h-5 flex-shrink-0"
+                              />
+                            )}
+                          <h3 className="font-semibold text-gray-900">
+                            {listItem.title}
+                          </h3>
+                          </div>
+                          <span
+                            className={`inline-block w-2 h-2 border-r-2 border-b-2 border-gray-600 transform transition-transform duration-300 ${
+                              isOpen ? "rotate-45" : "-rotate-45"
+                            }`}
+                          ></span>
+                        </div>
+
+                        {isOpen && (
+                          <div className="mt-2 text-sm text-gray-600">{listItem.description}</div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div dangerouslySetInnerHTML={{ __html: item.description }} />
+              )}
               <div className="flex gap-2">
               {item?.contentBlockButton?.map((button, index) => (
                   <Button key={index} href={button?.url} 

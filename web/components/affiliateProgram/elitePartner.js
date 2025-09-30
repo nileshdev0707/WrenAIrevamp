@@ -1,14 +1,13 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect, useRef } from 'react'
 import FrequentlyQuestions from './frequentlyQuestions'
 import HomeCTA from '../homeCTA'
 import { base } from '../../service/serviceConfig'
 
 const ElitePartner = ({data, tab}) => {
-console.log("tab ==> ", tab);
-  console.log(data,'elitePartnerData');
+  const eliteRef = useRef(null)
+  const affiliateRef = useRef(null)
   const elitePartnerData = data
   const [activeTab, setActiveTab] = useState(elitePartnerData?.CloudElitePartners?.[0]?.title)
-  console.log("activeTab ==> ", activeTab);
 
   const words = elitePartnerData?.CloudElitePartners?.[0]?.subtitle?.split(" ");
   const firstPart1 = words?.slice(0, 2).join(" ");
@@ -41,7 +40,18 @@ useEffect(() => {
     setActiveTab(elitePartnerData?.CloudElitePartners?.[1]?.title)
   }
 }, [tab])
+
+useEffect(() => {
+  if (activeTab === elitePartnerData?.CloudElitePartners?.[0]?.title) {
+    eliteRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+  if (activeTab === elitePartnerData?.CloudElitePartners?.[1]?.title) {
+    affiliateRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+}, [activeTab, elitePartnerData])
+
   return (
+    <div ref={activeTab === elitePartnerData?.CloudElitePartners?.[0]?.title ? eliteRef : affiliateRef} >
     <div className="bg-white md:py-16 py-10 px-4 sm:px-6 lg:px-0">
       <div className="">
         {/* Tab Buttons */}
@@ -134,6 +144,7 @@ useEffect(() => {
         )}
           <HomeCTA data={elitePartnerData?.bottomBlock} />
       </div>
+    </div>
     </div>
   )
 }

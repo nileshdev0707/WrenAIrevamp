@@ -17,6 +17,7 @@ export default function ProductHero({ product }) {
   return (
     <div>
       {product?.map((item, index) => {
+      console.log("item ==> ", item?.cmsListItesm);
         const url = item?.image?.url;
         const image = item?.image;
         const isRightAligned = item?.alignment === "right";
@@ -70,12 +71,7 @@ export default function ProductHero({ product }) {
                         </div>
 
                         {isOpen && (
-                          <div
-                            className="mt-2 text-sm text-gray-600"
-                            dangerouslySetInnerHTML={{
-                              __html: listItem.description,
-                            }}
-                          />
+                          <div className="mt-2 text-sm text-gray-600">{listItem.description}</div>
                         )}
                       </div>
                     );
