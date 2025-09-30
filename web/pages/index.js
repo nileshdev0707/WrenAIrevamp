@@ -27,12 +27,14 @@ export default function Home({ homePageRes }) {
       pageDescription="Transform your data into insights with Wren AI's intelligent analytics platform. Get started with AI-powered data analysis today."
     >
       <div
-        style={{
-          backgroundImage: safeBackgroundImage(heroImage),
-          WebkitBackgroundSize: "100%",
-          backgroundPosition: "center bottom",
-        }}
-        className="bg-cover"
+      style={{
+        backgroundImage: safeBackgroundImage(heroImage),
+        WebkitBackgroundSize: "100% 100%",
+        backgroundPosition: "center bottom",
+        backgroundColor: "rgba(255,255,255,0.4)", // white layer
+        backgroundBlendMode: "lighten",           // blend with image
+      }}
+        className="bg-cover bg-no-repeat"
       >
         <Hero data={hero} />
         <Logos items={logos} />

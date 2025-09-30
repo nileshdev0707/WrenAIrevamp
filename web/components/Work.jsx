@@ -158,13 +158,15 @@ export default function Work({ data }) {
             </div>
             
             {getTabContent(activeTab).image && (
-              <div className={`order-1 rounded-2xl bg-white shadow-lg ring-1 ring-gray-100 p-6 glow-effect`}
+              <div className={`order-1  glow-effect`}
                    style={{ animationDelay: '500ms' }}>
+                <div className="overflow-hidden  border border-[#D9D9D9] rounded-2xl bg-white shadow-lg">
                 <img 
                   src={`${getTabContent(activeTab).image[0].url?.startsWith('http') ? '' : base}${getTabContent(activeTab).image[0].url || getTabContent(activeTab).image}`} 
-                  alt={getTabContent(activeTab).title || 'Use case image'} 
-                  className="mx-auto rounded-lg max-w-full h-auto" 
-                />
+                    alt={getTabContent(activeTab).title || 'Use case image'} 
+                    className="rounded-lg max-w-full w-full h-auto" 
+                  />
+                </div>
               </div>
             )}
           </div>
