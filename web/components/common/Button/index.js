@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const Button = ({ 
+const   Button = ({ 
   children, 
   variant = 'primary', 
   size = 'md', 

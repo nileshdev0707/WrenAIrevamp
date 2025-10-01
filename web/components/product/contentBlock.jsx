@@ -26,7 +26,7 @@ export default function ProductHero({ product }) {
             className="grid grid-cols-1 md:grid-cols-2 xl:gap-10 gap-5 pt-20 md:pb-16 xl:px-0 px-5"
           >
             <div
-              className={`xl:px-10 px-5 order-1 ${
+              className={`xl:px-10 px-3 order-1 ${
                 isRightAligned ? "md:order-2" : "md:order-1 md:text-left"
               }`}
             >
@@ -79,7 +79,7 @@ export default function ProductHero({ product }) {
               ) : (
                 <div dangerouslySetInnerHTML={{ __html: item.description }} />
               )}
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2">
                 {item?.contentBlockButton?.map((button, index) => (
                   <Button
                     key={index}

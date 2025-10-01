@@ -51,7 +51,7 @@ const SolutionsTab = ({ data, isClient }) => {
             __html: activeTabData.description
           }} />
             {/* Call to Action Button */}
-            <div className="flex flex-col sm:flex-row justify-center px-10">
+            <div className="flex flex-col sm:flex-row justify-center px-6">
                   <Button
                   variant="primary"
                 onClick={() => window.open(getUrl(activeTabData?.button?.[0]?.url), activeTabData?.button?.[0]?.url?.startsWith("http") ? "_blank" : "_self", "noopener,noreferrer")}

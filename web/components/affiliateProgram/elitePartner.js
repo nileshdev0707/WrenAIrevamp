@@ -99,7 +99,7 @@ useEffect(() => {
         </div>
         {activeTab === elitePartnerData?.CloudElitePartners?.[1]?.title && (
           <>
-            <div className="flex justify-center gap-4 md:my-15 sm:my-10 my-5">
+            <div className="flex flex-col sm:flex-row justify-center gap-4 md:my-15 sm:my-10 my-5 px-4">
               <button
                 onClick={() => window.open('https://partners.getwren.ai/signup', '_blank')}
                 className="cursor-pointer bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] hover:-translate-y-0.5 transition-all text-white font-semibold md:py-4 py-3 md:px-8 px-4 rounded-lg lg:text-lg md:text-md text-sm duration-200 shadow-lg hover:shadow-xl"
@@ -152,19 +152,19 @@ useEffect(() => {
 const PerkCard = ({ perk }) => {
   const perkUrl = perk?.logo[0]?.url;
   return (
-    <div className="bg-white transition-shadow duration-300">
+    <div className="bg-white transition-shadow duration-300 flex flex-col items-center sm:items-start">
       {/* Icon */}
       <div className="md:w-12 md:h-12 w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center sm:mb-8.5 mb-4">
       <img src={`${perkUrl.startsWith('http') ? '' : base} ${perkUrl}`} alt={perk?.title} />
       </div>
 
       {/* Title */}
-      <h3 className="text-2xl font-bold text-[#1E1E1E] md:mb-4 mb-2">
+      <h3 className="text-2xl font-bold text-[#1E1E1E] md:mb-4 mb-2 text-center sm:text-left">
         {perk?.title}
       </h3>
 
       {/* Description */}
-      <p className="text-[#757575] leading-relaxed">
+      <p className="text-[#757575] leading-relaxed text-center sm:text-left">
         {perk.detail}
       </p>
     </div>

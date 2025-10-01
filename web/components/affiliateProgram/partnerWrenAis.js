@@ -55,15 +55,15 @@ const partnerData = data?.heroBlock[0];
 
   return (
     <div className="bg-[url('/image/ellipse.png')] bg-no-repeat bg-right" style={{backgroundPosition:'right 10px center',backgroundSize:'65%'}}>
-      <div  className="mx-auto lg:pb-30 md:pb-20 sm:pb-10 pb-5 lg:pt-40 md:pt-30 sm:pt-20 pt-10   max-w-6xl w-full grid lg:grid-cols-2 md:gap-12 sm:gap-5 gap-3 px-3">
+      <div  className="mx-auto lg:pb-30 md:pb-20 sm:pb-10 pb-5 lg:pt-40 sm:pt-30 pt-25 max-w-6xl w-full grid lg:grid-cols-2 md:gap-12 sm:gap-5 gap-3 px-3 sm:px-6">
         {/* Left Section - Promotional Content */}
-        <div className="md:space-y-8 sm:space-y-5 space-y-3">
+        <div className="md:space-y-8 sm:space-y-5 space-y-3 flex flex-col items-center sm:items-start">
           <div>
-            <h1 className="md:text-5xl sm:text-3xl text-2xl lg:text-6xl font-bold leading-tight">
-              <div className="text-blue-600">{partnerData?.title?.split(' ')[0] || 'Partner'}</div>
-              <div className="text-gray-900"> {partnerData?.title?.split(' ').slice(1).join(' ') || 'with Wren AI'}</div>
+            <h1 className="md:text-5xl sm:text-3xl text-3xl lg:text-6xl font-bold leading-tight">
+              <div className="text-blue-600 text-center sm:text-left">{partnerData?.title?.split(' ')[0] || 'Partner'}</div>
+              <div className="text-gray-900 text-center sm:text-left"> {partnerData?.title?.split(' ').slice(1).join(' ') || 'with Wren AI'}</div>
             </h1>
-            <p className="md:text-xl sm:text-lg text-base text-gray-700 sm:mt-4 mt-2">
+            <p className="md:text-xl sm:text-lg text-base text-gray-700 sm:mt-4 mt-2 text-center sm:text-left">
               {partnerData?.subTitle}
             </p>
           </div>

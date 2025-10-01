@@ -3,7 +3,7 @@ import { base } from "../../service/serviceConfig";
 import Button from "../common/Button";
 
 export default function ContentBlock({ data }) {
-console.log("data ==> ", data);
+  console.log("data ==> ", data);
   const [openIds, setOpenIds] = useState([]);
 
   const toggle = (id) => {
@@ -21,11 +21,17 @@ console.log("data ==> ", data);
         const isRightAligned = item?.alignment === "right";
         return (
           <div
-            key={index} 
+            key={index}
             className="grid grid-cols-1 md:grid-cols-2 xl:gap-10 gap-5 md:py-15 py-8 xl:px-0 px-5"
           >
-            <div className={`xl:px-10 px-5 order-1 ${isRightAligned ? "md:order-2" : "md:order-1 md:text-left"}`}>
-              <h2 className="text-blue-600 text-sm font-semibold">{item.badge}</h2>
+            <div
+              className={`xl:px-10 px-3 order-1 ${
+                isRightAligned ? "md:order-2" : "md:order-1 md:text-left"
+              }`}
+            >
+              <h2 className="text-blue-600 text-sm font-semibold">
+                {item.badge}
+              </h2>
               <h1 className="text-2xl md:text-3xl xl:text-4xl font-medium leading-tight mt-5">
                 {item.title}
               </h1>
@@ -43,17 +49,17 @@ console.log("data ==> ", data);
                           onClick={() => toggle(listItem.id)}
                           className="cursor-pointer flex items-center justify-between w-full text-left gap-5"
                         >
-                         <div className="flex items-center gap-5">
-                         {listItem?.icon?.url && (
+                          <div className="flex items-center gap-5">
+                            {listItem?.icon?.url && (
                               <img
                                 src={listItem.icon.url}
                                 alt={listItem.icon.name}
                                 className="w-5 h-5 flex-shrink-0"
                               />
                             )}
-                          <h3 className="font-semibold text-gray-900">
-                            {listItem.title}
-                          </h3>
+                            <h3 className="font-semibold text-gray-900">
+                              {listItem.title}
+                            </h3>
                           </div>
                           <span
                             className={`inline-block w-2 h-2 border-r-2 border-b-2 border-gray-600 transform transition-transform duration-300 ${
@@ -63,7 +69,9 @@ console.log("data ==> ", data);
                         </div>
 
                         {isOpen && (
-                          <div className="mt-2 text-sm text-gray-600">{listItem.description}</div>
+                          <div className="mt-2 text-sm text-gray-600">
+                            {listItem.description}
+                          </div>
                         )}
                       </div>
                     );
@@ -73,29 +81,36 @@ console.log("data ==> ", data);
                 <div dangerouslySetInnerHTML={{ __html: item.description }} />
               )}
               <div className="flex flex-col sm:flex-row gap-2">
-              {item?.contentBlockButton?.map((button, index) => (
-                  <Button key={index} href={button?.url} 
-                  variant={index === 0 ? "primary" : "gray"}
-                  target={button?.url?.startsWith("http") ? "_blank" : "_self"}
-                
+                {item?.contentBlockButton?.map((button, index) => (
+                  <Button
+                    key={index}
+                    href={button?.url}
+                    variant={index === 0 ? "primary" : "gray"}
+                    target={
+                      button?.url?.startsWith("http") ? "_blank" : "_self"
+                    }
                   >
                     {button?.label}
                   </Button>
-              ))}
+                ))}
               </div>
             </div>
-            
-           <div className={`md:block hidden order-2 ${isRightAligned ? "md:order-1" : "md:order-2"}`}>
+
+            <div
+              className={`md:block hidden order-2 ${
+                isRightAligned ? "md:order-1" : "md:order-2"
+              }`}
+            >
               <div className="glow-effect">
-              {url ? (
-                <img
-                  src={`${url.startsWith("http") ? "" : base}${url}`}
-                  alt={image?.name}
-                />
-              ) : (
-                <div className="text-gray-600">{image?.name}</div>
-              )}
-                </div>
+                {url ? (
+                  <img
+                    src={`${url.startsWith("http") ? "" : base}${url}`}
+                    alt={image?.name}
+                  />
+                ) : (
+                  <div className="text-gray-600">{image?.name}</div>
+                )}
+              </div>
             </div>
           </div>
         );

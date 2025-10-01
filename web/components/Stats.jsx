@@ -21,7 +21,7 @@ export default function Stats({ data }) {
         <div className="grid md:grid-cols-3 md:gap-6 sm:gap-4 gap-2 text-center 2xl:pt-20 xl:pt-15 lg:pt-14 md:pt-12 sm:pt-10 pt-8">
           {stats?.trustedByDataTeamsItem?.map((s, i) => (
             <div key={i} className="md:p-6 sm:p-4 p-2">
-              <div className="py-2 2xl:text-7xl xl:text-6xl md:text-5xl  sm:text-4xl text-3xl bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-clip-text text-transparent font-bold">{s.title}</div>
+              <div className="py-2 2xl:text-7xl xl:text-6xl text-5xl bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-clip-text text-transparent font-bold">{s.title}</div>
               <div className="mt-2 text-gray-600">
               <div className="glow-effect inline-flex md:text-base text-sm items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-white sm:px-4 px-2 sm:py-2 py-2 font-medium text-blue-700">
                 <span className="text-black sm:font-bold font-medium">{s.badge}</span></div>

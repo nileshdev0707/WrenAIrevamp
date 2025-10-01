@@ -31,7 +31,7 @@ export default function Footer({ data }) {
                     <p className="text-sm opacity-90 mt-4">{item?.subTitle}</p>
                   )}
                   {item?.btnBottomContentBlock?.length && (
-                    <div className="flex gap-5  mt-8">
+                    <div className="flex flex-col sm:flex-row gap-5  mt-8">
                       {item?.btnBottomContentBlock?.map((btn) => (
                         <Button
                           href={getUrl(btn?.url)}

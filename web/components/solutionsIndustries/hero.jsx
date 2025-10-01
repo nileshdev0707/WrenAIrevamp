@@ -23,18 +23,18 @@ export default function SolutionsIndustriesHero({ solutionsIndustries }) {
         <p className="mt-5 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base">
           {item?.subTitle}
         </p>
-        <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center">
+        <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center px-3 box-border">
             {item?.buttonContantBlock?.map((btn, index) => (
               <a
                 key={btn.id}
                 href={btn.url}
                 target={btn.url?.startsWith("http") ? "_blank" : "_self"}
                 onClick={() => setActiveIndex(index)} // set active button
-                className={`px-6 py-3 rounded-md font-medium text-sm transition-all duration-200 shadow-sm
+                className={`px-6 py-3 rounded-md font-medium text-md transition-all duration-200 shadow-md
                   ${
                     activeIndex === index
                       ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white"
-                      : "bg-white text-gray-800 border border-gray-200 hover:bg-gray-100"
+                      : "bg-white text-gray-800 box-border border border-gray-200 hover:bg-gray-100"
                   }`}
               >
                 {btn.label}

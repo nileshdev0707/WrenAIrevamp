@@ -15,14 +15,14 @@ export default function ContentBlock({ data }) {
             key={index}
             className="grid grid-cols-1 md:grid-cols-2 xl:gap-10 gap-5 lg:py-15 md:py-10 py-5 xl:px-0 px-5"
           >
-            <div className={`xl:px-10 px-5 order-1 ${isRightAligned ? "md:order-2" : "md:order-1 md:text-left"}`}>
+            <div className={`xl:px-10 px-3 order-1 ${isRightAligned ? "md:order-2" : "md:order-1 md:text-left"}`}>
               <h2 className="text-blue-600 text-sm font-semibold">{item.badge}</h2>
               <h2 className="text-2xl md:text-3xl xl:text-4xl font-medium leading-tight mt-5">
                 {item.title}
               </h2>
               <p className="text-gray-600 text-sm mt-4 pb-8">{item.subtitle}</p>
               <div dangerouslySetInnerHTML={{ __html: item.description }} />
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2">
               {item?.contentBlockButton?.map((button, index) => (
                   <Button 
                   key={index} 
@@ -30,7 +30,7 @@ export default function ContentBlock({ data }) {
                   variant={index === 0 ? "primary" : "gray"}
                   label={button?.label}
                   target={button?.url?.startsWith("http") ? "_blank" : "_self"}
-                  className="mt-5"
+                  className="mt-0 sm:mt-5"
                   >
                     {button?.label}
                   </Button>

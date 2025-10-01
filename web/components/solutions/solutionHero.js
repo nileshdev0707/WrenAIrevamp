@@ -22,11 +22,11 @@ const SolutionHero = ({ data }) => {
         backgroundPosition: "center top",
       }}
     >
-      <div className="bg-cover pt-10 pb-5 sm:py-12 md:py-16 lg:py-26 text-center">
+      <div className="bg-cover pt-10 pb-5 sm:py-12 md:py-16 lg:py-26 text-center sm:px-6 px-2">
         <button className="glow-effect animate-fade-in-up btn btn-primary bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-4 py-1 !rounded-full text-sm">
           {hero?.badge}
         </button>
-        <h1 className="animate-fade-in-up animation-delay-400 text-2xl sm:text-3xl md:text-4xl lg:text-[64px] font-medium leading-tight sm:mt-8 mt-5">
+        <h1 className="animate-fade-in-up animation-delay-400 text-3xl md:text-4xl lg:text-[64px] font-medium leading-tight sm:mt-8 mt-5">
           <span className="text-[#2F54EB]">{firstPart}</span>
           <br />
           <span>{secondPart}</span>
@@ -34,7 +34,7 @@ const SolutionHero = ({ data }) => {
         <p className="px-10 animate-fade-in-up animation-delay-600 text-lg sm:text-xl mx-auto max-w-3xl text-medium text-[#1E1E1E] md:mt-8 sm:mt-5 mt-3 md:mb-8 sm:mb-5 mb-3">
           {hero?.subtitle}
         </p>
-        <div className="animate-fade-in-up animation-delay-400 flex flex-col sm:flex-row gap-3 md:mt-14 mt-8 justify-center px-10">
+        <div className="animate-fade-in-up animation-delay-400 flex flex-col sm:flex-row gap-3 md:mt-14 mt-8 justify-center px-4">
           {hero?.buttons?.map((btn, index) => (
         <Button
           key={btn.id}

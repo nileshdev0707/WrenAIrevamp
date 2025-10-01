@@ -100,7 +100,7 @@ const EnterPrise = (data) => {
         ))}
       </div>
       <div
-        className="flex flex-col sm:flex-row px-5 justify-center md:mt-20 sm:mt-10 mt-5 animate-fade-in-up animation-delay-200"
+        className="flex flex-col sm:flex-row px-6 justify-center md:mt-20 sm:mt-10 mt-5 animate-fade-in-up animation-delay-200"
         onClick={() =>
           window.open(
             enterPrise?.button?.[0]?.url,

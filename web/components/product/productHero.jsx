@@ -8,7 +8,7 @@ export default function ProductHero({ data }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="py-10 sm:py-16 text-center">
+    <section className="py-10 sm:py-16 text-center sm:px-6 px-4">
       {data?.map((item, index) => (
         <div key={item.id}>
           <button className="btn btn-primary glow-effect bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-4 py-1 !rounded-full text-sm">
@@ -33,7 +33,7 @@ export default function ProductHero({ data }) {
           <p className="mt-5 px-10 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base">
             {item?.subtitle}
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center px-10">
+          <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center px-4">
             {item?.buttons?.map((btn, index) => (
               // <div key={btn.id} className="glow-effect bg-glow-effect">
               <Button

@@ -14,7 +14,7 @@ export default function DocumentHero({ data }) {
       }}
       className="bg-no-repeat pt-24 pb-10 max-w-6xl mx-auto bg-contain"
     >
-      <section className="py-10 md:py-16 text-center">
+      <section className="md:py-16 text-center sm:px-6 px-4">
         {data?.map((item, index) => {
           const words = item?.title?.split(" ");
           const firstPart = words.slice(0, 2).join(" ");
@@ -30,7 +30,7 @@ export default function DocumentHero({ data }) {
               <p className="mt-5 max-w-3xl mx-auto text-black xl:text-xl lg:text-lg text-base">
                 {item?.subtitle}
               </p>
-              <div className="flex gap-3 mt-14 justify-center">
+              <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center px-4">
                 {item?.buttons?.map((btn, index) => (
                   <Button
                     key={btn.id}

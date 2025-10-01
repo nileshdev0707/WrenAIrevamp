@@ -13,7 +13,7 @@ export default function DevelopersHero({ data }) {
   }, []);
 
   return (
-    <section className="py-10 md:py-16 text-center">
+    <section className="py-10 md:py-16 text-center sm:px-6 px-4">
       {data?.map((item, index) => {
         const words = item?.title?.split(" ");
         const firstPart = words?.slice(0, 3).join(" ");
@@ -102,7 +102,7 @@ export default function DevelopersHero({ data }) {
             <p className="mt-5 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base px-10">
               {item?.subtitle}
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center px-10">
+            <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center px-4">
               {item?.buttons?.map((btn, index) => (
                 <Button
                   key={btn.id}
