@@ -13,10 +13,10 @@ export default function FAQ({ frequentlyAskedQuestions }) {
   };
 
   return (
-    <section className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <section className="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-8">
       {/* Left Side Title */}
-      <div className="col-span-1">
-        <h2 className="text-3xl md:text-4xl font-medium leading-tight">
+      <div className="col-span-2 sm:col-span-1">
+        <h2 className="text-3xl md:text-4xl font-medium leading-tight text-center sm:text-left">
           Frequently <br /> Asked Questions
         </h2>
       </div>
