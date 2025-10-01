@@ -31,12 +31,6 @@
         ]
       },
       {
-        "id": 14,
-        "label": "Developers",
-        "url": "#",
-        "parent": []
-      },
-      {
         "id": 15,
         "label": "Solutions",
         "url": "#",
@@ -65,7 +59,7 @@
       },
       {
         "id": 16,
-        "label": "Docs",
+        "label": "Resources",
         "url": "#",
         "parent": []
       },
@@ -78,6 +72,12 @@
       {
         "id": 18,
         "label": "Blog",
+        "url": "#",
+        "parent": []
+      },
+      {
+        "id": 18,
+        "label": "Partners",
         "url": "#",
         "parent": []
       }

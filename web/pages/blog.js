@@ -8,7 +8,7 @@ import Layout from "./layout";
 import { base } from "../service/serviceConfig";
 import { safeBackgroundImage } from "../utils/ssrHelpers";
 
-export default function Post({
+export default function Blog({
   blogPageData,
   initialBlogs,
   pagination,

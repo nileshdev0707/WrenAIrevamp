@@ -142,7 +142,7 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
                 <div class="space-y-8">
                 {post.relatedPosts.map((post) => (
                   <div class="space-y-2">
-                    <Link href={`/post/${post.slug}`}>
+                    <Link href={`/blog.js/${post.slug}`}>
                     <span class="mb-4 inline-block px-3 py-2 text-xs font-medium bg-gray-100 text-gray-700 rounded-md">
                       {post?.publishedAt
                         ? new Date(post.publishedAt).toLocaleDateString(

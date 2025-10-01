@@ -56,7 +56,7 @@ export default function BlogCard({ post, showExcerpt = true, size = 'default' })
   })();
   
   return (
-    <div onClick={() => window.open(`/post/${attributes.slug}`, '_self')} className={cardClasses}>
+    <div onClick={() => window.open(`/blog/${attributes.slug}`, '_self')} className={cardClasses}>
       {featuredImage && (
         <div className="aspect-w-16 aspect-h-9">
           <img
@@ -86,7 +86,7 @@ export default function BlogCard({ post, showExcerpt = true, size = 'default' })
           )}
         </div>
         <h3 className={`${titleClasses} text-gray-900 mb-2`}>
-          <Link href={`/post/${attributes.slug}`} className="hover:text-blue-600 transition-colors">
+          <Link href={`/blog/${attributes.slug}`} className="hover:text-blue-600 transition-colors">
             {attributes.title}
           </Link>
         </h3>

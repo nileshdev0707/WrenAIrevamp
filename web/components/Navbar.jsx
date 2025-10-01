@@ -99,7 +99,7 @@ export default function Navbar({ serverLanguage }) {
     docs: 'docs',
     documentation: 'docs',
     pricing: 'pricing',
-    blog: 'post',
+    blog: 'blog',
     contact: 'contact',
     support: 'support',
     company: 'company',
@@ -107,6 +107,7 @@ export default function Navbar({ serverLanguage }) {
     privacy: 'privacy',
     terms: 'terms',
     security: 'security',
+    partners: 'partner',
   }
 
   const fallback = [
@@ -114,6 +115,7 @@ export default function Navbar({ serverLanguage }) {
     { label: isClient ? t("developers") : "Developers", url: '/developers' },
     { label: isClient ? t("solutions") : "Solutions", url: '/solutions' },
     { label: isClient ? t("docs") : "Docs", url: '/docs' },
+    { label: isClient ? t("partners ") : "partner", url: '/partner' },
   ]
 
   const baseLinks = Array.isArray(navigation?.links) && navigation.links.length > 0 ? navigation.links : fallback

@@ -8,43 +8,53 @@ export default function SiteFooter() {
 
   const cols = [
     {
-      title: t("company"),
+      title: t("Product"),
       links: [
-        // { label: "Careers", slug: "careers" },
-        // { label: "Press", slug: "press" },
-        { label: t("security"), slug: "https://cannerdata.com/terms/security" },
-        { label: t("caseStudies"), slug: "solutions-industries" },
+        { label: "Use Cases", slug: "product" },
+        { label: "Enterprise Cloud", slug: "/solutions?enterprise_cloud" },
+        { label: t("Self-hosted Pro"), slug: "https://cannerdata.com/terms/security" },
+        { label: t("Self-hosted Enterprise"), slug: "solutions-industries" },
+        { label: t("Wren AI OSS"), slug: "solutions-industries" },
       ],
     },
     {
-      title: t("contact"),
+      title: t("Solutions"),
       links: [
-        { label: t("contact"), slug: "contact" },
-        { label: t("discord"), slug: "https://discord.gg/5DvshJqG8Z" },
-        // { label: "Merch", slug: "merch" },
-      ],
-    },
-    {
-      title: t("partners"),
-      links: [
-        { label: t("affiliateProgram"), slug: "affiliate-program?tab=affiliate" },
-        { label: t("elitePartners"), slug: "affiliate-program?tab=elite" },
+        { label: t("Manufacturing"), slug: "https://wrenai.notion.site/" },
+        { label: t("Banking & Finance"), slug: "/" },
+        { label: t("Healthcare"), slug: "https://wrenaicloud.statuspage.io/" },
+        { label: t("Retail & E-commerce"), slug: "/" },
+        { label: t("Media & Entertainment"), slug: "/" },
+        { label: t("Automotive"), slug: "/" },
+        { label: t("DTC Brands"), slug: "/" },
       ],
     },
     {
       title: t("resources"),
       links: [
-        { label: t("publicRoadmap"), slug: "https://wrenai.notion.site/" },
-        { label: t("sla"), slug: "sla" },
-        { label: t("status"), slug: "https://wrenaicloud.statuspage.io/" },
-        { label: t("support"), slug: "support" },
+        { label: t("Wren AI Documentation"), slug: "https://docs.getwren.ai/cp/overview" },
+        { label: t("Blog"), slug: "blog" },
+        { label: t("Support Portal"), slug: "support" },
+        { label: t("Public Roadmap"), slug: "/" }
       ],
     },
     {
-      title: t("legal"),
+      title: t("Community"),
+      links: [
+        { label: t("Elite Partners"), slug: "partner?tab=elite" },
+        { label: t("Affiliate Partners"), slug: "partner?tab=affiliate" },
+        { label: t("Join Discord"), slug: "https://discord.gg/5DvshJqG8Z" },
+        { label: "GitHub", slug: "https://api.github.com/Canner/WrenAI" },
+      ],
+    },
+    {
+      title: t("Company"),
       links: [
         { label: t("privacyPolicy"), slug: "privacy-policy" },
+        { label: t("Security Policy"), slug: "terms-of-use" },
         { label: t("termsOfUse"), slug: "terms-of-use" },
+        { label: t("Service Status"), slug: "https://wrenaicloud.statuspage.io/" },
+        { label: t("SLA"), slug: "sla" }
       ],
     },
   ];
@@ -102,6 +112,17 @@ export default function SiteFooter() {
                     </li>
                   );
                 })}
+                {col.title === "Company" && (
+                <li>
+                  <a
+                    href="https://wrenaicloud.statuspage.io/"
+                    className="hover:text-gray-900"
+                  >
+                  <img className="h-20" src='https://capable-butterfly-84cab64826.media.strapiapp.com/footer_Logo_182b5bfa92.png'/>
+                  </a>
+                </li>
+
+                )}
               </ul>
             </div>
           ))}

@@ -42,11 +42,21 @@ useEffect(() => {
 }, [tab])
 
 useEffect(() => {
-  if (activeTab === elitePartnerData?.CloudElitePartners?.[0]?.title) {
-    eliteRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
-  if (activeTab === elitePartnerData?.CloudElitePartners?.[1]?.title) {
-    affiliateRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  if (tab) {
+    const scrollWithOffset = (ref) => {
+      const top = ref.current.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: top - 100, // <-- offset of 100px
+        behavior: 'smooth'
+      });
+    };
+
+    if (activeTab === elitePartnerData?.CloudElitePartners?.[0]?.title) {
+      scrollWithOffset(eliteRef);
+    }
+    if (activeTab === elitePartnerData?.CloudElitePartners?.[1]?.title) {
+      scrollWithOffset(affiliateRef);
+    }
   }
 }, [activeTab, elitePartnerData])
 
