@@ -114,7 +114,7 @@ export default function Post({
           }}
           className="bg-no-repeat pt-24 max-w-6xl mx-auto"
         >
-          <BlogHero data={blogPageData?.hero} />
+          <BlogHero data={blogPageData?.hero} blogs={blogs}/>
         </div>
 
         {/* Blog Content */}
