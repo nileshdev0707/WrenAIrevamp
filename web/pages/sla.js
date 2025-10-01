@@ -29,10 +29,10 @@ export default function Sla({ sla }) {
             }}
             className="bg-no-repeat py-16 max-w-6xl mx-auto bg-cover"
           >
-            <section className="py-10 md:py-16 text-center">
+            <section className="py-3 sm:py-16 text-center">
               {sla?.hero?.map((item, index) => (
                 <div key={index}>
-                  <h1 className="text-3xl sm:text-4xl lg:text-6xl font-medium leading-tight xl:pt-25 lg:pt-20 md:pt-15 pt-10">
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium leading-tight xl:pt-25 lg:pt-20 md:pt-15 pt-10">
                     {item?.title?.split("SLA").map((part, idx) =>
                       idx === 0 ? (
                         <span key={idx}>
@@ -52,7 +52,7 @@ export default function Sla({ sla }) {
           </div>
         )}
         {sla?.html && (
-          <div className="max-w-4xl mx-auto md:py-12 py-6">
+          <div className="max-w-4xl mx-auto md:py-12">
             <ReactMarkdownDetails data={sla?.html} />
           </div>
         )}

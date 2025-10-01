@@ -48,7 +48,7 @@ export default function PrivacyPolicy({ privacyPolicy }) {
           </div>
         )}
         {privacyPolicy?.descriptionDetails && (
-          <div className="max-w-4xl mx-auto md:py-12 py-6">
+          <div className="max-w-4xl mx-auto md:py-12">
           <ReactMarkdownDetails data={privacyPolicy?.descriptionDetails} />
           </div>
         )}

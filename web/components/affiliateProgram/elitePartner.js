@@ -119,10 +119,10 @@ useEffect(() => {
           {activeTab === elitePartnerData?.CloudElitePartners?.[0]?.title && (
          <div>
           <div className='bg-[#F7FBFE] lg:mt-20 sm:mt-10 mt-5'>
-            <div className='max-w-6xl mx-auto lg:py-20 md:py-10 py-5'>
+            <div className='max-w-6xl mx-auto lg:py-20 md:py-10 py-5 px-2'>
 
               <div className='text-center max-w-2xl mx-auto'>
-              <h2 className='md:text-[42px] text-[32px] font-medium text-[#1E1E1E]'>
+                <h2 className='md:text-[42px] text-[32px] font-medium text-[#1E1E1E]'>
                  {affiliatePartner?.headline}
               </h2>
               </div>
@@ -131,7 +131,7 @@ useEffect(() => {
                       <img src={`${affiliatePartnerUrl?.startsWith('http') ? '' : base} ${affiliatePartnerUrl}`} alt={affiliatePartner?.title}/>
                       </div>
               </div>
-              <div className='flex justify-center'>
+              <div className='flex flex-col sm:flex-row justify-center'>
                 <button onClick={() => window.open(affiliatePartner?.button?.url, '_self')} className='cursor-pointer bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] hover:-translate-y-0.5 transition-all text-white font-semibold md:py-4 py-3 md:px-8 px-4 rounded-lg lg:text-lg md:text-md text-sm duration-200 shadow-lg hover:shadow-xl'>
                   {affiliatePartner?.button?.label}
                 </button>
