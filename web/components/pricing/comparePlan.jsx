@@ -18,7 +18,7 @@ console.log("tiers ==> ", tiers);
   ];
 
   return (
-    <div>
+    <div className="px-3">
       {tiers?.length > 0 && (
         <section className="max-w-6xl mx-auto py-10">
           <h2 className="text-4xl font-medium text-center">Compare Plans</h2>

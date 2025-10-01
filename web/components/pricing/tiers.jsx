@@ -5,7 +5,7 @@ export default function Tiers({ tiers, billing }) {
   const getUrl = useLocalizedUrl();
 
   return (
-    <div className="mt-10 grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+    <div className="mt-10 grid md:grid-cols-3 gap-6 max-w-6xl mx-auto px-3">
       {tiers?.map((item, index) => (
         <div
           key={index}

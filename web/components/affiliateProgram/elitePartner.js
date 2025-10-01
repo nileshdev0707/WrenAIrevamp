@@ -119,7 +119,7 @@ useEffect(() => {
           {activeTab === elitePartnerData?.CloudElitePartners?.[0]?.title && (
          <div>
           <div className='bg-[#F7FBFE] lg:mt-20 sm:mt-10 mt-5'>
-            <div className='max-w-6xl mx-auto lg:py-20 md:py-10 py-5 px-2'>
+            <div className='max-w-6xl mx-auto lg:py-20 md:py-10 py-5 px-4'>
 
               <div className='text-center max-w-2xl mx-auto'>
                 <h2 className='md:text-[42px] text-[32px] font-medium text-[#1E1E1E]'>

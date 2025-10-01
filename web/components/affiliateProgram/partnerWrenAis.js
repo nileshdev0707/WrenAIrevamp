@@ -55,7 +55,7 @@ const partnerData = data?.heroBlock[0];
 
   return (
     <div className="bg-[url('/image/ellipse.png')] bg-no-repeat bg-right" style={{backgroundPosition:'right 10px center',backgroundSize:'65%'}}>
-      <div  className="mx-auto lg:pb-30 md:pb-20 sm:pb-10 pb-5 lg:pt-40 sm:pt-30 pt-25 max-w-6xl w-full grid lg:grid-cols-2 md:gap-12 sm:gap-5 gap-3 px-3 sm:px-6">
+      <div  className="mx-auto lg:pb-30 md:pb-20 sm:pb-10 pb-5 lg:pt-40 sm:pt-30 pt-25 max-w-6xl w-full grid lg:grid-cols-2 md:gap-12 sm:gap-5 gap-3 px-5 sm:px-6">
         {/* Left Section - Promotional Content */}
         <div className="md:space-y-8 sm:space-y-5 space-y-3 flex flex-col items-center sm:items-start">
           <div>

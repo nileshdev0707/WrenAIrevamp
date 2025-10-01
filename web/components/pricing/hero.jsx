@@ -10,7 +10,7 @@ export default function Hero({
   const title = pricing?.title || "";
 
   return (
-    <section className="text-center">
+    <section className="text-center px-3">
       <h1 className="text-3xl sm:text-5xl lg:text-6xl font-medium leading-tight md:mt-24 mt-16">
         {title.split(" ").map((word, i) =>
           word === "Pricing" ? (

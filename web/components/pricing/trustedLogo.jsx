@@ -49,7 +49,7 @@ export default function TrustedLogos({ items, title }) {
   }, [items.length])
 
   return (
-    <section className="py-20">
+    <section className="py-20 px-3">
       <div className="mx-auto">
         <h2 className="text-2xl font-medium text-center uppercase pb-6 text-gray-500">{title}</h2>
         <div 
