@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { base } from "../../service/serviceConfig";
 import Button from "../common/Button";
 import { useLocalizedUrl } from "../../utils/languageUtils";
 
-export default function ProductHero({ product }) {
-  const [openIds, setOpenIds] = useState([]);
+export default function ProductHero({ product, tab }) {
+const sectionRefs = useRef([]);
+
+const [openIds, setOpenIds] = useState([]);
 
   const toggle = (id) => {
     if (openIds.includes(id)) {
@@ -14,6 +16,32 @@ export default function ProductHero({ product }) {
     }
   };
   const getUrl = useLocalizedUrl();
+
+  const tabToIndex = {
+    "natural-language-prompts": 0,
+    "agentic-analytics": 1,
+    "distributed-data-sources": 2,
+    "no-code-sql-generation": 3,
+    "unified-semantic-layer": 4,
+    "ai-modeling": 5,
+  };
+  
+  
+  useEffect(() => {
+    const index = tabToIndex[tab];
+    if (index != null && sectionRefs.current[index]) {
+      const element = sectionRefs.current[index];
+      const rect = element.getBoundingClientRect();
+      const scrollTop = document.documentElement.scrollTop;
+  
+      window.scrollTo({
+        top: rect.top + scrollTop - 100, // 👈 offset 50px from top
+        behavior: "smooth",
+      });
+    }
+  }, [tab]);
+  
+
   return (
     <div>
       {product?.map((item, index) => {
@@ -23,6 +51,7 @@ export default function ProductHero({ product }) {
         return (
           <div
             key={index}
+            ref={(el) => (sectionRefs.current[index] = el)}
             className="grid grid-cols-1 md:grid-cols-2 xl:gap-10 gap-5 pt-20 md:pb-16 xl:px-0 px-5"
           >
             <div

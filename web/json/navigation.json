@@ -5,57 +5,104 @@
     "updatedAt": "2025-09-12T08:56:55.733Z",
     "publishedAt": "2025-09-12T08:56:55.745Z",
     "links": [
-        {
-            "id": 13,
-            "label": "Product",
-            "url": "#"
-        },
-        {
-            "id": 14,
-            "label": "Developers",
-            "url": "#"
-        },
-        {
-            "id": 15,
-            "label": "Solutions",
-            "url": "#"
-        },
-        {
-            "id": 16,
-            "label": "Docs",
-            "url": "#"
-        },
-        {
-            "id": 17,
-            "label": "Pricing",
-            "url": "#"
-        },
-        {
-            "id": 18,
-            "label": "Blog",
-            "url": "#"
-        }
+      {
+        "id": 13,
+        "label": "Product",
+        "url": "#",
+        "parent": [
+            {
+                "title": "Business Use Cases",
+                "children": [
+                  { "label": "Natural Language Prompts", "url": "/product?tab=natural-language-prompts", "description": "Query any dataset using plain English." },
+                  { "label": "Agentic Analytics", "url": "/product?tab=agentic-analytics", "description": "Conversational, agent-powered analytics for BI & SaaS data." },
+                  { "label": "Distributed Data Sources", "url": "/product?tab=distributed-data-sources", "description": "Connect to Snowflake, BigQuery, Redshift, Databricks, Postgres, and more." },
+                  { "label": "No-Code SQL Generation", "url": "/product?tab=no-code-sql-generation", "description": "Generate optimized SQL instantly without engineering help." },
+                  { "label": "Unified Semantic Layer", "url": "/product?tab=unified-semantic-layer", "description": "Consistent business metrics across distributed data." },
+                  { "label": "AI Modeling", "url": "/product?tab=ai-modeling", "description": "Build and deploy custom predictive models in minutes." }
+                ]
+              },
+              {
+                "title": "For Open-Source Community",
+                "children": [
+                  { "label": "Wren AI GenBI AI Agent", "url": "/developers", "description": "Open-source GenBI AI Agent that empowers data-driven teams to chat with their data to generate Text-to-SQL, charts, spreadsheets, reports, dashboards and BI." },
+                  { "label": "Wren Engine", "url": "https://github.com/Canner/wren-engine", "description": "The Semantic Engine for Model Context Protocol(MCP) Clients and AI Agents" }
+                ]
+              }
+        ]
+      },
+      {
+        "id": 14,
+        "label": "Developers",
+        "url": "#",
+        "parent": []
+      },
+      {
+        "id": 15,
+        "label": "Solutions",
+        "url": "#",
+        "parent": [
+          {
+            "title": "Industries",
+            "children": [
+              { "label": "Manufacturing", "url": "/solutions-industries", "description": "AI-driven analytics for complex data, enabling real-time insights and process optimization." },
+              { "label": "Banking & Finance", "url": "/", "description": "Fraud detection, compliance-ready BI, and digital transformation insights." },
+              { "label": "Healthcare", "url": "/", "description": "Optimize patient care and operational efficiency." },
+              { "label": "Retail & E-Commerce", "url": "/", "description": "Drive loyalty, personalization, and revenue insights." },
+              { "label": "Media & Entertainment", "url": "/", "description": "Optimize content performance and boost audience engagement." },
+              { "label": "Automotive", "url": "/", "description": "Fleet analytics, connected cars, and supply chain optimization." },
+              { "label": "DTC Brands", "url": "/", "description": "Optimize CAC, LTV, and growth performance." }
+            ]
+          },
+          {
+            "title": "Enterprise",
+            "children": [
+              { "label": "Enterprise Cloud", "url": "/solutions?tab=enterprise-cloud", "description": "White-label dashboards & widgets for embedding analytics into apps." },
+              { "label": "Self-hosted Pro", "url": "/solutions?tab=self-hosted-pro", "description": "AI agents deliver actionable insights proactively." },
+              { "label": "Self-hosted Enterprise", "url": "/solutions?tab=self-hosted-enterprise", "description": "Build customizable analytics experiences for SaaS customers." }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 16,
+        "label": "Docs",
+        "url": "#",
+        "parent": []
+      },
+      {
+        "id": 17,
+        "label": "Pricing",
+        "url": "#",
+        "parent": []
+      },
+      {
+        "id": 18,
+        "label": "Blog",
+        "url": "#",
+        "parent": []
+      }
     ],
     "logo": {
-        "id": 4,
-        "documentId": "hbhflityo9kqabagbo4mpk8v",
-        "name": "Logo.png",
-        "alternativeText": null,
-        "caption": null,
-        "width": 120,
-        "height": 30,
-        "formats": null,
-        "hash": "Logo_b130950efe",
-        "ext": ".png",
-        "mime": "image/png",
-        "size": 0.92,
-        "url": "/uploads/Logo_b130950efe.png",
-        "previewUrl": null,
-        "provider": "local",
-        "provider_metadata": null,
-        "createdAt": "2025-09-12T08:56:48.724Z",
-        "updatedAt": "2025-09-12T08:56:48.724Z",
-        "publishedAt": "2025-09-12T08:56:48.724Z"
+      "id": 4,
+      "documentId": "hbhflityo9kqabagbo4mpk8v",
+      "name": "Logo.png",
+      "alternativeText": null,
+      "caption": null,
+      "width": 120,
+      "height": 30,
+      "formats": null,
+      "hash": "Logo_b130950efe",
+      "ext": ".png",
+      "mime": "image/png",
+      "size": 0.92,
+      "url": "/uploads/Logo_b130950efe.png",
+      "previewUrl": null,
+      "provider": "local",
+      "provider_metadata": null,
+      "createdAt": "2025-09-12T08:56:48.724Z",
+      "updatedAt": "2025-09-12T08:56:48.724Z",
+      "publishedAt": "2025-09-12T08:56:48.724Z"
     },
     "pages": []
-}
+  }
+  

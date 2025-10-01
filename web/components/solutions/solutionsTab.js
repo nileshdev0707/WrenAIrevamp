@@ -1,19 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import { base } from "../../service/serviceConfig";
 import { useLocalizedUrl } from "../../utils/languageUtils";
 import Button from "../common/Button";
 
-const SolutionsTab = ({ data, isClient }) => {
-    const solutions = data?.SolutionsTab;
-    const getUrl = useLocalizedUrl();
-
+const SolutionsTab = ({ data, isClient, tab }) => {
+  const solutions = data?.SolutionsTab;
+  const getUrl = useLocalizedUrl();
   const [activeTab, setActiveTab] = useState(0);
+  console.log("activeTab ==> ", activeTab);
   
   // Get the active tab data
   const activeTabData = solutions?.[activeTab] || {};
   
+  const sectionRefs = useRef([]);
+  sectionRefs.current = [];
+
+  const addToRefs = (el) => {
+    if (el && !sectionRefs.current.includes(el)) {
+      sectionRefs.current.push(el);
+    }
+  };
+
+ const scrollToSection = (index) => {
+  const element = sectionRefs.current[index];
+  if (element) {
+    const top = element.getBoundingClientRect().top + window.scrollY - 100; // 100px offset
+    window.scrollTo({ top, behavior: "smooth" });
+  }
+};
+
+// On URL tab change
+useEffect(() => {
+  const mapping = {
+    "enterprise-cloud": 0,
+    "self-hosted-pro": 1,
+    "self-hosted-enterprise": 2,
+  };
+  if (tab && mapping[tab] != null) {
+    setActiveTab(mapping[tab]);
+    scrollToSection(mapping[tab]);
+  }
+}, [tab]);
+
   return (
-      <div className="max-w-7xl mx-auto lg:mb-25 md:mb-20 sm:mb-15 mb-10">
+      <div className="max-w-7xl mx-auto lg:mb-25 md:mb-20 sm:mb-15 mb-10" ref={addToRefs}>
         {/* Tab Navigation */}
         <div className="flex justify-center">
           <div className="bg-white flex overflow-x-auto scrollbar-hide gap-2 rounded-xl p-2 border border-gray-200">
@@ -32,7 +62,7 @@ const SolutionsTab = ({ data, isClient }) => {
         </div>
 
         {/* Main Content Block */}
-        <div className="bg-white rounded-2xl lg:my-18 md:my-15 sm:my-10 my-6">
+        <div className="bg-white rounded-2xl lg:my-18 md:my-15 sm:my-10 my-6" >
           <div className="text-center md:mb-8 sm:mb-6 mb-4">
             {/* Title with Badge */}
             <div className="sm:mb-4 mb-2">

@@ -6,8 +6,11 @@ import EnterPrise from "../components/solutions/enterPrise";
 import Industry from "../components/solutions/Industry";
 import PartnerEcosystem from "../components/solutions/partnerEcosystem";
 import { createServerSideProps } from "../utils/ssrHelpers";
+import { useRouter } from "next/router";
 
 export default function Solutions({ solutions }) {
+  const router = useRouter();
+  const { tab } = router.query
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -21,7 +24,7 @@ export default function Solutions({ solutions }) {
       {solutions?.hero.length > 0 && (
         <div className="max-w-7xl mx-auto lg:px-6 md:px-4 px-2">
           <SolutionHero data={solutions} />
-          <SolutionsTab data={solutions} isClient={isClient} />
+          <SolutionsTab data={solutions} isClient={isClient} tab={tab} />
         </div>
       )}
       {solutions?.EnterpriseFeaturesBlock.length > 0 && (

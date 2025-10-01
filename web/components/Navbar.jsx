@@ -75,6 +75,7 @@ export default function Navbar({ serverLanguage }) {
   // Use Next.js i18n translation hook
   const { t, locale, isClient } = useTranslation();
   const [hydrated, setHydrated] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   // Use router locale as the effective language
   const effectiveLanguage = locale || serverLanguage || 'en';
 
@@ -118,9 +119,9 @@ export default function Navbar({ serverLanguage }) {
   const baseLinks = Array.isArray(navigation?.links) && navigation.links.length > 0 ? navigation.links : fallback
 
   // Normalize: if a CMS link has url '#', replace with the matching page slug if available
-  const normalized = baseLinks.map((l) => {
-    const label = l.label || l.title || ''
-    const url = l.url || ''
+  const normalized = baseLinks.map((link) => {
+    const label = link.label || link.title || ''
+    const url = link.url || ''
     const normalizedLabel = label.toString().trim().toLowerCase()
     const slug = pageSlugByLabel[normalizedLabel] || defaultMapping[normalizedLabel]
     const finalUrl = (!url || url === '#') && slug ? `/${slug}` : (url || '#')
@@ -128,11 +129,11 @@ export default function Navbar({ serverLanguage }) {
     // Use translation hook for navigation labels to prevent hydration mismatch
     const translatedLabel = isClient ? t(normalizedLabel, label) : label
     
-    return { label: translatedLabel, url: finalUrl }
+    return { label: translatedLabel, url: finalUrl, parent: link.parent }
   })
 
   // Append dynamic pages not already present
-  const existing = new Set(normalized.map((l) => l.url))
+  const existing = new Set(normalized.map((link) => link.url))
   const appended = dynamicPages
     .map((p) => {
       const label = p.navLabel || p.title || p.label || ''
@@ -142,9 +143,10 @@ export default function Navbar({ serverLanguage }) {
     })
     .filter((p) => !existing.has(p.url))
 
-  const links = normalized.concat(appended)
+  const linksList = normalized.concat(appended)
   const [open, setOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [expandedIndex, setExpandedIndex] = useState(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -174,35 +176,45 @@ export default function Navbar({ serverLanguage }) {
                   <Link href='/' className="flex items-center gap-2 group">
                     {navigation?.logo?.url && <img src={`${navigation?.logo?.url.startsWith('http') ? '' : base}${navigation?.logo?.url}`} alt={navigation?.logo?.name} className="max-h-8 object-contain" />}
                   </Link>
-                  
+
                   {/* Desktop Navigation */}
-                  <nav className={`hidden lg:flex items-center xl:gap-8 gap-4 ${!isClient ? 'opacity-0' : 'opacity-100'} transition-opacity duration-200`} key={`nav-${effectiveLanguage}-${isClient}`}>
-                    {links.map((l, i) => {
-                      // Check if it's an external link
-                      const isExternal = l.url.startsWith('http') || l.url.startsWith('https') || l.url === '#';
-                      
-                      if (isExternal) {
-                        return (
-                          <Link
-                            key={`desktop-${i}-${isClient ? effectiveLanguage : 'default'}`} 
-                            href={l.url} 
-                            className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-md xl:px-2 px-1 py-1"
-                            target={l.url.startsWith('http') ? '_blank' : '_self'}
-                            rel={l.url.startsWith('http') ? 'noopener noreferrer' : undefined}
-                          >
-                            {l.label}
-                          </Link>
-                        );
-                      }
-                      
+                  <nav className={`hidden lg:flex items-center xl:gap-8 gap-4 ${!isClient ? 'opacity-0' : 'opacity-100'} transition-opacity duration-200`}>
+                    {linksList.map((link, i) => {
+                      const hasChildren = Array.isArray(link.parent) && link.parent.length > 0;
+
                       return (
-                        <Link 
-                          key={`desktop-${i}-${isClient ? effectiveLanguage : 'default'}`} 
-                          href={l.url}
-                          className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-md xl:px-2 px-1"
-                        >
-                          {l.label}
-                        </Link>
+                        <div key={`desktop-${i}`} className="group">
+                          <Link
+                            href={link.url}
+                            className="text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200 px-2 py-1 rounded-md"
+                          >
+                            {link.label}
+                          </Link>
+
+                          {hasChildren && (
+                            <div className="opacity-0 group-hover:opacity-100 invisible group-hover:visible absolute left-0 right-0 mt-10 bg-white border border-gray-200 rounded-2xl shadow-lg transition-all duration-200 z-50 p-8 grid grid-cols-2 gap-6">
+                              {link.parent.map((group, index) => (
+                                <div key={index}>
+                                    {group.title && <div className="font-medium text-blue-600 text-sm pb-4">{group.title}</div>}
+                                    {group.url && (
+                                      <Link href={group.url}>
+                                        <div className="font-medium text-base">{group.label}</div>
+                                        <div className="text-gray-500 text-sm pt-1.5">{group.description}</div>
+                                      </Link>
+                                    )}
+                                  <div className="space-y-6">
+                                    {group.children?.map((child, index) => (
+                                        <Link href={child.url} key={index} className="block">
+                                          <div className="ffont-medium text-base">{child.label}</div>
+                                          <div className="text-gray-500 text-sm pt-1.5">{child.description}</div>
+                                        </Link>
+                                    ))}
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
                       );
                     })}
                   </nav>
@@ -235,42 +247,64 @@ export default function Navbar({ serverLanguage }) {
                 </button>
                   </div>    
               </div>
-              
               {/* Mobile Menu */}
               {open && (
                 <div className="lg:hidden border-t border-gray-200 bg-white/95 backdrop-blur-sm rounded-b-2xl">
-                  <nav className="px-6 py-4 space-y-2" key={`mobile-nav-${effectiveLanguage}-${isClient}`}>
-                    {links.map((l, i) => {
-                      // Check if it's an external link
-                      const isExternal = l.url.startsWith('http') || l.url.startsWith('https') || l.url === '#';
-                      
-                      if (isExternal) {
-                        return (
-                          <Link
-                            key={`mobile-${i}-${isClient ? effectiveLanguage : 'default'}`} 
-                            href={l.url} 
-                            className="block py-3 px-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium transition-colors duration-200"
-                            target={l.url.startsWith('http') ? '_blank' : '_self'}
-                            rel={l.url.startsWith('http') ? 'noopener noreferrer' : undefined}
-                            onClick={() => setOpen(false)}
-                          >
-                            {l.label}
-                          </Link>
-                        );
-                      }
-                      
+                  <nav className="px-6 py-4 space-y-2 max-h-[calc(100vh-300px)] overflow-y-auto">
+                    {linksList.map((link, i) => {
+                      const hasChildren = Array.isArray(link.parent) && link.parent.length > 0;
                       return (
-                        <Link 
-                          key={`mobile-${i}-${isClient ? effectiveLanguage : 'default'}`} 
-                          href={l.url}
-                          className="block py-3 px-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium transition-colors duration-200"
-                          onClick={() => setOpen(false)}
-                        >
-                          {l.label}
-                        </Link>
+                        <div key={`mobile-${i}`}>
+                        <button
+                            onClick={() =>
+                              hasChildren &&
+                              setExpandedIndex(expandedIndex === i ? null : i)
+                            }
+                            className="flex justify-between items-center w-full py-3 px-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium transition-colors duration-200"
+                          >
+                            {link.label}
+                            {hasChildren && (
+                              <span
+                                className={`inline-block w-2 h-2 border-r-2 border-b-2 border-gray-600 transform transition-transform duration-300 ${
+                                  expandedIndex === i ? "rotate-45" : "-rotate-45"
+                                }`}
+                              ></span>
+                            )}
+                          </button>
+
+
+                          {hasChildren && expandedIndex === i && (
+                            <div className="ml-4 mt-2 space-y-4">
+                              {link.parent.map((group, index) => (
+                                <div key={index}>
+                                  {group.title && (
+                                    <div className="font-medium text-blue-600 text-sm pb-4">
+                                      {group.title}
+                                    </div>
+                                  )}
+                                  {group.url && (
+                                    <Link href={group.url}>
+                                      <div className="font-medium text-sm">{group.label}</div>
+                                      <div className="text-gray-500 text-xs">{group.description}</div>
+                                    </Link>
+                                  )}
+                                  <div className="space-y-4">
+                                    {group.children?.map((child, index) => (
+                                      <Link href={child.url} key={index} className="block">
+                                        <div className="font-medium text-sm">{child.label}</div>
+                                        <div className="text-gray-500 text-xs">{child.description}</div>
+                                      </Link>
+                                    ))}
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
                       );
                     })}
-                    <div className="flex flex-col gap-3 pt-4 border-t border-gray-200">
+                  </nav>
+                     <div className="flex flex-col gap-3 p-4 border-t border-gray-200">
                       <Link
                         href="https://cloud.getwren.ai/"
                         className="px-4 py-3 text-gray-600 hover:text-gray-900 font-medium text-center rounded-lg hover:bg-gray-50 transition-colors duration-200"
@@ -286,7 +320,6 @@ export default function Navbar({ serverLanguage }) {
                         {t("getStarted")}
                       </Link>
                     </div>
-                  </nav>
                 </div>
               )}
             </div>
