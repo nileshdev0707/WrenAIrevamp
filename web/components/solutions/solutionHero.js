@@ -23,7 +23,7 @@ const SolutionHero = ({ data }) => {
       }}
     >
       <div className="bg-cover pt-10 pb-5 sm:py-12 md:py-16 lg:py-26 text-center">
-        <button className="glow-effect animate-fade-in-up btn btn-primary bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-4 py-1 !rounded-full text-sm">
+        <button className="animate-fade-in-up btn btn-primary bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-4 py-1 !rounded-full text-sm">
           {hero?.badge}
         </button>
         <h1 className="animate-fade-in-up animation-delay-400 text-2xl sm:text-3xl md:text-4xl lg:text-[64px] font-medium leading-tight sm:mt-8 mt-5">

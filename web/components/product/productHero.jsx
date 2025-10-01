@@ -11,7 +11,7 @@ export default function ProductHero({ data }) {
     <section className="py-10 sm:py-16 text-center">
       {data?.map((item, index) => (
         <div key={item.id}>
-          <button className="btn btn-primary glow-effect bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-4 py-1 !rounded-full text-sm">
+          <button className="btn btn-primary bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-4 py-1 !rounded-full text-sm">
             {item?.badge}
           </button>
           <h1 className="text-3xl sm:text-4xl lg:text-6xl font-medium leading-tight mt-5">
@@ -35,7 +35,6 @@ export default function ProductHero({ data }) {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center px-10">
             {item?.buttons?.map((btn, index) => (
-              // <div key={btn.id} className="glow-effect bg-glow-effect">
               <Button
                 variant={activeIndex === index ? "primary" : "light"}
                 key={btn.id}
@@ -46,7 +45,6 @@ export default function ProductHero({ data }) {
               >
                 {btn.label}
               </Button>
-              // </div>
             ))}
           </div>
         </div>

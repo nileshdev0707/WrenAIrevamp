@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { base } from "../service/serviceConfig";
 import { useLocalizedUrl } from "../utils/languageUtils";
+import Link from "next/link";
 
 export default function Stories({ data }) {
   const getUrl = useLocalizedUrl()
@@ -163,7 +164,7 @@ export default function Stories({ data }) {
     <section className="lg:py-20 md:py-15 py-10">
       <div className="mx-auto lg:px-6 md:px-4 px-2">
         <div className="text-center">
-          <div className="my-4 glow-effect inline-flex text-base items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-white px-4 py-2 font-medium text-blue-700">
+          <div className="my-4 inline-flex text-base items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-white px-4 py-2 font-medium text-blue-700">
             <div className="w-2 h-2 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] rounded-full"></div>
             <span className="text-black ">{title}</span>
           </div>
@@ -198,7 +199,7 @@ export default function Stories({ data }) {
         <div className="mt-8 md:mt-12 lg:mt-16 slider-main-container relative">
           <div className="center">
             {caseStudieItems.map((story, index) => (
-              <div key={index} className="px-2 md:px-4 md:py-4 py-2">
+              <div key={index} className="cursor-pointer px-2 md:px-4 md:py-4 py-2" onClick={() => window.open(getUrl(story.link), '_self')}>
                 <div className="grid 2xl:grid-cols-3 xl:grid-cols-5 p-4 md:p-5 gap-4 bg-[#F5F5F5]  rounded-xl [.active]:bg-gradient-to-r [.active]:from-[#0B8EE5] [.active]:to-[#0022CB]">
                   <div className="2xl:col-span-1 xl:col-span-2">
                     <p className="xl:hidden sm:pb-2 pb-1 text-center 2xl:text-7xl xl:text-4xl md:text-4xl lg:text-5xl  text-3xl bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-clip-text text-transparent font-bold">
@@ -281,7 +282,7 @@ export default function Stories({ data }) {
           </div>
 
           {/* Custom Navigation Buttons */}
-          <div className="glow-effect flex justify-center  mx-auto rounded-full  p-1 w-fit items-center mt-8 gap-4 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB]">
+          <div className="flex justify-center  mx-auto rounded-full  p-1 w-fit items-center mt-8 gap-4 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB]">
             {/* Left Arrow */}
             <button
               onClick={() => {
@@ -289,7 +290,7 @@ export default function Stories({ data }) {
                   window.jQuery('.center').slick('slickPrev')
                 }
               }}
-              className="flex items-center justify-center text-white rounded-full shadow-lg"
+              className=" cursor-pointer flex items-center justify-center text-white rounded-full shadow-lg"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>
@@ -308,7 +309,7 @@ export default function Stories({ data }) {
                   window.jQuery('.center').slick('slickNext')
                 }
               }}
-               className="flex items-center justify-center  text-white rounded-full "
+               className="cursor-pointer flex items-center justify-center  text-white rounded-full "
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>

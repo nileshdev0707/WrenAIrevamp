@@ -13,7 +13,7 @@ const PartnerEcosystem = ({data}) => {
     return (
         <div>
             <div className="text-center justify-center flex">
-                         <div className="my-4 glow-effect justify-center inline-flex text-base items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-white px-4 py-2 font-medium text-blue-700">
+                         <div className="my-4 justify-center inline-flex text-base items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-white px-4 py-2 font-medium text-blue-700">
                                 <div className="w-2 h-2 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] rounded-full"></div>
                                 <span className="text-black ">{partnerEcosystem?.badge}</span>
                             </div>

@@ -38,12 +38,12 @@ export default function Capabilities({ data }) {
       <div className="max-w-7xl mx-auto lg:px-6 sm:px-4 px-2" ref={sectionRef}>
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="">
-                <div className="inline-flex text-base  items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] px-4 py-2 font-medium text-blue-700 glow-effect">
-                <div className="w-2 h-2 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] rounded-full"></div>
-                  <span className="text-black">{features.badge}</span>
-                </div>
+          <div>
+            <div className="inline-flex text-base items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] px-4 py-2 font-medium text-blue-700">
+            <div className="w-2 h-2 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] rounded-full"></div>
+              <span className="text-black">{features.badge}</span>
             </div>
+          </div>
           <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight md:py-4 py-2 leading-tight">
             {features.title && typeof features.title === "string" ? (
               <>
@@ -100,12 +100,16 @@ export default function Capabilities({ data }) {
             <div className="grid lg:grid-cols-12 md:grid-cols-2 sm:grid-cols-12 gap-6 relative fade-card">
           {features.coreCapabilitieList.map((item, index) =>
              item.size === 'lg' ? (
-                    <div key={index} className={`cursor-pointer hover:before:transition-all 
-                      hover:before:duration-500 bg-[#060A1F] hover:bg-[linear-gradient(90deg,#000000_0%,#101B52_63%,#1A2B85_100%)] hover:before:content-[''] 
-                      hover:before:absolute hover:before:inset-0 before:rounded-2xl hover:before:bg-[linear-gradient(27deg,#0B8EE5_0%,#2D50FF_50%,#8F3BFF_100%)] hover:before:blur-xl 
-                      before:opacity-70 before:-z-10  before:transition-all before:duration-500 relative
-                      lg:col-span-6 md:col-span-1 sm:col-span-12 row-span-2 
-                      text-white rounded-2xl sm:p-6 p-4 w-full 
+                    // <div key={index} className={`cursor-pointer hover:before:transition-all 
+                    //   hover:before:duration-500 bg-[#060A1F] hover:bg-[linear-gradient(90deg,#000000_0%,#101B52_63%,#1A2B85_100%)] hover:before:content-[''] 
+                    //   hover:before:absolute hover:before:inset-0 before:rounded-2xl hover:before:bg-[linear-gradient(27deg,#0B8EE5_0%,#2D50FF_50%,#8F3BFF_100%)] hover:before:blur-xl 
+                    //   before:opacity-70 before:-z-10  before:transition-all before:duration-500 relative
+                    //   lg:col-span-6 md:col-span-1 sm:col-span-12 row-span-2 
+                    //   text-white rounded-2xl sm:p-6 p-4 w-full 
+                    // `}>
+                    <div key={index} 
+                      className={`${index === 0 ?  "bg-[linear-gradient(90deg,#000000_0%,#101B52_63%,#1A2B85_100%)] before:content-[''] before:absolute before:inset-0 before:-m-2 before:rounded-2xl before:bg-[linear-gradient(27deg,#0B8EE5_0%,#2D50FF_50%,#8F3BFF_100%)] before:blur-xl before:opacity-70 before:-z-10":'bg-[#060A1F] fade-card' } 
+                      relative flex flex-col justify-between lg:col-span-6 md:col-span-1 sm:col-span-12 row-span-2 text-white rounded-2xl sm:p-6 p-4 w-full 
                     `}>
                       <div className='h-full flex flex-col justify-between'>
                         <div>
@@ -141,9 +145,10 @@ export default function Capabilities({ data }) {
                    </div>
              ) : (
                <div key={index} className="lg:col-span-3 md:col-span-1 space-y-4 sm:col-span-6">
-                 <div className="cursor-pointer hover:before:duration-500 hover:before:content-['']
+                 <div className="relative border border-[#D9D9D9]  bg-[#F5F5F5] rounded-xl sm:p-9 p-4 shadow-md  items-center gap-3 h-full">
+                 {/* <div className="cursor-pointer hover:before:duration-500 hover:before:content-['']
                       hover:before:absolute hover:before:inset-0 before:rounded-2xl hover:before:bg-[linear-gradient(27deg,#0B8EE5_0%,#2D50FF_50%,#8F3BFF_100%)] hover:before:blur-xl
-                      before:opacity-70 before:-z-10  before:transition-all before:duration-500 relative  border border-[#D9D9D9]  bg-[#F5F5F5] rounded-xl sm:p-9 p-4 shadow-md  items-center gap-3 h-full">
+                      before:opacity-70 before:-z-10  before:transition-all before:duration-500 relative  border border-[#D9D9D9]  bg-[#F5F5F5] rounded-xl sm:p-9 p-4 shadow-md  items-center gap-3 h-full"> */}
                         <div className='h-full flex flex-col justify-between'>
                         <div className='w-full'>
                      {item.image ? (

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { base } from "../../service/serviceConfig";
+import Button from "../common/Button";
 
 export default function ContentBlock({ solutionsIndustries }) {
   const [activeTab, setActiveTab] = useState(solutionsIndustries[0]?.id);
@@ -25,17 +26,28 @@ export default function ContentBlock({ solutionsIndustries }) {
     <div>
       <div className="bg-white flex overflow-x-auto scrollbar-hide gap-2 rounded-xl p-2 border border-gray-200">
         {solutionsIndustries?.map((tab, index) => (
-          <button
-            key={index}
-            onClick={() => scrollToSection(tab.id)}
-            className={`cursor-pointer w-full md:py-4 sm:px-4 whitespace-nowrap sm:py-2 px-3 py-1.5 sm:rounded-xl rounded-lg text-sm font-medium transition-all duration-200 ${
-              activeTab === tab.id
-                ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white shadow-sm"
-                : "text-[#757575] hover:text-gray-900 hover:bg-gray-100"
-            }`}
-          >
-            {tab.badge}
-          </button>
+          // <button
+          //   key={index}
+          //   onClick={() => scrollToSection(tab.id)}
+          //   className={`cursor-pointer w-full md:py-4 sm:px-4 whitespace-nowrap sm:py-2 px-3 py-1.5 sm:rounded-xl rounded-lg text-sm font-medium transition-all duration-200 ${
+          //     activeTab === tab.id
+          //       ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white shadow-sm"
+          //       : "text-[#757575] hover:text-gray-900 hover:bg-gray-100"
+          //   }`}
+          // >
+          //   {tab.badge}
+          // </button>
+          <Button
+          key={tab.id}
+          href={tab.url}
+          target={tab.url?.startsWith("http") ? "_blank" : "_self"}
+          onClick={() => scrollToSection(tab.id)}
+          variant={activeTab === tab.id ? "primary" : "light"}
+          label={tab.badge}
+          className="whitespace-nowrap min-w-max !px-4"
+        >
+          {tab.badge}
+        </Button>
         ))}
       </div>
       <div className="mt-10">

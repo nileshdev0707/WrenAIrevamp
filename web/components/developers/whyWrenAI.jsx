@@ -9,7 +9,7 @@ export default function WhyWrenAI({ data }) {
       {data?.map((item, index) => (
         <div key={index}>
           <div className="text-center">
-            <div className="inline-flex text-base  items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-white px-4 py-2 font-medium text-blue-700 glow-effect">
+            <div className="inline-flex text-base  items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-white px-4 py-2 font-medium text-blue-700">
               <div className="w-2 h-2 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] rounded-full"></div>
               <span className="text-black">{item?.badge}</span></div>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mt-5">

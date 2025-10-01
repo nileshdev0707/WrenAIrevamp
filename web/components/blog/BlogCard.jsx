@@ -56,7 +56,7 @@ export default function BlogCard({ post, showExcerpt = true, size = 'default' })
   })();
   
   return (
-    <Link href={`/post/${attributes.slug}`} className={cardClasses}>
+    <div onClick={() => window.open(`/post/${attributes.slug}`, '_self')} className={cardClasses}>
       {featuredImage && (
         <div className="aspect-w-16 aspect-h-9">
           <img
@@ -113,6 +113,6 @@ export default function BlogCard({ post, showExcerpt = true, size = 'default' })
           )}
         </div>
       </div>
-    </Link>
+    </div>
   );
 }

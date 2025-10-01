@@ -13,7 +13,7 @@ export default function OpenSourceDetails({ data }) {
             <div key={item.id}>
               {/* Header Section */}
               <div className="text-center">
-                <div className="glow-effect bg-glow-effect w-max mx-auto">
+                <div className="w-max mx-auto">
                   <div className="inline-flex text-base  items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-white px-4 py-2 font-medium text-blue-700">
                     <div class="w-2 h-2 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] rounded-full"></div>
                     <span class="text-black">{item.badge}</span></div></div>

@@ -26,7 +26,7 @@ export default function Hero({ data }) {
     <section className="relative overflow-hidden text-center md:pt-24 md:pb-24 pt-20 sm:pb-10 py-5 sm:px-6 px-4">
       {/* <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-blue-50 via-white to-white" /> */}
       <div className="relative max-w-6xl mx-auto md:mt-25 sm:mt-10 mt-5">
-        <div className="inline-block text-sm sm:text-base bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-sm animate-fade-in-up glow-effect">
+        <div className="inline-block text-sm sm:text-base bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-sm">
           {badge}
         </div>
         <h1 className="my-6 sm:my-8 md:my-10 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[64px] font-medium leading-tight animate-fade-in-up animation-delay-200">
