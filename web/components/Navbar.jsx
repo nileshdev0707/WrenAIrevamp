@@ -270,11 +270,6 @@ export default function Navbar({ serverLanguage }) {
                         </Link>
                       );
                     })}
-                    <div className="pt-4 border-t border-gray-200">
-                      <div className="px-3 py-2">
-                        <LanguageDropdown />
-                      </div>
-                    </div>
                     <div className="flex flex-col gap-3 pt-4 border-t border-gray-200">
                       <Link
                         href="https://cloud.getwren.ai/"
