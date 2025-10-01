@@ -39,7 +39,7 @@ export default function ContentBlock({ data }) {
             </div>
             
            <div className={`md:block hidden order-2 ${isRightAligned ? "md:order-1" : "md:order-2"}`}>
-            <div className="glow-effect">
+            <div>
                 {url ? (
                 <img
                   src={`${url.startsWith("http") ? "" : base}${url}`}

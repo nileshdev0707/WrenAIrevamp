@@ -23,51 +23,47 @@ export default function BlogHero({ data, blogs }) {
                 {item?.subtitle}
               </p>
             </div>
-            <Link href={`/`}>
-              <div className="sm:flex sm:gap-8 gap-5 lg:pt-22 pt-10 px-4">
-                <div className="md:block hidden  w-1/2">
-                  {url ? (
-                    <div className="w-full h-full flex flex-none">
-                      <img
-                        src={`${
-                          featuredPost.featuredImage.url.startsWith("http")
-                            ? ""
-                            : base
-                        }${featuredPost.featuredImage.url}`}
-                        alt={featuredPost?.featuredImage?.name}
-                        className="w-auto object-contain h-full"
-                      />
-                    </div>
-                  ) : (
-                    <div className="text-gray-600">{item?.image?.name}</div>
-                  )}
-                </div>
-                <div className="sm:w-1/2">
-                  <div className="flex flex-col sm:flex-row gap-2">
-                    {item.buttons.map((button, index) => (
-                      <Button
-                        key={index}
-                        href={button?.url}
-                        className="lg:mb-5 mb-3"
-                        variant="primary"
-                        label="Featured"
-                      >
-                        Featured
-                      </Button>
-                    ))}
-                  </div>
-                  <h1 className="xl:text-4xl lg:text-3xl md:text-2xl text-xl font-medium lg:mb-5 mb-3 leading-tight">
-                    {featuredPost?.title}
-                  </h1>
-                  <p className="text-gray-500 text-base">
-                    {featuredPost?.excerpt}
-                  </p>
-                </div>
-              </div>
-            </Link>
           </div>
         );
       })}
+
+      {featuredPost && (
+        <div className="cursor-pointer sm:flex sm:gap-8 gap-5 lg:pt-22 pt-10 px-5" onClick={() => window.open(`/post/${featuredPost?.slug}`, '_self')}>
+          <div className="md:block hidden w-1/2">
+            {featuredPost?.featuredImage?.url ? (
+              <div className="w-full h-full flex flex-none">
+                <img
+                  src={`${
+                    featuredPost.featuredImage.url.startsWith("http")
+                      ? ""
+                      : base
+                  }${featuredPost.featuredImage.url}`}
+                  alt={featuredPost?.featuredImage?.name}
+                  className="w-auto object-contain h-full"
+                />
+              </div>
+            ) : (
+              <div className="text-gray-600">
+                {featuredPost?.featuredImage?.name}
+              </div>
+            )}
+          </div>
+          <div className="sm:w-1/2">
+          <Button
+                    href={`/post/${featuredPost?.slug}`}
+                    className="lg:mb-5 mb-3"
+                    variant="primary"
+                    label="Featured"
+                  >
+                    Featured
+                  </Button>
+            <h1 className="xl:text-4xl lg:text-3xl md:text-2xl text-xl font-medium lg:mb-5 mb-3 leading-tight">
+              {featuredPost?.title}
+            </h1>
+            <p className="text-gray-500 text-base">{featuredPost?.excerpt}</p>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

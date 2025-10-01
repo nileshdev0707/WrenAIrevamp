@@ -56,7 +56,7 @@ const EnterPrise = (data) => {
       className="md:pb-20 md:pt-20 pb-10 pt-5 fade-up max-w-7xl mx-auto lg:px-6 md:px-4 px-2"
     >
       <div ref={headerRef} className="text-center fade-up">
-        <div className="my-4 glow-effect inline-flex text-base items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-white px-4 py-2 font-medium text-blue-700">
+        <div className="my-4 inline-flex text-base items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-white px-4 py-2 font-medium text-blue-700">
           <div className="w-2 h-2 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] rounded-full"></div>
           <span className="text-black ">{enterPrise?.badge}</span>
         </div>
@@ -71,7 +71,7 @@ const EnterPrise = (data) => {
         className="grid lg:grid-cols-3 md:grid-cols-2  sm:grid-cols-2 grid-cols-1 md:gap-6 sm:gap-5 gap-4 lg:my-20 md:my-15 sm:my-10 my-5"
       >
         {enterPrise?.EnterpriseFeaturesItems?.map((item, index) => (
-          <div className="glow-effect">
+          <div>
             <div
               key={index}
               className="bg-white rounded-2xl lg:p-10 md:p-8 sm:p-6  p-4   border lg:h-77 sm:h-60 h-45 border-[#D9D9D9]  flex flex-col gap-7 md:gap-10 lg:gap-0 lg:justify-between fade-card"

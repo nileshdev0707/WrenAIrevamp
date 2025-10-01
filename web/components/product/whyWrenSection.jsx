@@ -25,7 +25,7 @@ export default function WhyWrenSection({ data }) {
         return (
           <div className="max-w-6xl mx-auto xl:px-0 px-10" key={index}>
             <div className="text-center">
-              <div className="glow-effect bg-glow-effect w-max mx-auto">
+              <div className="w-max mx-auto">
                 <div class="inline-flex text-base  items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-white px-4 py-2 font-medium text-blue-700">
                   <div class="w-2 h-2 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] rounded-full"></div>
                   <span class="text-black">{badge}</span>
@@ -39,7 +39,6 @@ export default function WhyWrenSection({ data }) {
               {WhyWrenSectionDetails.map((item) => (
                 <div
                   key={item.id}
-                  className="glow-effect bg-glow-effect"
                 >
                   <div className="bg-white px-8 py-9 rounded-xl border border-gray-300 h-full">
                   <div className="grid grid-cols-3 gap-8">

@@ -38,8 +38,8 @@ export default function Capabilities({ data }) {
       <div className="max-w-7xl mx-auto lg:px-6 sm:px-4 px-2" ref={sectionRef}>
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="">
-            <div className="inline-flex text-base  items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] px-4 py-2 font-medium text-blue-700 glow-effect">
+          <div>
+            <div className="inline-flex text-base  items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] px-4 py-2 font-medium text-blue-700 ">
               <div className="w-2 h-2 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] rounded-full"></div>
               <span className="text-black">{features.badge}</span>
             </div>
@@ -99,27 +99,24 @@ export default function Capabilities({ data }) {
         </div>
         <div className="grid lg:grid-cols-12 md:grid-cols-2 sm:grid-cols-12 gap-6 relative fade-card">
           {features.coreCapabilitieList.map((item, index) =>
-            item.size === "lg" ? (
-              <div
-                key={index}
-                className={`cursor-pointer hover:before:transition-all 
-                      hover:before:duration-500 bg-[#060A1F] hover:bg-[linear-gradient(90deg,#000000_0%,#101B52_63%,#1A2B85_100%)] hover:before:content-[''] 
-                      hover:before:absolute hover:before:inset-0 before:rounded-2xl hover:before:bg-[linear-gradient(27deg,#0B8EE5_0%,#2D50FF_50%,#8F3BFF_100%)] hover:before:blur-xl 
-                      before:opacity-70 before:-z-10  before:transition-all before:duration-500 relative
-                      lg:col-span-6 md:col-span-1 sm:col-span-12 row-span-2 
-                      text-white rounded-2xl sm:p-6 p-4 w-full 
-                    `}
-              >
-                <div className="h-full flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center gap-3 mb-4">
-                      <h3 className="font-semibold text-[#0B8EE5] text-base">
-                        {item.badge}
-                      </h3>
-                    </div>
-                    <p className="text-slate-300  mb-4 sm:text-[28px] text-xl font-medium">
-                      {item.title}
-                    </p>
+             item.size === 'lg' ? (
+                    // <div key={index} className={`cursor-pointer hover:before:transition-all
+                    //   hover:before:duration-500 bg-[#060A1F] hover:bg-[linear-gradient(90deg,#000000_0%,#101B52_63%,#1A2B85_100%)] hover:before:content-['']
+                    //   hover:before:absolute hover:before:inset-0 before:rounded-2xl hover:before:bg-[linear-gradient(27deg,#0B8EE5_0%,#2D50FF_50%,#8F3BFF_100%)] hover:before:blur-xl
+                    //   before:opacity-70 before:-z-10  before:transition-all before:duration-500 relative
+                    //   lg:col-span-6 md:col-span-1 sm:col-span-12 row-span-2
+                    //   text-white rounded-2xl sm:p-6 p-4 w-full
+                    // `}>
+                    <div key={index}
+                      className={`${index === 0 ?  "bg-[linear-gradient(90deg,#000000_0%,#101B52_63%,#1A2B85_100%)] before:content-[''] before:absolute before:inset-0 before:-m-2 before:rounded-2xl before:bg-[linear-gradient(27deg,#0B8EE5_0%,#2D50FF_50%,#8F3BFF_100%)] before:blur-xl before:opacity-70 before:-z-10":'bg-[#060A1F] fade-card' } 
+                      relative flex flex-col justify-between lg:col-span-6 md:col-span-1 sm:col-span-12 row-span-2 text-white rounded-2xl sm:p-6 p-4 w-full 
+                    `}>
+                      <div className='h-full flex flex-col justify-between'>
+                        <div>
+                      <div className="flex items-center gap-3 mb-4">
+                        <h3 className="font-semibold text-[#0B8EE5] text-base">{item.badge}</h3>
+                      </div>
+                    <p className="text-slate-300  mb-4 sm:text-[28px] text-xl font-medium">{item.title}</p>
 
                     {/* Feature List */}
                     <div className="space-y-3">
@@ -163,37 +160,35 @@ export default function Capabilities({ data }) {
                 className="lg:col-span-3 md:col-span-1 space-y-4 sm:col-span-6"
               >
                 <div
-                  className="cursor-pointer hover:before:duration-500 hover:before:content-['']
+                 className="relative border border-[#D9D9D9]  bg-[#F5F5F5] rounded-xl sm:p-9 p-4 shadow-md  items-center gap-3 h-full">
+                 {/* <div className="cursor-pointer hover:before:duration-500 hover:before:content-['']
                       hover:before:absolute hover:before:inset-0 before:rounded-2xl hover:before:bg-[linear-gradient(27deg,#0B8EE5_0%,#2D50FF_50%,#8F3BFF_100%)] hover:before:blur-xl
-                      before:opacity-70 before:-z-10  before:transition-all before:duration-500 relative  border border-[#D9D9D9]  bg-[#F5F5F5] rounded-xl sm:p-9 p-4 shadow-md  items-center gap-3 h-full"
-                >
-                  <div className="h-full flex flex-col justify-between">
-                    <div className="w-full">
-                      {item.image ? (
-                        <img
-                          src={`${
-                            item.image[0].url?.startsWith("http") ? "" : base
-                          }${item.image[0].url || item.image}`}
-                          alt={item.title || "Feature image"}
-                          className="object-contain"
-                        />
-                      ) : (
-                        <div className="text-gray-600 ">{item.title}</div>
-                      )}
-                    </div>
-                    <div>
-                      <div className="sm:mt-4 mt-2 sm:mb-4 mb-2 font-normal  text-blue-600 text-base">
-                        {item.badge}
-                      </div>
-                      <div className="text-[#1E1E1E] sm:text-2xl text-xl font-medium">
-                        {item.title}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )
+                      before:opacity-70 before:-z-10  before:transition-all before:duration-500 relative  border border-[#D9D9D9]  bg-[#F5F5F5] rounded-xl sm:p-9 p-4 shadow-md  items-center gap-3 h-full"> */}
+                        <div className='h-full flex flex-col justify-between'>
+                        <div className='w-full'>
+                     {item.image ? (
+                       <img
+                         src={`${item.image[0].url?.startsWith('http') ? '' : base}${item.image[0].url || item.image}`}
+                         alt={item.title || 'Feature image'}
+                         className="object-contain"
+                       />
+                     ) : (
+                       <div className="text-gray-600 ">{item.title}</div>
+                     )}
+                   </div>
+                   <div>
+                     <div className="sm:mt-4 mt-2 sm:mb-4 mb-2 font-normal  text-blue-600 text-base">{item.badge}</div>
+                     <div className="text-[#1E1E1E] sm:text-2xl text-xl font-medium">{item.title}</div>
+                   </div>
+                   </div>
+                 </div>
+               </div>
+             )
           )}
+            </div>
+        </div>
+        <div className='flex justify-center md:mt-20 sm:mt-10 mt-5'>
+            <Button href={getUrl(features.learnMore[0].url)} variant="primary">{features.learnMore[0].label}</Button>
         </div>
       </div>
       <div className="flex flex-col sm:flex-row justify-center md:mt-20 sm:mt-10 mt-5 px-8">

@@ -7,7 +7,7 @@ export default function Footer({ data }) {
   const getUrl = useLocalizedUrl();
   return (
     <section className="max-w-6xl mx-auto py-10 md:py-16 xl:px-0 px-5">
-      <div className="glow-effect group rounded-2xl bg-blue-600 text-white md:px-16 sm:px-8 py-10 px-5">
+      <div className="group rounded-2xl bg-blue-600 text-white md:px-16 sm:px-8 py-10 px-5">
         {data?.map((item, index) => {
           const url = item.image?.url;
           return (

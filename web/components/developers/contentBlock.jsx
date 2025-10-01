@@ -51,7 +51,7 @@ export default function ContentBlock({ data }) {
                               toggle(listItem.id);
                             }
                           }}
-                          className="cursor-pointer flex items-center justify-between w-full text-left gap-5"
+                          className={`${listItem?.description ? "cursor-pointer" : ""}  flex items-center justify-between w-full text-left gap-5`}
                         >
                           <div className="flex items-center gap-5">
                             {listItem?.icon?.url && (
@@ -107,7 +107,7 @@ export default function ContentBlock({ data }) {
                 isRightAligned ? "md:order-1" : "md:order-2"
               }`}
             >
-              <div className="glow-effect">
+              <div>
                 {url ? (
                   <img
                     src={`${url.startsWith("http") ? "" : base}${url}`}

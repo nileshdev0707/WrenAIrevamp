@@ -96,7 +96,7 @@ export default function Work({ data }) {
     <section ref={sectionRef} className="md:pb-20 md:pt-20 pb-10 pt-5 bg-[#F7FBFE] fade-up">
       <div className="max-w-6xl mx-auto lg:px-6 sm:px-4 px-2 text-center">
         <div ref={titleRef} className="fade-up">
-          <div className="my-4 glow-effect inline-flex text-base items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-white px-4 py-2 font-medium text-blue-700">
+          <div className="my-4 inline-flex text-base items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-white px-4 py-2 font-medium text-blue-700">
             <div className="w-2 h-2 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] rounded-full"></div>
             <span className="text-black ">{badge}</span>
           </div>
@@ -127,7 +127,7 @@ export default function Work({ data }) {
               <button
                 key={`tab-${index}`}
                 onClick={() => setActiveTab(index)}
-                className={`flex-shrink-0 px-4 py-2 rounded-2xl text-md transition-all duration-200 whitespace-nowrap ${
+                className={`cursor-pointer flex-shrink-0 px-4 py-2 rounded-2xl text-md transition-all duration-200 whitespace-nowrap ${
                   activeTab === index
                     ? 'bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white font-bold'
                     : 'bg-[#F5F5F5] text-gray-600 hover:bg-gray-200 font-medium'
@@ -158,7 +158,7 @@ export default function Work({ data }) {
             </div>
             
             {getTabContent(activeTab).image && (
-              <div className={`order-1  glow-effect`}
+              <div className={`order-1`}
                    style={{ animationDelay: '500ms' }}>
                 <div className="overflow-hidden  border border-[#D9D9D9] rounded-2xl bg-white shadow-lg">
                 <img 
