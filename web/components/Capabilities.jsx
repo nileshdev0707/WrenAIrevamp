@@ -186,10 +186,6 @@ export default function Capabilities({ data }) {
              )
           )}
             </div>
-        </div>
-        <div className='flex justify-center md:mt-20 sm:mt-10 mt-5'>
-            <Button href={getUrl(features.learnMore[0].url)} variant="primary">{features.learnMore[0].label}</Button>
-        </div>
       </div>
       <div className="flex flex-col sm:flex-row justify-center md:mt-20 sm:mt-10 mt-5 px-8">
         <Button href={getUrl(features.learnMore[0].url)} variant="primary">
