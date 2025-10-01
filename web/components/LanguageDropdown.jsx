@@ -59,6 +59,25 @@ const LanguageDropdown = () => {
         <span className="sm:text-base text-sm sm:block hidden">
           {loading ? 'Switching...' : currentLanguage?.name}
         </span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-5 h-5 text-gray-600 block md:hidden"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M12 3c4.97 0 9 4.03 9 9s-4.03 9-9 9-9-4.03-9-9 4.03-9 9-9z"
+          />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M3 12h18M12 3a17 17 0 010 18M12 3a17 17 0 000 18"
+          />
+        </svg>
         <svg 
           className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
           fill="none" 
