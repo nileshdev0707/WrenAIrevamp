@@ -19,7 +19,7 @@ export default function Pricing({ pricing }) {
   const tiers = selectedPlan === 0 ? pricing?.tiers : pricing?.tiersHosted;
   return (
     <Layout>
-      <div className="px-6">
+      <div>
         {pricing?.hero?.length && (
           <div
             style={{

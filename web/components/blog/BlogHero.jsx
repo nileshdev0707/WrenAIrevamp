@@ -28,7 +28,7 @@ export default function BlogHero({ data, blogs }) {
       })}
 
       {featuredPost && (
-        <div className="cursor-pointer sm:flex sm:gap-8 gap-5 lg:pt-22 pt-10 px-5" onClick={() => window.open(`/post/${featuredPost?.slug}`, '_self')}>
+        <div className="cursor-pointer sm:flex sm:gap-8 gap-5 lg:pt-22 pt-10 px-4" onClick={() => window.open(`/post/${featuredPost?.slug}`, '_self')}>
           <div className="md:block hidden w-1/2">
             {featuredPost?.featuredImage?.url ? (
               <div className="w-full h-full flex flex-none">
@@ -51,7 +51,7 @@ export default function BlogHero({ data, blogs }) {
           <div className="sm:w-1/2">
           <Button
                     href={`/post/${featuredPost?.slug}`}
-                    className="lg:mb-5 mb-3"
+                    className="lg:mb-5 mb-3 w-full sm:w-fit"
                     variant="primary"
                     label="Featured"
                   >
