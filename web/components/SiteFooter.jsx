@@ -37,6 +37,7 @@ export default function SiteFooter() {
         { label: t("publicRoadmap"), slug: "https://wrenai.notion.site/" },
         { label: t("sla"), slug: "sla" },
         { label: t("status"), slug: "https://wrenaicloud.statuspage.io/" },
+        { label: t("support"), slug: "support" },
       ],
     },
     {

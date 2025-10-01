@@ -7,9 +7,12 @@ import { base } from "../service/serviceConfig";
 import Layout from "./layout";
 import { safeBackgroundImage } from "../utils/ssrHelpers";
 import { createServerSideProps } from "../utils/ssrHelpers";
+import { useRouter } from "next/router";
 
 export default function Product({ product }) {
   const heroImage = product?.productHero?.[0]?.backgroundimage?.url;
+  const router = useRouter();
+  const { tab } = router.query
 
   // Extract SEO data from product page data
   const seoData = product?.seo;
@@ -40,7 +43,7 @@ export default function Product({ product }) {
         )}
         {/* Content Block */}
         {product?.ContentBlock?.length && (
-          <ContentBlock product={product?.ContentBlock} />
+          <ContentBlock product={product?.ContentBlock} tab={tab} />
         )}
       </div>
       {/* Why Wren Section */}
