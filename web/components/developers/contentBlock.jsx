@@ -37,7 +37,7 @@ export default function ContentBlock({ data }) {
               </h1>
               <p className="text-gray-600 text-sm mt-4 pb-8">{item.subtitle}</p>
               {item?.cmsListItesm?.length > 0 ? (
-                <div className="space-y-4 mb-8">
+                <div className="space-y-4 mb-12">
                   {item?.cmsListItesm.map((listItem) => {
                     const isOpen = openIds.includes(listItem.id);
                     return (
@@ -46,7 +46,11 @@ export default function ContentBlock({ data }) {
                         className="border-b border-gray-200 py-3"
                       >
                         <div
-                          onClick={() => toggle(listItem.id)}
+                          onClick={() => {
+                            if (listItem?.description) {
+                              toggle(listItem.id);
+                            }
+                          }}
                           className="cursor-pointer flex items-center justify-between w-full text-left gap-5"
                         >
                           <div className="flex items-center gap-5">
@@ -61,11 +65,13 @@ export default function ContentBlock({ data }) {
                               {listItem.title}
                             </h3>
                           </div>
-                          <span
-                            className={`inline-block w-2 h-2 border-r-2 border-b-2 border-gray-600 transform transition-transform duration-300 ${
-                              isOpen ? "rotate-45" : "-rotate-45"
-                            }`}
-                          ></span>
+                          {listItem?.description && (
+                            <span
+                              className={`inline-block w-2 h-2 border-r-2 border-b-2 border-gray-600 transform transition-transform duration-300 ${
+                                isOpen ? "rotate-45" : "-rotate-45"
+                              }`}
+                            ></span>
+                          )}
                         </div>
 
                         {isOpen && (
@@ -78,7 +84,7 @@ export default function ContentBlock({ data }) {
                   })}
                 </div>
               ) : (
-                <div dangerouslySetInnerHTML={{ __html: item.description }} />
+               <></>
               )}
               <div className="flex flex-col sm:flex-row gap-2">
                 {item?.contentBlockButton?.map((button, index) => (
