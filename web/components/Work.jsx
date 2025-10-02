@@ -129,7 +129,7 @@ export default function Work({ data }) {
                 onClick={() => setActiveTab(index)}
                 className={`cursor-pointer flex-shrink-0 px-4 py-2 rounded-2xl text-md transition-all duration-200 whitespace-nowrap ${
                   activeTab === index
-                    ? 'bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white font-bold'
+                    ? 'bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white font-medium font-bold'
                     : 'bg-[#F5F5F5] text-gray-600 hover:bg-gray-200 font-medium'
                 }`}
                 style={{ animationDelay: `${400 + (index * 100)}ms` }}

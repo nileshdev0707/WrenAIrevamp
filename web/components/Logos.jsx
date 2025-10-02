@@ -33,17 +33,8 @@ export default function Logos({ items }) {
     // Start animation
     animate()
 
-    // Pause on hover
-    const handleMouseEnter = () => { isPaused = true }
-    const handleMouseLeave = () => { isPaused = false }
-
-    slider.addEventListener('mouseenter', handleMouseEnter)
-    slider.addEventListener('mouseleave', handleMouseLeave)
-
     return () => {
       cancelAnimationFrame(animationId)
-      slider.removeEventListener('mouseenter', handleMouseEnter)
-      slider.removeEventListener('mouseleave', handleMouseLeave)
     }
   }, [items.length])
 
@@ -60,7 +51,7 @@ export default function Logos({ items }) {
             return (
               <div 
                 key={`${it.name}-${idx}`} 
-                className="flex-shrink-0 flex items-center justify-center p-3 opacity-80 hover:opacity-100 transition-opacity"
+                className="flex-shrink-0 flex items-center justify-center p-3 opacity-80 transition-opacity"
                 style={{ minWidth: '200px' }}
               >
                 {url ? (

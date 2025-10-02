@@ -152,7 +152,7 @@ useEffect(() => {
           <FrequentlyQuestions frequentlyAskedQuestions={eliteFrequentlyAskedQuestions} />
          </div>
         )}
-          <HomeCTA data={elitePartnerData?.bottomBlock} />
+          <HomeCTA data={elitePartnerData?.bottomBlock} tab={tab}/>
       </div>
     </div>
     </div>

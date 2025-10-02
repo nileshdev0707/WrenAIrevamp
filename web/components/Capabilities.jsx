@@ -108,9 +108,9 @@ export default function Capabilities({ data }) {
                     //   text-white rounded-2xl sm:p-6 p-4 w-full
                     // `}>
                     <div key={index}
-                      className={`${index === 0 ?  "bg-[linear-gradient(90deg,#000000_0%,#101B52_63%,#1A2B85_100%)] before:content-[''] before:absolute before:inset-0 before:-m-2 before:rounded-2xl before:bg-[linear-gradient(27deg,#0B8EE5_0%,#2D50FF_50%,#8F3BFF_100%)] before:blur-xl before:opacity-70 before:-z-10":'bg-[#060A1F] fade-card' } 
-                      relative flex flex-col justify-between lg:col-span-6 md:col-span-1 sm:col-span-12 row-span-2 text-white rounded-2xl sm:p-6 p-4 w-full 
-                    `}>
+                      className="bg-[linear-gradient(90deg,#000000_0%,#101B52_63%,#1A2B85_100%)] before:content-[''] before:absolute before:inset-0 before:-m-2 before:rounded-2xl before:bg-[linear-gradient(27deg,#0B8EE5_0%,#2D50FF_50%,#8F3BFF_100%)] before:blur-xl before:opacity-70 before:-z-10
+                      relative flex flex-col justify-between lg:col-span-6 md:col-span-1 sm:col-span-12 row-span-2 text-white rounded-2xl sm:p-6 p-4 w-full"
+                    >
                       <div className='h-full flex flex-col justify-between'>
                         <div>
                       <div className="flex items-center gap-3 mb-4">
@@ -160,12 +160,12 @@ export default function Capabilities({ data }) {
                 className="lg:col-span-3 md:col-span-1 space-y-4 sm:col-span-6"
               >
                 <div
-                 className="relative border border-[#D9D9D9]  bg-[#F5F5F5] rounded-xl sm:p-9 p-4 shadow-md  items-center gap-3 h-full">
+                 className="relative border border-[#D9D9D9]  bg-[#F5F5F5] rounded-xl sm:p-9 md:p-10 p-4 shadow-md  items-center gap-3 h-full">
                  {/* <div className="cursor-pointer hover:before:duration-500 hover:before:content-['']
                       hover:before:absolute hover:before:inset-0 before:rounded-2xl hover:before:bg-[linear-gradient(27deg,#0B8EE5_0%,#2D50FF_50%,#8F3BFF_100%)] hover:before:blur-xl
                       before:opacity-70 before:-z-10  before:transition-all before:duration-500 relative  border border-[#D9D9D9]  bg-[#F5F5F5] rounded-xl sm:p-9 p-4 shadow-md  items-center gap-3 h-full"> */}
-                        <div className='h-full flex flex-col justify-between'>
-                        <div className='w-full'>
+                        <div className='h-full flex flex-col'>
+                        <div className='w-12.5'>
                      {item.image ? (
                        <img
                          src={`${item.image[0].url?.startsWith('http') ? '' : base}${item.image[0].url || item.image}`}
@@ -177,7 +177,7 @@ export default function Capabilities({ data }) {
                      )}
                    </div>
                    <div>
-                     <div className="sm:mt-4 mt-2 sm:mb-4 mb-2 font-normal  text-blue-600 text-base">{item.badge}</div>
+                     <div className="md:mt-6 sm:mt-4 mt-2 sm:mb-4 mb-2 font-normal  text-blue-600 text-base">{item.badge}</div>
                      <div className="text-[#1E1E1E] sm:text-2xl text-xl font-medium">{item.title}</div>
                    </div>
                    </div>

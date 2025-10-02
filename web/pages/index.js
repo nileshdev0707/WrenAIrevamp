@@ -7,7 +7,7 @@ import Stats from "../components/Stats";
 import HomeCTA from "../components/homeCTA";
 import { base } from "../service/serviceConfig";
 import Layout from "./layout";
-import { safeBackgroundImage } from "../utils/ssrHelpers";
+import { createServerSideProps, safeBackgroundImage } from "../utils/ssrHelpers";
 import axios from "axios";
 
 export default function Home({ homePageRes }) {
@@ -47,7 +47,7 @@ export default function Home({ homePageRes }) {
           <Work data={homePageRes} />
           <Stories data={homePageRes} />
           <Stats data={homePageRes} />
-          <HomeCTA data={homePageRes?.getStartedWithWrenAI} />
+          <HomeCTA data={homePageRes?.getStartedWithWrenAI}/>
         </>
       )}
     </Layout>
@@ -55,39 +55,45 @@ export default function Home({ homePageRes }) {
 }
 
 // Server-side rendering function
-export async function getServerSideProps(context) {
-  const { locale, defaultLocale } = context;
+// export async function getServerSideProps(context) {
+//   const { locale, defaultLocale } = context;
 
-  // Use Next.js i18n locale
-  const selectedLang = locale || defaultLocale || "en";
+//   // Use Next.js i18n locale
+//   const selectedLang = locale || defaultLocale || "en";
 
-  try {
-    const STRAPI = process.env.NEXT_PUBLIC_STRAPI_URL;
-    const token = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
+//   try {
+//     const STRAPI = process.env.NEXT_PUBLIC_STRAPI_URL; 
+//     const token = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
 
-    const api = axios.create({
-      baseURL: STRAPI,
-      headers: token ? { Authorization: `Bearer ${token}` } : {},
-    });
+//     const api = axios.create({
+//       baseURL: STRAPI,
+//       headers: token ? { Authorization: `Bearer ${token}` } : {},
+//     });
 
-    const { data } = await api.get(
-      `/api/home-page?populate=*&lang=${selectedLang}`
-    );
-    const homePageData = data?.data?.attributes ?? data?.data ?? null;
+//     const { data } = await api.get(
+//       `/api/home-page?populate=*&lang=${selectedLang}`
+//     );
+//     const homePageData = data?.data?.attributes ?? data?.data ?? null;
 
-    return {
-      props: {
-        homePageRes: homePageData,
-        serverLanguage: selectedLang,
-      },
-    };
-  } catch (error) {
-    console.error("Error fetching home page data:", error);
-    return {
-      props: {
-        homePageRes: null,
-        serverLanguage: selectedLang,
-      },
-    };
-  }
-}
+//     return {
+//       props: {
+//         homePageRes: homePageData,
+//         serverLanguage: selectedLang,
+//       },
+//     };
+//   } catch (error) {
+//     console.error("Error fetching home page data:", error);
+//     return {
+//       props: {
+//         homePageRes: null,
+//         serverLanguage: selectedLang,
+//       },
+//     };
+//   }
+// }
+
+
+export const getServerSideProps = createServerSideProps(
+  "/api/home-page",
+  "homePageRes"
+);

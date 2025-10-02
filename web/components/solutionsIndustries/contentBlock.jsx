@@ -1,19 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { base } from "../../service/serviceConfig";
 import Button from "../common/Button";
 
-export default function ContentBlock({ solutionsIndustries }) {
+export default function ContentBlock({ solutionsIndustries, tab }) {
   const [activeTab, setActiveTab] = useState(solutionsIndustries[0]?.id);
-  
+
+  useEffect(() => {
+    if (tab === "retail-and-e-commerce") {
+      setActiveTab(145);
+      scrollToSection(145);
+    }
+    if (tab === "media-and-entertainment") {
+      setActiveTab(146);
+      scrollToSection(146);
+    }
+    if (tab === "dtc-brands") {
+      setActiveTab(148);
+      scrollToSection(148);
+    }
+    if (tab === "engineering-and-manufacturing") {
+      setActiveTab(142);
+      scrollToSection(142);
+    }
+  }, [tab]);
+
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
     setActiveTab(id);
     if (el) {
       const header = document.querySelector("header");
       const headerHeight = header ? header.offsetHeight : 0;
-  
-      const top = el.getBoundingClientRect().top + window.scrollY - headerHeight;
-  
+
+      const top =
+        el.getBoundingClientRect().top + window.scrollY - headerHeight;
+
       window.scrollTo({
         top,
         behavior: "smooth",
@@ -21,7 +41,6 @@ export default function ContentBlock({ solutionsIndustries }) {
     }
   };
 
-  
   return (
     <div>
       <div className="bg-white flex overflow-x-auto scrollbar-hide gap-2 rounded-xl p-2 border border-gray-200">
@@ -38,16 +57,16 @@ export default function ContentBlock({ solutionsIndustries }) {
           //   {tab.badge}
           // </button>
           <Button
-          key={tab.id}
-          href={tab.url}
-          target={tab.url?.startsWith("http") ? "_blank" : "_self"}
-          onClick={() => scrollToSection(tab.id)}
-          variant={activeTab === tab.id ? "primary" : "light"}
-          label={tab.badge}
-          className="whitespace-nowrap min-w-max !px-4"
-        >
-          {tab.badge}
-        </Button>
+            key={tab.id}
+            href={tab.url}
+            target={tab.url?.startsWith("http") ? "_blank" : "_self"}
+            onClick={() => scrollToSection(tab.id)}
+            variant={activeTab === tab.id ? "primary" : "light"}
+            label={tab.badge}
+            className="whitespace-nowrap min-w-max !px-4"
+          >
+            {tab.badge}
+          </Button>
         ))}
       </div>
       <div className="mt-10">
@@ -72,9 +91,7 @@ export default function ContentBlock({ solutionsIndustries }) {
                 <p className="text-gray-600 text-sm mt-6 pb-8">
                   {item?.subTitle}
                 </p>
-                <div
-                  dangerouslySetInnerHTML={{ __html: item?.description }}
-                />
+                <div dangerouslySetInnerHTML={{ __html: item?.description }} />
                 {/* {item?.button?.length > 0 && (
                 <div className="flex gap-2 mt-10">
                   {item?.button?.map((button, index) => (

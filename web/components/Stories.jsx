@@ -4,15 +4,13 @@ import { useLocalizedUrl } from "../utils/languageUtils";
 import Link from "next/link";
 
 export default function Stories({ data }) {
-  const getUrl = useLocalizedUrl()
-  const caseStudies = data?.caseStudies[0] || []
-  const title = caseStudies?.title || 'case studies'
-  const subtitle = caseStudies?.subTitle || 'Customer Success Stories'
-  
-  const caseStudieItems = caseStudies?.caseStudieItems || []
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const [totalSlides, setTotalSlides] = useState(0)
-
+  const getUrl = useLocalizedUrl();
+  const caseStudies = data?.caseStudies[0] || [];
+  const title = caseStudies?.title || "case studies";
+  const subtitle = caseStudies?.subTitle || "Customer Success Stories";
+  const caseStudieItems = caseStudies?.caseStudieItems || [];
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [totalSlides, setTotalSlides] = useState(0);
 
   useEffect(() => {
     const initSlick = () => {
@@ -26,9 +24,9 @@ export default function Stories({ data }) {
       }
 
       // Add custom styles for navigation buttons
-      if (!document.querySelector('#slick-custom-styles')) {
-        const style = document.createElement('style')
-        style.id = 'slick-custom-styles'
+      if (!document.querySelector("#slick-custom-styles")) {
+        const style = document.createElement("style");
+        style.id = "slick-custom-styles";
         style.textContent = `
           .slick-prev-custom, .slick-next-custom {
             position: absolute;
@@ -69,8 +67,8 @@ export default function Stories({ data }) {
               right: 10px;
             }
           }
-        `
-        document.head.appendChild(style)
+        `;
+        document.head.appendChild(style);
       }
 
       if (!window.jQuery) {
@@ -121,23 +119,25 @@ export default function Stories({ data }) {
                     slidesToShow: 1,
                   },
                 },
-                { 
-                  breakpoint: 480, 
-                  settings: { 
-                    arrows: false, 
-                    centerMode: false, 
-                    centerPadding: '0px', 
-                    slidesToShow: 1 
-                  }
-                }
-              ]
-            })
+                {
+                  breakpoint: 480,
+                  settings: {
+                    arrows: false,
+                    centerMode: false,
+                    centerPadding: "0px",
+                    slidesToShow: 1,
+                  },
+                },
+              ],
+            });
 
-            sliderElement.on('afterChange', function(event, slick, currentSlide) {
-              setCurrentSlide(currentSlide)
-            })
-                        setTotalSlides(sliderElement.slick('getSlick').slideCount)
-
+            sliderElement.on(
+              "afterChange",
+              function (event, slick, currentSlide) {
+                setCurrentSlide(currentSlide);
+              }
+            );
+            setTotalSlides(sliderElement.slick("getSlick").slideCount);
           } catch (error) {
             console.log("Slick initialization error:", error);
           }
@@ -172,7 +172,9 @@ export default function Stories({ data }) {
             {subtitle.split("\n").map((line, i) => (
               <div key={`line-${i}`} className="mb-1 sm:mb-2">
                 {line.split(" ").map((word, j) => {
-                  const isHighlighted = word.toLowerCase() === "stories";
+                  const isHighlighted =
+                    word.toLowerCase() === "wren" ||
+                    word.toLowerCase() === "ai";
                   return (
                     <span
                       key={`word-${i}-${j}`}
@@ -199,17 +201,24 @@ export default function Stories({ data }) {
         <div className="mt-8 md:mt-12 lg:mt-16 slider-main-container relative">
           <div className="center">
             {caseStudieItems.map((story, index) => (
-              <div key={index} className="cursor-pointer px-2 md:px-4 md:py-4 py-2" onClick={() => window.open(getUrl(story.link), '_self')}>
-                <div className="grid 2xl:grid-cols-3 xl:grid-cols-5 p-4 md:p-5 gap-4 bg-[#F5F5F5]  rounded-xl [.active]:bg-gradient-to-r [.active]:from-[#0B8EE5] [.active]:to-[#0022CB]">
-                  <div className="2xl:col-span-1 xl:col-span-2">
-                    <p className="xl:hidden sm:pb-2 pb-1 text-center 2xl:text-7xl xl:text-4xl md:text-4xl lg:text-5xl  text-3xl bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-clip-text text-transparent font-bold">
+              <div
+                key={index}
+                className="cursor-pointer px-2 md:px-4 md:py-4 py-2"
+                onClick={() => window.open(getUrl(story.link), "_self")}
+              >
+                <div className="grid 2xl:grid-cols-3 xl:grid-cols-5 p-4 md:p-5 gap-10 md:gap-4 bg-[#F5F5F5]  rounded-xl [.active]:bg-gradient-to-r [.active]:from-[#0B8EE5] [.active]:to-[#0022CB]">
+                  <div className="2xl:col-span-1 xl:col-span-2 flex flex-col gap-3">
+                    <p className="xl:hidden sm:pb-2 pb-1 text-center 2xl:text-4xl xl:text-3xl text-2xl bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-clip-text text-transparent font-bold">
                       {story.title}
                     </p>
-                    <p className="text-[#1E1E1E] xl:hidden text-center sm:pb-3 pb-2 md:pb-5  sm:pt-2 font-bold text-lg md:text-xl">
-                      {story.subTitle}
-                    </p>
+                    {story.subTitle && (
+                      <p className="text-[#1E1E1E] xl:hidden text-center sm:pb-3 pb-2 md:pb-5  sm:pt-2 font-bold text-lg md:text-xl">
+                        {story.subTitle}
+                      </p>
+                    )}
+
                     <div className="relative rounded-xl overflow-hidden group">
-                      {story.image[0]?.url ? (
+                      {story?.image?.length === 2 && story.image[0]?.url ? (
                         <>
                           <img
                             src={`${
@@ -222,7 +231,7 @@ export default function Stories({ data }) {
                           />
                           <div className="bg-black/70 absolute inset-0 w-full h-[250px] md:h-[350px] 2xl:h-[434px] object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <div className="flex items-center justify-center h-full">
-                              {story.image[1]?.url && (
+                              {story.image[1]?.url ? (
                                 <img
                                   src={`${
                                     story.image[1]?.url?.startsWith("http")
@@ -232,10 +241,22 @@ export default function Stories({ data }) {
                                   alt={story.title}
                                   className="object-contain"
                                 />
+                              ) : (
+                                <div className="text-gray-600 flex items-center justify-center h-[250px] md:h-[350px] lg:h-[434px]">
+                                  {story.title}
+                                </div>
                               )}
                             </div>
                           </div>
                         </>
+                      ) : story?.image?.length === 1 && story.image[0]?.url ? (
+                        <img
+                          src={`${
+                            story.image[0]?.url?.startsWith("http") ? "" : base
+                          }${story.image[0]?.url}`}
+                          alt={story.title}
+                          className="w-full h-[250px] md:h-[350px] 2xl:h-[434px] object-cover transition-opacity duration-300"
+                        />
                       ) : (
                         <div className="text-gray-600 flex items-center justify-center h-[250px] md:h-[350px] lg:h-[434px]">
                           {story.title}
@@ -244,36 +265,43 @@ export default function Stories({ data }) {
                     </div>
                   </div>
                   <div className="items-center 2xl:col-span-2 xl:col-span-3 flex flex-col justify-center text-center md:text-left">
-                    <p className="py-2 hidden xl:block 2xl:text-7xl xl:text-6xl md:text-5xl lg:text-4xl text-xl bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-clip-text text-transparent font-bold">
-                      {story.title}
-                    </p>
-                    <p className="text-[#1E1E1E] hidden xl:block pb-3 md:pb-5 pt-2 font-bold text-lg md:text-xl">
-                      {story.subTitle}
-                    </p>
-                    <div className="pb-4 md:pb-5 font-medium text-[#757575] max-w-md mx-auto md:mx-0 text-description text-base xl:text-xl lg:text-lg md:text-lg">
-                      {story.description}
-                    </div>
-                    <div>
-                      <a
-                        href={getUrl(story.link)}
-                        className="text-sm text-gray-600 flex gap-2 justify-center md:justify-start items-center"
-                      >
-                        <p className="text-sm md:text-base font-bold text-[#1E1E1E]">
-                          {story.linkTitle}
+                    <div className="flex flex-col xl:justify-between items-center xl:h-[254px] xl:max-w-[411px]">
+                      <div className="flex flex-col gap-5 items-center text-center">
+                        <p className="py-2 hidden xl:block 2xl:text-4xl xl:text-3xl lg:text-xl md:text-2xl text-xl bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-clip-text text-transparent font-bold">
+                          {story.title}
                         </p>
-                        <div className="min-w-6 w-6 h-6 md:min-w-7 md:w-7 md:h-7">
-                          <img
-                            src="/svg/gradientarrow.svg"
-                            alt="arrow"
-                            className="w-6 h-6 md:w-7 md:h-7 arrow-inactive"
-                          />
-                          <img
-                            src="/svg/arrow.svg"
-                            alt="arrow"
-                            className="w-6 h-6 md:w-7 md:h-7 arrow-active hidden"
-                          />
+                        {story.subTitle && (
+                          <p className="text-[#1E1E1E] hidden xl:block pb-3 md:pb-5 pt-2 font-bold text-lg md:text-xl">
+                            {story.subTitle}
+                          </p>
+                        )}
+
+                        <div className="pb-4 md:pb-5 font-medium text-[#757575] max-w-md mx-auto md:mx-0 text-description text-base xl:text-xl lg:text-lg md:text-lg">
+                          {story.description}
                         </div>
-                      </a>
+                      </div>
+                      <div>
+                        <a
+                          href={getUrl(story.link)}
+                          className="text-sm text-gray-600 flex gap-2 justify-center md:justify-start items-center"
+                        >
+                          <p className="text-sm md:text-base font-bold text-[#1E1E1E]">
+                            {story.linkTitle}
+                          </p>
+                          <div className="min-w-6 w-6 h-6 md:min-w-7 md:w-7 md:h-7">
+                            <img
+                              src="/svg/gradientarrow.svg"
+                              alt="arrow"
+                              className="w-6 h-6 md:w-7 md:h-7 arrow-inactive"
+                            />
+                            <img
+                              src="/svg/arrow.svg"
+                              alt="arrow"
+                              className="w-6 h-6 md:w-7 md:h-7 arrow-active hidden"
+                            />
+                          </div>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -287,32 +315,54 @@ export default function Stories({ data }) {
             <button
               onClick={() => {
                 if (window.jQuery?.fn?.slick) {
-                  window.jQuery('.center').slick('slickPrev')
+                  window.jQuery(".center").slick("slickPrev");
                 }
               }}
               className=" cursor-pointer flex items-center justify-center text-white rounded-full shadow-lg"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M15 19l-7-7 7-7"
+                ></path>
               </svg>
             </button>
 
             {/* Pagination */}
             <div className="flex items-center gap-2 px-4 py-2  rounded-full text-white">
-              <span className="text-sm font-medium">{currentSlide + 1}/{totalSlides}</span>
+              <span className="text-sm font-medium">
+                {currentSlide + 1}/{totalSlides}
+              </span>
             </div>
 
             {/* Right Arrow */}
             <button
               onClick={() => {
                 if (window.jQuery?.fn?.slick) {
-                  window.jQuery('.center').slick('slickNext')
+                  window.jQuery(".center").slick("slickNext");
                 }
               }}
-               className="cursor-pointer flex items-center justify-center  text-white rounded-full "
+              className="cursor-pointer flex items-center justify-center  text-white rounded-full "
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9 5l7 7-7 7"
+                ></path>
               </svg>
             </button>
           </div>
