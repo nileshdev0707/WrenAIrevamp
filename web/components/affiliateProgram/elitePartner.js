@@ -31,7 +31,7 @@ useEffect(() => {
   const currentPerks = activeTab === elitePartnerData?.CloudElitePartners?.[0]?.title ? elitePerks : affiliatePerks
   const affiliatePartner = elitePartnerData?.AffiliatePartner?.[0]
 const affiliatePartnerUrl = affiliatePartner?.image?.url;
-
+console.log("affiliatePartnerUrl ==> ", affiliatePartnerUrl);
 useEffect(() => {
   if(tab === 'elite'){
     setActiveTab(elitePartnerData?.CloudElitePartners?.[0]?.title)
@@ -138,7 +138,7 @@ useEffect(() => {
               </div>
               <div className="flex flex-wrap justify-center md:gap-6 gap-3 md:my-20 sm:my-10 my-5">
                       <div>
-                      <img src={`${affiliatePartnerUrl?.startsWith('http') ? '' : base} ${affiliatePartnerUrl}`} alt={affiliatePartner?.title}/>
+                      <img src={`${affiliatePartnerUrl?.startsWith('http') ? '' : base}${affiliatePartnerUrl}`} alt={affiliatePartner?.title}/>
                       </div>
               </div>
               <div className='flex flex-col sm:flex-row justify-center'>
@@ -161,11 +161,12 @@ useEffect(() => {
 
 const PerkCard = ({ perk }) => {
   const perkUrl = perk?.logo[0]?.url;
+  console.log("perkUrl ==> ", perkUrl);
   return (
     <div className="bg-white transition-shadow duration-300 flex flex-col items-center sm:items-start">
       {/* Icon */}
       <div className="md:w-12 md:h-12 w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center sm:mb-8.5 mb-4">
-      <img src={`${perkUrl.startsWith('http') ? '' : base} ${perkUrl}`} alt={perk?.title} />
+      <img src={`${perkUrl.startsWith('http') ? '' : base}${perkUrl}`} alt={perk?.title} />
       </div>
 
       {/* Title */}
