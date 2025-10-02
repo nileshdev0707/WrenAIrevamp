@@ -5,7 +5,7 @@ import { createServerSideProps } from "../utils/ssrHelpers";
 import { HubspotEmbedForm } from "../components/hubspotEmbedForm";
 
 export default function Support({ support }) {
-  const heroImage = support?.hero?.[0]?.backgroundimage?.url;
+  const heroImage = support?.hero?.[0]?.backgroundImage?.url;
 
   return (
     <Layout>
