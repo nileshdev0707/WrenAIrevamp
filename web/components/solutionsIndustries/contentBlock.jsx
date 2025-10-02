@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { base } from "../../service/serviceConfig";
 import Button from "../common/Button";
-
+import { useRouter } from "next/router";
 export default function ContentBlock({ solutionsIndustries }) {
+console.log("solutionsIndustries ==> ", solutionsIndustries);
   const [activeTab, setActiveTab] = useState(solutionsIndustries[0]?.id);
+  console.log("activeTab ==> ", activeTab);
+  const router = useRouter();
+  const { tab } = router.query
   
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
@@ -21,22 +25,20 @@ export default function ContentBlock({ solutionsIndustries }) {
     }
   };
 
+  useEffect(() => {
+    if (tab) {
+      const found = solutionsIndustries.find(item => item.tabKey === tab);
+      if (found) {
+        setActiveTab(found.id);
+        scrollToSection(found.id);
+      }
+    }
+  }, [tab, solutionsIndustries]);
   
   return (
     <div>
       <div className="bg-white flex overflow-x-auto scrollbar-hide gap-2 rounded-xl p-2 border border-gray-200">
         {solutionsIndustries?.map((tab, index) => (
-          // <button
-          //   key={index}
-          //   onClick={() => scrollToSection(tab.id)}
-          //   className={`cursor-pointer w-full md:py-4 sm:px-4 whitespace-nowrap sm:py-2 px-3 py-1.5 sm:rounded-xl rounded-lg text-sm font-medium transition-all duration-200 ${
-          //     activeTab === tab.id
-          //       ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white shadow-sm"
-          //       : "text-[#757575] hover:text-gray-900 hover:bg-gray-100"
-          //   }`}
-          // >
-          //   {tab.badge}
-          // </button>
           <Button
           key={tab.id}
           href={tab.url}

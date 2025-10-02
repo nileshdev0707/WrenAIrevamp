@@ -13,18 +13,18 @@
             {
                 "title": "Business Use Cases",
                 "children": [
-                  { "label": "Natural Language Prompts", "url": "/product?tab=natural-language-prompts", "description": "Query any dataset using plain English." },
-                  { "label": "Agentic Analytics", "url": "/product?tab=agentic-analytics", "description": "Conversational, agent-powered analytics for BI & SaaS data." },
-                  { "label": "Distributed Data Sources", "url": "/product?tab=distributed-data-sources", "description": "Connect to Snowflake, BigQuery, Redshift, Databricks, Postgres, and more." },
-                  { "label": "No-Code SQL Generation", "url": "/product?tab=no-code-sql-generation", "description": "Generate optimized SQL instantly without engineering help." },
-                  { "label": "Unified Semantic Layer", "url": "/product?tab=unified-semantic-layer", "description": "Consistent business metrics across distributed data." },
-                  { "label": "AI Modeling", "url": "/product?tab=ai-modeling", "description": "Build and deploy custom predictive models in minutes." }
+                  { "label": "Ask Questions in Your Language", "url": "/product?tab=ask-questions-in-your-language", "description": "Query any dataset in plain English and get trusted answers faster." },
+                  { "label": "Secure Data Access", "url": "/product?tab=secure-data-access", "description": "Governed, safe collaboration through the MCP protocol for every AI agent." },
+                  { "label": "Connect to Any Data Source", "url": "/product?tab=connect-to-any-data-source", "description": "Connect to Snowflake, BigQuery, Redshift, Databricks, Postgres, and more." },
+                  { "label": "No-Code Visual Analytics", "url": "/product?tab=no-code-visual-analytics", "description": "Ask in natural language and generate charts or dashboards without training.." },
+                  { "label": "Embedded Analytics", "url": "/product?tab=embedded-analytics", "description": "White-label dashboards and embeds for SaaS at scale." },
+                  { "label": "Enterprise Control", "url": "/product?tab=enterprise-control", "description": "Identity, permissions, and flexible deployments for governance.." }
                 ]
               },
               {
                 "title": "For Open-Source Community",
                 "children": [
-                  { "label": "Wren AI GenBI AI Agent", "url": "/developers", "description": "Open-source GenBI AI Agent that empowers data-driven teams to chat with their data to generate Text-to-SQL, charts, spreadsheets, reports, dashboards and BI." },
+                  { "label": "Wren AI GenBI AI Agent", "url": "/oss", "description": "Open-source GenBI AI Agent that empowers data-driven teams to chat with their data to generate Text-to-SQL, charts, spreadsheets, reports, dashboards and BI." },
                   { "label": "Wren Engine", "url": "https://github.com/Canner/wren-engine", "description": "The Semantic Engine for Model Context Protocol(MCP) Clients and AI Agents" }
                 ]
               }
@@ -38,21 +38,21 @@
           {
             "title": "Industries",
             "children": [
-              { "label": "Manufacturing", "url": "/solutions-industries", "description": "AI-driven analytics for complex data, enabling real-time insights and process optimization." },
-              { "label": "Banking & Finance", "url": "/", "description": "Fraud detection, compliance-ready BI, and digital transformation insights." },
-              { "label": "Healthcare", "url": "/", "description": "Optimize patient care and operational efficiency." },
-              { "label": "Retail & E-Commerce", "url": "/", "description": "Drive loyalty, personalization, and revenue insights." },
-              { "label": "Media & Entertainment", "url": "/", "description": "Optimize content performance and boost audience engagement." },
-              { "label": "Automotive", "url": "/", "description": "Fleet analytics, connected cars, and supply chain optimization." },
-              { "label": "DTC Brands", "url": "/", "description": "Optimize CAC, LTV, and growth performance." }
+              { "label": "Manufacturing", "url": "/industries?tab=manufacturing", "description": "AI-driven analytics for complex data, enabling real-time insights and process optimization." },
+              { "label": "Banking & Finance", "url": "/industries?tab=banking-finance", "description": "Fraud detection, compliance-ready BI, and digital transformation insights." },
+              { "label": "Healthcare", "url": "/industries?tab=healthcare", "description": "Optimize patient care and operational efficiency." },
+              { "label": "Retail & E-Commerce", "url": "/industries?tab=retail-ecommerce", "description": "Drive loyalty, personalization, and revenue insights." },
+              { "label": "Media & Entertainment", "url": "/industries?tab=media-entertainment", "description": "Optimize content performance and boost audience engagement." },
+              { "label": "Automotive", "url": "/industries?tab=automotive", "description": "Fleet analytics, connected cars, and supply chain optimization." },
+              { "label": "DTC Brands", "url": "/industries?tab=dtc-brands", "description": "Optimize CAC, LTV, and growth performance." }
             ]
           },
           {
             "title": "Enterprise",
             "children": [
-              { "label": "Enterprise Cloud", "url": "/solutions?tab=enterprise-cloud", "description": "White-label dashboards & widgets for embedding analytics into apps." },
-              { "label": "Self-hosted Pro", "url": "/solutions?tab=self-hosted-pro", "description": "AI agents deliver actionable insights proactively." },
-              { "label": "Self-hosted Enterprise", "url": "/solutions?tab=self-hosted-enterprise", "description": "Build customizable analytics experiences for SaaS customers." }
+              { "label": "Enterprise Cloud", "url": "/solutions?tab=enterprise_cloud", "description": "White-label dashboards & widgets for embedding analytics into apps." },
+              { "label": "Self-hosted Pro", "url": "/solutions?tab=pro", "description": "AI agents deliver actionable insights proactively." },
+              { "label": "Self-hosted Enterprise", "url": "/solutions?tab=enterprise_hosted", "description": "Build customizable analytics experiences for SaaS customers." }
             ]
           }
         ]
@@ -61,7 +61,23 @@
         "id": 16,
         "label": "Resources",
         "url": "#",
-        "parent": []
+        "parent": [
+          {
+            "title": "For Commercial Plans",
+            "children": [
+              { "label": "Wren AI  Documentation", "url": "https://docs.getwren.ai/cp/overview", "description": "Learn more about Wren AI commercial plans and how to use it." },
+              { "label": "Support", "url": "/support", "description": "Looking for our team support on Wren AI commercial plans? Reach out to us!" },
+              { "label": "Public Roadmap", "url": "https://wrenai.notion.site/Wren-AI-Cloud-Public-Roadmap-1ed92976d0bf80488fe3fb16359734a3", "description": "We share our roadmap openly so you always know what’s coming next for Wren AI." }
+            ]
+          },
+          {
+            "title": "For Open-Source Edition",
+            "children": [
+              { "label": "OSS Documentation", "url": "https://docs.getwren.ai/oss/overview/introduction", "description": "Learn more about our open-source project and how to use it." },
+              { "label": "Join  Discord Community", "url": "https://discord.gg/5DvshJqG8Z", "description": "Join our vibrant Discord open community to learn more about AI and architecture" }
+            ]
+          }
+        ]
       },
       {
         "id": 17,

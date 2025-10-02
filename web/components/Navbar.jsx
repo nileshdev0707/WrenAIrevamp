@@ -1,10 +1,10 @@
-import { useState, useEffect, createContext, useContext } from 'react'
+import { useState, useEffect, createContext, useContext, useRef } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { base} from "../service/serviceConfig";
 import navigation from "../json/navigation.json";
 import LanguageDropdown from "./LanguageDropdown";
-import { getStoredLanguage, saveLanguage, detectBrowserLanguage } from "../utils/languageUtils";
+import { getStoredLanguage, saveLanguage, detectBrowserLanguage, useLocalizedUrl } from "../utils/languageUtils";
 import { useTranslation } from "../hooks/useTranslation";
 import Button from './common/Button';
 // Language Context for global language state
@@ -75,7 +75,7 @@ export default function Navbar({ serverLanguage }) {
   // Use Next.js i18n translation hook
   const { t, locale, isClient } = useTranslation();
   const [hydrated, setHydrated] = useState(false);
-  const [expanded, setExpanded] = useState(false);
+  const getUrl = useLocalizedUrl();
   // Use router locale as the effective language
   const effectiveLanguage = locale || serverLanguage || 'en';
 
@@ -96,7 +96,7 @@ export default function Navbar({ serverLanguage }) {
     product: 'product',
     developers: 'developers',
     solutions: 'solutions',
-    docs: 'docs',
+    resources: 'resources',
     documentation: 'docs',
     pricing: 'pricing',
     blog: 'blog',
@@ -112,9 +112,9 @@ export default function Navbar({ serverLanguage }) {
 
   const fallback = [
     { label: isClient ? t("product") : "Product", url: '/product' },
-    { label: isClient ? t("developers") : "Developers", url: '/developers' },
+    { label: isClient ? t("oss") : "OSS", url: '/oss' },
     { label: isClient ? t("solutions") : "Solutions", url: '/solutions' },
-    { label: isClient ? t("docs") : "Docs", url: '/docs' },
+    { label: isClient ? t("resources") : "Resources", url: '/resources' },
     { label: isClient ? t("partners ") : "partner", url: '/partner' },
   ]
 
@@ -149,6 +149,7 @@ export default function Navbar({ serverLanguage }) {
   const [open, setOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [expandedIndex, setExpandedIndex] = useState(null)
+  const dropdownRef = useRef(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -159,6 +160,18 @@ export default function Navbar({ serverLanguage }) {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (expandedIndex >= 0 && !dropdownRef?.current?.contains(event.target)) {
+        setExpandedIndex(null)
+      }
+    }
+    document.addEventListener('mousedown', handleOutsideClick)
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick)
+    }
+  }, [expandedIndex])
 
   return (
     <div className="relative"> 
@@ -185,28 +198,40 @@ export default function Navbar({ serverLanguage }) {
                       const hasChildren = Array.isArray(link.parent) && link.parent.length > 0;
 
                       return (
-                        <div key={`desktop-${i}`} className="group">
+                        <div key={`desktop-${i}`} className="group"
+                         onMouseEnter={() => hasChildren && setExpandedIndex(i)}>
                           <Link
                             href={link.url}
                             className="text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200 px-2 py-1 rounded-md"
+                            onMouseEnter={() => !hasChildren && setExpandedIndex(null)}
                           >
                             {link.label}
                           </Link>
-
-                          {hasChildren && (
-                            <div className="opacity-0 group-hover:opacity-100 invisible group-hover:visible absolute left-0 right-0 mt-10 bg-white border border-gray-200 rounded-2xl shadow-lg transition-all duration-200 z-50 p-8 grid grid-cols-2 gap-6">
-                              {link.parent.map((group, index) => (
+                        
+                          {hasChildren && expandedIndex === i && (
+                            <div ref={dropdownRef} className="absolute left-0 right-0 mt-10 bg-white border border-gray-200 rounded-2xl shadow-lg transition-all duration-200 z-50 p-8 grid grid-cols-2 gap-6 max-h-[calc(100vh-150px)] overflow-y-auto overscroll-contain">
+                            {link.parent.map((group, index) => (
                                 <div key={index}>
-                                    {group.title && <div className="font-medium text-blue-600 text-sm pb-4">{group.title}</div>}
+                                    {group.title && <div className="px-3 font-medium text-blue-600 text-sm pb-4">{group.title}</div>}
                                     {group.url && (
-                                      <Link href={group.url}>
+                                      <Link href={getUrl(group.url)} 
+                                      target={
+                                        group.url.startsWith("http") ? "_blank" : "_self"
+                                      }
+                                      onClick={() => setExpandedIndex(null)}
+                                      >
                                         <div className="font-medium text-base">{group.label}</div>
                                         <div className="text-gray-500 text-sm pt-1.5">{group.description}</div>
                                       </Link>
                                     )}
-                                  <div className="space-y-6">
+                                  <div className="space-y-2">
                                     {group.children?.map((child, index) => (
-                                        <Link href={child.url} key={index} className="block">
+                                        <Link href={getUrl(child.url)} key={index} className="block rounded-md px-3 py-2 transition-colors duration-200 hover:bg-[#F5F5F5]"
+                                        target={
+                                          child.url.startsWith("http") ? "_blank" : "_self"
+                                        }
+                                        onClick={() => setExpandedIndex(null)}
+                                        >
                                           <div className="ffont-medium text-base">{child.label}</div>
                                           <div className="text-gray-500 text-sm pt-1.5">{child.description}</div>
                                         </Link>
@@ -258,10 +283,15 @@ export default function Navbar({ serverLanguage }) {
                       return (
                         <div key={`mobile-${i}`}>
                         <button
-                            onClick={() =>
-                              hasChildren &&
-                              setExpandedIndex(expandedIndex === i ? null : i)
-                            }
+                            onClick={() => {
+                              if (hasChildren) {
+                                setExpandedIndex(expandedIndex === i ? null : i)
+                              } else {
+                                window.location.href = link.url
+                                setOpen(false)
+                                setExpandedIndex(null)
+                              }
+                            }}
                             className="flex justify-between items-center w-full py-3 px-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium transition-colors duration-200"
                           >
                             {link.label}
@@ -285,14 +315,14 @@ export default function Navbar({ serverLanguage }) {
                                     </div>
                                   )}
                                   {group.url && (
-                                    <Link href={group.url}>
+                                    <Link href={getUrl(group.url)} target={group.url.startsWith("http") ? "_blank" : "_self"} onClick={() => setOpen(false)}>
                                       <div className="font-medium text-sm">{group.label}</div>
                                       <div className="text-gray-500 text-xs">{group.description}</div>
                                     </Link>
                                   )}
-                                  <div className="space-y-4">
+                                  <div>
                                     {group.children?.map((child, index) => (
-                                      <Link href={child.url} key={index} className="block">
+                                      <Link href={getUrl(child.url)} key={index} target={child.url.startsWith("http") ? "_blank" : "_self"} onClick={() => setOpen(false)} className="block rounded-md px-3 py-2 transition-colors duration-200 hover:bg-[#F5F5F5]">
                                         <div className="font-medium text-sm">{child.label}</div>
                                         <div className="text-gray-500 text-xs">{child.description}</div>
                                       </Link>

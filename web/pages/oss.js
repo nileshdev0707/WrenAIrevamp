@@ -8,7 +8,7 @@ import {
   safeBackgroundImage,
   createServerSideProps,
 } from "../utils/ssrHelpers";
-export default function Developers({ developers }) {
+export default function OSS({ developers }) {
   const heroImage = developers?.hero?.[0]?.backgroundimage?.url;
 
   // Loading state

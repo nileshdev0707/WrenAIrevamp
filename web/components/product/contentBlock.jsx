@@ -18,12 +18,12 @@ const [openIds, setOpenIds] = useState([]);
   const getUrl = useLocalizedUrl();
 
   const tabToIndex = {
-    "natural-language-prompts": 0,
-    "agentic-analytics": 1,
-    "distributed-data-sources": 2,
-    "no-code-sql-generation": 3,
-    "unified-semantic-layer": 4,
-    "ai-modeling": 5,
+    "ask-questions-in-your-language": 0,
+    "secure-data-access": 1,
+    "connect-to-any-data-source": 2,
+    "no-code-visual-analytics": 3,
+    "embedded-analytics": 4,
+    "enterprise-control": 5,
   };
   
   
