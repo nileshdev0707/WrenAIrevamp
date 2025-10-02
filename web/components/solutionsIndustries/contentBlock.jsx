@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { base } from "../../service/serviceConfig";
 import Button from "../common/Button";
 import { useRouter } from "next/router";
@@ -26,8 +26,8 @@ console.log("solutionsIndustries ==> ", solutionsIndustries);
   }, [tab]);
 
   console.log("activeTab ==> ", activeTab);
-  const router = useRouter();
-  const { tab } = router.query
+  // const router = useRouter();
+  // const { mytab } = router.query
 
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
