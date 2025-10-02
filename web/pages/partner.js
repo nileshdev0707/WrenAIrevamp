@@ -17,10 +17,10 @@ const partner = ({ affiliateProgram }) => {
           <PartnerWrenAis data={affiliateProgram} />
         )}
         {affiliateProgram?.trustedBy?.length > 0 && (
-          <div className="max-w-6xl mx-auto">
+          <div className="mx-auto">
             <TrustedLogo data={affiliateProgram} />
           </div>
-        )}
+        )}  
         <ElitePartner data={affiliateProgram} tab={tab}/>
       </div>
     </Layout>

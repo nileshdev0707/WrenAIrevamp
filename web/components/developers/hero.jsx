@@ -29,7 +29,7 @@ export default function DevelopersHero({ data }) {
               <span>{secondPart}</span>
             </h1>
             <div className="flex flex-wrap justify-center gap-4 mt-8">
-              {/* First button */}
+           
               <div className="flex items-center justify-center gap-2">
                 <button
                   className="glow-effect flex items-center gap-2 bg-white border border-blue-400 text-black px-4 py-3 rounded-full font-medium text-sm cursor-pointer"
@@ -41,34 +41,8 @@ export default function DevelopersHero({ data }) {
                     );
                   }}
                 >
-                  <svg
-                    width="16"
-                    height="22"
-                    viewBox="0 0 16 22"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M8 22C12.1421 22 15.5 18.6421 15.5 14.5C15.5 13.6345 15.2697 12.8032 15 12.0296C13.3333 13.6765 12.0667 14.5 11.2 14.5C15.1954 7.5 13 4.5 7 0.5C7.5 5.49951 4.20403 7.77375 2.86179 9.0366C1.40786 10.4045 0.5 12.3462 0.5 14.5C0.5 18.6421 3.85786 22 8 22ZM8.7094 4.23498C11.9511 6.98528 11.9666 9.1223 9.463 13.5086C8.702 14.8419 9.6648 16.5 11.2 16.5C11.8884 16.5 12.5841 16.2992 13.3189 15.9051C12.6979 18.262 10.5519 20 8 20C4.96243 20 2.5 17.5376 2.5 14.5C2.5 12.9608 3.13279 11.5276 4.23225 10.4932C4.35826 10.3747 4.99749 9.8081 5.02477 9.7836C5.44862 9.4021 5.7978 9.0663 6.1429 8.69677C7.3733 7.37932 8.2571 5.91631 8.7094 4.23498Z"
-                      fill="black"
-                    />
-                  </svg>
-                  #1 GenBI solution on GitHub
-                </button>
-              </div>
-
-              {/* Second button */}
-              <div className="flex items-center justify-center gap-2">
-                <button
-                  className="glow-effect flex items-center gap-2 bg-white border border-blue-400 text-black px-4 py-3 rounded-full font-medium text-sm cursor-pointer"
-                  onClick={() => {
-                    window.open(
-                      "https://github.com/Canner/WrenAI",
-                      "_blank",
-                      "noopener,noreferrer"
-                    );
-                  }}
-                >
+                 
+                  <span> #1 GenBI solution on </span>
                   <svg
                     width="19"
                     height="21"

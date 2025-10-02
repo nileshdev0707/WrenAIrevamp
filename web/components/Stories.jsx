@@ -203,12 +203,12 @@ export default function Stories({ data }) {
             {caseStudieItems.map((story, index) => (
               <div
                 key={index}
-                className="cursor-pointer px-2 md:px-4 md:py-4 py-2"
+                className="cursor-pointer px-2 md:px-4 md:py-4 py-2 h-full"
                 onClick={() => window.open(getUrl(story.link), "_self")}
               >
-                <div className="grid 2xl:grid-cols-3 xl:grid-cols-5 p-4 md:p-5 gap-10 md:gap-4 bg-[#F5F5F5]  rounded-xl [.active]:bg-gradient-to-r [.active]:from-[#0B8EE5] [.active]:to-[#0022CB]">
+                <div className="grid 2xl:grid-cols-3 xl:grid-cols-5 p-4 md:p-5 gap-10 md:gap-4 bg-[#F5F5F5] h-full rounded-xl [.active]:bg-gradient-to-r [.active]:from-[#0B8EE5] [.active]:to-[#0022CB]">
                   <div className="2xl:col-span-1 xl:col-span-2 flex flex-col gap-3">
-                    <p className="xl:hidden sm:pb-2 pb-1 text-center 2xl:text-4xl xl:text-3xl text-2xl bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-clip-text text-transparent font-bold">
+                    <p className="min-h-[75px] xl:hidden sm:pb-2 pb-1 text-center 2xl:text-4xl xl:text-3xl text-2xl bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-clip-text text-transparent font-bold">
                       {story.title}
                     </p>
                     {story.subTitle && (
@@ -265,7 +265,7 @@ export default function Stories({ data }) {
                     </div>
                   </div>
                   <div className="items-center 2xl:col-span-2 xl:col-span-3 flex flex-col justify-center text-center md:text-left">
-                    <div className="flex flex-col xl:justify-between items-center xl:h-[254px] xl:max-w-[411px]">
+                    <div className="flex flex-col xl:justify-between items-center xl:min-h-[254px] xl:max-w-[411px]">
                       <div className="flex flex-col gap-5 items-center text-center">
                         <p className="py-2 hidden xl:block 2xl:text-4xl xl:text-3xl lg:text-xl md:text-2xl text-xl bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-clip-text text-transparent font-bold">
                           {story.title}

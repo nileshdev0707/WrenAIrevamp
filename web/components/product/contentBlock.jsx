@@ -67,7 +67,7 @@ const [openIds, setOpenIds] = useState([]);
               </h1>
               <p className="text-gray-600 text-sm mt-4 pb-8">{item.subtitle}</p>
               {item?.cmsListItesm?.length > 0 ? (
-                <div className="space-y-4 mb-12">
+                <div className=" mb-12">
                   {item?.cmsListItesm.map((listItem) => {
                     const isOpen = openIds.includes(listItem.id);
                     return (

@@ -12,7 +12,7 @@ export default function ContentBlock({ contentBlock }) {
           const secondPart = parts[1] ? parts[1].trim() : "";
           return (
             <div key={index} className="grid gap-8 md:grid-cols-3 pb-10">
-              <div className="flex flex-col justify-center col-span-2 sm:col-span-1">
+              <div className="flex flex-col col-span-2 sm:col-span-1">
                 <h2 className="text-3xl md:text-5xl font-medium leading-tight pt-5 text-center sm:text-left">
                   <span className="text-black">{firstPart}</span>{" "}
                   {secondPart && (

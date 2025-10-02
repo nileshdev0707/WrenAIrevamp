@@ -81,7 +81,7 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
     >
       <article className="max-w-6xl mx-auto py-12">
         {/* Article Header */}
-        <div className="mb-8 pt-20 max-w-2xl px-5">
+        <div className="mb-8 pt-25 px-5">
           <h1 className="lg:text-4xl text-2xl font-medium text-gray-900 mb-4">
             {post.title}
           </h1>

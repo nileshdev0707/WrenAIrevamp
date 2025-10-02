@@ -34,7 +34,7 @@ export default function Solutions({ solutions }) {
       )}
       {solutions?.ContentBlock.length > 0 && (
         <div className="max-w-7xl mx-auto lg:px-6 md:px-4 px-2">
-          <Industry data={solutions} />
+          {/* <Industry data={solutions} /> */}
           <PartnerEcosystem data={solutions} />
         </div>
       )}

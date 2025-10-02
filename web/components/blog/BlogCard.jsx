@@ -13,7 +13,7 @@ export default function BlogCard({ post, showExcerpt = true, size = 'default' })
 
   const cardClasses = size === 'small' 
     ? 'bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow'
-    : 'bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-lg transition-shadow';
+    : 'bg-white rounded-lg overflow-hidden hover:shadow-lg transition-shadow';
 
   const imageClasses = size === 'small' ? 'w-full h-32 object-cover' : 'w-full h-48 object-cover';
   const titleClasses = size === 'small' ? 'text-lg font-semibold' : 'lg:text-xl md:text-lg text-base font-bold';
@@ -62,7 +62,7 @@ export default function BlogCard({ post, showExcerpt = true, size = 'default' })
           <img
             src={`${featuredImage.url?.startsWith('http') ? '' : base}${featuredImage.url}`}
             alt={attributes.title}
-            className={imageClasses}
+            className={`${imageClasses} transition-transform duration-300 hover:scale-110`}
           />
         </div>
       )}
