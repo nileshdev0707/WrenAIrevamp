@@ -37,7 +37,7 @@ const Industry = ({ data }) => {
           <div key={index}>
             <div>
               <img
-                src={`${item.image.url.startsWith("http") ? "" : base} ${
+                src={`${item.image.url.startsWith("http") ? "" : base}${
                   item.image.url
                 }`}
                 alt={item?.title}

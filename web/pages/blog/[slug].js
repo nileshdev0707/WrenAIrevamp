@@ -135,15 +135,15 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
               </a>
             </div>
               {post.relatedPosts.length > 0 && (
-            <div class="bg-white rounded-lg mt-5">
-              <h2 class="xl:text-2xl md:text-xl text-lg font-semibold mb-6">
+            <div className="bg-white rounded-lg mt-5">
+              <h2 className="xl:text-2xl md:text-xl text-lg font-semibold mb-6">
                 Related Posts
               </h2>
-                <div class="space-y-8">
+                <div className="space-y-8">
                 {post.relatedPosts.map((post) => (
-                  <div class="space-y-2">
+                  <div className="space-y-2">
                     <Link href={`/blog.js/${post.slug}`}>
-                    <span class="mb-4 inline-block px-3 py-2 text-xs font-medium bg-gray-100 text-gray-700 rounded-md">
+                    <span className="mb-4 inline-block px-3 py-2 text-xs font-medium bg-gray-100 text-gray-700 rounded-md">
                       {post?.publishedAt
                         ? new Date(post.publishedAt).toLocaleDateString(
                             "en-US",
@@ -155,8 +155,8 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
                           )
                         : ""}
                     </span>
-                    <h3 class="font-semibold text-gray-900">{post.title}</h3>
-                    <p class="text-sm text-gray-600">{post.excerpt}</p>
+                    <h3 className="font-semibold text-gray-900">{post.title}</h3>
+                    <p className="text-sm text-gray-600">{post.excerpt}</p>
                     </Link>
                     </div>
                 ))}

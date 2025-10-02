@@ -9,7 +9,7 @@ import {
 import OpenSourceDetails from "../components/document/openSourceDetails";
 import Footer from "../components/footer";
 import PublicRoadmap from "../components/document/publicRoadmap";
-export default function Document({ document }) {
+export default function Resources({ document }) {
   return (
     <Layout>
       <div className="max-w-6xl mx-auto">

@@ -11,22 +11,22 @@ export default function SiteFooter() {
       title: t("Product"),
       links: [
         { label: "Use Cases", slug: "product" },
-        { label: "Enterprise Cloud", slug: "/solutions?enterprise_cloud" },
-        { label: t("Self-hosted Pro"), slug: "https://cannerdata.com/terms/security" },
-        { label: t("Self-hosted Enterprise"), slug: "solutions-industries" },
-        { label: t("Wren AI OSS"), slug: "solutions-industries" },
+        { label: "Enterprise Cloud", slug: "solutions?tab=enterprise_cloud" },
+        { label: t("Self-hosted Pro"), slug: "solutions?tab=pro" },
+        { label: t("Self-hosted Enterprise"), slug: "solutions?tab=enterprise_hosted" },
+        { label: t("Wren AI OSS"), slug: "oss" },
       ],
     },
     {
       title: t("Solutions"),
       links: [
-        { label: t("Manufacturing"), slug: "https://wrenai.notion.site/" },
-        { label: t("Banking & Finance"), slug: "/" },
-        { label: t("Healthcare"), slug: "https://wrenaicloud.statuspage.io/" },
-        { label: t("Retail & E-commerce"), slug: "/" },
-        { label: t("Media & Entertainment"), slug: "/" },
-        { label: t("Automotive"), slug: "/" },
-        { label: t("DTC Brands"), slug: "/" },
+        { label: t("Manufacturing"), slug: "industries?tab=manufacturing" },
+        { label: t("Banking & Finance"), slug: "industries?tab=banking-finance" },
+        { label: t("Healthcare"), slug: "industries?tab=healthcare" },
+        { label: t("Retail & E-commerce"), slug: "industries?tab=retail-ecommerce" },
+        { label: t("Media & Entertainment"), slug: "industries?tab=media-entertainment" },
+        { label: t("Automotive"), slug: "industries?tab=automotive" },
+        { label: t("DTC Brands"), slug: "industries?tab=dtc-brands" }
       ],
     },
     {
@@ -35,7 +35,7 @@ export default function SiteFooter() {
         { label: t("Wren AI Documentation"), slug: "https://docs.getwren.ai/cp/overview" },
         { label: t("Blog"), slug: "blog" },
         { label: t("Support Portal"), slug: "support" },
-        { label: t("Public Roadmap"), slug: "/" }
+        { label: t("Public Roadmap"), slug: "https://wrenai.notion.site/Wren-AI-Cloud-Public-Roadmap-1ed92976d0bf80488fe3fb16359734a3" }
       ],
     },
     {
@@ -51,7 +51,7 @@ export default function SiteFooter() {
       title: t("Company"),
       links: [
         { label: t("privacyPolicy"), slug: "privacy-policy" },
-        { label: t("Security Policy"), slug: "terms-of-use" },
+        { label: t("Security Policy"), slug: "security-policy" },
         { label: t("termsOfUse"), slug: "terms-of-use" },
         { label: t("Service Status"), slug: "https://wrenaicloud.statuspage.io/" },
         { label: t("SLA"), slug: "sla" }

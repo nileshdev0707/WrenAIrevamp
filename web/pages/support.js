@@ -1,26 +1,16 @@
 import React from "react";
 import Layout from "./layout";
-import {
-  safeBackgroundImage,
-  createServerSideProps,
-} from "../utils/ssrHelpers";
-import ReactMarkdownDetails from "../components/reactMarkDown";
+import { safeBackgroundImage } from "../utils/ssrHelpers";
+import { createServerSideProps } from "../utils/ssrHelpers";
+import { HubspotEmbedForm } from "../components/hubspotEmbedForm";
 
-export default function Support({ sla }) {
-  const heroImage = sla?.hero?.[0]?.backgroundimage?.url;
+export default function Support({ support }) {
+  const heroImage = support?.hero?.[0]?.backgroundImage?.url;
 
-  // Extract SEO data from SLA page data
-  const seoData = sla?.seo?.[0] || sla?.seo;
-
-  console.log({ sla });
   return (
-    <Layout
-      seoData={seoData}
-      pageTitle="Service Level Agreement - Wren AI"
-      pageDescription="Wren AI Service Level Agreement - Terms and conditions for our services"
-    >
-      <div className="px-6 max-w-6xl mx-auto">
-        {sla?.hero?.length && (
+    <Layout>
+      <div className="px-6">
+        {support?.hero?.length && (
           <div
             style={{
               backgroundImage: safeBackgroundImage(heroImage),
@@ -29,37 +19,29 @@ export default function Support({ sla }) {
             }}
             className="bg-no-repeat py-16 max-w-6xl mx-auto bg-cover"
           >
-            <section className="py-3 sm:py-16 text-center">
-              {sla?.hero?.map((item, index) => (
+            <section className="py-10 sm:py-16 text-center">
+              {support?.hero?.map((item, index) => (
                 <div key={index}>
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium leading-tight xl:pt-25 lg:pt-20 md:pt-15 pt-10">
-                    {item?.title?.split("SLA").map((part, idx) =>
-                      idx === 0 ? (
-                        <span key={idx}>
-                          {part} <br />
-                        </span>
-                      ) : (
-                        <span key={idx}>SLA</span>
-                      )
-                    )}
+                  <h1 className="text-3xl sm:text-4xl lg:text-6xl font-medium leading-tight pt-10 sm:pt-25">
+                    {item?.title}
                   </h1>
+
                   <p className="pt-10 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base">
-                    {item?.subtitle}
+                    {item?.subTitle}
                   </p>
                 </div>
               ))}
             </section>
           </div>
         )}
-        {sla?.html && (
-          <div className="max-w-4xl mx-auto md:py-12">
-            <ReactMarkdownDetails data={sla?.html} />
-          </div>
-        )}
+        <HubspotEmbedForm formId={support?.formId} />
       </div>
     </Layout>
   );
 }
 
 // Server-side rendering function
-export const getServerSideProps = createServerSideProps("/api/sla-page", "sla");
+export const getServerSideProps = createServerSideProps(
+  "/api/support-page",
+  "support"
+);

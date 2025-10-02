@@ -84,7 +84,7 @@ const EnterPrise = (data) => {
                 </div>
                 <div className="max-w-20 sm:w-12 w-8">
                   <img
-                    src={`${item?.icon?.url.startsWith("http") ? "" : base} ${
+                    src={`${item?.icon?.url.startsWith("http") ? "" : base}${
                       item?.icon?.url
                     }`}
                     alt={item?.title}

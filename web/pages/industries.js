@@ -8,7 +8,7 @@ import SolutionsIndustriesHero from "../components/solutionsIndustries/hero";
 import ContentBlock from "../components/solutionsIndustries/contentBlock";
 import Footer from "../components/footer";
 import { useRouter } from "next/router";
-export default function SolutionsIndustries({ solutionsIndustries }) {
+export default function Industries({ solutionsIndustries }) {
   const heroImage = solutionsIndustries?.hero?.[0]?.backgroundImage?.url;
   const router = useRouter();
   const { tab } = router.query
