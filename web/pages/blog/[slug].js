@@ -79,7 +79,7 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
       pageTitle={attributes.title}
       pageDescription={attributes.excerpt}
     >
-      <article className="max-w-6xl mx-auto py-12">
+      <article className="max-w-6xl mx-auto py-8 md:py-10 lg:mt-15">
         {/* Article Header */}
         <div className="mb-8 pt-25 px-5">
           <h1 className="lg:text-4xl text-2xl font-medium text-gray-900 mb-4">
@@ -88,6 +88,37 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
           <p className="lg:text-lg text-base text-gray-600 mb-6">
             {post.excerpt}
           </p>
+          <div className="flex items-center gap-5 sm:hidden">
+        <img
+          src="/svg/avtar.svg"
+          alt="Allison Hsieh"
+          className="w-14 h-14 rounded-full object-cover"
+        />
+        <div>
+          <p className="font-medium text-gray-900 text-lg">
+            {post?.author_name?.name || ""}
+          </p>
+          <p className="text-sm text-gray-500">
+            Updated:{" "}
+            {blogPageData?.updatedAt
+              ? new Date(blogPageData.updatedAt).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "2-digit",
+                  year: "numeric",
+                })
+              : ""}
+            <br />
+            Published:{" "}
+            {blogPageData?.publishedAt
+              ? new Date(blogPageData.publishedAt).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "2-digit",
+                  year: "numeric",
+                })
+              : ""}
+          </p>
+        </div>
+      </div>
         </div>
 
         <div className="md:grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-20 pt-5 px-5">
@@ -165,7 +196,7 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
               )}
 
             {blogPageData?.formId && (
-              <div className="mt-5">
+              <div className="mt-5 border border-gray-300 p-5 rounded-md">
                 <HubspotEmbedForm formId={blogPageData?.formId} hideClass />
               </div>
             )}

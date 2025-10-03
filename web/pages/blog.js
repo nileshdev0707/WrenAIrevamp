@@ -105,20 +105,20 @@ export default function Blog({
       pageTitle="Blog - Wren AI"
       pageDescription="Latest insights, tutorials, and updates from Wren AI"
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="mx-auto">
         <div
           style={{
             backgroundImage: safeBackgroundImage(heroImage),
             WebkitBackgroundSize: "100% 100%",
             backgroundPosition: "center top",
           }}
-          className="bg-no-repeat pt-24 max-w-6xl mx-auto"
-        >
+          className="bg-no-repeat pt-24 max-w-8xl mx-auto"
+        > 
           <BlogHero data={blogPageData?.hero} blogs={blogs}/>
         </div>
 
         {/* Blog Content */}
-        <div className="lg:pb-15 pb-10 px-5">
+        <div className="max-w-7xl mx-auto lg:pb-15 pb-10 px-5">
           {/* Category Filter - only show if not using BlogHero with integrated categories */}
           <CategoryFilter
             categories={categories}

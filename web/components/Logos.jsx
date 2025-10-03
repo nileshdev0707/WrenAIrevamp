@@ -51,14 +51,14 @@ export default function Logos({ items }) {
             return (
               <div 
                 key={`${it.name}-${idx}`} 
-                className="flex-shrink-0 flex items-center justify-center p-3 opacity-80 transition-opacity"
-                style={{ minWidth: '200px' }}
+                className="flex-shrink-0 flex items-center justify-center px-5 opacity-80 transition-opacity"
+                style={{ minWidth: '120px' }} 
               >
                 {url ? (
                   <img 
                     src={`${url.startsWith('http') ? '' : base}${url}`} 
                     alt={it.name} 
-                    className="max-h-12 object-contain grayscale" 
+                    className="h-10 w-30 object-contain grayscale" 
                   />
                 ) : (
                   <div className="text-gray-600">{it.name}</div>

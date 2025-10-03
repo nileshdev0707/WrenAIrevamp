@@ -8,6 +8,7 @@ const ElitePartner = ({data, tab}) => {
   const affiliateRef = useRef(null)
   const elitePartnerData = data
   const [activeTab, setActiveTab] = useState(elitePartnerData?.CloudElitePartners?.[0]?.title)
+  console.log('elitePartnerData', elitePartnerData);
 
   const words = elitePartnerData?.CloudElitePartners?.[0]?.subtitle?.split(" ");
   const firstPart1 = words?.slice(0, 2).join(" ");
@@ -30,7 +31,7 @@ useEffect(() => {
 
   const currentPerks = activeTab === elitePartnerData?.CloudElitePartners?.[0]?.title ? elitePerks : affiliatePerks
   const affiliatePartner = elitePartnerData?.AffiliatePartner?.[0]
-const affiliatePartnerUrl = affiliatePartner?.image?.url;
+const affiliatePartnerUrl = affiliatePartner?.images;
 console.log("affiliatePartnerUrl ==> ", affiliatePartnerUrl);
 useEffect(() => {
   if(tab === 'elite'){
@@ -129,7 +130,7 @@ useEffect(() => {
           {activeTab === elitePartnerData?.CloudElitePartners?.[0]?.title && (
          <div>
           <div className='bg-[#F7FBFE] lg:mt-20 sm:mt-10 mt-5'>
-            <div className='max-w-6xl mx-auto lg:py-20 md:py-10 py-5 px-4'>
+            <div className='max-w-[1400px] mx-auto lg:py-20 md:py-10 py-5 px-4'>
 
               <div className='text-center max-w-2xl mx-auto'>
                 <h2 className='md:text-[42px] text-[32px] font-medium text-[#1E1E1E]'>
@@ -137,9 +138,12 @@ useEffect(() => {
               </h2>
               </div>
               <div className="flex flex-wrap justify-center md:gap-6 gap-3 md:my-20 sm:my-10 my-5">
-                      <div>
-                      <img src={`${affiliatePartnerUrl?.startsWith('http') ? '' : base}${affiliatePartnerUrl}`} alt={affiliatePartner?.title}/>
+                {affiliatePartnerUrl?.map((image,i) => (
+                  <div className='bg-white p-5 flex gap-6 justify-center rounded-[16px] border border-[#D9D9D9] h-[139px] w-[302px]'>
+                      <img className='w-[200px] object-contain h-auto' src={`${image?.url?.startsWith('http') ? '' : base}${image?.url}`} alt={image?.title}/>
                       </div>
+                ))}
+                      
               </div>
               <div className='flex flex-col sm:flex-row justify-center'>
                 <button onClick={() => window.open(affiliatePartner?.button?.url, '_self')} className='cursor-pointer bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] hover:-translate-y-0.5 transition-all text-white font-semibold md:py-4 py-3 md:px-8 px-4 rounded-lg lg:text-lg md:text-md text-sm duration-200 shadow-lg hover:shadow-xl'>

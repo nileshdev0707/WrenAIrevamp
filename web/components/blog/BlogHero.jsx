@@ -6,7 +6,7 @@ export default function BlogHero({ data, blogs }) {
   const featuredPost = blogs.find((post) => post.isFeatured) || blogs[0];
 
   return (
-    <section className="py-10 md:py-16 sm::px-6 px-4">
+    <section className="pt-10 md:pt-16 sm::px-6 px-4">
       {data?.map((item, index) => {
         const words = item?.title?.split(" ");
         const firstPart = words.slice(0, 3).join(" ");
@@ -21,17 +21,20 @@ export default function BlogHero({ data, blogs }) {
               </h1>
               <p className="mt-5 max-w-3xl mx-auto text-black xl:text-xl lg:text-lg text-base">
                 {item?.subtitle}
-              </p>
+              </p>    
             </div>
           </div>
         );
       })}
 
       {featuredPost && (
-        <div className="cursor-pointer sm:flex sm:gap-8 gap-5 lg:pt-22 pt-10 px-4" onClick={() => window.open(`/blog/${featuredPost?.slug}`, '_self')}>
-          <div className="md:block hidden w-1/2">
+        <div
+          className="cursor-pointer sm:flex sm:gap-8 gap-5 lg:pt-22 pt-10 lg:px-70"
+          onClick={() => window.open(`/blog/${featuredPost?.slug}`, "_self")}
+        >
+          <div className="w-full sm:w-1/2">
             {featuredPost?.featuredImage?.url ? (
-              <div className="w-full h-full flex flex-none">
+              <div className=" flex flex-none justify-center">
                 <img
                   src={`${
                     featuredPost.featuredImage.url.startsWith("http")
@@ -39,7 +42,7 @@ export default function BlogHero({ data, blogs }) {
                       : base
                   }${featuredPost.featuredImage.url}`}
                   alt={featuredPost?.featuredImage?.name}
-                  className="w-auto object-contain h-full"
+                  className="lg:w-[628px] object-contain lg:h-[353px] rounded-2xl"
                 />
               </div>
             ) : (
@@ -49,14 +52,16 @@ export default function BlogHero({ data, blogs }) {
             )}
           </div>
           <div className="sm:w-1/2">
-          <Button
-                    href={`/blog/${featuredPost?.slug}`}
-                    className="lg:mb-5 mb-3 w-full sm:w-fit"
-                    variant="primary"
-                    label="Featured"
-                  >
-                    Featured
-                  </Button>
+            <button
+              // key={index}  
+              href={`/blog/${featuredPost?.slug}`}
+              label="Featured"
+              className="btn bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white lg:mb-5 mb-3 mt-5 sm:mt-0 w-[101px] h-[38px]"
+              
+            >
+              Featured
+            </button>
+
             <h1 className="xl:text-4xl lg:text-3xl md:text-2xl text-xl font-medium lg:mb-5 mb-3 leading-tight">
               {featuredPost?.title}
             </h1>

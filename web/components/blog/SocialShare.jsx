@@ -2,6 +2,7 @@ import { useState } from "react";
 
 export default function SocialShare({ title, url, blogPageData, post }) {
   const [copied, setCopied] = useState(false);
+  console.log('post', post);
 
   const shareOnTwitter = () => {
     const tweetUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
@@ -36,7 +37,7 @@ export default function SocialShare({ title, url, blogPageData, post }) {
 
   return (
     <div className="flex flex-col gap-10 pb-15">
-      <div className="flex items-center gap-5">
+   <div className="sm:flex items-center gap-5 hidden">
         <img
           src="/svg/avtar.svg"
           alt="Allison Hsieh"
@@ -44,7 +45,7 @@ export default function SocialShare({ title, url, blogPageData, post }) {
         />
         <div>
           <p className="font-medium text-gray-900 text-lg">
-            {post?.author || ""}
+            {post?.author_name?.name || ""}
           </p>
           <p className="text-sm text-gray-500">
             Updated:{" "}
@@ -67,7 +68,6 @@ export default function SocialShare({ title, url, blogPageData, post }) {
           </p>
         </div>
       </div>
-
       {/* Share + Stay updated */}
       <div className="grid grid-cols-2 items-center text-sm text-gray-700">
         <div className="flex flex-col gap-5">

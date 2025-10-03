@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const   Button = ({ 
+const Button = ({ 
   children, 
   variant = 'primary', 
   size = 'md', 
@@ -19,7 +19,7 @@ const   Button = ({
     ghost: 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
     danger: 'bg-red-600 text-white hover:bg-red-700',
     elevated: "sm:w-max w-full xl:px-8 xl:py-[15px] lg:px-4 lg:py-[12px] md:px-4 md:py-[12px] sm:px-5 sm:py-3 py-2.5 px-4  relative before:absolute befote:inset-0 bg-white px-4 py-2 rounded-md font-semibold overflow-hidden inline-block hover:opacity-90 transition  gradient-text-button transition-all duration-200 transform hover:-translate-y-0.5",
-    light: "!ring-0 cursor-pointer focus:!border-none focus:!border-transparent  focus:!shadow-none focus:!ring-0  shadow-none  visible:!ring-0 focus:!ring-0 focus:!outline-none focus:ring-offset-0 focus:shadow-none text-gray-800  xl:px-8 xl:py-[15px] lg:px-4 lg:py-[12px] md:px-4 md:py-[12px] sm:px-5 sm:py-3 py-2.5 px-4  relative bg-white px-4 py-2 rounded-md font-semibold overflow-hidden  transition transition-all duration-200 transform hover:-translate-y-0.5",
+    light: "!ring-0 cursor-pointer focus:!border-none focus:!border-transparent  focus:!shadow-none focus:!ring-0  shadow-none  visible:!ring-0 focus:!ring-0 focus:!outline-none focus:ring-offset-0 focus:shadow-none text-gray-800  xl:px-8 xl:py-[15px] lg:px-4 lg:py-[12px] md:px-4 md:py-[12px] sm:px-5 sm:py-3 py-2.5 px-4  relative bg-[#F5F5F5] px-4 py-2 rounded-md font-semibold overflow-hidden  transition transition-all duration-200 transform hover:-translate-y-0.5",
     gray: "cursor-pointer text-gray-800  xl:px-8 xl:py-[15px] lg:px-4 lg:py-[12px] md:px-4 md:py-[12px] sm:px-5 sm:py-3 py-2.5 px-4  relative bg-gray-100 px-4 py-2 rounded-md font-semibold overflow-hidden  transition transition-all duration-200 transform hover:-translate-y-0.5",
   };
    

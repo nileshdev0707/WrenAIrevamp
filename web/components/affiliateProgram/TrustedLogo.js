@@ -17,7 +17,7 @@ console.log(trustedByData,'trustedByData');
             </div>
           ))}
         </div> */}
-      <div className='pt-15'>
+      <div className='pt-8'>
       <Logos items={trustedByData} />
 
       </div>

@@ -2,9 +2,18 @@ import Link from "next/link";
 import { base } from "../service/serviceConfig";
 import navigation from "../json/navigation.json";
 import { useTranslation } from "../hooks/useTranslation";
+import { useEffect, useState } from "react";
 
 export default function SiteFooter() {
   const { t } = useTranslation();
+
+  const [stars, setStars] = useState(null);
+
+  useEffect(() => {
+    fetch(`https://api.github.com/repos/Canner/WrenAI`)
+      .then((res) => res.json())
+      .then((data) => setStars(data.stargazers_count));
+  }, []);
 
   const cols = [
     {
@@ -13,7 +22,10 @@ export default function SiteFooter() {
         { label: "Use Cases", slug: "product" },
         { label: "Enterprise Cloud", slug: "solutions?tab=enterprise_cloud" },
         { label: t("Self-hosted Pro"), slug: "solutions?tab=pro" },
-        { label: t("Self-hosted Enterprise"), slug: "solutions?tab=enterprise_hosted" },
+        {
+          label: t("Self-hosted Enterprise"),
+          slug: "solutions?tab=enterprise_hosted",
+        },
         { label: t("Wren AI OSS"), slug: "oss" },
       ],
     },
@@ -21,21 +33,36 @@ export default function SiteFooter() {
       title: t("Solutions"),
       links: [
         { label: t("Manufacturing"), slug: "industries?tab=manufacturing" },
-        { label: t("Banking & Finance"), slug: "industries?tab=banking-finance" },
+        {
+          label: t("Banking & Finance"),
+          slug: "industries?tab=banking-finance",
+        },
         { label: t("Healthcare"), slug: "industries?tab=healthcare" },
-        { label: t("Retail & E-commerce"), slug: "industries?tab=retail-ecommerce" },
-        { label: t("Media & Entertainment"), slug: "industries?tab=media-entertainment" },
+        {
+          label: t("Retail & E-commerce"),
+          slug: "industries?tab=retail-ecommerce",
+        },
+        {
+          label: t("Media & Entertainment"),
+          slug: "industries?tab=media-entertainment",
+        },
         { label: t("Automotive"), slug: "industries?tab=automotive" },
-        { label: t("DTC Brands"), slug: "industries?tab=dtc-brands" }
+        { label: t("DTC Brands"), slug: "industries?tab=dtc-brands" },
       ],
     },
     {
       title: t("resources"),
       links: [
-        { label: t("Wren AI Documentation"), slug: "https://docs.getwren.ai/cp/overview" },
+        {
+          label: t("Wren AI Documentation"),
+          slug: "https://docs.getwren.ai/cp/overview",
+        },
         { label: t("Blog"), slug: "blog" },
         { label: t("Support Portal"), slug: "support" },
-        { label: t("Public Roadmap"), slug: "https://wrenai.notion.site/Wren-AI-Cloud-Public-Roadmap-1ed92976d0bf80488fe3fb16359734a3" }
+        {
+          label: t("Public Roadmap"),
+          slug: "https://wrenai.notion.site/Wren-AI-Cloud-Public-Roadmap-1ed92976d0bf80488fe3fb16359734a3",
+        },
       ],
     },
     {
@@ -44,7 +71,7 @@ export default function SiteFooter() {
         { label: t("Elite Partners"), slug: "partner?tab=elite" },
         { label: t("Affiliate Partners"), slug: "partner?tab=affiliate" },
         { label: t("Join Discord"), slug: "https://discord.gg/5DvshJqG8Z" },
-        { label: "GitHub", slug: "https://api.github.com/Canner/WrenAI" },
+        { label: "GitHub", slug: "https://github.com/Canner/WrenAI" },
       ],
     },
     {
@@ -53,8 +80,11 @@ export default function SiteFooter() {
         { label: t("privacyPolicy"), slug: "privacy-policy" },
         { label: t("Security Policy"), slug: "security-policy" },
         { label: t("termsOfUse"), slug: "terms-of-use" },
-        { label: t("Service Status"), slug: "https://wrenaicloud.statuspage.io/" },
-        { label: t("SLA"), slug: "sla" }
+        {
+          label: t("Service Status"),
+          slug: "https://wrenaicloud.statuspage.io/",
+        },
+        { label: t("SLA"), slug: "sla" },
       ],
     },
   ];
@@ -89,7 +119,7 @@ export default function SiteFooter() {
                       {isExternal ? (
                         <Link
                           href={l.slug?.startsWith("#") ? l.slug : link(l.slug)}
-                          className="hover:text-gray-900"
+                          className="hover:text-gray-900 flex gap-2"
                           target={
                             l.slug.startsWith("http") ? "_blank" : "_self"
                           }
@@ -100,6 +130,28 @@ export default function SiteFooter() {
                           }
                         >
                           {l.label}
+                          {l.label === "GitHub" && (
+                            <div className="flex items-center gap-1 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] p-1 pr-[6px] rounded-sm text-white border max-w-[47px] max-h-[18px]">
+                              <div className="h-[10px] w-[10px] flex justify-center items-center">
+                                <svg
+                                  width="7.93"
+                                  height="7.54"
+                                  viewBox="0 0 20 19"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M9.9998 15L4.12197 18.5902L5.72007 11.8906L0.489258 7.40983L7.35479 6.85942L9.9998 0.5L12.6449 6.85942L19.5104 7.40983L14.2796 11.8906L15.8777 18.5902L9.9998 15Z"
+                                    fill="white"
+                                  />
+                                </svg>
+                              </div>
+
+                              <span className="font-normal text-[8px]/1">
+                                {stars?.toLocaleString()}
+                              </span>
+                            </div>
+                          )}
                         </Link>
                       ) : (
                         <Link
@@ -113,20 +165,34 @@ export default function SiteFooter() {
                   );
                 })}
                 {col.title === "Company" && (
-                <li>
-                  <a
-                    href="https://wrenaicloud.statuspage.io/"
-                    className="hover:text-gray-900"
-                  >
-                  <img className="h-20" src='https://capable-butterfly-84cab64826.media.strapiapp.com/footer_Logo_182b5bfa92.png'/>
-                  </a>
-                </li>
-
+                  <li className="hidden sm:block">
+                    <a
+                      href="https://wrenaicloud.statuspage.io/"
+                      className="hover:text-gray-900"
+                    >
+                      <img
+                        className="h-20"
+                        src="https://capable-butterfly-84cab64826.media.strapiapp.com/footer_Logo_182b5bfa92.png"
+                      />
+                    </a>
+                  </li>
                 )}
               </ul>
             </div>
           ))}
+          <div className="block sm:hidden">
+            <a
+              href="https://wrenaicloud.statuspage.io/"
+              className="hover:text-gray-900"
+            >
+              <img
+                className="h-20"
+                src="https://capable-butterfly-84cab64826.media.strapiapp.com/footer_Logo_182b5bfa92.png"
+              />
+            </a>
+          </div>
         </div>
+
         <div className="mt-5 sm:mt-20 gap-5 grid grid-cols-1 sm:grid-cols-3 text-sm items-center text-gray-500">
           <div className="font-semibold text-gray-400 text-center sm:text-left">
             © 2025 Canner. All right reserved.
