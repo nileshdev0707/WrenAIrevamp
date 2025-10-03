@@ -41,8 +41,7 @@ export default function DevelopersHero({ data }) {
                     );
                   }}
                 >
-                 
-                  <span> #1 GenBI solution on </span>
+
                   <svg
                     width="19"
                     height="21"
