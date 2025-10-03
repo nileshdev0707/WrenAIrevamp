@@ -12,7 +12,7 @@ export default function BlogCard({ post, showExcerpt = true, size = 'default' })
   };
 
   const cardClasses = size === 'small' 
-    ? 'bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow'
+    ? 'bg-white rounded-lg overflow-hidden hover:shadow-md transition-shadow'
     : 'bg-white rounded-lg overflow-hidden hover:shadow-lg transition-shadow';
 
   const imageClasses = size === 'small' ? 'w-full h-32 object-cover' : 'w-full h-48 object-cover';

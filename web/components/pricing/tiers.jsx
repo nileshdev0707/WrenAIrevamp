@@ -3,6 +3,7 @@ import { useLocalizedUrl } from "../../utils/languageUtils";
 
 export default function Tiers({ tiers, billing }) {
   const getUrl = useLocalizedUrl();
+  console.log('tiers', tiers);
 
   return (
     <div className="mt-10 grid md:grid-cols-3 gap-6 max-w-6xl mx-auto px-3">
@@ -13,7 +14,7 @@ export default function Tiers({ tiers, billing }) {
         >
           {item?.highlight && (
             <div className="flex justify-end">
-            <p className="bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] px-4 py-2 rounded-b-[8px] text-white font-semibold text-md h-9.5 w-[135px]">Most Popular</p>
+            <p className="bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] px-4 py-2 rounded-b-[8px] text-white font-semibold text-md h-9.5 w-[135px]">{tiers?.highlightTag}</p>
           </div>
           )}
           
