@@ -51,8 +51,8 @@
           "title": "企業方案",
           "children": [
             { "label": "企業雲端", "url": "/solutions?tab=enterprise_cloud", "description": "White-label dashboards & widgets for embedding analytics into apps." },
-            { "label": "自建 Pro 版", "url": "/solutions?tab=pro", "description": "AI agents deliver actionable insights proactively." },
-            { "label": "自建企業版", "url": "/solutions?tab=enterprise_hosted", "description": "Build customizable analytics experiences for SaaS customers." }
+            { "label": "自建 Business 版", "url": "/solutions?tab=business", "description": "AI agents deliver actionable insights proactively." },
+            { "label": "自建 Enterprise Plus 版", "url": "/solutions?tab=enterprise_plus_hosted", "description": "Build customizable analytics experiences for SaaS customers." }
           ]
         }
       ]

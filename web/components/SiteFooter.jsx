@@ -21,10 +21,10 @@ export default function SiteFooter() {
       links: [
         { label: "Use Cases", slug: "product" },
         { label: "Enterprise Cloud", slug: "solutions?tab=enterprise_cloud" },
-        { label: t("Self-hosted Pro"), slug: "solutions?tab=pro" },
+        { label: t("Self-hosted Business"), slug: "solutions?tab=business" },
         {
-          label: t("Self-hosted Enterprise"),
-          slug: "solutions?tab=enterprise_hosted",
+          label: t("Self-hosted Enterprise Plus"),
+          slug: "solutions?tab=enterpris_plus_hosted",
         },
         { label: t("Wren AI OSS"), slug: "oss" },
       ],
@@ -131,11 +131,11 @@ export default function SiteFooter() {
                         >
                           {l.label}
                           {l.label === "GitHub" && (
-                            <div className="flex items-center gap-1 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] p-1 pr-[6px] rounded-sm text-white border max-w-[47px] max-h-[18px]">
-                              <div className="h-[10px] w-[10px] flex justify-center items-center">
+                            <div className="flex items-center gap-1 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] p-1 pr-[6px] rounded-sm text-white border max-h-[18px]">
+                              <div className="h-[15px] w-[15px] flex justify-center items-center">
                                 <svg
-                                  width="7.93"
-                                  height="7.54"
+                                  width="10"
+                                  height="10"
                                   viewBox="0 0 20 19"
                                   fill="none"
                                   xmlns="http://www.w3.org/2000/svg"
@@ -147,7 +147,7 @@ export default function SiteFooter() {
                                 </svg>
                               </div>
 
-                              <span className="font-normal text-[8px]/1">
+                              <span className="font-normal text-[12px]/1">
                                 {stars?.toLocaleString()}
                               </span>
                             </div>
@@ -212,7 +212,7 @@ export default function SiteFooter() {
             )}
           </Link>
           <div className="flex gap-5 justify-center sm:justify-end">
-            <Link href="https://twitter.com" className="group">
+            <Link href="https://x.com/getwrenai" className="group" target="_blank">
               <img
                 src="/svg/twitter.svg"
                 target="_blank"
@@ -220,7 +220,7 @@ export default function SiteFooter() {
                 className="w-5 h-5"
               />
             </Link>
-            <Link href="https://linkedin.com" className="group">
+            <Link href="https://www.linkedin.com/company/wrenai/" className="group" target="_blank">
               <img
                 src="/svg/linkedin.svg"
                 target="_blank"
@@ -228,7 +228,7 @@ export default function SiteFooter() {
                 className="w-5 h-5"
               />
             </Link>
-            <Link href="https://medium.com" className="group">
+            <Link href="https://medium.com/wrenai" className="group" target="_blank">
               <img
                 src="/svg/medium.svg"
                 target="_blank"
@@ -236,7 +236,7 @@ export default function SiteFooter() {
                 className="w-5 h-5"
               />
             </Link>
-            <Link href="https://discord.com" className="group">
+            <Link href="https://discord.gg/5DvshJqG8Z" className="group" target="_blank">
               <img
                 src="/svg/discord.svg"
                 target="_blank"
@@ -244,7 +244,7 @@ export default function SiteFooter() {
                 className="w-5 h-5"
               />
             </Link>
-            <Link href="https://github.com" className="group">
+            <Link href="https://github.com/Canner/WrenAI" className="group" target="_blank">
               <img
                 src="/svg/github.svg"
                 target="_blank"

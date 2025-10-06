@@ -34,17 +34,8 @@ export default function TrustedLogos({ items, title }) {
     // Start animation
     animate()
 
-    // Pause on hover
-    const handleMouseEnter = () => { isPaused = true }
-    const handleMouseLeave = () => { isPaused = false }
-
-    slider.addEventListener('mouseenter', handleMouseEnter)
-    slider.addEventListener('mouseleave', handleMouseLeave)
-
     return () => {
       cancelAnimationFrame(animationId)
-      slider.removeEventListener('mouseenter', handleMouseEnter)
-      slider.removeEventListener('mouseleave', handleMouseLeave)
     }
   }, [items.length])
 
@@ -61,14 +52,13 @@ export default function TrustedLogos({ items, title }) {
             return (
               <div 
                 key={`${item.name}-${idx}`} 
-                className="flex-shrink-0 flex items-center justify-center p-3 opacity-80 hover:opacity-100 transition-opacity"
-                style={{ minWidth: '200px' }}
+                className="flex-shrink-0 flex items-center justify-center p-5 opacity-80 hover:opacity-100 transition-opacity"
               >
                {url ? (
                   <img 
                     src={`${url?.startsWith('http') ? '' : base}${url}`} 
                     alt={item.name} 
-                    className="max-h-12 object-contain grayscale" 
+                    className="h-10 w-30 object-contain grayscale" 
                   />
                 ) : (
                   <div className="text-gray-600">{item.name}</div>

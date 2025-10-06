@@ -48,11 +48,11 @@
             ]
           },
           {
-            "title": "Enterprise",
+            "title": "Enterprise Offerings",
             "children": [
               { "label": "Enterprise Cloud", "url": "/solutions?tab=enterprise_cloud", "description": "White-label dashboards & widgets for embedding analytics into apps." },
-              { "label": "Self-hosted Pro", "url": "/solutions?tab=pro", "description": "AI agents deliver actionable insights proactively." },
-              { "label": "Self-hosted Enterprise", "url": "/solutions?tab=enterprise_hosted", "description": "Build customizable analytics experiences for SaaS customers." }
+              { "label": "Self-hosted Business", "url": "/solutions?tab=business", "description": "AI agents deliver actionable insights proactively." },
+              { "label": "Self-hosted Enterprise Plus", "url": "/solutions?tab=enterprise_plus_hosted", "description": "Build customizable analytics experiences for SaaS customers." }
             ]
           }
         ]

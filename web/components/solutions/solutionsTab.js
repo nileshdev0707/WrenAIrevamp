@@ -12,8 +12,8 @@ const SolutionsTab = ({ data, isClient, tab }) => {
   // Mapping for tab from URL → index
   const mapping = {
     enterprise_cloud: 0,
-    pro: 1,
-    enterprise_hosted: 2,
+    business: 1,
+    enterpris_plus_hosted: 2,
   };
 
   // Scroll to the active tab content
@@ -73,7 +73,7 @@ const SolutionsTab = ({ data, isClient, tab }) => {
                     dangerouslySetInnerHTML={{
                       __html: activeTabData.title
                         ? activeTabData.title.replace(
-                            /\b(in Your|Enterprise)\b/g,
+                            /\b(in Your|Enterprise|and)\b/g,
                             "<br/>$1"
                           )
                         : "Fully Managed, <br/>Enterprise-Ready Cloud",
