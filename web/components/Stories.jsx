@@ -198,7 +198,12 @@ export default function Stories({ data }) {
         </div>
 
         {/* Slick Slider Container */}
-        <div className="mt-8 md:mt-12 lg:mt-16 slider-main-container relative">
+        <div className="mt-8 md:mt-12 lg:mt-16 slider-main-container relative  mx-auto 
+          max-w-7xl
+          overflow-hidden
+          [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]
+          [mask-repeat:no-repeat]
+          [mask-size:100%_100%]">
           <div className="center">
             {caseStudieItems.map((story, index) => (
               <div

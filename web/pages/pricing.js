@@ -5,12 +5,11 @@ import ContentBlock from "../components/pricing/contantBlock";
 import ComparePlan from "../components/pricing/comparePlan";
 import FAQ from "../components/pricing/faq";
 import Footer from "../components/footer";
-import { base } from "../service/serviceConfig";
-import TrustedLogos from "../components/pricing/trustedLogo";
 import Layout from "./layout";
 import { safeBackgroundImage } from "../utils/ssrHelpers";
 import { createServerSideProps } from "../utils/ssrHelpers";
 import TiersHosted from "../components/pricing/tiresHosted";
+import Logos from "../components/Logos";
 
 export default function Pricing({ pricing }) {
   const [billing, setBilling] = useState(0);
@@ -66,9 +65,11 @@ export default function Pricing({ pricing }) {
         )}
 
         {/* Trusted Logos */}
-        {pricing?.TrustedBy?.length && (
-          <TrustedLogos items={pricing?.TrustedBy} title={pricing?.TrustedByTitle}/>
-        )}
+        <div className="py-20 px-3">
+          {pricing?.TrustedBy?.length && (
+            <Logos items={pricing?.TrustedBy} title={pricing?.TrustedByTitle}/>
+          )}
+        </div>
 
         {/* Feature comparison */}
 

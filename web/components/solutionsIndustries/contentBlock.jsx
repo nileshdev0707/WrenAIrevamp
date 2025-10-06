@@ -1,33 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { base } from "../../service/serviceConfig";
 import Button from "../common/Button";
-import { useRouter } from "next/router";
+
 export default function ContentBlock({ solutionsIndustries, tab }) {
-console.log("solutionsIndustries ==> ", solutionsIndustries);
   const [activeTab, setActiveTab] = useState(solutionsIndustries[0]?.id);
-
-  useEffect(() => {
-    if (tab === "retail-and-e-commerce") {
-      setActiveTab(145);
-      scrollToSection(145);
-    }
-    if (tab === "media-and-entertainment") {
-      setActiveTab(146);
-      scrollToSection(146);
-    }
-    if (tab === "dtc-brands") {
-      setActiveTab(148);
-      scrollToSection(148);
-    }
-    if (tab === "engineering-and-manufacturing") {
-      setActiveTab(142);
-      scrollToSection(142);
-    }
-  }, [tab]);
-
-  console.log("activeTab ==> ", activeTab);
-  // const router = useRouter();
-  // const { mytab } = router.query
 
   const scrollToSection = (id) => {
     const el = document.getElementById(id);

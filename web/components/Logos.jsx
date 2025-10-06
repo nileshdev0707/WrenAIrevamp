@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { base } from "../service/serviceConfig";
-export default function Logos({ items }) {
+
+export default function Logos({ items, title }) {
   const sliderRef = useRef(null)
   
   if (!items || items.length === 0) return;
@@ -40,8 +41,19 @@ export default function Logos({ items }) {
 
   return (
     <section>
-      <div className="mx-auto">
+      <div 
+        className="
+          mx-auto 
+          relative
+          overflow-hidden
+          2xl:[mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]
+          2xl:[mask-repeat:no-repeat]
+          2xl:[mask-size:100%_100%]"
+        >
         {/* <div className="text-center text-xs uppercase tracking-wider text-gray-500">Trusted by leading teams</div> */}
+        {title && (
+          <h2 className="text-2xl font-medium text-center uppercase pb-6 text-gray-500">{title}</h2>
+        )}
         <div 
           ref={sliderRef}
           className="flex overflow-hidden gap-8 items-center logo-slider"
