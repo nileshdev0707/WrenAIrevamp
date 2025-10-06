@@ -13,7 +13,7 @@ const SolutionsTab = ({ data, isClient, tab }) => {
   const mapping = {
     enterprise_cloud: 0,
     business: 1,
-    enterpris_plus_hosted: 2,
+    enterprise_plus_hosted: 2,
   };
 
   // Scroll to the active tab content

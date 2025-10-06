@@ -139,7 +139,7 @@ useEffect(() => {
               </div>
               <div className="flex flex-wrap justify-center md:gap-6 gap-3 md:my-20 sm:my-10 my-5">
                 {affiliatePartnerUrl?.map((image,i) => (
-                  <div className='bg-white p-5 flex gap-6 justify-center rounded-[16px] border border-[#D9D9D9] h-[139px] w-[302px]'>
+                  <div className='bg-white p-5 flex gap-6 justify-center rounded-[16px] border border-[#D9D9D9] h-[139px] w-[302px]' key={i}> 
                       <img className='w-[200px] object-contain h-auto' src={`${image?.url?.startsWith('http') ? '' : base}${image?.url}`} alt={image?.title}/>
                       </div>
                 ))}

@@ -177,23 +177,6 @@ export default function Navbar({ serverLanguage }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const handleOutsideClick = (event) => {
-      if (window.innerWidth >= 1024) {
-        if (
-          expandedIndex >= 0 &&
-          !dropdownRef?.current?.contains(event.target)
-        ) {
-          setExpandedIndex(null);
-        }
-      }
-    };
-    document.addEventListener("mousedown", handleOutsideClick);
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    };
-  }, [expandedIndex]);
-
   return (
     <div className="relative">
       {/* Main Header */}
@@ -204,7 +187,7 @@ export default function Navbar({ serverLanguage }) {
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Floating Navigation Bar */}
-          <div className="relative">
+          <div className="relative" onMouseLeave={() => setExpandedIndex(null)}>
             <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200/50">
               <div className="flex items-center justify-between xl:px-6 px-4 py-2.5">
                 {/* Logo and Navigation */}
@@ -248,63 +231,6 @@ export default function Navbar({ serverLanguage }) {
                           >
                             {link.label}
                           </Link>
-
-                          {hasChildren && expandedIndex === i && (
-                            <div
-                              ref={dropdownRef}
-                              className="absolute left-0 right-0 mt-10 bg-white border border-gray-200 rounded-2xl shadow-lg transition-all duration-200 z-50 p-8 grid grid-cols-2 gap-6 max-h-[calc(100vh-150px)] overflow-y-auto overscroll-contain"
-                            >
-                              {link.parent.map((group, index) => (
-                                <div key={index}>
-                                  {group.title && (
-                                    <div className="px-3 font-medium text-blue-600 text-sm pb-4">
-                                      {group.title}
-                                    </div>
-                                  )}
-                                  {group.url && (
-                                    <Link
-                                      href={getUrl(group.url)}
-                                      target={
-                                        group.url.startsWith("http")
-                                          ? "_blank"
-                                          : "_self"
-                                      }
-                                      onClick={() => setExpandedIndex(null)}
-                                    >
-                                      <div className="font-medium text-base">
-                                        {group.label}
-                                      </div>
-                                      <div className="text-gray-500 text-sm pt-1.5">
-                                        {group.description}
-                                      </div>
-                                    </Link>
-                                  )}
-                                  <div className="space-y-2">
-                                    {group.children?.map((child, index) => (
-                                      <Link
-                                        href={getUrl(child.url)}
-                                        key={index}
-                                        className="block rounded-md px-3 py-2 transition-colors duration-200 hover:bg-[#F5F5F5]"
-                                        target={
-                                          child.url.startsWith("http")
-                                            ? "_blank"
-                                            : "_self"
-                                        }
-                                        onClick={() => setExpandedIndex(null)}
-                                      >
-                                        <div className="ffont-medium text-base">
-                                          {child.label}
-                                        </div>
-                                        <div className="text-gray-500 text-sm pt-1.5">
-                                          {child.description}
-                                        </div>
-                                      </Link>
-                                    ))}
-                                  </div>
-                                </div>
-                              ))}
-                            </div>
-                          )}
                         </div>
                       );
                     })}
@@ -382,26 +308,8 @@ export default function Navbar({ serverLanguage }) {
                                 <div key={index}>
                                   {group.title && (
                                     <div className="font-medium text-blue-600 text-sm pb-4">
-                                      {group.title}
+                                      {t(group.title)}
                                     </div>
-                                  )}
-                                  {group.url && (
-                                    <Link
-                                      href={getUrl(group.url)}
-                                      target={
-                                        group.url.startsWith("http")
-                                          ? "_blank"
-                                          : "_self"
-                                      }
-                                      onClick={() => setOpen(false)}
-                                    >
-                                      <div className="font-medium text-sm">
-                                        {group.label}
-                                      </div>
-                                      <div className="text-gray-500 text-xs">
-                                        {group.description}
-                                      </div>
-                                    </Link>
                                   )}
                                   <div>
                                     {group.children?.map((child, index) => (
@@ -417,10 +325,10 @@ export default function Navbar({ serverLanguage }) {
                                         className="block rounded-md px-3 py-2 transition-colors duration-200 hover:bg-[#F5F5F5]"
                                       >
                                         <div className="font-medium text-sm">
-                                          {child.label}
+                                          {t(child.label)}
                                         </div>
                                         <div className="text-gray-500 text-xs">
-                                          {child.description}
+                                          {t(child.description)}
                                         </div>
                                       </Link>
                                     ))}
@@ -452,6 +360,52 @@ export default function Navbar({ serverLanguage }) {
                 </div>
               )}
             </div>
+            {linksList.map((link, i) => {
+              const hasChildren =
+                Array.isArray(link.parent) && link.parent.length > 0;
+
+              return (
+                hasChildren &&
+                expandedIndex === i && (
+                  <div>
+                    <div className="h-4 z-40 pointer-events-auto"></div>
+                    <div className="bg-white border border-gray-200 rounded-2xl shadow-lg transition-all duration-200 z-50 p-8 grid grid-cols-2 gap-6 max-h-[calc(100vh-150px)] overflow-y-auto overscroll-contain">
+                      {link.parent.map((group, index) => (
+                        <div key={index}>
+                          {group.title && (
+                            <div className="px-3 font-medium text-blue-600 text-sm pb-4">
+                              {t(group.title)}
+                            </div>
+                          )}
+                          <div className="space-y-2">
+                            {group.children?.map((child, index) => (
+                              <Link
+                                href={getUrl(child.url)}
+                                key={index}
+                                className="block rounded-md px-3 py-2 transition-colors duration-200 hover:bg-[#F5F5F5]"
+                                target={
+                                  child.url.startsWith("http")
+                                    ? "_blank"
+                                    : "_self"
+                                }
+                                onClick={() => setExpandedIndex(null)}
+                              >
+                                <div className="ffont-medium text-base">
+                                  {t(child.label)}
+                                </div>
+                                <div className="text-gray-500 text-sm pt-1.5">
+                                  {t(child.description)}
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )
+              );
+            })}
           </div>
         </div>
       </header>

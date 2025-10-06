@@ -1,5 +1,5 @@
 import Hero from "../components/Hero";
-import Logos from "../components/Logos";
+import TrustedLogo from "../components/trustedLogo";
 import Capabilities from "../components/Capabilities";
 import Work from "../components/Work";
 import Stories from "../components/Stories";
@@ -37,7 +37,7 @@ export default function Home({ homePageRes }) {
         className="bg-cover bg-no-repeat"
       >
         <Hero data={hero} />
-        <Logos items={logos} />
+        <TrustedLogo items={logos} />
       </div>
       {homePageRes?.coreCapabilities?.length > 0 && (
         <Capabilities data={homePageRes?.coreCapabilities} />

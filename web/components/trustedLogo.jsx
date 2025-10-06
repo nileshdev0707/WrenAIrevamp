@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { base } from "../service/serviceConfig";
 
-export default function Logos({ items, title }) {
+export default function TrustedLogo({ items, title }) {
   const sliderRef = useRef(null)
   
   if (!items || items.length === 0) return;
@@ -50,9 +50,8 @@ export default function Logos({ items, title }) {
           2xl:[mask-repeat:no-repeat]
           2xl:[mask-size:100%_100%]"
         >
-        {/* <div className="text-center text-xs uppercase tracking-wider text-gray-500">Trusted by leading teams</div> */}
         {title && (
-          <h2 className="text-2xl font-medium text-center uppercase pb-6 text-gray-500">{title}</h2>
+          <h2 className="text-xl sm:text-2xl font-medium text-center uppercase pb-6 text-gray-500">{title}</h2>
         )}
         <div 
           ref={sliderRef}
