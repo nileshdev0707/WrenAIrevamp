@@ -10,7 +10,7 @@ const partner = ({ affiliateProgram }) => {
   const router = useRouter();
   const { tab } = router.query
   const heroImage = affiliateProgram?.Hero[0]?.backgroundImage?.url;
-  console.log({affiliateProgram})
+  console.log("affiliateProgram", affiliateProgram)
 
   return (
     <Layout>
@@ -31,15 +31,15 @@ const partner = ({ affiliateProgram }) => {
               {affiliateProgram?.Hero?.map((item, index) => (
                 <div key={index}>
                   <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium leading-tight xl:pt-25 lg:pt-20 md:pt-15 pt-10">
-                    {item?.title?.split("SLA").map((part, idx) =>
-                      idx === 0 ? (
-                        <span key={idx}>
-                          {part} <br />
-                        </span>
-                      ) : (
-                        <span key={idx}>SLA</span>
-                      )
-                    )}
+                  {item?.title?.split(" ").map((word, i) =>
+                    word === "Partner" ? (
+                      <span key={i} className="text-blue-600">
+                        {word}
+                      </span>
+                    ) : (
+                      <span key={i}> {word}</span>
+                    )
+                  )}
                   </h1>
                   <p className="pt-10 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base">
                     {item?.subtitle}
