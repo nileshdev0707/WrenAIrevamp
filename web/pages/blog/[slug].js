@@ -89,14 +89,14 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
             {post.excerpt}
           </p>
           <div className="flex items-center gap-5 sm:hidden">
-        <img
-          src="/svg/avtar.svg"
-          alt="Allison Hsieh"
-          className="w-14 h-14 rounded-full object-cover"
-        />
+          <img
+            src={`${post?.author_name?.photo?.url.startsWith("http") ? "" : base }${post?.author_name?.photo?.url}`}
+            alt={post?.author_name?.name || post?.author || ""}
+            className="w-14 h-14 rounded-full object-cover"
+          />
         <div>
           <p className="font-medium text-gray-900 text-lg">
-            {post?.author_name?.name || ""}
+            {post?.author_name?.name || post?.author || ""}
           </p>
           <p className="text-sm text-gray-500">
             Updated:{" "}

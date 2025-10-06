@@ -367,7 +367,7 @@ export default function Navbar({ serverLanguage }) {
               return (
                 hasChildren &&
                 expandedIndex === i && (
-                  <div>
+                  <div key={`mobile-${i}`}>
                     <div className="h-4 z-40 pointer-events-auto"></div>
                     <div className="bg-white border border-gray-200 rounded-2xl shadow-lg transition-all duration-200 z-50 p-8 grid grid-cols-2 gap-6 max-h-[calc(100vh-150px)] overflow-y-auto overscroll-contain">
                       {link.parent.map((group, index) => (
