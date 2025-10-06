@@ -47,14 +47,14 @@ export default function Footer({ data }) {
                 </div>
               </div>
               <div className="justify-end items-center sm:flex hidden">
-                <div className="group-hover:opacity-95 transition-opacity duration-300 overflow-hidden">
+                <div className="transition-opacity duration-300 overflow-hidden">
                 {url ? (
                   <img
                     width={320}
                     height={320}
                     src={`${url.startsWith("http") ? "" : base}${url}`}
                     alt={item?.name}
-                     className="transition-transform duration-700 ease-out group-hover:scale-106"
+                     className="transition-transform duration-700 ease-out"
                   />
                 ) : (
                   <div className="text-gray-600">{item?.name}</div>

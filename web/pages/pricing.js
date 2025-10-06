@@ -65,7 +65,7 @@ export default function Pricing({ pricing }) {
         )}
 
         {/* Trusted Logos */}
-        <div className="py-20 px-3">
+        <div className="py-15 sm:py-20   px-3">
           {pricing?.TrustedBy?.length && (
             <Logos items={pricing?.TrustedBy} title={pricing?.TrustedByTitle}/>
           )}

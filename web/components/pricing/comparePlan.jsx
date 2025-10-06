@@ -1,7 +1,8 @@
 import React from "react";
+import { useTranslation } from "../../hooks/useTranslation";
 
 export default function ComparePlan({ tiers, selectedPlan }) {
-console.log("tiers ==> ", tiers);
+  const { locale } = useTranslation();
 
   const compareData = [
     "GenBI Features",
@@ -16,7 +17,21 @@ console.log("tiers ==> ", tiers);
     "Security and Single Sign-on",
     "Support",
   ];
+  const compareDataZh = [
+    "GenBI 功能",
+    "資料管理",
+    "資料安全",
+    "資料視覺化與分享",
+    "API 管理與整合",
+    "範本",
+    "組織",
+    "權限",
+    "部署",
+    "安全與單一登入",
+    "支援",
+  ];
 
+  const comparedData = locale === "en" ? compareData : compareDataZh;
   return (
     <div className="px-3">
       {tiers?.length > 0 && (
@@ -27,8 +42,10 @@ console.log("tiers ==> ", tiers);
               // Parse features grouped by category
               const parsed = tiers.map((t) => ({
                 name: t.name,
-                featuresByCategory: Object.entries(selectedPlan === 0 ? t.compareFeatures || {} : t.selfHostedCompareFeatures || {}
-                   
+                featuresByCategory: Object.entries(
+                  selectedPlan === 0
+                    ? t.compareFeatures || {}
+                    : t.selfHostedCompareFeatures || {}
                 ).map(([category, feats]) => [
                   category,
                   Array.isArray(feats)
@@ -53,7 +70,7 @@ console.log("tiers ==> ", tiers);
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
-                    {compareData.map((category, catIdx) => {
+                    {comparedData.map((category, catIdx) => {
                       // find features for this category in the parsed data
                       const feats =
                         parsed[0].featuresByCategory.find(

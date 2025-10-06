@@ -1,7 +1,9 @@
 import Link from 'next/link';
+import { useLocalizedUrl } from '../../utils/languageUtils';
 
 export default function BlogCard({ post, showExcerpt = true, size = 'default' }) {
   const base = process.env.NEXT_PUBLIC_STRAPI_URL || '';
+  const getUrl = useLocalizedUrl();
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -56,10 +58,10 @@ export default function BlogCard({ post, showExcerpt = true, size = 'default' })
   })();
   
   return (
-    <div onClick={() => window.open(`/blog/${attributes.slug}`, '_self')} className={cardClasses}>
+    <div onClick={() => window.open(getUrl(`/blog/${attributes.slug}`), '_self')} className={cardClasses}>
       {featuredImage && (
         <div className="aspect-w-16 aspect-h-9">
-          <img
+          <img 
             src={`${featuredImage.url?.startsWith('http') ? '' : base}${featuredImage.url}`}
             alt={attributes.title}
             className={`${imageClasses} transition-transform duration-300 hover:scale-110`}

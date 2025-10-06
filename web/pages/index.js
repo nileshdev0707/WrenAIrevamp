@@ -47,7 +47,9 @@ export default function Home({ homePageRes }) {
           <Work data={homePageRes} />
           <Stories data={homePageRes} />
           <Stats data={homePageRes} />
+          <div className="px-4">
           <HomeCTA data={homePageRes?.getStartedWithWrenAI}/>
+          </div>
         </>
       )}
     </Layout>

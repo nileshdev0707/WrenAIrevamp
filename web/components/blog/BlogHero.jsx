@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { base } from "../../service/serviceConfig";
+import { useLocalizedUrl } from "../../utils/languageUtils";
 import Button from "../common/Button";
 
 export default function BlogHero({ data, blogs }) {
   const featuredPost = blogs.find((post) => post.isFeatured) || blogs[0];
+  const getUrl = useLocalizedUrl();
 
   return (
     <section className="pt-10 md:pt-16 sm::px-6 px-4">
@@ -30,7 +32,7 @@ export default function BlogHero({ data, blogs }) {
       {featuredPost && (
         <div
           className="cursor-pointer sm:flex sm:gap-8 gap-5 lg:pt-22 pt-10 lg:px-70"
-          onClick={() => window.open(`/blog/${featuredPost?.slug}`, "_self")}
+          onClick={() => window.open(getUrl(`/blog/${featuredPost?.slug}`), "_self")}
         >
           <div className="w-full sm:w-1/2">
             {featuredPost?.featuredImage?.url ? (
