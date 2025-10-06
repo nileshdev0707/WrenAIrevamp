@@ -24,7 +24,7 @@ export default function SiteFooter() {
         { label: t("Self-hosted Business"), slug: "solutions?tab=business" },
         {
           label: t("Self-hosted Enterprise Plus"),
-          slug: "solutions?tab=enterpris_plus_hosted",
+          slug: "solutions?tab=enterprise_plus_hosted",
         },
         { label: t("Wren AI OSS"), slug: "oss" },
       ],

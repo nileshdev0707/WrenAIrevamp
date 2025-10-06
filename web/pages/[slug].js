@@ -3,7 +3,7 @@ import ReactMarkdown from "react-markdown";
 import CTA from "../components/CTA";
 import Hero from "../components/Hero";
 import FeatureShowcase from "../components/FeatureShowcase";
-import Logos from "../components/Logos";
+import TrustedLogo from "../components/trustedLogo";
 import Layout from "./layout";
 export default function Page({ page }) {
   if (!page) return <div />;
@@ -52,7 +52,7 @@ export default function Page({ page }) {
             if (sec.__component === "sections.logos-section") {
               return (
                 <section key={i} className="mt-12">
-                  <Logos items={[]} />
+                  <TrustedLogo items={[]} />
                 </section>
               );
             }

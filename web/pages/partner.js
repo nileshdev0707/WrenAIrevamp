@@ -1,17 +1,17 @@
 import React from "react";
 import Layout from "./layout";
 import PartnerWrenAis from "../components/affiliateProgram/partnerWrenAis";
-import TrustedLogo from "../components/affiliateProgram/TrustedLogo";
 import ElitePartner from "../components/affiliateProgram/elitePartner";
 import { getAffiliateProgramApi } from "../service/apiClient";
 import {createServerSideProps, safeBackgroundImage} from "../utils/ssrHelpers";
 import { useRouter } from "next/router";
+import TrustedLogo from "../components/trustedLogo";
 const partner = ({ affiliateProgram }) => {
   const router = useRouter();
   const { tab } = router.query
   const heroImage = affiliateProgram?.Hero[0]?.backgroundImage?.url;
   console.log("affiliateProgram", affiliateProgram)
-
+  const trustedByData = affiliateProgram?.trustedBy ?? affiliateProgram ?? null;
   return (
     <Layout>
       <div>
@@ -50,8 +50,8 @@ const partner = ({ affiliateProgram }) => {
           </div>
         )}
         {affiliateProgram?.trustedBy?.length > 0 && (
-          <div className="mx-auto">
-            <TrustedLogo data={affiliateProgram} />
+          <div className="mx-auto py-10">
+            <TrustedLogo items={trustedByData} title={"Trusted by"}/>
           </div>
         )}  
         <ElitePartner data={affiliateProgram} tab={tab}/>

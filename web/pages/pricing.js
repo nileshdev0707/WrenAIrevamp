@@ -9,7 +9,7 @@ import Layout from "./layout";
 import { safeBackgroundImage } from "../utils/ssrHelpers";
 import { createServerSideProps } from "../utils/ssrHelpers";
 import TiersHosted from "../components/pricing/tiresHosted";
-import Logos from "../components/Logos";
+import TrustedLogo from "../components/trustedLogo";
 
 export default function Pricing({ pricing }) {
   const [billing, setBilling] = useState(0);
@@ -65,11 +65,11 @@ export default function Pricing({ pricing }) {
         )}
 
         {/* Trusted Logos */}
-        <div className="py-20 px-3">
           {pricing?.TrustedBy?.length && (
-            <Logos items={pricing?.TrustedBy} title={pricing?.TrustedByTitle}/>
+          <div className="py-20 px-3">
+              <TrustedLogo items={pricing?.TrustedBy} title={pricing?.TrustedByTitle}/>
+          </div>
           )}
-        </div>
 
         {/* Feature comparison */}
 
