@@ -11,19 +11,20 @@ export default function Logos({ items, title }) {
 
   useEffect(() => {
     const slider = sliderRef.current
-    if (!slider) return
+    if (!slider || !items.length) return
 
     let animationId
     let isPaused = false
     let scrollPosition = 0
     const scrollSpeed = 0.5 // pixels per frame
-    const itemWidth = 200 // approximate width of each logo item
 
     const animate = () => {
-      if (!isPaused) {
+      if (!isPaused && slider) {
         scrollPosition += scrollSpeed
-        // Reset position when we've scrolled through one complete set of items
-        if (scrollPosition >= items.length * itemWidth) {
+
+        // Get the actual scroll width and reset when we've scrolled through one complete set
+        const maxScroll = slider.scrollWidth / 2 // Since we duplicate items, half is one complete set
+        if (scrollPosition >= maxScroll) {
           scrollPosition = 0
         }
         slider.scrollLeft = scrollPosition
@@ -35,7 +36,9 @@ export default function Logos({ items, title }) {
     animate()
 
     return () => {
-      cancelAnimationFrame(animationId)
+      if (animationId) {
+        cancelAnimationFrame(animationId)
+      }
     }
   }, [items.length])
 
