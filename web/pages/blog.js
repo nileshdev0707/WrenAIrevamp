@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import BlogGrid from "../components/blog/BlogGrid";
 import CategoryFilter from "../components/blog/CategoryFilter";
 import BlogHero from "../components/blog/BlogHero";
@@ -14,69 +13,53 @@ export default function Blog({
   pagination,
   dynamicCategories,
 }) {
-  const [blogs, setBlogs] = useState(initialBlogs);
+  const POSTS_PER_PAGE = 9;
   const [allBlogs, setAllBlogs] = useState(initialBlogs);
+  const [displayedBlogs, setDisplayedBlogs] = useState(
+    initialBlogs.slice(0, POSTS_PER_PAGE)
+  );
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [filteredBlogs, setFilteredBlogs] = useState(initialBlogs);
   const heroImage = blogPageData?.hero?.[0]?.backgroundimage?.url;
 
-  const loadMoreBlogs = async (page) => {
-    setLoading(true);
-    try {
-      const STRAPI = process.env.NEXT_PUBLIC_STRAPI_URL;
-      let categoryFilter = "";
-      if (selectedCategory !== "all") {
-        // We need to find the category ID first, then filter by it
-        try {
-          const categoryRes = await axios.get(
-            `${STRAPI}/api/categories?filters[name][$eq]=${encodeURIComponent(
-              selectedCategory
-            )}`
-          );
-          const categoryData = categoryRes.data?.data?.[0];
-          if (categoryData?.id) {
-            categoryFilter = `&filters[categories][id][$eq]=${categoryData.id}`;
-          }
-        } catch (error) {
-          console.error("Error finding category:", error);
-        }
-      }
-
-      const response = await axios.get(
-        `${STRAPI}/api/blogs?populate=*&pagination[page]=${page}&pagination[pageSize]=12${categoryFilter}`
-      );
-
-      if (page === 1) {
-        setAllBlogs(response.data.data);
-      } else {
-        setAllBlogs((prev) => [...prev, ...response.data.data]);
-      }
-      setCurrentPage(page);
-    } catch (error) {
-      console.error("Error loading blogs:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
+  // Filter blogs by category
   useEffect(() => {
     if (selectedCategory === "all") {
-      setBlogs(allBlogs);
+      setFilteredBlogs(allBlogs);
     } else {
       const filtered = allBlogs.filter((post) => {
         const categories = post?.categories || [];
         return categories.some((cat) => cat?.name === selectedCategory);
       });
-      setBlogs(filtered);
+      setFilteredBlogs(filtered);
     }
+    setCurrentPage(1); // Reset to first page when category changes
   }, [selectedCategory, allBlogs]);
+
+  // Update displayed blogs when filtered blogs or page changes
+  useEffect(() => {
+    const startIndex = 0;
+    const endIndex = currentPage * POSTS_PER_PAGE;
+    setDisplayedBlogs(filteredBlogs.slice(startIndex, endIndex));
+  }, [filteredBlogs, currentPage]);
 
   const filterByCategory = (category) => {
     setSelectedCategory(category);
     setCurrentPage(1);
-    // loadMoreBlogs(1);
   };
+
+  const loadMoreBlogs = () => {
+    setLoading(true);
+    // Simulate loading delay for better UX
+    setTimeout(() => {
+      setCurrentPage((prev) => prev + 1);
+      setLoading(false);
+    }, 500);
+  };
+
+  const hasMorePosts = displayedBlogs.length < filteredBlogs.length;
 
   // Use dynamic categories from props, fallback to static ones
   const categories = dynamicCategories || [
@@ -106,7 +89,7 @@ export default function Blog({
           }}
           className="bg-no-repeat pt-24 max-w-8xl mx-auto"
         >
-          <BlogHero data={blogPageData?.hero} blogs={blogs} />
+          <BlogHero data={blogPageData?.hero} blogs={displayedBlogs} />
         </div>
 
         {/* Blog Content */}
@@ -137,14 +120,14 @@ export default function Blog({
 
           {/* All Posts */}
           <BlogGrid
-            posts={blogs}
+            posts={displayedBlogs}
             title={
               selectedCategory === "all"
                 ? "All Posts"
                 : `${selectedCategory} Posts`
             }
-            showLoadMore={pagination && currentPage < pagination.pageCount}
-            onLoadMore={() => loadMoreBlogs(currentPage + 1)}
+            showLoadMore={hasMorePosts}
+            onLoadMore={loadMoreBlogs}
             loading={loading}
           />
         </div>
