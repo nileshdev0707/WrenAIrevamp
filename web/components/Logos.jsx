@@ -1,89 +1,3 @@
-// import { useEffect, useRef } from 'react'
-// import { base } from "../service/serviceConfig";
-
-// export default function Logos({ items, title }) {
-//   const sliderRef = useRef(null)
-  
-//   if (!items || items.length === 0) return;
-
-//   // Repeat items 4 times for smooth scroll coverage
-//   const duplicatedItems = Array(4).fill(items).flat()
-
-//   useEffect(() => {
-//     const slider = sliderRef.current
-//     if (!slider) return
-
-//     let animationId
-//     let translateX = 0
-//     const scrollSpeed = 2 // pixels per frame
-
-//     const animate = () => {
-//       translateX += scrollSpeed
-//       slider.style.transform = `translateX(-${translateX}px)`
-
-//       const maxScroll = slider.scrollWidth / 2
-//       if (translateX >= maxScroll) {
-//         translateX = 0
-//         slider.style.transform = `translateX(0px)`
-//       }
-
-//       animationId = requestAnimationFrame(animate)
-//     }
-
-//     const timeoutId = setTimeout(animate, 100)
-
-//     return () => {
-//       clearTimeout(timeoutId)
-//       cancelAnimationFrame(animationId)
-//     }
-//   }, [items.length])
-
-//   return (
-//     <section>
-//       <div 
-//         className="
-//           mx-auto 
-//           relative
-//           overflow-hidden
-//           xl:[mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]
-//           xl:[mask-repeat:no-repeat]
-//           xl:[mask-size:100%_100%]"
-//         >
-//         {/* <div className="text-center text-xs uppercase tracking-wider text-gray-500">Trusted by leading teams</div> */}
-//         {title && (
-//           <h2 className="text-2xl font-medium text-center uppercase pb-6 text-gray-500">{title}</h2>
-//         )}
-//         <div 
-//           ref={sliderRef}
-//           className="flex gap-8 items-center logo-slider"
-//           style={{ willChange: 'transform' }}
-//         >
-//           {duplicatedItems.map((it, idx) => {
-//             const url = it.image?.url
-//             return (
-//               <div 
-//                 key={`${it.name}-${idx}`} 
-//                 className="flex-shrink-0 flex items-center justify-center px-5 opacity-80 transition-opacity"
-//                 style={{ minWidth: '120px' }} 
-//               >
-//                 {url ? (
-//                   <img 
-//                     src={`${url.startsWith('http') ? '' : base}${url}`} 
-//                     alt={it.name} 
-//                     className="h-10 w-30 object-contain grayscale" 
-//                   />
-//                 ) : (
-//                   <div className="text-gray-600">{it.name}</div>
-//                 )}
-//               </div>
-//             )
-//           })}
-//         </div>
-//       </div>
-//     </section>
-//   )
-// }
-
 import { useEffect, useRef, useState } from 'react'
 import { base } from "../service/serviceConfig";
 
@@ -136,7 +50,15 @@ export default function Logos({ items = [], title }) {
 
   return (
     <section>
-      <div className="mx-auto relative overflow-hidden">
+       <div 
+        className="
+          mx-auto 
+          relative
+          overflow-hidden
+          xl:[mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]
+          xl:[mask-repeat:no-repeat]
+          xl:[mask-size:100%_100%]"
+        >
         {title && <h2 className="text-2xl font-medium text-center uppercase pb-6 text-gray-500">{title}</h2>}
         <div 
           ref={sliderRef}
