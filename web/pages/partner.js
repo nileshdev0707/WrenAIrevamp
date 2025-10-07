@@ -1,7 +1,6 @@
 import React from "react";
 import Layout from "./layout";
 import PartnerWrenAis from "../components/affiliateProgram/partnerWrenAis";
-import TrustedLogo from "../components/affiliateProgram/TrustedLogo";
 import ElitePartner from "../components/affiliateProgram/elitePartner";
 import { safeBackgroundImage } from "../utils/ssrHelpers";
 import { useRouter } from "next/router";

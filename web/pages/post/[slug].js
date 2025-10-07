@@ -83,7 +83,7 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
           <p className="lg:text-lg text-base text-gray-600 mb-6">
             {post.excerpt}
           </p>
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-5 sm:hidden">
             <img
               src={
                 post?.author?.photo?.url

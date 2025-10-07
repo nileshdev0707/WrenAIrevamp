@@ -57,7 +57,7 @@ export default function SiteFooter() {
           label: t("Wren AI Documentation"),
           slug: "https://docs.getwren.ai/cp/overview",
         },
-        { label: t("Blog"), slug: "post" },
+        { label: t("Blog"), slug: "blog" },
         { label: t("Support Portal"), slug: "support" },
         {
           label: t("Public Roadmap"),

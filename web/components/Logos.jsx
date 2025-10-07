@@ -1,76 +1,143 @@
-import { useEffect, useRef } from 'react'
+// import { useEffect, useRef } from 'react'
+// import { base } from "../service/serviceConfig";
+
+// export default function Logos({ items, title }) {
+//   const sliderRef = useRef(null)
+  
+//   if (!items || items.length === 0) return;
+
+//   // Repeat items 4 times for smooth scroll coverage
+//   const duplicatedItems = Array(4).fill(items).flat()
+
+//   useEffect(() => {
+//     const slider = sliderRef.current
+//     if (!slider) return
+
+//     let animationId
+//     let translateX = 0
+//     const scrollSpeed = 2 // pixels per frame
+
+//     const animate = () => {
+//       translateX += scrollSpeed
+//       slider.style.transform = `translateX(-${translateX}px)`
+
+//       const maxScroll = slider.scrollWidth / 2
+//       if (translateX >= maxScroll) {
+//         translateX = 0
+//         slider.style.transform = `translateX(0px)`
+//       }
+
+//       animationId = requestAnimationFrame(animate)
+//     }
+
+//     const timeoutId = setTimeout(animate, 100)
+
+//     return () => {
+//       clearTimeout(timeoutId)
+//       cancelAnimationFrame(animationId)
+//     }
+//   }, [items.length])
+
+//   return (
+//     <section>
+//       <div 
+//         className="
+//           mx-auto 
+//           relative
+//           overflow-hidden
+//           xl:[mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]
+//           xl:[mask-repeat:no-repeat]
+//           xl:[mask-size:100%_100%]"
+//         >
+//         {/* <div className="text-center text-xs uppercase tracking-wider text-gray-500">Trusted by leading teams</div> */}
+//         {title && (
+//           <h2 className="text-2xl font-medium text-center uppercase pb-6 text-gray-500">{title}</h2>
+//         )}
+//         <div 
+//           ref={sliderRef}
+//           className="flex gap-8 items-center logo-slider"
+//           style={{ willChange: 'transform' }}
+//         >
+//           {duplicatedItems.map((it, idx) => {
+//             const url = it.image?.url
+//             return (
+//               <div 
+//                 key={`${it.name}-${idx}`} 
+//                 className="flex-shrink-0 flex items-center justify-center px-5 opacity-80 transition-opacity"
+//                 style={{ minWidth: '120px' }} 
+//               >
+//                 {url ? (
+//                   <img 
+//                     src={`${url.startsWith('http') ? '' : base}${url}`} 
+//                     alt={it.name} 
+//                     className="h-10 w-30 object-contain grayscale" 
+//                   />
+//                 ) : (
+//                   <div className="text-gray-600">{it.name}</div>
+//                 )}
+//               </div>
+//             )
+//           })}
+//         </div>
+//       </div>
+//     </section>
+//   )
+// }
+
+import { useEffect, useRef, useState } from 'react'
 import { base } from "../service/serviceConfig";
 
-export default function Logos({ items, title }) {
+export default function Logos({ items = [], title }) {
   const sliderRef = useRef(null)
-  
-  if (!items || items.length === 0) return;
+  const [duplicatedItems, setDuplicatedItems] = useState([])
 
-  // Duplicate items for seamless infinite scroll
-  const duplicatedItems = [...items, ...items]
+  if (!items.length) return null
 
   useEffect(() => {
     const slider = sliderRef.current
-    if (!slider || !items.length) return
+    if (!slider) return
+
+    // Calculate how many times we need to duplicate items
+    const containerWidth = slider.parentElement.offsetWidth
+    const itemWidth = 120 + 40 // minWidth + gap approximation
+    const minItemsNeeded = Math.ceil(containerWidth / itemWidth) * 2
+    let repeatTimes = Math.ceil(minItemsNeeded / items.length)
+
+    const newItems = Array(repeatTimes).fill(items).flat()
+    setDuplicatedItems(newItems)
+  }, [items])
+
+  useEffect(() => {
+    if (!duplicatedItems.length) return
+    const slider = sliderRef.current
+    if (!slider) return
 
     let animationId
-    let isPaused = false
     let translateX = 0
     const scrollSpeed = 0.5 // pixels per frame
 
     const animate = () => {
-      if (!isPaused && slider) {
-        translateX += scrollSpeed
-        slider.style.transform = `translateX(-${translateX}px)`
+      translateX += scrollSpeed
+      slider.style.transform = `translateX(-${translateX}px)`
 
-        // Reset position when we've scrolled through one complete set
-        // This creates seamless infinite scroll
-        const maxScroll = slider.scrollWidth / 2
-        if (translateX >= maxScroll) {
-          translateX = 0
-          slider.style.transform = `translateX(0px)`
-        }
+      const maxScroll = slider.scrollWidth / 2
+      if (translateX >= maxScroll) {
+        translateX = 0
+        slider.style.transform = `translateX(0px)`
       }
+
       animationId = requestAnimationFrame(animate)
     }
 
-    // Wait for the DOM to be fully rendered before starting animation
-    const startAnimation = () => {
-      // Ensure the slider has proper dimensions
-      if (slider.scrollWidth > 0) {
-        animate()
-      } else {
-        // Retry after a short delay if dimensions aren't ready
-        setTimeout(startAnimation, 10)
-      }
-    }
+    animationId = requestAnimationFrame(animate)
 
-    // Start animation after a brief delay to ensure DOM is ready
-    const timeoutId = setTimeout(startAnimation, 50)
-
-    return () => {
-      clearTimeout(timeoutId)
-      if (animationId) {
-        cancelAnimationFrame(animationId)
-      }
-    }
-  }, [items.length])
+    return () => cancelAnimationFrame(animationId)
+  }, [duplicatedItems])
 
   return (
     <section>
-      <div 
-        className="
-          mx-auto 
-          relative
-          overflow-hidden
-          xl:[mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]
-          xl:[mask-repeat:no-repeat]
-          xl:[mask-size:100%_100%]"
-        >
-        {/* <div className="text-center text-xs uppercase tracking-wider text-gray-500">Trusted by leading teams</div> */}
-        {title && (
-          <h2 className="text-2xl font-medium text-center uppercase pb-6 text-gray-500">{title}</h2>
-        )}
+      <div className="mx-auto relative overflow-hidden">
+        {title && <h2 className="text-2xl font-medium text-center uppercase pb-6 text-gray-500">{title}</h2>}
         <div 
           ref={sliderRef}
           className="flex gap-8 items-center logo-slider"
