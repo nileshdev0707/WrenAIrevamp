@@ -15,27 +15,41 @@ export default function Logos({ items, title }) {
 
     let animationId
     let isPaused = false
-    let scrollPosition = 0
+    let translateX = 0
     const scrollSpeed = 0.5 // pixels per frame
 
     const animate = () => {
       if (!isPaused && slider) {
-        scrollPosition += scrollSpeed
+        translateX += scrollSpeed
+        slider.style.transform = `translateX(-${translateX}px)`
 
-        // Get the actual scroll width and reset when we've scrolled through one complete set
-        const maxScroll = slider.scrollWidth / 2 // Since we duplicate items, half is one complete set
-        if (scrollPosition >= maxScroll) {
-          scrollPosition = 0
+        // Reset position when we've scrolled through one complete set
+        // This creates seamless infinite scroll
+        const maxScroll = slider.scrollWidth / 2
+        if (translateX >= maxScroll) {
+          translateX = 0
+          slider.style.transform = `translateX(0px)`
         }
-        slider.scrollLeft = scrollPosition
       }
       animationId = requestAnimationFrame(animate)
     }
 
-    // Start animation
-    animate()
+    // Wait for the DOM to be fully rendered before starting animation
+    const startAnimation = () => {
+      // Ensure the slider has proper dimensions
+      if (slider.scrollWidth > 0) {
+        animate()
+      } else {
+        // Retry after a short delay if dimensions aren't ready
+        setTimeout(startAnimation, 10)
+      }
+    }
+
+    // Start animation after a brief delay to ensure DOM is ready
+    const timeoutId = setTimeout(startAnimation, 50)
 
     return () => {
+      clearTimeout(timeoutId)
       if (animationId) {
         cancelAnimationFrame(animationId)
       }
@@ -49,9 +63,9 @@ export default function Logos({ items, title }) {
           mx-auto 
           relative
           overflow-hidden
-          2xl:[mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]
-          2xl:[mask-repeat:no-repeat]
-          2xl:[mask-size:100%_100%]"
+          xl:[mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]
+          xl:[mask-repeat:no-repeat]
+          xl:[mask-size:100%_100%]"
         >
         {/* <div className="text-center text-xs uppercase tracking-wider text-gray-500">Trusted by leading teams</div> */}
         {title && (
@@ -59,7 +73,8 @@ export default function Logos({ items, title }) {
         )}
         <div 
           ref={sliderRef}
-          className="flex overflow-hidden gap-8 items-center logo-slider"
+          className="flex gap-8 items-center logo-slider"
+          style={{ willChange: 'transform' }}
         >
           {duplicatedItems.map((it, idx) => {
             const url = it.image?.url
