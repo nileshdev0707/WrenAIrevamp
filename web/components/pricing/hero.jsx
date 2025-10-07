@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 
 export default function Hero({
   pricing,
@@ -7,7 +8,37 @@ export default function Hero({
   selectedPlan,
   setSelectedPlan,
 }) {
+  const router = useRouter();
+  const { tab } = router.query;
   const title = pricing?.title || "";
+
+  useEffect(() => {
+    if (tab === "self-hosted") {
+      setSelectedPlan(1); // default to Self-hosted tab
+    }
+
+  }, [setSelectedPlan, tab]);
+
+  const handleSelectPlan = (index) => {
+    setSelectedPlan(index);
+
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+
+    if (index === 1) {
+      // self-hosted
+      params.set("tab", "self-hosted");
+    } else {
+      // remove tab param for default (cloud) tab
+      params.delete("tab");
+    }
+
+    // Update URL without reload
+    const newUrl =
+      window.location.pathname +
+      (params.toString() ? `?${params.toString()}` : "");
+    window.history.replaceState({}, "", newUrl);
+  };
 
   return (
     <section className="text-center px-4">
@@ -32,7 +63,7 @@ export default function Hero({
           .map((plan, index) => (
             <button
               key={plan.id}
-              onClick={() => setSelectedPlan(index)}
+              onClick={() => handleSelectPlan(index)}
               className={`cursor-pointer flex items-center gap-2 md:px-8 px-6 py-4 rounded-md font-semibold text-sm ${
                 selectedPlan === index
                   ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white"
