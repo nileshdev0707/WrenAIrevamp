@@ -6,7 +6,10 @@
 const fs = require("fs");
 const path = require("path");
 
-const DATA_FILE = path.join(process.cwd(), "public/static-data/all-data.json");
+const DATA_FILE = path.join(
+  process.cwd(),
+  "public/static-data/all-content.json"
+);
 
 let cachedData = null;
 
@@ -40,7 +43,11 @@ function loadAllData() {
  */
 function getData(contentType) {
   const allData = loadAllData();
-  return allData[contentType] || { data: [] };
+
+  // Handle the nested structure: allData.en[contentType] or allData.zh[contentType]
+  // For now, default to 'en' locale
+  const localeData = allData.en || allData.zh || {};
+  return localeData[contentType] || { data: [] };
 }
 
 /**

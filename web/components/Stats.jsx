@@ -1,5 +1,10 @@
 export default function Stats({ data }) {
-  const stats = data?.trustedByDataTeams[0] || []
+  // Add safety checks to prevent undefined access
+  if (!data || !data.trustedByDataTeams || !Array.isArray(data.trustedByDataTeams) || data.trustedByDataTeams.length === 0) {
+    return null; // Return null if no data is available
+  }
+  
+  const stats = data.trustedByDataTeams[0] || {}
   return (
     <section className="lg:py-6 md:py-5 sm:py-3 py-1">
       <div className="max-w-7xl mx-auto lg:px-6 sm:px-4 px-2">

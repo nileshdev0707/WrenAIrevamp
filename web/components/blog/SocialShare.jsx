@@ -2,7 +2,6 @@ import { useState } from "react";
 import { base } from "../../service/serviceConfig";
 
 export default function SocialShare({ title, url, blogPageData, post }) {
-  const [copied, setCopied] = useState(false);
 
   const shareOnTwitter = () => {
     const tweetUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
@@ -25,27 +24,18 @@ export default function SocialShare({ title, url, blogPageData, post }) {
     window.open(facebookUrl, "_blank");
   };
 
-  const copyToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(url);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error("Failed to copy link: ", err);
-    }
-  };
 
   return (
     <div className="flex flex-col gap-10 pb-15">
    <div className="sm:flex items-center gap-5 hidden">
          <img
-          src={`${post?.author_name?.photo?.url.startsWith("http") ? "" : base }${post?.author_name?.photo?.url}`}
-          alt={post?.author_name?.name || post?.author || ""}
+          src={post?.author?.photo?.url ? `${post?.author?.photo?.url.startsWith("http") ? "" : base }${post?.author?.photo?.url}` : "/svg/avtar.svg"}
+          alt={post?.author?.name || post?.author || ""}
           className="w-14 h-14 rounded-full object-cover"
         />
         <div>
           <p className="font-medium text-gray-900 text-lg">
-            {post?.author_name?.name || post?.author || ""}
+            {post?.author?.name || post?.author || ""}
           </p>
           <p className="text-sm text-gray-500">
             Updated:{" "}
@@ -58,8 +48,8 @@ export default function SocialShare({ title, url, blogPageData, post }) {
               : ""}
             <br />
             Published:{" "}
-            {blogPageData?.publishedAt
-              ? new Date(blogPageData.publishedAt).toLocaleDateString("en-US", {
+            {blogPageData?.publishedDate
+              ? new Date(blogPageData.publishedDate).toLocaleDateString("en-US", {
                   month: "short",
                   day: "2-digit",
                   year: "numeric",

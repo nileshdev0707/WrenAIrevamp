@@ -1,19 +1,20 @@
 import React from "react";
 import Layout from "./layout";
-import {
-  safeBackgroundImage,
-  createServerSideProps,
-} from "../utils/ssrHelpers";
-import { base } from "../service/serviceConfig";
+import { safeBackgroundImage } from "../utils/ssrHelpers";
 import { HubspotEmbedForm } from "../components/hubspotEmbedForm";
+import { createCustomGetStaticProps } from "../lib/getStaticProps";
 
-export default function RequestDemo({ requestDemo }) {
-  const heroImage = requestDemo?.hero?.[0]?.backgroundImage?.url;
-
+export default function RequestDemo({ requestPageData }) {
+  const heroImage = requestPageData?.hero?.[0]?.backgroundImage?.url;
+  // Extract SEO data from product page data
+  const seoData = requestPageData?.seo;
   return (
-    <Layout>
+    <Layout
+      seoData={seoData}
+      pageTitle="Wren AI | Request a Demo"
+      pageDescription="Experience the power of Wren AI with a personalized demo. See how our GenBI platform transforms data into insights using natural language and AI. Book your demo today.">
       <div className="px-6">
-        {requestDemo?.hero?.length && (
+        {requestPageData?.hero?.length && (
           <div
             style={{
               backgroundImage: safeBackgroundImage(heroImage),
@@ -23,7 +24,7 @@ export default function RequestDemo({ requestDemo }) {
             className="bg-no-repeat py-16 max-w-6xl mx-auto bg-cover"
           >
             <section className="py-10 sm:py-16 text-center">
-              {requestDemo?.hero?.map((item, index) => (
+              {requestPageData?.hero?.map((item, index) => (
                 <div key={index}>
                   <h1 className="text-3xl sm:text-4xl lg:text-6xl font-medium leading-tight pt-25">
                     {item?.title}
@@ -37,14 +38,11 @@ export default function RequestDemo({ requestDemo }) {
             </section>
           </div>
         )}
-        <HubspotEmbedForm formId={requestDemo?.formId} />
+        <HubspotEmbedForm formId={requestPageData?.formId} />
       </div>
     </Layout>
   );
 }
 
-// Server-side rendering function
-export const getServerSideProps = createServerSideProps(
-  "/api/request-page",
-  "requestDemo"
-);
+// Static data loading function
+export const getStaticProps = createCustomGetStaticProps("request-page");

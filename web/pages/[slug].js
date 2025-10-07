@@ -3,7 +3,7 @@ import ReactMarkdown from "react-markdown";
 import CTA from "../components/CTA";
 import Hero from "../components/Hero";
 import FeatureShowcase from "../components/FeatureShowcase";
-import TrustedLogo from "../components/trustedLogo";
+import Logos from "../components/Logos";
 import Layout from "./layout";
 export default function Page({ page }) {
   if (!page) return <div />;
@@ -16,8 +16,8 @@ export default function Page({ page }) {
   return (
     <Layout
       seoData={seoData}
-      pageTitle={page.title}
-      pageDescription={page.excerpt || `${page.title} - Wren AI`}
+      pageTitle={`Wren AI Blog | ${page.title}`}
+      pageDescription={page.excerpt || `Wren AI Blog | ${page.title}`}
     >
       <div className="max-w-6xl mx-auto px-6 py-16">
         <h1 className="text-3xl font-bold">{page.title}</h1>
@@ -52,7 +52,7 @@ export default function Page({ page }) {
             if (sec.__component === "sections.logos-section") {
               return (
                 <section key={i} className="mt-12">
-                  <TrustedLogo items={[]} />
+                  <Logos items={[]} />
                 </section>
               );
             }

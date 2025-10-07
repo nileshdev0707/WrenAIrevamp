@@ -7,19 +7,26 @@ import FAQ from "../components/pricing/faq";
 import Footer from "../components/footer";
 import Layout from "./layout";
 import { safeBackgroundImage } from "../utils/ssrHelpers";
-import { createServerSideProps } from "../utils/ssrHelpers";
+const { createPricingGetStaticProps } = require("../lib/getStaticProps");
 import TiersHosted from "../components/pricing/tiresHosted";
-import TrustedLogo from "../components/trustedLogo";
+import Logos from "../components/Logos";
 
-export default function Pricing({ pricing }) {
+export default function Pricing({ pricingData }) {
   const [billing, setBilling] = useState(0);
   const [selectedPlan, setSelectedPlan] = useState(0);
-  const heroImage = pricing?.hero?.[0]?.backgroundimage?.url;
-  const tiers = selectedPlan === 0 ? pricing?.tiers : pricing?.tiersHosted;
+  const heroImage = pricingData?.hero?.[0]?.backgroundimage?.url;
+  const tiers =
+    selectedPlan === 0 ? pricingData?.tiers : pricingData?.tiersHosted;
+
+  // Extract SEO data from product page data
+  const seoData = pricingData?.seo;
   return (
-    <Layout>
+    <Layout
+      seoData={seoData}
+      pageTitle="Wren AI | Pricing"
+      pageDescription="Tailored solutions for every stage of growth with scalable plans to meet diverse needs.">
       <div>
-        {pricing?.hero?.length && (
+        {pricingData?.hero?.length && (
           <div
             style={{
               backgroundImage: safeBackgroundImage(heroImage),
@@ -28,9 +35,9 @@ export default function Pricing({ pricing }) {
             }}
             className="bg-no-repeat py-16 max-w-6xl mx-auto bg-contain"
           >
-            {pricing?.hero?.length && (
+            {pricingData?.hero?.length && (
               <Hero
-                pricing={pricing?.hero?.[0]}
+                pricing={pricingData?.hero?.[0]}
                 billing={billing}
                 setBilling={setBilling}
                 selectedPlan={selectedPlan}
@@ -38,62 +45,64 @@ export default function Pricing({ pricing }) {
               />
             )}
 
-            {selectedPlan === 0 ?
-              pricing?.tiers?.length ? (
-              <Tiers
-                tiers={pricing?.tiers}
-                billing={billing}
-                selectedPlan={selectedPlan}
-              />
-            ) : (
-              <></>
-            ) : (
-              pricing?.tiersHosted?.length && (
-                <TiersHosted
-                  tiers={pricing?.tiersHosted}
+            {selectedPlan === 0 ? (
+              pricingData?.tiers?.length ? (
+                <Tiers
+                  tiers={pricingData?.tiers}
+                  billing={billing}
+                  selectedPlan={selectedPlan}
                 />
+              ) : (
+                <></>
+              )
+            ) : (
+              pricingData?.tiersHosted?.length && (
+                <TiersHosted tiers={pricingData?.tiersHosted} />
               )
             )}
           </div>
         )}
 
         {/* Content Block */}
-        {selectedPlan === 0 ? pricing?.ContentBlock?.length && (
-          <ContentBlock contentBlock={pricing?.ContentBlock} />
+        {selectedPlan === 0 ? (
+          pricingData?.ContentBlock?.length && (
+            <ContentBlock contentBlock={pricingData?.ContentBlock} />
+          )
         ) : (
-         <></>
+          <></>
         )}
 
         {/* Trusted Logos */}
-          {pricing?.TrustedBy?.length && (
-          <div className="py-20 px-3">
-              <TrustedLogo items={pricing?.TrustedBy} title={pricing?.TrustedByTitle}/>
-          </div>
+        <div className="py-20 px-3">
+          {pricingData?.TrustedBy?.length && (
+            <Logos
+              items={pricingData?.TrustedBy}
+              title={pricingData?.TrustedByTitle}
+            />
           )}
+        </div>
 
         {/* Feature comparison */}
 
-      {tiers?.length > 0 && (
-        <ComparePlan tiers={tiers} selectedPlan={selectedPlan} />
-      )}
-
+        {tiers?.length > 0 && (
+          <ComparePlan tiers={tiers} selectedPlan={selectedPlan} />
+        )}
 
         {/* FAQ */}
-        {pricing?.frequentlyAskedQuestions?.length && (
-          <FAQ frequentlyAskedQuestions={pricing?.frequentlyAskedQuestions} />
+        {pricingData?.frequentlyAskedQuestions?.length && (
+          <FAQ
+            frequentlyAskedQuestions={pricingData?.frequentlyAskedQuestions}
+          />
         )}
 
         {/* Footer banner */}
-        {pricing?.bottomContentBlock?.length && (
-          <Footer data={pricing?.bottomContentBlock} />
+        {pricingData?.bottomContentBlock?.length && (
+          <Footer data={pricingData?.bottomContentBlock} />
         )}
       </div>
     </Layout>
   );
 }
 
-// Server-side rendering function
-export const getServerSideProps = createServerSideProps(
-  "/api/pricing",
-  "pricing"
-);
+// Static data loading function
+export const getStaticProps = createPricingGetStaticProps();

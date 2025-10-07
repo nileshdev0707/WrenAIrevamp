@@ -2,22 +2,21 @@ import DevelopersHero from "../components/developers/hero";
 import ContentBlock from "../components/developers/contentBlock";
 import WrenEngine from "../components/developers/wrenEngine";
 import WhyWrenAI from "../components/developers/whyWrenAI";
-import { base } from "../service/serviceConfig";
 import Layout from "./layout";
-import {
-  safeBackgroundImage,
-  createServerSideProps,
-} from "../utils/ssrHelpers";
-export default function OSS({ developers }) {
-  const heroImage = developers?.hero?.[0]?.backgroundimage?.url;
+import { safeBackgroundImage } from "../utils/ssrHelpers";
+import { createCustomGetStaticProps } from "../lib/getStaticProps";
 
-  // Loading state
-  // if (loading) {
-  //   return <LoadingSpinner />;
-  // }
+export default function OSS({ developersPageData }) {
+  const heroImage = developersPageData?.hero?.[0]?.backgroundimage?.url;
+
+  // Extract SEO data from product page data
+  const seoData = developersPageData?.seo;
 
   return (
-    <Layout>
+    <Layout
+      seoData={seoData}
+      pageTitle="Wren AI | #1 Generative BI Open-source Solution"
+      pageDescription="Transform how your team explores data. Wren AI’s open-source GenBI platform lets you chat with your data, generate SQL, build charts, and create insights—all with natural language.">
       <div className="max-w-6xl mx-auto">
         <div
           style={{
@@ -28,27 +27,24 @@ export default function OSS({ developers }) {
           className="bg-no-repeat pt-24 max-w-6xl mx-auto"
         >
           {/* Product Hero */}
-          {developers?.hero?.length && (
-            <DevelopersHero data={developers?.hero} />
+          {developersPageData?.hero?.length && (
+            <DevelopersHero data={developersPageData?.hero} />
           )}
         </div>
         {/* Content Block */}
-        {developers?.ContentBlock?.length && (
-          <ContentBlock data={developers?.ContentBlock} />
+        {developersPageData?.ContentBlock?.length && (
+          <ContentBlock data={developersPageData?.ContentBlock} />
         )}
       </div>
-      {developers?.wrenEngine?.length && (
-        <WrenEngine data={developers?.wrenEngine} />
+      {developersPageData?.wrenEngine?.length && (
+        <WrenEngine data={developersPageData?.wrenEngine} />
       )}
-      {developers?.whyWrenAI?.length && (
-        <WhyWrenAI data={developers?.whyWrenAI} />
+      {developersPageData?.whyWrenAI?.length && (
+        <WhyWrenAI data={developersPageData?.whyWrenAI} />
       )}
     </Layout>
   );
 }
 
-// Server-side rendering function
-export const getServerSideProps = createServerSideProps(
-  "/api/developers-page",
-  "developers"
-);
+// Static data loading function
+export const getStaticProps = createCustomGetStaticProps("developers-page");

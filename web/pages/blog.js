@@ -5,8 +5,8 @@ import CategoryFilter from "../components/blog/CategoryFilter";
 import BlogHero from "../components/blog/BlogHero";
 import BlogCard from "../components/blog/BlogCard";
 import Layout from "./layout";
-import { base } from "../service/serviceConfig";
 import { safeBackgroundImage } from "../utils/ssrHelpers";
+import { createBlogGetStaticProps } from "../lib/getStaticProps";
 
 export default function Blog({
   blogPageData,
@@ -78,14 +78,6 @@ export default function Blog({
     // loadMoreBlogs(1);
   };
 
-  const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  };
-
   // Use dynamic categories from props, fallback to static ones
   const categories = dynamicCategories || [
     { key: "all", label: "All", shortLabel: "All" },
@@ -102,8 +94,8 @@ export default function Blog({
   return (
     <Layout
       seoData={seoData}
-      pageTitle="Blog - Wren AI"
-      pageDescription="Latest insights, tutorials, and updates from Wren AI"
+      pageTitle="Wren AI | Official Blog"
+      pageDescription="Learn more about the latest designs of GenBI latest trend and how to utilize AI for the benefit of your marketing, sales, and support teams."
     >
       <div className="mx-auto">
         <div
@@ -113,8 +105,8 @@ export default function Blog({
             backgroundPosition: "center top",
           }}
           className="bg-no-repeat pt-24 max-w-8xl mx-auto"
-        > 
-          <BlogHero data={blogPageData?.hero} blogs={blogs}/>
+        >
+          <BlogHero data={blogPageData?.hero} blogs={blogs} />
         </div>
 
         {/* Blog Content */}
@@ -161,80 +153,6 @@ export default function Blog({
   );
 }
 
-export async function getStaticProps({ locale }) {
-  const STRAPI = process.env.NEXT_PUBLIC_STRAPI_URL;
-  const token = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
-
-  const api = axios.create({
-    baseURL: STRAPI,
-    headers: token ? { Authorization: `Bearer ${token}` } : {},
-  });
-
-  try {
-    const selectedLang = locale || "en";
-    const [navRes, blogPageRes, blogsRes, categoriesRes] = await Promise.all([
-      // Navigation data
-      Promise.all([
-        api
-          .get(
-            `/api/pages?fields=slug,navLabel,title,showInNav,navOrder&lang=${selectedLang}`
-          )
-          .then((r) => r.data)
-          .catch(() => null),
-      ]).then(([nav, pages]) => ({ nav, pages })),
-
-      // Blog page configuration
-      api
-        .get(`/api/blog-page?populate=*&lang=${selectedLang}`)
-        .then((r) => r.data)
-        .catch(() => null),
-
-      // Initial blog posts
-      api
-        .get(
-          `/api/blogs?populate=*&pagination[page]=1&pagination[pageSize]=12&sort[0]=publishedDate:desc&lang=${selectedLang}`
-        )
-        .then((r) => r.data)
-        .catch(() => ({ data: [], meta: { pagination: { pageCount: 0 } } })),
-
-      // Fetch categories
-      api
-        .get(`/api/categories?lang=${selectedLang}`)
-        .then((r) => r.data)
-        .catch(() => ({ data: [] })),
-    ]);
-
-    // Build dynamic categories array
-    const dynamicCategories = [
-      { key: "all", label: "All", shortLabel: "All" },
-      ...(categoriesRes?.data?.map((cat) => {
-        const name = cat.attributes?.name || cat.name;
-        return {
-          key: name,
-          label: name,
-          shortLabel: name?.substring(0, 8) || "Cat",
-        };
-      }) || []),
-    ];
-
-    return {
-      props: {
-        blogPageData: blogPageRes?.data ?? null,
-        initialBlogs: blogsRes?.data ?? [],
-        pagination: blogsRes?.meta?.pagination ?? null,
-        dynamicCategories,
-      },
-      revalidate: 60, // Revalidate every minute
-    };
-  } catch (error) {
-    console.error("Error fetching blog data:", error);
-    return {
-      props: {
-        blogPageData: null,
-        initialBlogs: [],
-        pagination: null,
-      },
-      revalidate: 60,
-    };
-  }
-}
+export const getStaticProps = createBlogGetStaticProps({
+  revalidate: 60, // Revalidate every minute
+});

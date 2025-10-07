@@ -3,7 +3,6 @@ import { useLocalizedUrl } from "../../utils/languageUtils";
 
 export default function TiersHosted({ tiers }) {
   const getUrl = useLocalizedUrl();
-  console.log("tiers", tiers);
 
   return (
     <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-3">

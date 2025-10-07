@@ -2,7 +2,12 @@ import { useState, useRef, useEffect } from 'react'
 import { base } from "../service/serviceConfig";
 
 export default function Work({ data }) {
-  const works = data?.UseCases?.[0] || []
+  // Add safety checks to prevent undefined access
+  if (!data || !data.UseCases || !Array.isArray(data.UseCases) || data.UseCases.length === 0) {
+    return null; // Return null if no data is available
+  }
+  
+  const works = data.UseCases[0] || {}
   const badge = works?.badge || 'Put WrenAI to Work'
   const title = works?.title || 'Empower data teams with secure, scalable access.'
   const visualUrl = data?.visual?.url || data?.visual?.data?.attributes?.url || null

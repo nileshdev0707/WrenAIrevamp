@@ -16,7 +16,7 @@ export const LANGUAGES = {
   zh: {
     code: "zh",
     name: "中文",
-    flag: "🇨🇳",
+    flag: "",
     direction: "ltr",
   },
 };
@@ -38,7 +38,7 @@ export const useLocalizedUrl = () => {
 
 // Detect browser language
 export const detectBrowserLanguage = () => {
-  if (typeof window !== "undefined") {
+  /* if (typeof window !== "undefined") {
     // Get browser language preference
     const browserLang = navigator.language || navigator.languages?.[0] || "en";
 
@@ -47,7 +47,7 @@ export const detectBrowserLanguage = () => {
 
     // Check if we support this language, otherwise default to English
     return LANGUAGES[langCode] ? langCode : "en";
-  }
+  } */
   return "en";
 };
 

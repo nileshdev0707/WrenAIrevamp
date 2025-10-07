@@ -6,22 +6,22 @@ import Footer from "../components/footer";
 import { base } from "../service/serviceConfig";
 import Layout from "./layout";
 import { safeBackgroundImage } from "../utils/ssrHelpers";
-import { createServerSideProps } from "../utils/ssrHelpers";
+const { createProductPageGetStaticProps } = require("../lib/getStaticProps");
 import { useRouter } from "next/router";
 
-export default function Product({ product }) {
-  const heroImage = product?.productHero?.[0]?.backgroundimage?.url;
+export default function Product({ productPageData }) {
+  const heroImage = productPageData?.productHero?.[0]?.backgroundimage?.url;
   const router = useRouter();
-  const { tab } = router.query
+  const { tab } = router.query;
 
   // Extract SEO data from product page data
-  const seoData = product?.seo;
+  const seoData = productPageData?.seo;
 
   return (
     <Layout
       seoData={seoData}
-      pageTitle="Product - Wren AI"
-      pageDescription="Discover Wren AI's powerful features and capabilities for data analytics and business intelligence."
+      pageTitle="Wren AI | The #1 Generative BI Platform"
+      pageDescription="Wren AI transforms how teams query, analyze, and act on data — powered by Intelligent AI Modeling, agent-driven analytics, and enterprise-grade security. Get governed, explainable insights at the speed of thought."
     >
       <div className="max-w-6xl mx-auto">
         <div
@@ -33,33 +33,30 @@ export default function Product({ product }) {
           className="bg-no-repeat pt-24 max-w-6xl mx-auto"
         >
           {/* Product Hero */}
-          {product?.productHero?.length && (
-            <ProductHero data={product?.productHero} />
+          {productPageData?.productHero?.length && (
+            <ProductHero data={productPageData?.productHero} />
           )}
         </div>
         {/* What is Wren AI */}
-        {product?.WhatIsWrenAI?.length && (
-          <WhatIsWrenAI data={product?.WhatIsWrenAI} />
+        {productPageData?.WhatIsWrenAI?.length && (
+          <WhatIsWrenAI data={productPageData?.WhatIsWrenAI} />
         )}
         {/* Content Block */}
-        {product?.ContentBlock?.length && (
-          <ContentBlock product={product?.ContentBlock} tab={tab} />
+        {productPageData?.ContentBlock?.length && (
+          <ContentBlock product={productPageData?.ContentBlock} tab={tab} />
         )}
       </div>
       {/* Why Wren Section */}
-      {product?.WhyWrenSection?.length && (
-        <WhyWrenSection data={product?.WhyWrenSection} />
+      {productPageData?.WhyWrenSection?.length && (
+        <WhyWrenSection data={productPageData?.WhyWrenSection} />
       )}
       {/* Footer */}
-      {product?.bottomContentBlock?.length && (
-        <Footer data={product?.bottomContentBlock} />
+      {productPageData?.bottomContentBlock?.length && (
+        <Footer data={productPageData?.bottomContentBlock} />
       )}
     </Layout>
   );
 }
 
-// Server-side rendering function
-export const getServerSideProps = createServerSideProps(
-  "/api/product-page",
-  "product"
-);
+// Static data loading function
+export const getStaticProps = createProductPageGetStaticProps();

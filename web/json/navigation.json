@@ -11,21 +11,21 @@
         "url": "#",
         "parent": [
             {
-                "title": "businessUseCases",
+                "title": "Key Features",
                 "children": [
-                  { "label": "askQuestionsInYourLanguage", "url": "/product?tab=ask-questions-in-your-language", "description": "askQuestionsInYourLanguageDescription" },
-                  { "label": "secureDataAccess", "url": "/product?tab=secure-data-access", "description": "secureDataAccessDescription" },
-                  { "label": "connectToAnyDataSource", "url": "/product?tab=connect-to-any-data-source", "description": "connectToAnyDataSourceDescription" },
-                  { "label": "noCodeVisualAnalytics", "url": "/product?tab=no-code-visual-analytics", "description": "noCodeVisualAnalyticsDescription" },
-                  { "label": "embeddedAnalytics", "url": "/product?tab=embedded-analytics", "description": "embeddedAnalyticsDescription" },
-                  { "label": "enterpriseControl", "url": "/product?tab=enterprise-control", "description": "enterpriseControlDescription" }
+                  { "label": "Ask Questions in Your Language", "url": "/product?tab=ask-questions-in-your-language", "description": "Query any dataset in plain English and get trusted answers faster." },
+                  { "label": "Secure Data Access", "url": "/product?tab=secure-data-access", "description": "Governed, safe collaboration through the MCP protocol for every AI agent." },
+                  { "label": "Connect to Any Data Source", "url": "/product?tab=connect-to-any-data-source", "description": "Connect to Snowflake, BigQuery, Redshift, Databricks, Postgres, and more." },
+                  { "label": "No-Code Visual Analytics", "url": "/product?tab=no-code-visual-analytics", "description": "Ask in natural language and generate charts or dashboards without training.." },
+                  { "label": "Embedded Analytics", "url": "/product?tab=embedded-analytics", "description": "White-label dashboards and embeds for SaaS at scale." },
+                  { "label": "Enterprise Control", "url": "/product?tab=enterprise-control", "description": "Identity, permissions, and flexible deployments for governance.." }
                 ]
               },
               {
-                "title": "forOpenSourceCommunity",
+                "title": "For Open-Source Community",
                 "children": [
-                  { "label": "wrenAIGenBI", "url": "/oss", "description": "wrenAIGenBIDescription" },
-                  { "label": "wrenEngine", "url": "https://github.com/Canner/wren-engine", "description": "wrenEngineDescription" }
+                  { "label": "Wren AI GenBI AI Agent", "url": "/oss", "description": "Open-source GenBI AI Agent that empowers data-driven teams to chat with their data to generate Text-to-SQL, charts, spreadsheets, reports, dashboards and BI." },
+                  { "label": "Wren Engine", "url": "https://github.com/Canner/wren-engine", "description": "The Semantic Engine for Model Context Protocol(MCP) Clients and AI Agents" }
                 ]
               }
         ]
@@ -36,45 +36,45 @@
         "url": "#",
         "parent": [
           {
-            "title": "industries",
+            "title": "Industries",
             "children": [
-              { "label": "manufacturing", "url": "/industries?tab=manufacturing", "description": "manufacturingDescription" },
-              { "label": "bankingFinance", "url": "/industries?tab=banking-finance", "description": "bankingFinanceDescription" },
-              { "label": "healthcare", "url": "/industries?tab=healthcare", "description": "healthcareDescription" },
-              { "label": "retailEcommerce", "url": "/industries?tab=retail-ecommerce", "description": "retailEcommerceDescription" },
-              { "label": "mediaEntertainment", "url": "/industries?tab=media-entertainment", "description": "mediaEntertainmentDescription" },
-              { "label": "automotive", "url": "/industries?tab=automotive", "description": "automotiveDescription" },
-              { "label": "dtcBrands", "url": "/industries?tab=dtc-brands", "description": "dtcBrandsDescription" }
+              { "label": "Manufacturing", "url": "/industries?tab=manufacturing", "description": "AI-driven analytics for complex data, enabling real-time insights and process optimization." },
+              { "label": "Banking & Finance", "url": "/industries?tab=banking-finance", "description": "Fraud detection, compliance-ready BI, and digital transformation insights." },
+              { "label": "Healthcare", "url": "/industries?tab=healthcare", "description": "Optimize patient care and operational efficiency." },
+              { "label": "Retail & E-Commerce", "url": "/industries?tab=retail-ecommerce", "description": "Drive loyalty, personalization, and revenue insights." },
+              { "label": "Media & Entertainment", "url": "/industries?tab=media-entertainment", "description": "Optimize content performance and boost audience engagement." },
+              { "label": "Automotive", "url": "/industries?tab=automotive", "description": "Fleet analytics, connected cars, and supply chain optimization." },
+              { "label": "DTC Brands", "url": "/industries?tab=dtc-brands", "description": "Optimize CAC, LTV, and growth performance." }
             ]
           },
           {
-            "title": "enterpriseOfferings",
+            "title": "Enterprise Offerings",
             "children": [
-              { "label": "enterpriseCloud", "url": "/solutions?tab=enterprise_cloud", "description": "enterpriseCloudDescription" },
-              { "label": "selfHostedBusiness", "url": "/solutions?tab=business", "description": "selfHostedBusinessDescription" },
-              { "label": "selfHostedEnterprisePlus", "url": "/solutions?tab=enterprise_plus_hosted", "description": "selfHostedEnterprisePlusDescription" }
+              { "label": "Enterprise Cloud", "url": "/solutions?tab=enterprise_cloud", "description": "Fully managed GenBI with enterprise security and zero infrastructure overhead" },
+              { "label": "Self-hosted Business", "url": "/solutions?tab=business", "description": "Complete data sovereignty with essential enterprise controls" },
+              { "label": "Self-hosted Enterprise Plus", "url": "/solutions?tab=enterprise_plus_hosted", "description": "Priority support and security for large organization" }
             ]
           }
         ]
       },
       {
         "id": 16,
-        "label": "resources",
+        "label": "Resources",
         "url": "#",
         "parent": [
           {
-            "title": "forCommercialPlans",
+            "title": "For Commercial Plans",
             "children": [
-              { "label": "wrenAIDocumentation", "url": "https://docs.getwren.ai/cp/overview", "description": "wrenAIDocumentationDescription" },
-              { "label": "support", "url": "/support", "description": "supportDescription" },
-              { "label": "publicRoadmap", "url": "https://wrenai.notion.site/Wren-AI-Cloud-Public-Roadmap-1ed92976d0bf80488fe3fb16359734a3", "description": "publicRoadmapDescription" }
+              { "label": "Wren AI  Documentation", "url": "https://docs.getwren.ai/cp/overview", "description": "Learn more about Wren AI commercial plans and how to use it." },
+              { "label": "Support", "url": "/support", "description": "Looking for our team support on Wren AI commercial plans? Reach out to us!" },
+              { "label": "Public Roadmap", "url": "https://wrenai.notion.site/Wren-AI-Cloud-Public-Roadmap-1ed92976d0bf80488fe3fb16359734a3", "description": "We share our roadmap openly so you always know what’s coming next for Wren AI." }
             ]
           },
           {
-            "title": "forOpenSourceEdition",
+            "title": "For Open-Source Edition",
             "children": [
-              { "label": "ossDocumentation", "url": "https://docs.getwren.ai/oss/overview/introduction", "description": "ossDocumentationDescription" },
-              { "label": "joinDiscordCommunity", "url": "https://discord.gg/5DvshJqG8Z", "description": "joinDiscordCommunityDescription" }
+              { "label": "OSS Documentation", "url": "https://docs.getwren.ai/oss/overview/introduction", "description": "Learn more about our open-source project and how to use it." },
+              { "label": "Join  Discord Community", "url": "https://discord.gg/5DvshJqG8Z", "description": "Join our vibrant Discord open community to learn more about AI and architecture" }
             ]
           }
         ]

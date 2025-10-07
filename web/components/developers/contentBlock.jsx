@@ -3,7 +3,6 @@ import { base } from "../../service/serviceConfig";
 import Button from "../common/Button";
 
 export default function ContentBlock({ data }) {
-  console.log("data ==> ", data);
   const [openIds, setOpenIds] = useState([]);
 
   const toggle = (id) => {

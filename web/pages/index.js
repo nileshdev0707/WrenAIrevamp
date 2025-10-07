@@ -1,99 +1,58 @@
 import Hero from "../components/Hero";
-import TrustedLogo from "../components/trustedLogo";
+import Logos from "../components/Logos";
 import Capabilities from "../components/Capabilities";
 import Work from "../components/Work";
 import Stories from "../components/Stories";
 import Stats from "../components/Stats";
 import HomeCTA from "../components/homeCTA";
-import { base } from "../service/serviceConfig";
 import Layout from "./layout";
-import { createServerSideProps, safeBackgroundImage } from "../utils/ssrHelpers";
-import axios from "axios";
+import { safeBackgroundImage } from "../utils/ssrHelpers";
 
-export default function Home({ homePageRes }) {
-  const heroImage = homePageRes?.hero?.backgroundimage?.url;
-  const hero = homePageRes?.hero;
-  const logos = Array.isArray(homePageRes?.TrustedBy)
-    ? homePageRes.TrustedBy.map((l) => l?.attributes ?? l)
+export default function Home({ homePageData }) {
+  const heroImage = homePageData?.hero?.backgroundimage?.url;
+  const hero = homePageData?.hero;
+  const logos = Array.isArray(homePageData?.TrustedBy)
+    ? homePageData.TrustedBy.map((l) => l?.attributes ?? l)
     : [];
 
   // Extract SEO data from home page data
-  const seoData = homePageRes?.seo;
+  const seoData = homePageData?.seo;
 
   return (
     <Layout
       seoData={seoData}
-      pageTitle="Wren AI - AI-Powered Data Analytics Platform"
-      pageDescription="Transform your data into insights with Wren AI's intelligent analytics platform. Get started with AI-powered data analysis today."
+      pageTitle="Wren AI | GenBI (Generative BI) & Embedded Analytics for Smarter Decisions"
+      pageDescription="Turn plain‑language questions into SQL, charts, and insights. Empower your teams and SaaS customers with conversational analytics — secure, accurate, and instantly deployable."
     >
       <div
-      style={{
-        backgroundImage: safeBackgroundImage(heroImage),
-        WebkitBackgroundSize: "100% 100%",
-        backgroundPosition: "center bottom",
-        backgroundColor: "rgba(255,255,255,0.4)", // white layer
-        backgroundBlendMode: "lighten",           // blend with image
-      }}
+        style={{
+          backgroundImage: safeBackgroundImage(heroImage),
+          WebkitBackgroundSize: "100% 100%",
+          backgroundPosition: "center bottom",
+          backgroundColor: "rgba(255,255,255,0.4)", // white layer
+          backgroundBlendMode: "lighten", // blend with image
+        }}
         className="bg-cover bg-no-repeat"
       >
         <Hero data={hero} />
-        <TrustedLogo items={logos} />
+        <Logos items={logos} />
       </div>
-      {homePageRes?.coreCapabilities?.length > 0 && (
-        <Capabilities data={homePageRes?.coreCapabilities} />
+      {homePageData?.coreCapabilities?.length > 0 && (
+        <Capabilities data={homePageData?.coreCapabilities} />
       )}
-      {homePageRes && (
+      {homePageData && (
         <>
-          <Work data={homePageRes} />
-          <Stories data={homePageRes} />
-          <Stats data={homePageRes} />
-          <HomeCTA data={homePageRes?.getStartedWithWrenAI}/>
+          <Work data={homePageData} />
+          <Stories data={homePageData} />
+          <Stats data={homePageData} />
+          <HomeCTA data={homePageData?.getStartedWithWrenAI} />
         </>
       )}
     </Layout>
   );
 }
 
-// Server-side rendering function
-// export async function getServerSideProps(context) {
-//   const { locale, defaultLocale } = context;
+// Static data loading function
+const { createHomePageGetStaticProps } = require("../lib/getStaticProps");
 
-//   // Use Next.js i18n locale
-//   const selectedLang = locale || defaultLocale || "en";
-
-//   try {
-//     const STRAPI = process.env.NEXT_PUBLIC_STRAPI_URL; 
-//     const token = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
-
-//     const api = axios.create({
-//       baseURL: STRAPI,
-//       headers: token ? { Authorization: `Bearer ${token}` } : {},
-//     });
-
-//     const { data } = await api.get(
-//       `/api/home-page?populate=*&lang=${selectedLang}`
-//     );
-//     const homePageData = data?.data?.attributes ?? data?.data ?? null;
-
-//     return {
-//       props: {
-//         homePageRes: homePageData,
-//         serverLanguage: selectedLang,
-//       },
-//     };
-//   } catch (error) {
-//     console.error("Error fetching home page data:", error);
-//     return {
-//       props: {
-//         homePageRes: null,
-//         serverLanguage: selectedLang,
-//       },
-//     };
-//   }
-// }
-
-
-export const getServerSideProps = createServerSideProps(
-  "/api/home-page",
-  "homePageRes"
-);
+export const getStaticProps = createHomePageGetStaticProps();

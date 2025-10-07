@@ -1,41 +1,44 @@
 import DocumentHero from "../components/document/hero";
 import ContentBlock from "../components/document/contentBlock";
-import { base, token } from "../service/serviceConfig";
 import Layout from "./layout";
-import {
-  safeBackgroundImage,
-  createServerSideProps,
-} from "../utils/ssrHelpers";
+import { safeBackgroundImage } from "../utils/ssrHelpers";
 import OpenSourceDetails from "../components/document/openSourceDetails";
 import Footer from "../components/footer";
 import PublicRoadmap from "../components/document/publicRoadmap";
-export default function Resources({ document }) {
+import { createCustomGetStaticProps } from "../lib/getStaticProps";
+
+export default function Resources({ docsPageData }) {
+
+  // Extract SEO data from product page data
+  const seoData = docsPageData?.seo;
   return (
-    <Layout>
+    <Layout
+      seoData={seoData}
+      pageTitle="Wren AI | Documentation"
+      pageDescription="Everything you need to install, customize, and scale Wren AI’s Agentic Analytics Platform — from self-hosting guides to release notes and our public roadmap.">
       <div className="max-w-6xl mx-auto">
         {/* Product Hero */}
-        {document?.hero?.length && <DocumentHero data={document?.hero} />}
+        {docsPageData?.hero?.length && (
+          <DocumentHero data={docsPageData?.hero} />
+        )}
         {/* Content Block */}
-        {document?.ContentBlock?.length && (
-          <ContentBlock data={document?.ContentBlock} />
+        {docsPageData?.ContentBlock?.length && (
+          <ContentBlock data={docsPageData?.ContentBlock} />
         )}
       </div>
-      {document?.openSourceProject?.length && (
-        <OpenSourceDetails data={document?.openSourceProject} />
+      {docsPageData?.openSourceProject?.length && (
+        <OpenSourceDetails data={docsPageData?.openSourceProject} />
       )}
-      {document?.publicRoadmap?.length && (
-        <PublicRoadmap data={document?.publicRoadmap} />
+      {docsPageData?.publicRoadmap?.length && (
+        <PublicRoadmap data={docsPageData?.publicRoadmap} />
       )}
       {/* Footer banner */}
-      {document?.BottomContentBlock?.length && (
-        <Footer data={document?.BottomContentBlock} />
+      {docsPageData?.BottomContentBlock?.length && (
+        <Footer data={docsPageData?.BottomContentBlock} />
       )}
     </Layout>
   );
 }
 
-// Server-side rendering function
-export const getServerSideProps = createServerSideProps(
-  "/api/docs-page",
-  "document"
-);
+// Static data loading function
+export const getStaticProps = createCustomGetStaticProps("docs-page");

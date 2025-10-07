@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function ComparePlan({ tiers, selectedPlan }) {
-console.log("tiers ==> ", tiers);
 
   const compareData = [
     "GenBI Features",

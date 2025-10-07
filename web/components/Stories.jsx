@@ -5,7 +5,13 @@ import Link from "next/link";
 
 export default function Stories({ data }) {
   const getUrl = useLocalizedUrl();
-  const caseStudies = data?.caseStudies[0] || [];
+  
+  // Add safety checks to prevent undefined access
+  if (!data || !data.caseStudies || !Array.isArray(data.caseStudies) || data.caseStudies.length === 0) {
+    return null; // Return null if no data is available
+  }
+  
+  const caseStudies = data.caseStudies[0] || {};
   const title = caseStudies?.title || "case studies";
   const subtitle = caseStudies?.subTitle || "Customer Success Stories";
   const caseStudieItems = caseStudies?.caseStudieItems || [];
@@ -94,7 +100,7 @@ export default function Stories({ data }) {
           try {
             sliderElement.slick({
               centerMode: true,
-              centerPadding: "300px",
+              centerPadding: "200px",
               slidesToShow: 1,
               arrows: false,
               infinite: true,

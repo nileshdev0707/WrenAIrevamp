@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-export default function SEO({ seoData, fallbackTitle = "Wren AI", fallbackDescription = "AI-powered data analytics platform" }) {
+export default function SEO({ seoData, fallbackTitle = "Wren AI", fallbackDescription = "GenBI (Generative BI) & Embedded Analytics for Smarter Decisions" }) {
   // Handle both array format and direct object format
   const seo = Array.isArray(seoData) ? seoData[0] : seoData;
   
@@ -14,11 +14,11 @@ export default function SEO({ seoData, fallbackTitle = "Wren AI", fallbackDescri
   const structuredData = seo?.structuredData;
   
   // Handle meta image
-  const metaImage = seo?.metaImage;
+  const metaImage = seo?.metaImage || "https://capable-butterfly-84cab64826.media.strapiapp.com/OG_Website_be62e2caae.png";
   const imageUrl = metaImage?.url ? 
     (metaImage.url.startsWith('http') ? metaImage.url : `${process.env.NEXT_PUBLIC_STRAPI_URL || ''}${metaImage.url}`) 
     : null;
-  
+
   return (
     <Head>
       {/* Basic Meta Tags */}
@@ -58,13 +58,12 @@ export default function SEO({ seoData, fallbackTitle = "Wren AI", fallbackDescri
             __html: typeof structuredData === 'string' ? structuredData : JSON.stringify(structuredData)
           }}
         />
-      )}
-      
+      )}      
       {/* Favicon and App Icons */}
-      <link rel="icon" href="/favicon.ico" />
-      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+      <link rel="icon" href="/favicon_io/favicon.ico" />
+      <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png" />
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png" />
     </Head>
   );
 }

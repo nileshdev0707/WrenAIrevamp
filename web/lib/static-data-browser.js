@@ -13,6 +13,7 @@ async function loadStaticDataFromPublic(locale = "en", endpoint) {
     if (typeof window !== "undefined") {
       // Browser environment - use relative path
       const dataUrl = `/static-data/locals/${locale}/${endpoint}.json`;
+      console.log({dataUrl})
       console.log(`🔍 Loading static data from: ${dataUrl}`);
 
       const response = await fetch(dataUrl);
@@ -71,50 +72,3 @@ export async function getContentTypeData(contentType, locale = "en") {
 
   return data;
 }
-
-/**
- * Get home page data
- */
-export async function getHomePage(locale = "en") {
-  return await getContentTypeData("home-page", locale);
-}
-
-/**
- * Get navigation data
- */
-export async function getNavigation(locale = "en") {
-  return await getContentTypeData("navigation", locale);
-}
-
-/**
- * Get all blog posts
- */
-export async function getAllBlogPosts(locale = "en") {
-  const data = await getContentTypeData("blog-posts", locale);
-  return data?.data || [];
-}
-
-/**
- * Get blog post by slug
- */
-export async function getBlogPostBySlug(slug, locale = "en") {
-  const posts = await getAllBlogPosts(locale);
-  return posts.find((post) => post.attributes?.slug === slug) || null;
-}
-
-/**
- * Get all blog categories
- */
-export async function getBlogCategories(locale = "en") {
-  const data = await getContentTypeData("blog-categories", locale);
-  return data?.data || [];
-}
-
-export default {
-  getContentTypeData,
-  getHomePage,
-  getNavigation,
-  getAllBlogPosts,
-  getBlogPostBySlug,
-  getBlogCategories,
-};

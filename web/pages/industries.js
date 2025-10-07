@@ -1,20 +1,25 @@
 import Layout from "./layout";
-import {
-  safeBackgroundImage,
-  createServerSideProps,
-} from "../utils/ssrHelpers";
-import { base } from "../service/serviceConfig";
+import { safeBackgroundImage } from "../utils/ssrHelpers";
 import SolutionsIndustriesHero from "../components/solutionsIndustries/hero";
 import ContentBlock from "../components/solutionsIndustries/contentBlock";
 import Footer from "../components/footer";
 import { useRouter } from "next/router";
-export default function Industries({ solutionsIndustries }) {
-  const heroImage = solutionsIndustries?.hero?.[0]?.backgroundImage?.url;
+import { createCustomGetStaticProps } from "../lib/getStaticProps";
+
+export default function Industries({ solutionsIndustriesPageData }) {
+  const heroImage =
+    solutionsIndustriesPageData?.hero?.[0]?.backgroundImage?.url;
   const router = useRouter();
-  const { tab } = router.query
+  const { tab } = router.query;
+
+  // Extract SEO data from product page data
+  const seoData = solutionsIndustriesPageData?.seo;
 
   return (
-    <Layout>
+    <Layout
+      seoData={seoData}
+      pageTitle="Wren AI | GenBI Empowering Industries with AI-Driven Insights"
+      pageDescription="Wren AI transforms data into actionable intelligence across industries with an open-source Generative Business Intelligence platform. Explore how we solve unique challenges for each sector.">
       <div className="max-w-6xl mx-auto">
         <div
           style={{
@@ -25,30 +30,31 @@ export default function Industries({ solutionsIndustries }) {
           className="bg-no-repeat pt-24 max-w-6xl mx-auto px-5"
         >
           {/* Solutions Industries Hero */}
-          {solutionsIndustries?.hero?.length > 0 && (
+          {solutionsIndustriesPageData?.hero?.length > 0 && (
             <SolutionsIndustriesHero
-              solutionsIndustries={solutionsIndustries?.hero}
+              solutionsIndustries={solutionsIndustriesPageData?.hero}
             />
           )}
         </div>
         {/* Solutions Industries Content Block */}
-        {solutionsIndustries?.solutionIndustriesTab?.length > 0 && (
+        {solutionsIndustriesPageData?.solutionIndustriesTab?.length > 0 && (
           <ContentBlock
-            solutionsIndustries={solutionsIndustries?.solutionIndustriesTab}
+            solutionsIndustries={
+              solutionsIndustriesPageData?.solutionIndustriesTab
+            }
             tab={tab}
           />
         )}
         {/* Solutions Industries Footer */}
-        {solutionsIndustries?.bottomContentBlock?.length > 0 && (
-          <Footer data={solutionsIndustries?.bottomContentBlock} />
+        {solutionsIndustriesPageData?.bottomContentBlock?.length > 0 && (
+          <Footer data={solutionsIndustriesPageData?.bottomContentBlock} />
         )}
       </div>
     </Layout>
   );
 }
 
-// Server-side rendering function
-export const getServerSideProps = createServerSideProps(
-  "/api/solutions-industries-page",
-  "solutionsIndustries"
+// Static data loading function
+export const getStaticProps = createCustomGetStaticProps(
+  "solutions-industries-page"
 );

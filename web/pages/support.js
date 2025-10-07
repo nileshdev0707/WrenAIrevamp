@@ -1,17 +1,16 @@
 import React from "react";
 import Layout from "./layout";
 import { safeBackgroundImage } from "../utils/ssrHelpers";
-import { createServerSideProps } from "../utils/ssrHelpers";
 import { HubspotEmbedForm } from "../components/hubspotEmbedForm";
+import { createCustomGetStaticProps } from "../lib/getStaticProps";
 
-export default function Support({ support }) {
-  const heroImage = support?.hero?.[0]?.backgroundImage?.url;
-  console.log('support', support);
+export default function Support({ supportPageData }) {
+  const heroImage = supportPageData?.hero?.[0]?.backgroundImage?.url;
 
   return (
     <Layout>
       <div className="px-6">
-        {support?.hero?.length && (
+        {supportPageData?.hero?.length && (
           <div
             style={{
               backgroundImage: safeBackgroundImage(heroImage),
@@ -21,7 +20,7 @@ export default function Support({ support }) {
             className="bg-no-repeat py-16 max-w-6xl mx-auto bg-cover"
           >
             <section className="py-10 sm:py-16 text-center">
-              {support?.hero?.map((item, index) => (
+              {supportPageData?.hero?.map((item, index) => (
                 <div key={index}>
                   <h1 className="text-3xl sm:text-4xl lg:text-6xl font-medium leading-tight pt-10 sm:pt-25">
                     {item?.title}
@@ -35,14 +34,11 @@ export default function Support({ support }) {
             </section>
           </div>
         )}
-        <HubspotEmbedForm formId={support?.formId} />
+        <HubspotEmbedForm formId={supportPageData?.formId} />
       </div>
     </Layout>
   );
 }
 
-// Server-side rendering function
-export const getServerSideProps = createServerSideProps(
-  "/api/support-page",
-  "support"
-);
+// Static data loading function
+export const getStaticProps = createCustomGetStaticProps("support-page");

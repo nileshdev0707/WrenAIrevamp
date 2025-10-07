@@ -67,3 +67,4 @@ module.exports = {
   getGetStaticPropsForContentType,
   getPropNameForContentType,
 };
+

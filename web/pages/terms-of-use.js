@@ -1,25 +1,23 @@
 import React from "react";
 import Layout from "./layout";
-import {
-  safeBackgroundImage,
-  createServerSideProps,
-} from "../utils/ssrHelpers";
+import { safeBackgroundImage } from "../utils/ssrHelpers";
 import ReactMarkdownDetails from "../components/reactMarkDown";
+import { createCustomGetStaticProps } from "../lib/getStaticProps";
 
-export default function TermsOfUse({ termsOfUse }) {
-  const heroImage = termsOfUse?.hero?.[0]?.backgroundimage?.url;
+export default function TermsOfUse({ termsPageData }) {
+  const heroImage = termsPageData?.hero?.[0]?.backgroundimage?.url;
 
   // Extract SEO data from terms page data
-  const seoData = termsOfUse?.seo?.[0] || termsOfUse?.seo;
+  const seoData = termsPageData?.seo?.[0] || termsPageData?.seo;
 
   return (
     <Layout
       seoData={seoData}
-      pageTitle="Terms of Use - Wren AI"
-      pageDescription="Wren AI Terms of Use - End User License Agreement and terms of service"
+      pageTitle="Wren AI | EULA"
+      pageDescription="Wren AI - End-user License Agreement"
     >
       <div className="px-6 max-w-6xl mx-auto">
-        {termsOfUse?.hero?.length && (
+        {termsPageData?.hero?.length && (
           <div
             style={{
               backgroundImage: safeBackgroundImage(heroImage),
@@ -29,7 +27,7 @@ export default function TermsOfUse({ termsOfUse }) {
             className="bg-no-repeat py-16 max-w-6xl mx-auto bg-cover"
           >
             <section className="py-10 md:py-16 text-center">
-              {termsOfUse?.hero?.map((item, index) => (
+              {termsPageData?.hero?.map((item, index) => (
                 <div key={index}>
                   <h1 className="text-3xl sm:text-4xl lg:text-6xl font-medium leading-tight xl:pt-25 lg:pt-20 md:pt-15 pt-10">
                     {item?.title?.split("EULA").map((part, idx) =>
@@ -50,9 +48,9 @@ export default function TermsOfUse({ termsOfUse }) {
             </section>
           </div>
         )}
-        {termsOfUse?.descriptionDetails && (
+        {termsPageData?.descriptionDetails && (
           <div className="max-w-4xl mx-auto md:py-12">
-            <ReactMarkdownDetails data={termsOfUse?.descriptionDetails} />        
+            <ReactMarkdownDetails data={termsPageData?.descriptionDetails} />
           </div>
         )}
       </div>
@@ -60,8 +58,5 @@ export default function TermsOfUse({ termsOfUse }) {
   );
 }
 
-// Server-side rendering function
-export const getServerSideProps = createServerSideProps(
-  "/api/terms-page",
-  "termsOfUse"
-);
+// Static data loading function
+export const getStaticProps = createCustomGetStaticProps("terms-page");

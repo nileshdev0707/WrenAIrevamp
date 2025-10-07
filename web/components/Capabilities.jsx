@@ -3,8 +3,8 @@ import { base } from "../service/serviceConfig";
 import { useLocalizedUrl } from "../utils/languageUtils";
 import Button from "./common/Button";
 export default function Capabilities({ data }) {
-  if (!data) return null;
-  const features = data[0] || [];
+  if (!data || !Array.isArray(data) || data.length === 0) return null;
+  const features = data[0] || {};
   const sectionRef = useRef(null);
   const getUrl = useLocalizedUrl();
 
@@ -98,7 +98,7 @@ export default function Capabilities({ data }) {
           </p>
         </div>
         <div className="grid lg:grid-cols-12 md:grid-cols-2 sm:grid-cols-12 gap-6 relative fade-card">
-          {features.coreCapabilitieList.map((item, index) =>
+          {features.coreCapabilitieList && Array.isArray(features.coreCapabilitieList) && features.coreCapabilitieList.map((item, index) =>
              item.size === 'lg' ? (
                     // <div key={index} className={`cursor-pointer hover:before:transition-all
                     //   hover:before:duration-500 bg-[#060A1F] hover:bg-[linear-gradient(90deg,#000000_0%,#101B52_63%,#1A2B85_100%)] hover:before:content-['']
@@ -187,11 +187,13 @@ export default function Capabilities({ data }) {
           )}
             </div>
       </div>
-      <div className="flex flex-col sm:flex-row justify-center md:mt-20 sm:mt-10 mt-5 px-8">
-        <Button href={getUrl(features.learnMore[0].url)} variant="primary">
-          {features.learnMore[0].label}
-        </Button>
-      </div>
+      {features.learnMore && Array.isArray(features.learnMore) && features.learnMore.length > 0 && (
+        <div className="flex flex-col sm:flex-row justify-center md:mt-20 sm:mt-10 mt-5 px-8">
+          <Button href={getUrl(features.learnMore[0].url)} variant="primary">
+            {features.learnMore[0].label}
+          </Button>
+        </div>
+      )}
     </section>
   );
 }
