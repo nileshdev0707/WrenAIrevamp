@@ -39,8 +39,8 @@ export default function SocialShare({ title, url, blogPageData, post }) {
           </p>
           <p className="text-sm text-gray-500">
             Updated:{" "}
-            {blogPageData?.updatedAt
-              ? new Date(blogPageData.updatedAt).toLocaleDateString("en-US", {
+            { post?.updatedAt
+              ? new Date( post.updatedAt).toLocaleDateString("en-US", {
                   month: "short",
                   day: "2-digit",
                   year: "numeric",
@@ -48,8 +48,8 @@ export default function SocialShare({ title, url, blogPageData, post }) {
               : ""}
             <br />
             Published:{" "}
-            {blogPageData?.publishedDate
-              ? new Date(blogPageData.publishedDate).toLocaleDateString("en-US", {
+            {post?.publishedDate
+              ? new Date(post.publishedDate).toLocaleDateString("en-US", {
                   month: "short",
                   day: "2-digit",
                   year: "numeric",

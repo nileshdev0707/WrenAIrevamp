@@ -83,7 +83,7 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
           <p className="lg:text-lg text-base text-gray-600 mb-6">
             {post.excerpt}
           </p>
-          <div className="flex items-center gap-5 sm:hidden">
+          <div className="flex items-center gap-5">
             <img
               src={
                 post?.author?.photo?.url
@@ -101,10 +101,8 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
               </p>
               <p className="text-sm text-gray-500">
                 Updated:{" "}
-                {blogPageData?.updatedAt
-                  ? new Date(blogPageData.updatedAt).toLocaleDateString(
-                      "en-US",
-                      {
+                {post?.updatedAt
+                  ? new Date(post.updatedAt).toLocaleDateString("en-US", {
                         month: "short",
                         day: "2-digit",
                         year: "numeric",
@@ -113,11 +111,9 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
                   : ""}
                 <br />
                 Published:{" "}
-                {blogPageData?.publishedDate
-                  ? new Date(blogPageData.publishedDate).toLocaleDateString(
-                      "en-US",
-                      {
-                        month: "short",
+                {post?.publishedDate
+                  ? new Date(post.publishedDate).toLocaleDateString("en-US", {
+                      month: "short",
                         day: "2-digit",
                         year: "numeric",
                       }
