@@ -165,13 +165,18 @@ export default function Work({ data }) {
             {getTabContent(activeTab).image && (
               <div className={`order-1`}
                    style={{ animationDelay: '500ms' }}>
-                <div className="overflow-hidden  border border-[#D9D9D9] rounded-2xl bg-white shadow-lg">
-                <img 
-                  src={`${getTabContent(activeTab).image[0].url?.startsWith('http') ? '' : base}${getTabContent(activeTab).image[0].url || getTabContent(activeTab).image}`} 
-                    alt={getTabContent(activeTab).title || 'Use case image'} 
-                    className="rounded-lg max-w-full w-full h-auto" 
-                  />
-                </div>
+              <div className="overflow-hidden border border-[#D9D9D9] rounded-2xl bg-white shadow-lg relative group">
+                  <img
+                      src={`${
+                        getTabContent(activeTab).image[0].url?.startsWith('http') ? '' : base
+                      }${getTabContent(activeTab).image[0].url || getTabContent(activeTab).image}`}
+                      alt={getTabContent(activeTab).title || 'Use case image'}
+                      className="rounded-lg max-w-full w-full h-auto"
+                    />
+                <div
+                  className="pulsing-glow  absolute inset-0 pointer-events-none transition-all duration-500" style={{  maxWidth: '18.5%',
+                    maxHeight: '32.5%',}}/>
+              </div>
               </div>
             )}
           </div>
