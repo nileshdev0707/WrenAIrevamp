@@ -1,4 +1,5 @@
 import React, { useState,useEffect, useRef } from 'react'
+import Link from 'next/link';
 import FrequentlyQuestions from './frequentlyQuestions'
 import HomeCTA from '../homeCTA'
 import { base } from '../../service/serviceConfig'
@@ -8,7 +9,6 @@ const ElitePartner = ({data, tab}) => {
   const affiliateRef = useRef(null)
   const elitePartnerData = data
   const [activeTab, setActiveTab] = useState(elitePartnerData?.CloudElitePartners?.[0]?.title)
-  console.log('elitePartnerData', elitePartnerData);
 
   const words = elitePartnerData?.CloudElitePartners?.[0]?.subtitle?.split(" ");
   const firstPart1 = words?.slice(0, 2).join(" ");
@@ -22,35 +22,35 @@ const ElitePartner = ({data, tab}) => {
   const elitePerks = data?.CloudElitePartners?.[0]?.CloudElitePartnersItems;
 
   const affiliatePerks = data?.CloudElitePartners?.[1]?.CloudElitePartnersItems;
-const frequentlyAskedQuestions = data?.CloudElitePartners?.[1]?.FrequentlyAskedQuestions;
-const eliteFrequentlyAskedQuestions = data?.CloudElitePartners?.[0]?.FrequentlyAskedQuestions;
+  const frequentlyAskedQuestions = data?.CloudElitePartners?.[1]?.FrequentlyAskedQuestions;
+  const eliteFrequentlyAskedQuestions = data?.CloudElitePartners?.[0]?.FrequentlyAskedQuestions;
 
-useEffect(() => {
-  setActiveTab(elitePartnerData?.CloudElitePartners?.[0]?.title)
-}, [elitePartnerData])
+  useEffect(() => {
+    setActiveTab(elitePartnerData?.CloudElitePartners?.[0]?.title)
+  }, [elitePartnerData])
 
   const currentPerks = activeTab === elitePartnerData?.CloudElitePartners?.[0]?.title ? elitePerks : affiliatePerks
   const affiliatePartner = elitePartnerData?.AffiliatePartner?.[0]
-const affiliatePartnerUrl = affiliatePartner?.images;
-console.log("affiliatePartnerUrl ==> ", affiliatePartnerUrl);
-useEffect(() => {
-  if(tab === 'elite'){
-    setActiveTab(elitePartnerData?.CloudElitePartners?.[0]?.title)
-  }
-  if(tab === 'affiliate'){
-    setActiveTab(elitePartnerData?.CloudElitePartners?.[1]?.title)
-  }
-}, [tab])
+  const affiliatePartnerUrl = affiliatePartner?.images;
 
-useEffect(() => {
-  if (tab) {
-    const scrollWithOffset = (ref) => {
-      const top = ref.current.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({
-        top: top - 100, // <-- offset of 100px
-        behavior: 'smooth'
-      });
-    };
+  useEffect(() => {
+    if(tab === 'elite'){
+      setActiveTab(elitePartnerData?.CloudElitePartners?.[0]?.title)
+    }
+    if(tab === 'affiliate'){
+      setActiveTab(elitePartnerData?.CloudElitePartners?.[1]?.title)
+    }
+  }, [tab])
+
+  useEffect(() => {
+    if (tab) {
+      const scrollWithOffset = (ref) => {
+        const top = ref.current.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+          top: top - 100, // <-- offset of 100px
+          behavior: 'smooth'
+        });
+      };
 
     if (activeTab === elitePartnerData?.CloudElitePartners?.[0]?.title) {
       scrollWithOffset(eliteRef);
@@ -138,10 +138,10 @@ useEffect(() => {
               </h2>
               </div>
               <div className="flex flex-wrap justify-center md:gap-6 gap-3 md:my-20 sm:my-10 my-5">
-                {affiliatePartnerUrl?.map((image,i) => (
-                  <div className='bg-white p-5 flex gap-6 justify-center rounded-[16px] border border-[#D9D9D9] h-[139px] w-[302px]' key={i}>
-                      <img className='w-[200px] object-contain h-auto' src={`${image?.url?.startsWith('http') ? '' : base}${image?.url}`} alt={image?.title}/>
-                      </div>
+                {affiliatePartnerUrl?.map(({image, url},i) => (
+                  <Link href={url} className='glow-effect bg-white p-5 flex gap-6 justify-center rounded-[16px] border border-[#D9D9D9] h-[139px] w-[302px]' key={i}>
+                    <img className='w-[200px] object-contain h-auto' src={`${image?.url?.startsWith('http') ? '' : base}${image?.url}`} alt={image?.title}/>
+                  </Link>
                 ))}
                       
               </div>

@@ -9,6 +9,7 @@ export default function Layout({
   pageTitle,
   pageDescription,
 }) {
+  const GA_ID = 'G-7V36KLWTSL';
   return (
     <>
       <SEO
@@ -40,6 +41,27 @@ export default function Layout({
         data-rewardful="e1a414"
         data-domains="getwren.ai, cloud.getwren.ai"
         // 'async' is handled by the 'strategy' prop
+      />
+      
+      {/* 1. Google Tag Manager (GTM) External Script */}
+      <Script
+        strategy="afterInteractive" // Loads after the page is interactive, good for analytics
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+      />
+
+      {/* 2. Google Analytics Inline Configuration Script */}
+      <Script
+        id="google-analytics-config"
+        strategy="afterInteractive" // Should run after the external script
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', '${GA_ID}');
+          `,
+        }}
       />
       <div className="max-h-screen h-full justify-between flex flex-col">
         <div>

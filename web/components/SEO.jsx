@@ -59,6 +59,9 @@ export default function SEO({ seoData, fallbackTitle = "Wren AI", fallbackDescri
           }}
         />
       )}      
+      {/* RSS Feed */}
+      <link rel="alternate" type="application/rss+xml" title="Wren AI Blog RSS Feed" href="/rss.xml" />
+      
       {/* Favicon and App Icons */}
       <link rel="icon" href="/favicon_io/favicon.ico" />
       <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png" />

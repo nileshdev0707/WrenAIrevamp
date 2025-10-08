@@ -84,6 +84,7 @@ const SolutionsTab = ({ data, isClient, tab }) => {
               </div>
             </div>
             <div
+              className={`m-7`}
               dangerouslySetInnerHTML={{
                 __html: activeTabData.description,
               }}

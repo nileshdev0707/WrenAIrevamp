@@ -79,7 +79,7 @@ export default function SiteFooter() {
       links: [
         { label: t("privacyPolicy"), slug: "privacy-policy" },
         { label: t("Security Policy"), slug: "security-policy" },
-        { label: t("termsOfUse"), slug: "terms-of-use" },
+        { label: t("termsOfUse"), slug: "eula" },
         {
           label: t("Service Status"),
           slug: "https://wrenaicloud.statuspage.io/",
