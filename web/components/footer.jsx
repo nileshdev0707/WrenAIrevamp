@@ -6,7 +6,7 @@ import Button from "./common/Button";
 export default function Footer({ data }) {
   const getUrl = useLocalizedUrl();
   return (
-    <section className="max-w-6xl mx-auto py-10 md:py-16 xl:px-0 px-4">
+    <section className="max-w-6xl mx-auto sm:py-10 py-8  md:py-16 xl:px-0 px-4">
         <div className="group rounded-2xl bg-blue-600 text-white md:px-16 sm:px-8 py-10 px-4">
         {data?.map((item, index) => {
           const url = item.image?.url;
@@ -23,7 +23,7 @@ export default function Footer({ data }) {
                     </Link>
                   )} */}
                   {item?.title && (
-                    <h3 className="text-3xl lg:text-4xl font-medium mt-8 leading-tight">
+                    <h3 className="text-3xl lg:text-4xl font-medium  leading-tight">
                       {item?.title}
                     </h3>
                   )}
@@ -47,14 +47,14 @@ export default function Footer({ data }) {
                 </div>
               </div>
               <div className="justify-end items-center sm:flex hidden">
-                <div className="group-hover:opacity-95 transition-opacity duration-300 overflow-hidden">
+                <div className="transition-opacity duration-300 overflow-hidden">
                 {url ? (
                   <img
                     width={320}
                     height={320}
                     src={`${url.startsWith("http") ? "" : base}${url}`}
                     alt={item?.name}
-                     className="transition-transform duration-700 ease-out group-hover:scale-106"
+                     className="transition-transform duration-700 ease-out"
                   />
                 ) : (
                   <div className="text-gray-600">{item?.name}</div>

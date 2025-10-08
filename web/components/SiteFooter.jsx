@@ -101,13 +101,13 @@ export default function SiteFooter() {
   };
 
   return (
-    <footer className="border-t border-gray-100 py-16">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 pb-10 px-10">
+    <footer className="border-t border-gray-100 md:py-16 py-10">
+      <div className="max-w-7xl mx-auto md:px-6 px-4">
+        <div className="grid grid-cols-2 lg:grid-cols-5 md:grid-cols-3 sm:gap-8 gap-5 pb-10 sm:px-10">
           {cols.map((col, i) => (
             <div key={i}>
-              <div className="font-semibold mb-3">{col.title}</div>
-              <ul className="space-y-2 text-sm text-gray-600">
+              <div className="font-semibold text-[#1E1E1E] sm:text-xl text-base sm:mb-6 mb-3">{col.title}</div>
+              <ul className="space-y-2 sm:text-base text-sm text-[#757575]">
                 {col.links.map((l, j) => {
                   const isExternal =
                     l.slug?.startsWith("http") ||
@@ -115,7 +115,7 @@ export default function SiteFooter() {
                     l.slug?.startsWith("#");
 
                   return (
-                    <li key={j}>
+                    <li key={j} className="mb-3">
                       {isExternal ? (
                         <Link
                           href={l.slug?.startsWith("#") ? l.slug : link(l.slug)}

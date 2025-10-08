@@ -30,7 +30,7 @@ export default function ProductHero({ data }) {
               ))}
           </h1>
 
-          <p className="mt-5 px-10 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base">
+          <p className="mt-5 lg:px-9 md:px-6 sm:px-4 max-w-3xl mx-auto text-black xl:text-xl lg:text-lg text-base">
             {item?.subtitle}
           </p>
             <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center px-4">

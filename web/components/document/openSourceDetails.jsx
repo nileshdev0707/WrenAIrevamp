@@ -47,16 +47,21 @@ export default function OpenSourceDetails({ data }) {
                     {/* Square (diamond style) */}
                     <div className="w-2 h-2 bg-blue-600 rotate-45"></div>
                   </div>
-                  {imageUrl ? (
-                    <img
-                      src={`${
-                        imageUrl.startsWith("http") ? "" : base
-                      }${imageUrl}`}
-                      alt={image?.name}
-                    />
-                  ) : (
-                    <div className="text-gray-600">{image?.name}</div>
-                  )}
+                 <div className="relative group">
+                      {imageUrl ? (
+                          <img
+                            src={`${
+                              imageUrl.startsWith("http") ? "" : base
+                            }${imageUrl}`}
+                            alt={image?.name}
+                          />
+                        ) : (
+                          <div className="text-gray-600">{image?.name}</div>
+                        )}
+                          <div
+                  className="pulsing-glow  absolute inset-0 pointer-events-none transition-all duration-500" style={{  maxWidth: '77%',
+                    maxHeight: '76.5%',top: '9.5%',left: '9.1%',margin: '0'}}/>
+                    </div>
                   <div className="flex items-center absolute -right-15">
                     <div className="w-2 h-2 bg-blue-600 rotate-45"></div>
                     <div className="flex-1 border-t-2 border-dashed border-blue-600 xl:w-28 w-24"></div>
