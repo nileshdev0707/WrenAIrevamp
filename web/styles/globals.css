@@ -293,3 +293,44 @@ body { @apply bg-white text-gray-800 antialiased; }
   -webkit-text-fill-color: transparent;
   pointer-events: none;
 }
+
+@keyframes animateGlow {
+  0% {
+    opacity: 0.3;
+    box-shadow: 0 0 10px 3px rgba(0,34,203,0.3), 0 0 20px 6px rgba(11,142,229,0.2);
+  }
+  50% {
+    opacity: 0.8;
+    box-shadow: 0 0 25px 8px rgba(0,34,203,0.6), 0 0 50px 15px rgba(11,142,229,0.4);
+  }
+  100% {
+    opacity: 0.3;
+    box-shadow: 0 0 10px 3px rgba(0,34,203,0.3), 0 0 20px 6px rgba(11,142,229,0.2);
+  }
+}
+
+/* Glow div is hidden by default */
+.pulsing-glow {
+  background: radial-gradient(circle, rgba(0,34,203,0.1) 0%, rgba(11,142,229,0.05) 50%, transparent 70%);
+  border-radius: 100%;
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  left: 0px;
+  top: 0px;
+  margin: auto;
+  padding: 2px;
+  transition: opacity 0.8s ease-in-out;
+}
+
+/* Trigger animation on hover of parent */
+.group:hover .pulsing-glow {
+  opacity: 1;
+  animation: 3s ease-in-out 0s infinite normal none running animateGlow;
+}
+
+.group:not(:hover) .pulsing-glow {
+  animation: none;
+  opacity: 0;
+
+}
