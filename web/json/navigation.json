@@ -8,17 +8,17 @@
       {
         "id": 13,
         "label": "Product",
-        "url": "#",
+        "url": "genbi",
         "parent": [
             {
                 "title": "Key Features",
                 "children": [
-                  { "label": "Ask Questions in Your Language", "url": "/product?tab=ask-questions-in-your-language", "description": "Query any dataset in plain English and get trusted answers faster." },
-                  { "label": "Secure Data Access", "url": "/product?tab=secure-data-access", "description": "Governed, safe collaboration through the MCP protocol for every AI agent." },
-                  { "label": "Connect to Any Data Source", "url": "/product?tab=connect-to-any-data-source", "description": "Connect to Snowflake, BigQuery, Redshift, Databricks, Postgres, and more." },
-                  { "label": "No-Code Visual Analytics", "url": "/product?tab=no-code-visual-analytics", "description": "Ask in natural language and generate charts or dashboards without training.." },
-                  { "label": "Embedded Analytics", "url": "/product?tab=embedded-analytics", "description": "White-label dashboards and embeds for SaaS at scale." },
-                  { "label": "Enterprise Control", "url": "/product?tab=enterprise-control", "description": "Identity, permissions, and flexible deployments for governance.." }
+                  { "label": "Ask Questions in Your Language", "url": "/genbi?tab=ask-questions-in-your-language", "description": "Query any dataset in plain English and get trusted answers faster." },
+                  { "label": "Secure Data Access", "url": "/genbi?tab=secure-data-access", "description": "Governed, safe collaboration through the MCP protocol for every AI agent." },
+                  { "label": "Connect to Any Data Source", "url": "/genbi?tab=connect-to-any-data-source", "description": "Connect to Snowflake, BigQuery, Redshift, Databricks, Postgres, and more." },
+                  { "label": "No-Code Visual Analytics", "url": "/genbi?tab=no-code-visual-analytics", "description": "Ask in natural language and generate charts or dashboards without training.." },
+                  { "label": "Embedded Analytics", "url": "/genbi?tab=embedded-analytics", "description": "White-label dashboards and embeds for SaaS at scale." },
+                  { "label": "Enterprise Control", "url": "/genbi?tab=enterprise-control", "description": "Identity, permissions, and flexible deployments for governance.." }
                 ]
               },
               {
@@ -82,7 +82,7 @@
       {
         "id": 17,
         "label": "Pricing",
-        "url": "/pricing?tab=self-hosted",
+        "url": "/pricing",
         "parent": []
       },
       {

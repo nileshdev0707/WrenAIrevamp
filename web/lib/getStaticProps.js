@@ -251,11 +251,6 @@ function generateBlogPaths() {
       };
     });
 
-    console.log(
-      `Generated ${blogPaths.length} blog paths dynamically:`,
-      blogPaths.map((p) => p.params.slug)
-    );
-
     return blogPaths;
   } catch (error) {
     console.error("Error generating blog paths:", error);
@@ -275,7 +270,7 @@ function createBlogGetStaticPaths() {
 
       return {
         paths: blogPaths,
-        fallback: false, // No fallback needed for static export
+        fallback: "blocking", // Allow dynamic generation for invalid slugs to redirect
       };
     } catch (error) {
       console.error("Error loading blog paths:", error);
@@ -308,11 +303,6 @@ function createDynamicRoute(contentType, slugField = "slug", options = {}) {
           const slug = item[slugField] || item.attributes?.[slugField];
           return { params: { slug } };
         });
-
-        console.log(
-          `Generated ${paths.length} paths for ${contentType}:`,
-          paths.map((p) => p.params.slug)
-        );
 
         return {
           paths,
@@ -350,7 +340,10 @@ function createBlogsSlugGetStaticProps(options = {}) {
 
       if (!post) {
         return {
-          notFound: true,
+          redirect: {
+            destination: "/blog",
+            permanent: false,
+          },
         };
       }
 
@@ -371,7 +364,10 @@ function createBlogsSlugGetStaticProps(options = {}) {
     } catch (error) {
       console.error("Error loading blog post:", error);
       return {
-        notFound: true,
+        redirect: {
+          destination: "/blog",
+          permanent: false,
+        },
       };
     }
   };

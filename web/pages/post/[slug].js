@@ -11,17 +11,18 @@ import {
   createBlogsSlugGetStaticProps,
   createBlogGetStaticPaths,
 } from "../../lib/getStaticProps";
+import { base } from "../../service/serviceConfig";
 
 export default function BlogPost({ post, relatedPosts, blogPageData }) {
   const router = useRouter();
-  const base = process.env.NEXT_PUBLIC_STRAPI_URL || "";
 
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
 
   if (!post) {
-    return <div>Post not found</div>;
+    router.replace("/blog");
+    return <div>Redirecting to blog...</div>;
   }
 
   // Extract post attributes
@@ -103,21 +104,19 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
                 Updated:{" "}
                 {post?.updatedAt
                   ? new Date(post.updatedAt).toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "2-digit",
-                        year: "numeric",
-                      }
-                    )
+                      month: "short",
+                      day: "2-digit",
+                      year: "numeric",
+                    })
                   : ""}
                 <br />
                 Published:{" "}
                 {post?.publishedDate
                   ? new Date(post.publishedDate).toLocaleDateString("en-US", {
                       month: "short",
-                        day: "2-digit",
-                        year: "numeric",
-                      }
-                    )
+                      day: "2-digit",
+                      year: "numeric",
+                    })
                   : ""}
               </p>
             </div>

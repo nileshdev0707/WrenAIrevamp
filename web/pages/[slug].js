@@ -6,7 +6,7 @@ import FeatureShowcase from "../components/FeatureShowcase";
 import Logos from "../components/Logos";
 import Layout from "./layout";
 export default function Page({ page }) {
-  if (!page) return <div />;
+  if (!page) return {notFound: true};
 
   // Extract SEO data from page sections
   const seoData = page.sections?.find(
@@ -126,6 +126,18 @@ export async function getStaticProps({ params, locale }) {
   const pageData = Array.isArray(pageRes?.data)
     ? pageRes.data[0]?.attributes ?? pageRes.data[0]
     : null;
+
+  // --------------------------------------------------------
+  // 1. Check if pageData is null (i.e., post was not found)
+  if (!pageData) {
+    // Return notFound: true to serve the 404 page
+    return {
+      notFound: true,
+      revalidate: 10, // Keep revalidate in case the page is created later
+    };
+  }
+  // --------------------------------------------------------
+
   const safePage = JSON.parse(JSON.stringify(pageData ?? null));
   return {
     props: {

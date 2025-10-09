@@ -7,12 +7,12 @@ export default function ComparePlan({ tiers, selectedPlan }) {
     "Data Management",
     "Data Security",
     "Data Visualization & Sharing",
-    "APIManagement & Integration",
+    "API Management & Integration",
     "Boilerplates",
     "Organization",
     "Permissions",
     "Deployment",
-    "Security and Single Sign-on",
+    "Security & Single Sign-on",
     "Support",
   ];
 

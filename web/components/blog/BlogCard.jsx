@@ -15,7 +15,7 @@ export default function BlogCard({ post, showExcerpt = true, size = 'default' })
     ? 'bg-white rounded-lg overflow-hidden hover:shadow-md transition-shadow cursor-pointer'
     : 'bg-white rounded-lg overflow-hidden hover:shadow-lg transition-shadow cursor-pointer';
 
-  const imageClasses = size === 'small' ? 'w-full h-32 object-cover' : 'w-full h-48 object-cover';
+  const imageClasses = size === 'small' ? 'w-full h-32 object-cover' : 'w-full h-50 object-cover';
   const titleClasses = size === 'small' ? 'text-lg font-semibold' : 'lg:text-xl md:text-lg text-base font-bold';
   const padding = size === 'small' ? 'p-4' : 'p-6';
 

@@ -13,12 +13,12 @@
         {
           "title": "主要功能",
           "children": [
-            { "label": "以您的語言提問", "url": "/product?tab=ask-questions-in-your-language", "description": "Query any dataset in plain English and get trusted answers faster." },
-            { "label": "安全資料存取", "url": "/product?tab=secure-data-access", "description": "Governed, safe collaboration through the MCP protocol for every AI agent." },
-            { "label": "連接任何資料來源", "url": "/product?tab=connect-to-any-data-source", "description": "Connect to Snowflake, BigQuery, Redshift, Databricks, Postgres, and more." },
-            { "label": "零程式碼視覺化分析", "url": "/product?tab=no-code-visual-analytics", "description": "Ask in natural language and generate charts or dashboards without training.." },
-            { "label": "嵌入式分析", "url": "/product?tab=embedded-analytics", "description": "White-label dashboards and embeds for SaaS at scale." },
-            { "label": "企業級管控", "url": "/product?tab=enterprise-control", "description": "Identity, permissions, and flexible deployments for governance.." }
+            { "label": "以您的語言提問", "url": "/genbi?tab=ask-questions-in-your-language", "description": "Query any dataset in plain English and get trusted answers faster." },
+            { "label": "安全資料存取", "url": "/genbi?tab=secure-data-access", "description": "Governed, safe collaboration through the MCP protocol for every AI agent." },
+            { "label": "連接任何資料來源", "url": "/genbi?tab=connect-to-any-data-source", "description": "Connect to Snowflake, BigQuery, Redshift, Databricks, Postgres, and more." },
+            { "label": "零程式碼視覺化分析", "url": "/genbi?tab=no-code-visual-analytics", "description": "Ask in natural language and generate charts or dashboards without training.." },
+            { "label": "嵌入式分析", "url": "/genbi?tab=embedded-analytics", "description": "White-label dashboards and embeds for SaaS at scale." },
+            { "label": "企業級管控", "url": "/genbi?tab=enterprise-control", "description": "Identity, permissions, and flexible deployments for governance.." }
           ]
         },
         {

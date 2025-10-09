@@ -123,7 +123,7 @@ export default function Navbar({ serverLanguage }) {
   };
 
   const fallback = [
-    { label: isClient ? t("product") : "Product", url: "/product" },
+    { label: isClient ? t("product") : "Product", url: "/genbi" },
     { label: isClient ? t("oss") : "OSS", url: "/oss" },
     { label: isClient ? t("solutions") : "Solutions", url: "/solutions" },
     { label: isClient ? t("resources") : "Resources", url: "/resources" },
@@ -290,9 +290,8 @@ export default function Navbar({ serverLanguage }) {
                             }}
                             className="flex justify-between items-center w-full py-3 px-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium transition-colors duration-200"
                           >
-                            <div>{link.label}</div>
-                           <div>
-                             {hasChildren && (
+                            {link.label}
+                            {hasChildren && (
                               <span
                                 className={`inline-block w-2 h-2 border-r-2 border-b-2 border-gray-600 transform transition-transform duration-300 ${
                                   expandedIndex === i
@@ -301,7 +300,6 @@ export default function Navbar({ serverLanguage }) {
                                 }`}
                               ></span>
                             )}
-                           </div>
                           </button>
 
                           {hasChildren && expandedIndex === i && (
@@ -369,7 +367,7 @@ export default function Navbar({ serverLanguage }) {
               return (
                 hasChildren &&
                 expandedIndex === i && (
-                  <div key={`mobile-${i}`} className="lg:inline-block hidden">
+                  <div key={`mobile-${i}`}>
                     <div className="h-4 z-40 pointer-events-auto"></div>
                     <div className="bg-white border border-gray-200 rounded-2xl shadow-lg transition-all duration-200 z-50 p-8 grid grid-cols-2 gap-6 max-h-[calc(100vh-150px)] overflow-y-auto overscroll-contain">
                       {link.parent.map((group, index) => (
