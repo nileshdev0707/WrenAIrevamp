@@ -1,9 +1,12 @@
+import { useState, useEffect } from 'react';
+
 export default function CategoryFilter({ 
   categories, 
   selectedCategory, 
   onCategoryChange,
   className = '' 
 }) {
+  const [activeCategory, setActiveCategory] = useState(selectedCategory || 'all');
   const defaultCategories = [
     { key: 'all', label: 'All', shortLabel: 'All' },
     { key: 'Technology', label: 'Technology', shortLabel: 'Tech' },
@@ -15,6 +18,23 @@ export default function CategoryFilter({
   
   const categoryList = categories || defaultCategories;
 
+  // Sync with URL hash on page load
+  useEffect(() => {
+    const hash = window.location.hash.replace("#", "");
+    if (hash && categoryList.some(cat => (cat.key || cat) === hash)) {
+      setActiveCategory(hash);
+      onCategoryChange(hash);
+    }
+  }, []);
+
+  const handleCategoryClick = (categoryKey) => {
+    setActiveCategory(categoryKey);
+    onCategoryChange(categoryKey);
+    // Update URL anchor without reload
+    window.history.replaceState(null, "", `#${categoryKey}`);
+  };
+
+
   return (
     <div className={`md:py-20 sm:py-10 py-5 ${className}`}>
       <div className="flex overflow-x-auto scrollbar-hide gap-2 px-4 sm:px-0">
@@ -25,10 +45,10 @@ export default function CategoryFilter({
           
           return (
             <button
-              key={categoryKey}
-              onClick={() => onCategoryChange(categoryKey)}
+            key={categoryKey}
+            onClick={() => handleCategoryClick(categoryKey)}
               className={`cursor-pointer flex-shrink-0 px-4 py-2 rounded-lg text-sm sm:text-md transition-all duration-200 whitespace-nowrap font-medium ${
-                selectedCategory === categoryKey
+                  activeCategory === categoryKey
                   ? 'bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white font-bold shadow-lg'
                   : 'bg-[#F5F5F5] text-gray-600 hover:bg-gray-200 hover:shadow-md'
               }`}
