@@ -2,12 +2,23 @@ import React, { useState, useEffect, useRef } from "react";
 import { base } from "../../service/serviceConfig";
 import { useLocalizedUrl } from "../../utils/languageUtils";
 import Button from "../common/Button";
+import { useRouter } from "next/router";
+
 
 const SolutionsTab = ({ data, isClient, tab }) => {
-  const solutions = data?.SolutionsTab;
+  const router = useRouter();
   const getUrl = useLocalizedUrl();
+  const solutions = data?.SolutionsTab;
   const [activeTab, setActiveTab] = useState(0);
   const sectionRef = useRef(null);
+  const [tabKey, setTabKey] = useState("enterprise_cloud");
+
+  useEffect(() => {
+    if (tab) {
+      setTabKey(tab);
+    }
+  }, [tab]); 
+
 
   // Mapping for tab from URL → index
   const mapping = {
@@ -27,12 +38,38 @@ const SolutionsTab = ({ data, isClient, tab }) => {
 
   // On URL tab change
   useEffect(() => {
-    if (tab && mapping[tab] != null) {
-      setActiveTab(mapping[tab]);
+    if (tabKey && mapping[tabKey] != null) {
+      setActiveTab(mapping[tabKey]);
       setTimeout(scrollToSection, 100); // delay for render
+      if (tabKey) {
+        router.replace({
+          pathname: router.pathname,
+          query: { ...router.query, tab: tabKey },
+        }, undefined, { shallow: true });
+      }
     }
-  }, [tab]);
+  }, [tabKey]);
 
+  // Reverse mapping (index → tabKey)
+  const reverseMapping = Object.entries(mapping).reduce((acc, [key, value]) => {
+    acc[value] = key;
+    return acc;
+  }, {});
+
+  const handleTabChange = (index) => {
+    setActiveTab(index);
+    const tabKey = reverseMapping[index];
+    setTabKey(tabKey);
+    if (tabKey) {
+      router.replace({
+        pathname: router.pathname,
+        query: { ...router.query, tab: tabKey },
+      }, undefined, { shallow: true });
+    }
+  };
+  
+
+    
   const activeTabData = solutions[activeTab] || {};
 
   return (
@@ -46,10 +83,7 @@ const SolutionsTab = ({ data, isClient, tab }) => {
           {solutions?.map((tab, index) => (
             <Button
               key={index}
-              onClick={() => {
-                setActiveTab(index);
-                scrollToSection();
-              }}
+              onClick={() => handleTabChange(index)}
               variant={activeTab === index ? "primary" : "light"}
               label={tab.badge}
               className="whitespace-nowrap min-w-max"

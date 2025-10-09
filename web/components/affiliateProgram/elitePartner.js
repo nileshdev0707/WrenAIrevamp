@@ -3,8 +3,10 @@ import Link from 'next/link';
 import FrequentlyQuestions from './frequentlyQuestions'
 import HomeCTA from '../homeCTA'
 import { base } from '../../service/serviceConfig'
+import { useRouter } from 'next/router';
 
 const ElitePartner = ({data, tab}) => {
+  const router = useRouter();
   const eliteRef = useRef(null)
   const affiliateRef = useRef(null)
   const elitePartnerData = data
@@ -33,33 +35,28 @@ const ElitePartner = ({data, tab}) => {
   const affiliatePartner = elitePartnerData?.AffiliatePartner?.[0]
   const affiliatePartnerUrl = affiliatePartner?.images;
 
+  const eliteTitle = elitePartnerData?.CloudElitePartners?.[0]?.title;
+  const affiliateTitle = elitePartnerData?.CloudElitePartners?.[1]?.title;
+  // Sync tab with URL
   useEffect(() => {
-    if(tab === 'elite'){
-      setActiveTab(elitePartnerData?.CloudElitePartners?.[0]?.title)
-    }
-    if(tab === 'affiliate'){
-      setActiveTab(elitePartnerData?.CloudElitePartners?.[1]?.title)
-    }
-  }, [tab])
+    if (tab === "elite") setActiveTab(eliteTitle);
+    else if (tab === "affiliate") setActiveTab(affiliateTitle);
+    else setActiveTab(eliteTitle);
+  }, [tab]);
 
-  useEffect(() => {
-    if (tab) {
-      const scrollWithOffset = (ref) => {
-        const top = ref.current.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({
-          top: top - 100, // <-- offset of 100px
-          behavior: 'smooth'
-        });
-      };
-
-    if (activeTab === elitePartnerData?.CloudElitePartners?.[0]?.title) {
-      scrollWithOffset(eliteRef);
+   // Scroll to section when tab changes
+   useEffect(() => {
+    const ref = activeTab === eliteTitle ? eliteRef : affiliateRef;
+    if (ref.current) {
+      const top = ref.current.getBoundingClientRect().top + window.scrollY - 100;
+      window.scrollTo({ top, behavior: "smooth" });
     }
-    if (activeTab === elitePartnerData?.CloudElitePartners?.[1]?.title) {
-      scrollWithOffset(affiliateRef);
+    if (activeTab === eliteTitle) {
+      router.replace({ pathname: router.pathname, query: { ...router.query, tab: "elite" } }, undefined, { shallow: true });
+    } else if (activeTab === affiliateTitle) {
+      router.replace({ pathname: router.pathname, query: { ...router.query, tab: "affiliate" } }, undefined, { shallow: true });
     }
-  }
-}, [activeTab, elitePartnerData])
+  }, [activeTab]);
 
   return (
     <div ref={activeTab === elitePartnerData?.CloudElitePartners?.[0]?.title ? eliteRef : affiliateRef} >

@@ -11,35 +11,45 @@ export default function Hero({
   const router = useRouter();
   const { tab } = router.query;
   const title = pricing?.title || "";
+  const query = { ...router.query };
 
+  // Sync plan & billing from URL on initial load
   useEffect(() => {
     if (tab === "self-hosted") {
-      setSelectedPlan(1); // default to Self-hosted tab
+      setSelectedPlan(1);
+    } else {
+      setSelectedPlan(0);
     }
-
-  }, [setSelectedPlan, tab]);
+    if (selectedPlan === 0) {
+      if (tab === "annually") {
+        setBilling(0);
+      } else if (tab === "monthly") {
+        setBilling(1);
+      }
+    }
+  }, [tab, setSelectedPlan, setBilling]);
 
   const handleSelectPlan = (index) => {
     setSelectedPlan(index);
 
-    const url = new URL(window.location.href);
-    const params = new URLSearchParams(url.search);
+    const query = { ...router.query };
+    if (index === 1) query.tab = "self-hosted";
+    else query.tab = "annually"; // default to annual
 
-    if (index === 1) {
-      // self-hosted
-      params.set("tab", "self-hosted");
-    } else {
-      // remove tab param for default (cloud) tab
-      params.delete("tab");
-    }
-
-    // Update URL without reload
-    const newUrl =
-      window.location.pathname +
-      (params.toString() ? `?${params.toString()}` : "");
-    window.history.replaceState({}, "", newUrl);
+    router.replace({ pathname: router.pathname, query }, undefined, { shallow: true });
   };
 
+
+    // Select Billing
+    const handleSelectBilling = (index) => {
+      setBilling(index);
+  
+      const query = { ...router.query };
+      query.tab = index === 0 ? "annually" : "monthly";
+  
+      router.replace({ pathname: router.pathname, query }, undefined, { shallow: true });
+    };
+    
   return (
     <section className="text-center px-4">
       <h1 className="text-3xl sm:text-5xl lg:text-6xl font-medium leading-tight md:mt-24 mt-16">
@@ -110,7 +120,7 @@ export default function Hero({
               .map((plan, index) => (
                 <button
                   key={plan.id}
-                  onClick={() => setBilling(index)}
+                  onClick={() => handleSelectBilling(index)}
                   className={`cursor-pointer px-4 py-2 rounded-full text-sm font-semibold ${
                     billing === index
                       ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white"

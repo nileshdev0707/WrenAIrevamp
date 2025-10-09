@@ -20,6 +20,19 @@ export default function ContentBlock({ solutionsIndustries, tab }) {
         behavior: "smooth",
       });
     }
+
+    // Update URL param based on tabKey
+    const selected = solutionsIndustries.find((item) => item.id === id);
+    if (selected?.tabKey) {
+      const url = new URL(window.location.href);
+      const params = new URLSearchParams(url.search);
+      params.set("tab", selected?.tabKey);
+      const newUrl =
+        window.location.pathname +
+        (params.toString() ? `?${params.toString()}` : "");
+      window.history.replaceState({}, "", newUrl);
+    }
+
   };
 
   useEffect(() => {
