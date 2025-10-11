@@ -20,26 +20,28 @@ export default function Tiers({ tiers, billing }) {
           <div className="text-3xl font-medium">{item.name}</div>
           <p className="text-gray-500 mb-4 text-sm pt-4">{item.description}</p>
 
-          <div className="flex items-baseline mb-4">
-            <div className="lg:text-4xl text-3xl font-semibold mt-1 bg-gradient-to-r from-[#0B8EE5] via-61%  via-[#044CD5] to-[#0222CB] text-transparent bg-clip-text">
-              {billing === 0 ? item.annualPrice : item.price}
+          <div className="sm:h-40">
+            <div className="flex flex-col gap-2">
+              <div className="lg:text-4xl text-3xl font-semibold mt-1 bg-gradient-to-r from-[#0B8EE5] via-61%  via-[#044CD5] to-[#0222CB] text-transparent bg-clip-text">
+                {billing === 0 ? item.annualPrice : item.price}
+              </div>
+              <div className="text-gray-500 ml-2 text-sm block">
+                /month, billed annually
+              </div>
+              
             </div>
-            <div className="text-gray-500 ml-2 text-sm">
-              /month, billed annually
+            <div className="mt-6">
+              <span className="text-sm bg-gray-100 p-2 rounded-full text-black font-medium capitalize">
+                {billing === 0 ? item.annualFeatures : item.features}
+              </span>
             </div>
-            
           </div>
-          <div className="mt-6">
-            <span className="text-sm bg-gray-100 p-2 rounded-full text-black font-medium capitalize">
-              {billing === 0 ? item.annualFeatures : item.features}
-            </span>
-          </div>
-          <div className="mt-6">
+          <div>
             <a
               href={getUrl(item?.ctaUrl)}
               target={item?.ctaUrl?.startsWith("http") ? "_blank" : "_self"}
               className={`btn mt-6 inline-block text-white w-full !py-3 ${
-                item.ctaLabel === "Talk to sales"
+                item.ctaLabel === "Talk to Sales"
                   ? "bg-black hover:bg-black"
                   : "btn-primary bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white"
               }`} 

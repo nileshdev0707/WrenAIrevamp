@@ -65,7 +65,11 @@ export default function TiersHosted({ tiers }) {
             <a
               href={getUrl(item?.ctaUrl)}
               target={item?.ctaUrl?.startsWith("http") ? "_blank" : "_self"}
-              className="btn sm:mt-8 mt-5 inline-block w-full !py-3 btn-primary bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white"
+              className={`btn mt-6 inline-block text-white w-full !py-3 ${
+                item.ctaLabel === "Talk to Sales"
+                  ? "bg-black hover:bg-black"
+                  : "btn-primary bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white"
+              }`} 
             >
               {item.ctaLabel || "Choose plan"}
             </a>
