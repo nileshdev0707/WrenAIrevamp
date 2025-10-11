@@ -1,6 +1,7 @@
 import { useRef, useEffect } from "react";
 import { base } from "../service/serviceConfig";
 import { useLocalizedUrl } from "../utils/languageUtils";
+import Badge from "./common/Badge";
 import Button from "./common/Button";
 export default function Capabilities({ data }) {
   if (!data || !Array.isArray(data) || data.length === 0) return null;
@@ -35,14 +36,13 @@ export default function Capabilities({ data }) {
 
   return (
     <section className="md:py-22 sm:py-10 py-5">
-      <div className="max-w-7xl mx-auto lg:px-6 sm:px-4 px-2" ref={sectionRef}>
+      <div className="max-w-7xl mx-auto lg:px-6 sm:px-4 px-3" ref={sectionRef}>
         {/* Header */}
         <div className="text-center mb-16">
           <div>
-            <div className="inline-flex text-base  items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] px-4 py-2 font-medium text-blue-700 ">
-              <div className="w-2 h-2 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] rounded-full"></div>
-              <span className="text-black">{features.badge}</span>
-            </div>
+            <Badge variant="primary" showDot dotColor="primary">
+              {features.badge}
+            </Badge>
           </div>
           <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight md:py-4 py-2 leading-tight">
             {features.title && typeof features.title === "string" ? (

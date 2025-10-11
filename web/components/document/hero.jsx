@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { safeBackgroundImage } from "../../utils/ssrHelpers";
 import Button from "../common/Button";
+import Badge from "../common/Badge";
 
 export default function DocumentHero({ data }) {
   const heroImage = data?.[0]?.backgroundimage?.url;
@@ -21,9 +22,7 @@ export default function DocumentHero({ data }) {
           const secondPart = words.slice(2).join(" ");
           return (
             <div key={index}>
-              <button className="animate-fade-in-up btn btn-primary bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-4 py-1 !rounded-full text-sm">
-                {item?.badge}
-              </button>
+              <Badge variant="primaryGradient" className="animate-fade-in-up">{item?.badge}</Badge>
               <h1 className="text-3xl sm:text-4xl lg:text-6xl font-medium leading-tight mt-8">
                 <span>{firstPart}</span>
                 <br />

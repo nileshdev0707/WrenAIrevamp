@@ -28,7 +28,7 @@ export default function ReactMarkdownDetails({ data }) {
       ),
       a: ({ node, ...props }) => (
         <a
-          className="text-blue-600 underline hover:text-blue-800"
+          className="text-blue-600 underline hover:text-blue-800 break-words"
           target="_blank"
           rel="noopener noreferrer"
           {...props}

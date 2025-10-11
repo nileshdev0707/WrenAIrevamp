@@ -2,6 +2,7 @@ import React from "react";
 import { base } from "../../service/serviceConfig";
 import { useLocalizedUrl } from "../../utils/languageUtils";
 import Button from "../common/Button";
+import Badge from "../common/Badge";
 
 const PartnerEcosystem = ({data}) => {
     const getUrl = useLocalizedUrl();
@@ -13,10 +14,7 @@ const PartnerEcosystem = ({data}) => {
     return (
         <div>
             <div className="text-center justify-center flex">
-                         <div className="my-4 justify-center inline-flex text-base items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-white px-4 py-2 font-medium text-blue-700">
-                                <div className="w-2 h-2 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] rounded-full"></div>
-                                <span className="text-black ">{partnerEcosystem?.badge}</span>
-                            </div>
+                            <Badge variant="primary" className="animate-fade-in-up my-4" showDot dotColor="primary">{partnerEcosystem?.badge}</Badge>
                         </div> 
                         <h1 className="text-center text-2xl max-w-3xl mx-auto sm:text-3xl md:text-4xl lg:text-[64px] font-medium leading-tight sm:mt-8 mt-5">
                                 {title ? title.split(" ").map((word, i) =>

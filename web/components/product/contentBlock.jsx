@@ -52,10 +52,10 @@ const [openIds, setOpenIds] = useState([]);
           <div
             key={index}
             ref={(el) => (sectionRefs.current[index] = el)}
-            className="grid grid-cols-1 md:grid-cols-2 xl:gap-10 gap-5 pt-20 md:pb-16 xl:px-0 px-5"
+            className="grid grid-cols-1 md:grid-cols-2 xl:gap-10 gap-5 lg:pt-20 md:pt-10 md:pb-10 pb-5 pt-5 lg:pb-16 xl:px-0 sm:px-5 px-3"
           >
             <div
-              className={`xl:px-10 px-3 order-1 ${
+              className={`xl:px-10 sm:px-3 order-1 ${
                 isRightAligned ? "md:order-2" : "md:order-1 md:text-left"
               }`}
             >

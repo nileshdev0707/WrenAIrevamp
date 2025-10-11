@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { base } from "../service/serviceConfig";
 import { useLocalizedUrl } from "../utils/languageUtils";
-import Link from "next/link";
+import Badge from "./common/Badge";
 
 export default function Stories({ data }) {
   const getUrl = useLocalizedUrl();
@@ -61,6 +61,16 @@ export default function Stories({ data }) {
           .slick-next-custom {
             right: 20px;
           }
+          .slick-slide {
+            height: auto;
+          }
+          .slick-slide > div {
+            height: 100%;
+          }
+          .slick-track {
+            display: flex;
+            align-items: stretch;
+          }
           @media (max-width: 768px) {
             .slick-prev-custom, .slick-next-custom {
               width: 40px;
@@ -106,6 +116,8 @@ export default function Stories({ data }) {
               infinite: true,
               autoplay: false,
               autoplaySpeed: 3000,
+              adaptiveHeight: false,
+              variableWidth: false,
               responsive: [
                 {
                   breakpoint: 1024,
@@ -114,6 +126,7 @@ export default function Stories({ data }) {
                     centerMode: true,
                     centerPadding: "100px",
                     slidesToShow: 1,
+                    infinite: true,
                   },
                 },
                 {
@@ -123,13 +136,14 @@ export default function Stories({ data }) {
                     centerMode: true,
                     centerPadding: "50px",
                     slidesToShow: 1,
+                    infinite: true,
                   },
                 },
                 {
                   breakpoint: 480,
                   settings: {
                     arrows: false,
-                    centerMode: false,
+                    centerMode: true,
                     centerPadding: "0px",
                     slidesToShow: 1,
                   },
@@ -168,12 +182,9 @@ export default function Stories({ data }) {
 
   return (
     <section className="lg:py-20 md:py-15 py-10">
-      <div className="mx-auto lg:px-6 md:px-4 px-2">
+      <div className="mx-auto lg:px-6 md:px-4 px-3">
         <div className="text-center">
-          <div className="my-4 inline-flex text-base items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-white px-4 py-2 font-medium text-blue-700">
-            <div className="w-2 h-2 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] rounded-full"></div>
-            <span className="text-black ">{title}</span>
-          </div>
+          <Badge variant="primary" showDot dotColor="primary">{title}</Badge>
           <h2 className="sm:mt-4 mt-2 text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight md:py-4 py-2 leading-tight">
             {subtitle.split("\n").map((line, i) => (
               <div key={`line-${i}`} className="mb-1 sm:mb-2">
@@ -214,12 +225,12 @@ export default function Stories({ data }) {
             {caseStudieItems.map((story, index) => (
               <div
                 key={index}
-                className="cursor-pointer px-2 md:px-4 md:py-4 py-2 h-full"
+                className="cursor-pointer px-0 md:px-4 md:py-4 py-2 h-full"
                 onClick={() => window.open(getUrl(story.link), "_self")}
               >
-                <div className="grid 2xl:grid-cols-3 xl:grid-cols-5 p-4 md:p-5 gap-10 md:gap-4 bg-[#F5F5F5] h-full rounded-xl [.active]:bg-gradient-to-r [.active]:from-[#0B8EE5] [.active]:to-[#0022CB]">
-                  <div className="2xl:col-span-1 xl:col-span-2 flex flex-col gap-3">
-                    <p className="min-h-[75px] xl:hidden sm:pb-2 pb-1 text-center 2xl:text-4xl xl:text-3xl text-2xl bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-clip-text text-transparent font-bold">
+                <div className="grid 2xl:grid-cols-3 xl:grid-cols-5 py-4 md:p-5 gap-10 md:gap-4 bg-[#F5F5F5] h-full rounded-xl [.active]:bg-gradient-to-r [.active]:from-[#0B8EE5] [.active]:to-[#0022CB] items-stretch">
+                  <div className="2xl:col-span-1 xl:col-span-2 flex flex-col gap-3 h-full">
+                    <p className=" xl:hidden sm:pb-2 pb-1 text-center 2xl:text-4xl xl:text-3xl text-2xl bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-clip-text text-transparent font-bold">
                       {story.title}
                     </p>
                     {story.subTitle && (
@@ -228,7 +239,7 @@ export default function Stories({ data }) {
                       </p>
                     )}
 
-                    <div className="relative rounded-xl overflow-hidden group">
+                    <div className="relative rounded-xl overflow-hidden group flex-1 min-h-[200px]">
                       {story?.image?.length === 2 && story.image[0]?.url ? (
                         <>
                           <img
@@ -238,9 +249,9 @@ export default function Stories({ data }) {
                                 : base
                             }${story.image[0]?.url}`}
                             alt={story.title}
-                            className="w-full h-[250px] md:h-[350px] 2xl:h-[434px] object-cover transition-opacity duration-300"
+                            className="w-full h-full object-cover transition-opacity duration-300"
                           />
-                          <div className="bg-black/70 absolute inset-0 w-full h-[250px] md:h-[350px] 2xl:h-[434px] object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                          <div className="bg-black/70 absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <div className="flex items-center justify-center h-full">
                               {story.image[1]?.url ? (
                                 <img
@@ -269,13 +280,13 @@ export default function Stories({ data }) {
                           className="w-full h-[250px] md:h-[350px] 2xl:h-[434px] object-cover transition-opacity duration-300"
                         />
                       ) : (
-                        <div className="text-gray-600 flex items-center justify-center h-[250px] md:h-[350px] lg:h-[434px]">
+                        <div className="text-gray-600 flex items-center justify-center h-full">
                           {story.title}
                         </div>
                       )}
                     </div>
                   </div>
-                  <div className="items-center 2xl:col-span-2 xl:col-span-3 flex flex-col justify-center text-center md:text-left">
+                  <div className="items-center 2xl:col-span-2 xl:col-span-3 flex flex-col justify-center text-center md:text-left h-full">
                     <div className="flex flex-col xl:justify-between items-center xl:min-h-[254px] xl:max-w-[411px]">
                       <div className="flex flex-col gap-5 items-center text-center">
                         <p className="py-2 hidden xl:block 2xl:text-4xl xl:text-3xl lg:text-xl md:text-2xl text-xl bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-clip-text text-transparent font-bold">

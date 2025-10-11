@@ -52,7 +52,7 @@ export default function Hero({
     
   return (
     <section className="text-center px-4">
-      <h1 className="text-3xl sm:text-5xl lg:text-6xl font-medium leading-tight md:mt-24 mt-16">
+      <h1 className="text-3xl sm:text-5xl lg:text-[64px] font-medium leading-tight md:mt-35 mt-16">
         {title.split(" ").map((word, i) =>
           word === "Pricing" ? (
             <span key={i} className="text-blue-600">
@@ -63,11 +63,11 @@ export default function Hero({
           )
         )}
       </h1>
-      <p className="mt-3 max-w-3xl mx-auto xl:text-xl lg:text-lg text-base">
+      <p className="mt-4 max-w-3xl mx-auto xl:text-xl lg:text-lg text-base">
         {pricing?.subtitle}
       </p>
 
-      <div className="bg-white inline-flex items-center md:mt-10 mt-5 px-2.5 py-2 gap-5 rounded-2xl border border-gray-200">
+      <div className="bg-white inline-flex items-center md:mt-14 mt-5 px-2.5 py-2 gap-5 rounded-2xl border border-gray-200">
         {pricing?.buttons
           .filter((p, index) => index === 0 || index === 1)
           .map((plan, index) => (
@@ -112,9 +112,9 @@ export default function Hero({
             </button>
           ))}
       </div>
-      <div className="flex justify-center mt-10">
+      <div className="flex justify-center sm:mt-10 mt-5">
         {selectedPlan === 0 ? (
-          <div className="bg-white mt-6 px-2.5 py-2 rounded-full border border-gray-200">
+          <div className="bg-white sm:mt-6 mt-3 px-2.5 py-2 rounded-full border border-gray-200">
             {pricing?.buttons
               .filter((p, index) => index === 2 || index === 3)
               .map((plan, index) => (

@@ -1,6 +1,6 @@
 import React from "react";
 import { base } from "../../service/serviceConfig";
-
+import Badge from "../common/Badge";
 export default function WhyWrenSection({ data }) {
 
   const formatTitle = (text) => {
@@ -23,19 +23,16 @@ export default function WhyWrenSection({ data }) {
       {data?.map((item, index) => {
         const { title, badge, WhyWrenSectionDetails } = item;
         return (
-          <div className="max-w-6xl mx-auto xl:px-0 px-5" key={index}>
+          <div className="max-w-6xl mx-auto xl:px-0 sm:px-5 px-3" key={index}>
             <div className="text-center">
               <div className="w-max mx-auto">
-                <div className="inline-flex text-base  items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-white px-4 py-2 font-medium text-blue-700">
-                  <div className="w-2 h-2 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] rounded-full"></div>
-                  <span className="text-black">{badge}</span>
-                  </div>
+                  <Badge variant="primary" showDot dotColor="primary">{badge}</Badge>
               </div>
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mt-5">
                 {formatTitle(title)}
               </h1>
             </div>
-            <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-14">
+            <div className="grid sm:gap-6 gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 sm:mt-14 mt-8">
               {WhyWrenSectionDetails.map((item) => (
                 <div
                   key={item.id}

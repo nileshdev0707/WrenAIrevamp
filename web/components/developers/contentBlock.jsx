@@ -24,7 +24,7 @@ export default function ContentBlock({ data }) {
             className="grid grid-cols-1 md:grid-cols-2 xl:gap-10 gap-5 md:py-15 py-8 xl:px-0 px-5"
           >
             <div
-              className={`xl:px-10 px-3 order-1 ${
+              className={`xl:px-10 sm:px-3 order-1 ${
                 isRightAligned ? "md:order-2" : "md:order-1 md:text-left"
               }`}
             >

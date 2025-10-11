@@ -1,6 +1,6 @@
 import React from "react";
 import { base } from "../../service/serviceConfig";
-
+import Badge from "../common/Badge";
 export default function OpenSourceDetails({ data }) {
   return (
     <section className="bg-[#F7FBFE] py-10 md:pb-15 md:pt-20">
@@ -14,9 +14,8 @@ export default function OpenSourceDetails({ data }) {
               {/* Header Section */}
               <div className="text-center">
                 <div className="w-max mx-auto">
-                  <div className="inline-flex text-base  items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-white px-4 py-2 font-medium text-blue-700">
-                    <div className="w-2 h-2 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] rounded-full"></div>
-                    <span className="text-black">{item.badge}</span></div></div>
+                   <Badge variant="primary" className="animate-fade-in-up" showDot dotColor="primary">{item?.badge}</Badge>
+                </div>
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mt-5">
                   {item.title.split("Building Blocks")[0]}
                   <span className="text-blue-600">Building Blocks</span> <br />
@@ -47,16 +46,21 @@ export default function OpenSourceDetails({ data }) {
                     {/* Square (diamond style) */}
                     <div className="w-2 h-2 bg-blue-600 rotate-45"></div>
                   </div>
-                  {imageUrl ? (
-                    <img
-                      src={`${
-                        imageUrl.startsWith("http") ? "" : base
-                      }${imageUrl}`}
-                      alt={image?.name}
-                    />
-                  ) : (
-                    <div className="text-gray-600">{image?.name}</div>
-                  )}
+                 <div className="relative group">
+                      {imageUrl ? (
+                          <img
+                            src={`${
+                              imageUrl.startsWith("http") ? "" : base
+                            }${imageUrl}`}
+                            alt={image?.name}
+                          />
+                        ) : (
+                          <div className="text-gray-600">{image?.name}</div>
+                        )}
+                          <div
+                  className="pulsing-glow  absolute inset-0 pointer-events-none transition-all duration-500" style={{  maxWidth: '77%',
+                    maxHeight: '76.5%',top: '9.5%',left: '9.1%',margin: '0'}}/>
+                    </div>
                   <div className="flex items-center absolute -right-15">
                     <div className="w-2 h-2 bg-blue-600 rotate-45"></div>
                     <div className="flex-1 border-t-2 border-dashed border-blue-600 xl:w-28 w-24"></div>

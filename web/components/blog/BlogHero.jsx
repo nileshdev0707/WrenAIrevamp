@@ -6,14 +6,14 @@ export default function BlogHero({ data, blogs }) {
   const featuredPost = blogs.find((post) => post.isFeatured) || blogs[0];
 
   return (
-    <section className="pt-10 md:pt-16 sm::px-6 px-4">
+    <section className="pt-10 md:pt-24 sm::px-6 px-4">
       {data?.map((item, index) => {
         const words = item?.title?.split(" ");
         const firstPart = words.slice(0, 3).join(" ");
         const secondPart = words.slice(3).join(" ");
         const url = item?.image?.url;
         return (
-          <div key={index}>
+          <div key={index} className="mb-8">
             <div className="text-center">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium mb-6">
                 <span>{firstPart}</span>&nbsp;

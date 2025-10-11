@@ -77,7 +77,7 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
     >
       <article className="max-w-6xl mx-auto py-8 md:py-10 lg:mt-15">
         {/* Article Header */}
-        <div className="mb-8 pt-25 px-5">
+        <div className="mb-8 pt-25 sm:px-5 px-4">
           <h1 className="lg:text-4xl text-2xl font-medium text-gray-900 mb-4">
             {post.title}
           </h1>
@@ -123,7 +123,7 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
           </div>
         </div>
 
-        <div className="md:grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-20 pt-5 px-5">
+        <div className="md:grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-20 pt-5 sm:px-5 px-4">
           <div className="col-span-2">
             {/* Featured Image */}
             {post.featuredImage && (
