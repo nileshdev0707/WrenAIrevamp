@@ -27,7 +27,7 @@ export default function Industries({ solutionsIndustriesPageData }) {
             WebkitBackgroundSize: "100%",
             backgroundPosition: "center top",
           }}
-          className="bg-no-repeat pt-24 max-w-6xl mx-auto px-5"
+          className="bg-no-repeat pt-24 max-w-6xl mx-auto sm:px-5 px-4"
         >
           {/* Solutions Industries Hero */}
           {solutionsIndustriesPageData?.hero?.length > 0 && (

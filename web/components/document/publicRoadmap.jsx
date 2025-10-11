@@ -4,7 +4,7 @@ import Button from "../common/Button";
 export default function PublicRoadmap({ data }) {
     return (
       <section className="py-10 lg:py-20">
-        <div className="max-w-6xl mx-auto xl:px-0 px-8">
+        <div className="max-w-6xl mx-auto xl:px-0 sm:px-8 px-4">
           {data?.map((item) => {
             return (
               <div key={item.id}>

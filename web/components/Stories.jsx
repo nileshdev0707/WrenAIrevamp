@@ -182,7 +182,7 @@ export default function Stories({ data }) {
 
   return (
     <section className="lg:py-20 md:py-15 py-10">
-      <div className="mx-auto lg:px-6 md:px-4 px-3">
+      <div className="mx-auto lg:px-6 md:px-4 px-4">
         <div className="text-center">
           <Badge variant="primary" showDot dotColor="primary">{title}</Badge>
           <h2 className="sm:mt-4 mt-2 text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight md:py-4 py-2 leading-tight">

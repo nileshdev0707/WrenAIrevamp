@@ -30,7 +30,7 @@ export default function Hero({ data }) {
   }, []);
 
   return (
-    <section className="relative overflow-hidden text-center md:pt-24 md:pb-24 pt-20 sm:pb-10 py-5 sm:px-6 px-3">
+    <section className="relative overflow-hidden text-center md:pt-24 md:pb-24 pt-20 sm:pb-10 py-5 sm:px-6 px-4">
       {/* <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-blue-50 via-white to-white" /> */}
       <div className="relative max-w-6xl mx-auto md:mt-25 sm:mt-10 mt-5">
         <div onClick={() => {

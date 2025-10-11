@@ -4,7 +4,7 @@ import Badge from "../common/Badge";
 export default function OpenSourceDetails({ data }) {
   return (
     <section className="bg-[#F7FBFE] py-10 md:pb-15 md:pt-20">
-      <div className="max-w-6xl mx-auto xl:px-0 px-10">
+      <div className="max-w-6xl mx-auto xl:px-0 sm:px-10 px-4">
         {data?.map((item) => {
           const { WrenAI, wrenEngineAI, image } = item;
           const imageUrl = image?.url;
@@ -28,7 +28,7 @@ export default function OpenSourceDetails({ data }) {
               </div>
 
               {/* Boxes + Center */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:items-center lg:gap-15 gap-8 mt-10">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:items-center lg:gap-15 md:gap-8 gap-6 mt-10">
                 {/* Left box */}
                 <div className="bg-white rounded-xl border border-gray-200 py-6 px-10">
                   <h3 className="text-lg font-semibold">{WrenAI?.title}</h3>

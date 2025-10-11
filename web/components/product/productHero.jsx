@@ -9,7 +9,7 @@ export default function ProductHero({ data }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="py-10 sm:py-16 text-center sm:px-6 px-3">
+    <section className="py-10 sm:py-16 text-center sm:px-6 px-4">
       {data?.map((item, index) => (
         <div key={item.id}>
           <Badge variant="primaryGradient" size="sm">{item?.badge}</Badge>
@@ -33,7 +33,7 @@ export default function ProductHero({ data }) {
           <p className="mt-5 lg:px-9 md:px-6 sm:px-4 max-w-4xl mx-auto text-black xl:text-xl lg:text-lg text-base">
             {item?.subtitle}
           </p>
-            <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center px-4">
+            <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center sm:px-4">
             {item?.buttons?.map((btn, index) => (
               <Button
                 variant={activeIndex === index ? "primary" : "light"}

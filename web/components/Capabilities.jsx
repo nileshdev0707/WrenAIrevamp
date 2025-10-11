@@ -36,7 +36,7 @@ export default function Capabilities({ data }) {
 
   return (
     <section className="md:py-22 sm:py-10 py-5">
-      <div className="max-w-7xl mx-auto lg:px-6 sm:px-4 px-3" ref={sectionRef}>
+      <div className="max-w-7xl mx-auto lg:px-6 sm:px-4 px-4" ref={sectionRef}>
         {/* Header */}
         <div className="text-center mb-16">
           <div>
@@ -188,7 +188,7 @@ export default function Capabilities({ data }) {
             </div>
       </div>
       {features.learnMore && Array.isArray(features.learnMore) && features.learnMore.length > 0 && (
-        <div className="flex flex-col sm:flex-row justify-center md:mt-20 sm:mt-10 mt-5 px-8">
+        <div className="flex flex-col sm:flex-row justify-center md:mt-20 sm:mt-10 mt-5 sm:px-8 px-3">
           <Button href={getUrl(features.learnMore[0].url)} variant="primary">
             {features.learnMore[0].label}
           </Button>

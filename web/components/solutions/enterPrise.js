@@ -53,7 +53,7 @@ const EnterPrise = (data) => {
   return (
     <div
       ref={sectionRef}
-      className="md:pb-20 md:pt-20 pb-10 pt-5 fade-up max-w-7xl mx-auto lg:px-6 md:px-4 px-2"
+      className="md:pb-20 md:pt-20 pb-10 pt-5 fade-up max-w-7xl mx-auto lg:px-6 md:px-4 px-4"
     >
       <div ref={headerRef} className="text-center fade-up">
         <Badge variant="primary" className="animate-fade-in-up" showDot dotColor="primary">{enterPrise?.badge}</Badge>
@@ -97,7 +97,7 @@ const EnterPrise = (data) => {
         ))}
       </div>
       <div
-        className="flex flex-col sm:flex-row px-6 justify-center md:mt-20 sm:mt-10 mt-5 animate-fade-in-up animation-delay-200"
+        className="flex flex-col sm:flex-row sm:px-6  justify-center md:mt-20 sm:mt-10 mt-5 animate-fade-in-up animation-delay-200"
         onClick={() =>
           window.open(
             enterPrise?.button?.[0]?.url,

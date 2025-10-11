@@ -7,7 +7,7 @@ export default function Stats({ data }) {
   const stats = data.trustedByDataTeams[0] || {}
   return (
     <section className="lg:py-6 md:py-5 sm:py-3 py-1">
-      <div className="max-w-7xl mx-auto lg:px-6 sm:px-4 px-3">
+      <div className="max-w-7xl mx-auto lg:px-6 px-4">
         <p className="sm:mt-4 max-w-2xl mx-auto mt-2 text-3xl sm:text-4xl text-center md:text-5xl font-medium tracking-tight md:py-4 py-2 leading-tight">
           {stats.title?.split(' ').map((word, index) => {
             const isWorldwide = word.toLowerCase() === 'worldwide'

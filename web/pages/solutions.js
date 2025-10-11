@@ -28,7 +28,7 @@ export default function Solutions({ solutionsPageData }) {
       pageTitle="Wren AI | Enterprise-Grade Generative BI Solution"
       pageDescription="Empower your organization with scalable AI-powered analytics, secure deployments, and LLM-agnostic Intelligent AI Modeling — built for data-driven enterprises.">
       {solutionsPageData?.hero?.length > 0 && (
-        <div className="max-w-7xl mx-auto lg:px-6 md:px-4 px-2">
+        <div className="max-w-7xl mx-auto lg:px-6 md:px-4 px-4">
           <SolutionHero data={solutionsPageData} />
           <SolutionsTab
             data={solutionsPageData}
@@ -43,7 +43,7 @@ export default function Solutions({ solutionsPageData }) {
         </div>
       )}
       {solutionsPageData?.ContentBlock?.length > 0 && (
-        <div className="max-w-7xl mx-auto lg:px-6 md:px-4 px-2">
+        <div className="max-w-7xl mx-auto lg:px-6 px-4 ">
           {/* <Industry data={solutionsPageData} /> */}
           <PartnerEcosystem data={solutionsPageData} />
         </div>

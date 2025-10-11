@@ -82,7 +82,7 @@ const ElitePartner = ({data, tab}) => {
         </div>
 
         {/* Title */}
-        <div className="text-center mb-16">
+        <div className="text-center md:mb-16 sm:mb-10 mb-5">
             <h1 className="lg:text-5xl md:text-4xl sm:text-3xl text-2xl font-bold text-gray-900">
               { activeTab === elitePartnerData?.CloudElitePartners?.[0]?.title ? (
                 <>
@@ -100,14 +100,14 @@ const ElitePartner = ({data, tab}) => {
         </div>
 
         {/* Perks */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-8  gap-6 max-w-6xl mx-auto">
           {currentPerks?.map((perk, index) => (
             <PerkCard key={index} perk={perk} />
           ))}
         </div>
         {activeTab === elitePartnerData?.CloudElitePartners?.[1]?.title && (
           <>
-            <div className="flex flex-col sm:flex-row justify-center gap-4 md:my-15 sm:my-10 my-5 px-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-4 md:my-15 sm:my-10 my-5 sm:px-4 ">
               <button
                 onClick={() => window.open('https://partners.getwren.ai/signup', '_blank')}
                 className="cursor-pointer bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] hover:-translate-y-0.5 transition-all text-white font-semibold md:py-4 py-3 md:px-8 px-4 rounded-lg lg:text-lg md:text-md text-sm duration-200 shadow-lg hover:shadow-xl"
@@ -130,13 +130,13 @@ const ElitePartner = ({data, tab}) => {
             <div className='max-w-[1400px] mx-auto lg:py-20 md:py-10 py-5 px-4'>
 
               <div className='text-center max-w-2xl mx-auto'>
-                <h2 className='md:text-[42px] text-[32px] font-medium text-[#1E1E1E]'>
+                <h2 className='lg:text-[42px] md:text-[32px] text-[28px] font-medium text-[#1E1E1E]'>
                  {affiliatePartner?.headline}
               </h2>
               </div>
-              <div className="flex flex-wrap justify-center md:gap-6 gap-3 md:my-20 sm:my-10 my-5">
+              <div className="flex flex-wrap justify-center lg:gap-6 md:gap-4 gap-3 lg:my-20 md:my-10 sm:my-8 my-5">
                 {affiliatePartnerUrl?.map(({image, url},i) => (
-                  <Link href={url} className='bg-white p-5 flex gap-6 justify-center rounded-[16px] border border-[#D9D9D9] h-[139px] w-[302px]' key={i}>
+                  <Link href={url} className='bg-white p-5 flex gap-6 justify-center md:rounded-[16px] rounded-[10px] border border-[#D9D9D9] lg:h-[139px] md:h-[110px] sm:h-[90px] h-[80px] lg:w-[302px] md:w-[250px] sm:w-[200px]' key={i}>
                     <img className='w-[200px] object-contain h-auto' src={`${image?.url?.startsWith('http') ? '' : base}${image?.url}`} alt={image?.title}/>
                   </Link>
                 ))}
@@ -164,7 +164,7 @@ const PerkCard = ({ perk }) => {
   const perkUrl = perk?.logo[0]?.url;
   console.log("perkUrl ==> ", perkUrl);
   return (
-    <div className="bg-white transition-shadow duration-300 flex flex-col items-center sm:items-start">
+    <div className="bg-white transition-shadow duration-300 flex flex-col items-center sm:items-start  sm:border-0  border sm:border-transparent border-gray-200 sm:rounded-none rounded-md p-4">
       {/* Icon */}
       <div className="md:w-12 md:h-12 w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center sm:mb-8.5 mb-4">
       <img src={`${perkUrl.startsWith('http') ? '' : base}${perkUrl}`} alt={perk?.title} />

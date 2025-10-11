@@ -11,13 +11,22 @@ export default function Resources({ docsPageData }) {
 
   // Extract SEO data from product page data
   const seoData = docsPageData?.seo;
+  const heroImage = docsPageData?.hero?.[0]?.backgroundimage?.url;
+
   return (
     <Layout
       seoData={seoData}
       pageTitle="Wren AI | Documentation"
       pageDescription="Everything you need to install, customize, and scale Wren AI’s Agentic Analytics Platform — from self-hosting guides to release notes and our public roadmap.">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         {/* Product Hero */}
+        <div
+          style={{
+            backgroundImage: safeBackgroundImage(heroImage),
+            WebkitBackgroundSize: "contain",
+          }}
+          className="bg-no-repeat sm:py-16 py-10 max-w-7xl mx-auto bg-contain"
+        >
         {docsPageData?.hero?.length && (
           <DocumentHero data={docsPageData?.hero} />
         )}
@@ -25,6 +34,7 @@ export default function Resources({ docsPageData }) {
         {docsPageData?.ContentBlock?.length && (
           <ContentBlock data={docsPageData?.ContentBlock} />
         )}
+        </div>
       </div>
       {docsPageData?.openSourceProject?.length && (
         <OpenSourceDetails data={docsPageData?.openSourceProject} />

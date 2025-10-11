@@ -4,16 +4,10 @@ import Button from "../common/Button";
 import Badge from "../common/Badge";
 
 export default function DocumentHero({ data }) {
-  const heroImage = data?.[0]?.backgroundimage?.url;
   const [activeIndex, setActiveIndex] = useState(0);
   return (
     <div
-      style={{
-        backgroundImage: safeBackgroundImage(heroImage),
-        WebkitBackgroundSize: "100%",
-        backgroundPosition: "center top",
-      }}
-      className="bg-no-repeat pt-24 pb-10 max-w-6xl mx-auto bg-contain"
+      className="lg:pt-24 md:pt-16 pt-14 pb-10 max-w-6xl mx-auto"
     >
       <section className="md:py-16 text-center sm:px-6 px-4">
         {data?.map((item, index) => {
@@ -29,10 +23,10 @@ export default function DocumentHero({ data }) {
                 <span className="text-blue-600">{secondPart}</span>
               </h1>
 
-              <p className="mt-5 max-w-3xl mx-auto text-black xl:text-xl lg:text-lg text-base">
+              <p className="mt-7.5 max-w-3xl mx-auto text-black xl:text-xl lg:text-lg text-base">
                 {item?.subtitle}
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center px-4">
+              <div className="flex flex-col sm:flex-row gap-3 md:mt-14 mt-10 justify-center px-4">
                 {item?.buttons?.map((btn, index) => (
                   <Button
                     key={btn.id}

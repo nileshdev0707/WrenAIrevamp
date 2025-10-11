@@ -100,7 +100,7 @@ export default function Work({ data }) {
   }
   return (
     <section ref={sectionRef} className="md:pb-20 md:pt-20 pb-10 pt-5 bg-[#F7FBFE] fade-up">
-      <div className="max-w-6xl mx-auto lg:px-6 sm:px-4 px-3 text-center">
+      <div className="max-w-6xl mx-auto lg:px-6 sm:px-4 px-4 text-center">
         <div ref={titleRef} className="fade-up">
           <Badge variant="primary" showDot dotColor="primary">{badge}</Badge>
           <h2 className="sm:mt-4 mt-2 text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight md:py-4 py-2 leading-tight">

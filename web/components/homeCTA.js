@@ -6,7 +6,7 @@ import Button from "./common/Button";
 export default function HomeCTA({ data, tab }) {
   const getUrl = useLocalizedUrl();
   return (
-    <section className={`max-w-7xl mx-auto lg:px-6 sm:py-10 py-4 md:py-16 ${tab === "elite" || tab === "affiliate" ? '' : 'px-3'}`}>
+    <section className={`max-w-7xl mx-auto lg:px-6 sm:py-10 py-4 md:py-16 ${tab === "elite" || tab === "affiliate" ? '' : 'px-4'}`}>
       <div className="rounded-2xl bg-blue-600 text-white md:px-16 sm:px-8 py-6 px-4 group transition-colors duration-300">
         {data?.map((item, index) => {
           const url = item.image?.url;

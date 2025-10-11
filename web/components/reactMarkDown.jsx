@@ -1,7 +1,7 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 
-export default function ReactMarkdownDetails({ data }) {
+export default function ReactMarkdownDetails({ data, className }) {
   return (
     <ReactMarkdown
     components={{
@@ -28,7 +28,7 @@ export default function ReactMarkdownDetails({ data }) {
       ),
       a: ({ node, ...props }) => (
         <a
-          className="text-blue-600 underline hover:text-blue-800 break-words"
+          className={`text-blue-600 underline hover:text-blue-800 break-words ${className}`}
           target="_blank"
           rel="noopener noreferrer"
           {...props}

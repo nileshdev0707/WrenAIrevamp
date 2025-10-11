@@ -118,13 +118,13 @@ const SolutionsTab = ({ data, isClient, tab }) => {
               </div>
             </div>
             <div
-              className={`m-7`}
+              className={`md:m-7 sm:m-4 `}
               dangerouslySetInnerHTML={{
                 __html: activeTabData.description,
               }}
             />
             {/* Call to Action Button */}
-            <div className="flex flex-col sm:flex-row justify-center px-6">
+            <div className="flex flex-col sm:flex-row justify-center sm:px-6">
               <Button
                 variant="primary"
                 onClick={() =>

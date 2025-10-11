@@ -83,17 +83,17 @@ export default function Blog({
       <div className="mx-auto">
         <div
           style={{
-            backgroundImage: safeBackgroundImage(heroImage),
-            WebkitBackgroundSize: "100% 100%",
-            backgroundPosition: "center top",
+              backgroundImage: safeBackgroundImage(heroImage),
+              WebkitBackgroundSize: "contain",
+              backgroundPosition: "center -22px",
           }}
-          className="bg-no-repeat pt-24 max-w-8xl mx-auto"
+          className="bg-no-repeat sm:py-16 py-10 max-w-8xl mx-auto bg-contain"
         >
           <BlogHero data={blogPageData?.hero} blogs={displayedBlogs} />
         </div>
 
         {/* Blog Content */}
-        <div className="max-w-7xl mx-auto lg:pb-15 pb-10 px-5">
+        <div className="max-w-7xl mx-auto lg:pb-15 pb-10 sm:px-5 px-4">
           {/* Category Filter - only show if not using BlogHero with integrated categories */}
           <CategoryFilter
             categories={categories}

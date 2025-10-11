@@ -17,7 +17,7 @@ export default function SecurityPolicy({ securityPolicyPageData }) {
       pageTitle="Wren AI | Security Policy"
       pageDescription="Wren AI Security Policy"
     >
-      <div className="px-6 max-w-6xl mx-auto">
+      <div className="sm:px-6 px-4 max-w-6xl mx-auto">
         {securityPolicyPageData?.hero?.length && (
           <div
             style={{

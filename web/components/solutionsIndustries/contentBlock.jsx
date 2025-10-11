@@ -47,7 +47,7 @@ export default function ContentBlock({ solutionsIndustries, tab }) {
 
   return (
     <div>
-      <div className="bg-white flex overflow-x-auto scrollbar-hide gap-2 rounded-xl p-2 border border-gray-200">
+      <div className="bg-white flex overflow-x-auto scrollbar-hide gap-2 rounded-xl p-2 border border-gray-200 sm:mx-0 mx-4">
         {solutionsIndustries?.map((tab, index) => (
           <Button
             key={tab.id}
@@ -71,7 +71,7 @@ export default function ContentBlock({ solutionsIndustries, tab }) {
             <div
               key={index}
               id={item.id}
-              className="grid grid-cols-1 md:grid-cols-2 xl:gap-10 gap-5 lg:py-10 md:py-5 xl:px-0 sm:px-5 px-3"
+              className="grid grid-cols-1 md:grid-cols-2 xl:gap-10 gap-5 lg:py-10 md:py-5 xl:px-0 sm:px-5 px-4"
             >
               <div
                 className={`xl:px-10 sm:px-5 order-1 ${

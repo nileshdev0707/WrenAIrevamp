@@ -3,7 +3,7 @@ import React from "react";
 export default function ContentBlock({ contentBlock }) {
 
   return (
-    <div className="bg-[#F7FBFE] px-3">
+    <div className="bg-[#F7FBFE] px-4">
       <div className="md:py-16 py-8 max-w-7xl mx-auto">
         {contentBlock?.map((block, index) => {
           const text = block.title;

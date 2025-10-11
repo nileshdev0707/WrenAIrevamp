@@ -21,7 +21,7 @@ export default function ContentBlock({ data }) {
         return (
           <div
             key={index}
-            className="grid grid-cols-1 md:grid-cols-2 xl:gap-10 gap-5 md:py-15 py-8 xl:px-0 px-5"
+            className="grid grid-cols-1 md:grid-cols-2 xl:gap-10 gap-5 md:py-15 py-8 xl:px-0 sm:px-5 px-4"
           >
             <div
               className={`xl:px-10 sm:px-3 order-1 ${

@@ -17,7 +17,7 @@ export default function ComparePlan({ tiers, selectedPlan }) {
   ];
 
   return (
-    <div className="px-3">
+    <div className="px-4">
       {tiers?.length > 0 && (
         <section className="max-w-6xl mx-auto py-10">
           <h2 className="text-4xl font-medium text-center">Compare Plans</h2>
