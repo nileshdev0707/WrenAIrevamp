@@ -181,7 +181,7 @@ export default function Navbar({ serverLanguage }) {
     <div className="relative">
       {/* Main Header */}
       <header
-        className={`z-50 fixed w-full transition-transform duration-700 ease-out ${
+        className={`z-50 fixed top-0 w-full transition-transform duration-700 ease-out ${
           isScrolled ? "translate-y-3" : "translate-y-4 md:translate-y-5"
         }`}
       >
