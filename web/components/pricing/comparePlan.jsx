@@ -5,9 +5,9 @@ const Tooltip = ({ children, title }) => {
   return (
     <span className="relative inline-block group">
       {children}
-      <span className="invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-opacity duration-200 absolute z-10 left-full top-1/2 transform -translate-y-1/2 ml-3 px-4 py-3 text-sm text-white bg-gray-800 rounded-xl whitespace-normal w-fit shadow-lg pointer-events-none">
+      <span className="invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-opacity duration-200 absolute z-10 left-full top-1/2 transform -translate-y-1/2 ml-3 px-4 py-3 text-sm text-white bg-black rounded-xl whitespace-normal w-80 shadow-lg pointer-events-none">
         {title}
-        <span className="absolute right-full top-1/2 transform -translate-y-1/2 rotate-45 w-3 h-3 bg-gray-800 rounded-sm" style={{marginRight: "-6px"}}></span>
+        <span className="absolute right-full top-1/2 transform -translate-y-1/2 rotate-45 w-3 h-3 bg-black rounded-sm" style={{marginRight: "-8px"}}></span>
       </span>
     </span>
   );
@@ -21,7 +21,6 @@ const InfoIcon = () => (
 );
 
 export default function ComparePlan({ tiers, selectedPlan }) {
-  console.log(tiers,"tiers");
   const [isSticky, setIsSticky] = useState(false);
   const [headerWidth, setHeaderWidth] = useState(0);
   const [headerLeft, setHeaderLeft] = useState(0);
@@ -94,7 +93,7 @@ export default function ComparePlan({ tiers, selectedPlan }) {
         <section className="py-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-4xl font-medium text-center mb-6">Compare Plans</h2>
-            {(() => {
+            {(() => { 
               // Parse features grouped by category
               const parsed = tiers.map((t) => ({
                 name: t.name,
@@ -103,14 +102,25 @@ export default function ComparePlan({ tiers, selectedPlan }) {
                 ).map(([category, feats]) => [
                   category,
                   Array.isArray(feats)
-                    ? feats.map((f) => [Object.keys(f)[0], Object.values(f)[0]])
-                    : Object.entries(feats),
+                    ? feats.map((f) => {
+                        // Extract feature name (first key that's not 'toolTips')
+                        const featureName = Object.keys(f).find(k => k !== 'toolTips');
+                        return {
+                          name: featureName,
+                          value: f[featureName],
+                          toolTips: f.toolTips || null
+                        };
+                      })
+                    : Object.entries(feats).map(([name, value]) => ({
+                        name,
+                        value,
+                        toolTips: null
+                      })),
                 ]),
               }));
-
               return (
                 <div className="sm:overflow-x-visible overflow-x-auto px-4 sm:px-0" ref={tableRef}>
-                  <table className="w-full border-collapse border border-gray-200 rounded-lg">
+                  <table className="w-full">
                     <>
                       {/* Placeholder when header is fixed to prevent content jump */}
                       {isSticky && (
@@ -129,12 +139,12 @@ export default function ComparePlan({ tiers, selectedPlan }) {
                       <thead
                         ref={headerRef}
                         className={`bg-white/95   ${
-                          isSticky ? "sticky z-40 border-gray-200 border bg-white" : "relative"
+                          isSticky ? "sticky z-40 border-gray-200 border bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg" : "relative"
                         }`}
                         style={
                           isSticky
                             ? {
-                                top: "89px",
+                                top: "86px",
                                 width: `${headerWidth}px`,
                                 left: `${headerLeft}px`,
                               }
@@ -156,46 +166,50 @@ export default function ComparePlan({ tiers, selectedPlan }) {
                     </>
                   <tbody className="divide-y divide-gray-200">
                     {compareData.map((category, catIdx) => {
+                      console.log(category,"category");
                       // find features for this category in the parsed data
                       const feats =
                         parsed[0].featuresByCategory.find(
                           ([c]) => c === category
                         )?.[1] || [];
-                      console.log(feats,"feats");
-                      if (!feats.length) return null; // skip if no features in this category
+                        if (!feats.length) return null; // skip if no features in this category
+                        console.log(feats,"feats");
 
                       return (
                         <React.Fragment key={catIdx}>
                           {/* Category Header Row */}
+                          <tr aria-hidden="true" className="border-b border-white">
+    <td colSpan={parsed.length + 1} className="p-0 h-[35px] bg-white"></td>
+  </tr>
+                 
                           <tr className="bg-[#F7FBFE] border-b border-blue-500">
                             <td
                               colSpan={parsed.length + 1}
-                              className="px-4 py-2 text-sm font-bold text-blue-600"
+                              className="px-4 py-4 md:text-md text-sm font-medium text-blue-600"
                             >
                               {category}
                             </td>
                           </tr>
-
-                          {/* Features Rows */}
-                          {feats.map(([f], featIdx) => {
-                            console.log(f,"f");
+                        {/* Features Rows */}
+                          {feats.map((feature, featIdx) => {
+                            console.log(feature,"feature");
                             return (
                               <tr key={`${catIdx}-${featIdx}`}>
-                              <td className="p-4 text-sm text-gray-700">{f} 
-                                {f?.tooltip && (
-                                  <Tooltip title={f.tooltip}>
+                              <td className="p-4 md:text-md text-sm text-gray-700 hover:bg-[#F7FBFE]">
+                                {feature.name}
+                                {feature.toolTips && (
+                                  <Tooltip title={feature.toolTips}>
                                     <InfoIcon />
                                   </Tooltip>
                                 )}
-                                 
-                                </td>
+                              </td>
                               {parsed.map((p, j) => {
                                 const featList =
                                   p.featuresByCategory.find(
                                     ([c]) => c === category
                                   )?.[1] || [];
-                                const entry = featList.find(([k]) => k === f);
-                                const val = entry ? entry[1] : false;
+                                const entry = featList.find((feat) => feat.name === feature.name);
+                                const val = entry ? entry.value : false;
                                 return (
                                   <td
                                     key={`${catIdx}-${featIdx}-${j}`}
