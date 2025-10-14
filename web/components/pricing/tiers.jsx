@@ -6,10 +6,20 @@ export default function Tiers({ tiers, billing }) {
 
   return (
     <div className="md:mt-16 mt-10 grid lg:grid-cols-3 md:grid-cols-2 gap-6 max-w-7xl mx-auto sm:px-3 px-4">
-      {tiers?.map((item, index) => (
+    {tiers?.map((item, index) => (
+      <div
+        key={index}
+        className={`${item.highlight
+            ? 'bg-gradient-to-r from-[#0B8EE5] to-[#0022CB]'
+            : 'bg-gray-200'
+          } animate-pulse-glow-on-hover  animate-pulse-glow-on-hover hover:bg-gradient-to-r hover:from-[#0B8EE5] hover:to-[#0022CB] rounded-xl shadow-sm p-[1px]`}
+        style={{
+          animationDelay: `${index * 0.2}s`,
+          zIndex: 1000 - index, // each card appears 0.2s after previous
+        }}
+      >
         <div
-          key={index}
-          className={`p-5 lg:p-10 ${item.highlight ? 'pt-0 lg:pt-0' : '' } rounded-xl ring-1 ring-gray-200 bg-white shadow-sm`}
+          className={`p-5 lg:p-10 ${item.highlight ? 'pt-0 lg:pt-0' : ''} rounded-xl bg-white h-full`}
         >
           {item?.highlight && (
             <div className="flex justify-end">
@@ -28,7 +38,6 @@ export default function Tiers({ tiers, billing }) {
               <div className="text-gray-500 ml-2 text-sm block">
                 /month, billed annually
               </div>
-              
             </div>
             <div className="mt-6">
               <span className="text-sm bg-gray-100 p-2 rounded-full text-black font-medium capitalize">
@@ -36,25 +45,27 @@ export default function Tiers({ tiers, billing }) {
               </span>
             </div>
           </div>
+
           <div>
             <a
               href={getUrl(item?.ctaUrl)}
               target={item?.ctaUrl?.startsWith("http") ? "_blank" : "_self"}
-              className={`btn mt-6 inline-block text-white w-full !py-3 ${
-                item.ctaLabel === "Talk to Sales"
-                  ? "bg-black hover:bg-black"
-                  : "btn-primary bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white"
-              }`} 
+              className={`btn mt-6 inline-block text-white w-full !py-3 ${item.ctaLabel === "Talk to Sales"
+                ? "bg-black hover:bg-black"
+                : "btn-primary bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white"
+                }`}
             >
               {item.ctaLabel || "Choose plan"}
             </a>
           </div>
+
           <div
             className="mt-4 text-sm leading-6"
             dangerouslySetInnerHTML={{ __html: item.featuresDetails }}
           />
         </div>
-      ))}
+      </div>
+    ))}
     </div>
   );
 }

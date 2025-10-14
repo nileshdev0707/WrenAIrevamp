@@ -74,10 +74,10 @@ export default function Hero({
             <button
               key={plan.id}
               onClick={() => handleSelectPlan(index)}
-              className={`cursor-pointer flex items-center gap-2 md:px-8 px-6 py-4 rounded-md font-semibold text-sm ${
+              className={`cursor-pointer flex items-center gap-2 md:px-8 px-6 py-4 rounded-md font-semibold text-sm transition-all duration-500 ease-in-out ${
                 selectedPlan === index
-                  ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white"
-                  : "text-gray-600"
+                  ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white scale-105"
+                  : "text-gray-600 scale-100"
               }`}
             >
               {index === 0 && (
@@ -114,17 +114,17 @@ export default function Hero({
       </div>
       <div className="flex justify-center sm:mt-10 mt-5">
         {selectedPlan === 0 ? (
-          <div className="bg-white sm:mt-6 mt-3 px-2.5 py-2 rounded-full border border-gray-200">
+          <div className="bg-white sm:mt-6 mt-3 px-2.5 py-2 rounded-full border border-gray-200 inline-flex">
             {pricing?.buttons
               .filter((p, index) => index === 2 || index === 3)
               .map((plan, index) => (
                 <button
                   key={plan.id}
                   onClick={() => handleSelectBilling(index)}
-                  className={`cursor-pointer px-4 py-2 rounded-full text-sm font-semibold ${
+                  className={`cursor-pointer px-4 py-2 rounded-full text-sm font-semibold transition-all duration-500 ease-in-out ${
                     billing === index
-                      ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white"
-                      : "text-gray-700"
+                      ? "bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white scale-105"
+                      : "text-gray-700 scale-100"
                   }`}
                 >
                   {plan.label}

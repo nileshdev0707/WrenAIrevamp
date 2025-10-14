@@ -5,8 +5,10 @@ import { useLocalizedUrl } from "../../utils/languageUtils";
 
 export default function ProductHero({ product, tab }) {
 const sectionRefs = useRef([]);
+const observerRefs = useRef([]);
 
 const [openIds, setOpenIds] = useState([]);
+const [visibleItems, setVisibleItems] = useState([]);
 
   const toggle = (id) => {
     if (openIds.includes(id)) {
@@ -40,6 +42,30 @@ const [openIds, setOpenIds] = useState([]);
       });
     }
   }, [tab]);
+
+  useEffect(() => {
+    const observers = observerRefs.current.map((ref, index) => {
+      if (!ref) return null;
+      
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setVisibleItems((prev) => [...new Set([...prev, index])]);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -70px 0px' }
+      );
+
+      observer.observe(ref);
+      return observer;
+    });
+
+    return () => {
+      observers.forEach((observer) => observer?.disconnect());
+    };
+  }, [product]);
   
 
   return (
@@ -48,10 +74,15 @@ const [openIds, setOpenIds] = useState([]);
         const url = item?.image?.url;
         const image = item?.image;
         const isRightAligned = item?.alignment === "right";
+        const isVisible = visibleItems.includes(index);
+        
         return (
           <div
             key={index}
-            ref={(el) => (sectionRefs.current[index] = el)}
+            ref={(el) => {
+              sectionRefs.current[index] = el;
+              observerRefs.current[index] = el;
+            }}
             className="grid grid-cols-1 md:grid-cols-2 xl:gap-10 gap-5 lg:pt-20 md:pt-10 md:pb-10 pb-5 pt-5 lg:pb-16 xl:px-0 sm:px-5 px-4"
           >
             <div
@@ -130,9 +161,12 @@ const [openIds, setOpenIds] = useState([]);
             </div>
 
             <div
-              className={`md:block hidden order-2  ${
+              className={`md:block hidden order-2 ${
                 isRightAligned ? "md:order-1" : "md:order-2"
+              } transition-all duration-700 ease-out ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
+              style={{ transitionDelay: isVisible ? '300ms' : '0ms' }}
             >
               {url ? (
                 <div>

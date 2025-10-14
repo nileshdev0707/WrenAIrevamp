@@ -194,8 +194,8 @@ export default function ComparePlan({ tiers, selectedPlan }) {
                           {feats.map((feature, featIdx) => {
                             console.log(feature,"feature");
                             return (
-                              <tr key={`${catIdx}-${featIdx}`}>
-                              <td className="p-4 md:text-md text-sm text-gray-700 hover:bg-[#F7FBFE]">
+                              <tr key={`${catIdx}-${featIdx}`} className="hover:bg-[#F7FBFE]">
+                              <td className="p-4 md:text-md text-sm text-gray-700">
                                 {feature.name}
                                 {feature.toolTips && (
                                   <Tooltip title={feature.toolTips}>
