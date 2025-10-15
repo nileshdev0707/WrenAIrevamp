@@ -8,6 +8,7 @@ import PublicRoadmap from "../components/document/publicRoadmap";
 import { createCustomGetStaticProps } from "../lib/getStaticProps";
 
 export default function Resources({ docsPageData }) {
+  const heroImage = docsPageData?.hero?.[0]?.backgroundimage?.url;
 
   // Extract SEO data from product page data
   const seoData = docsPageData?.seo;
@@ -16,8 +17,15 @@ export default function Resources({ docsPageData }) {
       seoData={seoData}
       pageTitle="Wren AI | Documentation"
       pageDescription="Everything you need to install, customize, and scale Wren AI’s Agentic Analytics Platform — from self-hosting guides to release notes and our public roadmap.">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         {/* Product Hero */}
+        <div
+          style={{
+            backgroundImage: safeBackgroundImage(heroImage),
+            WebkitBackgroundSize: "contain",
+          }}
+          className="bg-no-repeat py-16 max-w-7xl mx-auto bg-contain"
+        >
         {docsPageData?.hero?.length && (
           <DocumentHero data={docsPageData?.hero} />
         )}
@@ -25,6 +33,7 @@ export default function Resources({ docsPageData }) {
         {docsPageData?.ContentBlock?.length && (
           <ContentBlock data={docsPageData?.ContentBlock} />
         )}
+        </div>
       </div>
       {docsPageData?.openSourceProject?.length && (
         <OpenSourceDetails data={docsPageData?.openSourceProject} />

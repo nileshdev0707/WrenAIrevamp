@@ -84,7 +84,7 @@ export default function Hero({ data }) {
             </div>
           ))}
         </h1>
-        <div className="my-4 sm:my-6 md:my-8 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4 sm:px-0 animate-fade-in-up animation-delay-400">
+        <div className="my-4 sm:my-6 md:my-8 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4  animate-fade-in-up animation-delay-400">
           {buttons.map((b, i) => (
             <>
               <Button

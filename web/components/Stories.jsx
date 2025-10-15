@@ -168,7 +168,7 @@ export default function Stories({ data }) {
 
   return (
     <section className="lg:py-20 md:py-15 py-10">
-      <div className="mx-auto lg:px-6 md:px-4 px-2">
+      <div className="mx-auto lg:px-6 md:px-4 px-4">
         <div className="text-center">
           <div className="my-4 inline-flex text-base items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-white px-4 py-2 font-medium text-blue-700">
             <div className="w-2 h-2 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] rounded-full"></div>
@@ -214,7 +214,7 @@ export default function Stories({ data }) {
             {caseStudieItems.map((story, index) => (
               <div
                 key={index}
-                className="cursor-pointer px-2 md:px-4 md:py-4 py-2 h-full"
+                className="cursor-pointer sm:px-2 md:px-4 md:py-4 py-2 h-full"
                 onClick={() => window.open(getUrl(story.link), "_self")}
               >
                 <div className="grid 2xl:grid-cols-3 xl:grid-cols-5 p-4 md:p-5 gap-10 md:gap-4 bg-[#F5F5F5] h-full rounded-xl [.active]:bg-gradient-to-r [.active]:from-[#0B8EE5] [.active]:to-[#0022CB]">

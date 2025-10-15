@@ -23,7 +23,7 @@ export default function WhyWrenSection({ data }) {
       {data?.map((item, index) => {
         const { title, badge, WhyWrenSectionDetails } = item;
         return (
-          <div className="max-w-6xl mx-auto xl:px-0 px-5" key={index}>
+          <div className="max-w-6xl mx-auto xl:px-0 sm:px-5 px-4" key={index}>
             <div className="text-center">
               <div className="w-max mx-auto">
                 <div className="inline-flex text-base  items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-white px-4 py-2 font-medium text-blue-700">
@@ -40,7 +40,7 @@ export default function WhyWrenSection({ data }) {
                 <div
                   key={item.id}
                 >
-                  <div className="bg-white px-8 py-9 rounded-xl border border-gray-300 h-full">
+                  <div className="bg-white sm:px-8 px-5 sm:py-9 py-5 rounded-xl border border-gray-300 h-full">
                   <div className="grid grid-cols-3 gap-8">
                     <h2 className="text-xl lg:text-2xl font-medium col-span-2">
                       {item.title}
@@ -52,7 +52,7 @@ export default function WhyWrenSection({ data }) {
                             item?.icon?.[0]?.url.startsWith("http") ? "" : base
                           }${item?.icon?.[0]?.url}`}
                           alt={item.title}
-                          className="w-12 h-12"
+                          className="md:w-12 md:h-12 w-10 h-10"
                         />
                       </div>
                     )}

@@ -13,7 +13,7 @@ export default function FAQ({ frequentlyAskedQuestions }) {
   };
 
   return (
-    <section className="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-8 px-3">
+    <section className="max-w-6xl mx-auto sm:px-6 sm:py-12 py-8 grid md:grid-cols-3 gap-8 px-4">
       {/* Left Side Title */}
       <div className="col-span-2 sm:col-span-1">
         <h2 className="text-3xl md:text-4xl font-medium leading-tight text-center sm:text-left">

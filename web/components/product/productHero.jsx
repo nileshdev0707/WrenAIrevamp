@@ -30,10 +30,10 @@ export default function ProductHero({ data }) {
               ))}
           </h1>
 
-          <p className="mt-5 px-10 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base">
+          <p className="mt-5  max-w-3xl mx-auto text-black xl:text-xl lg:text-lg text-base">
             {item?.subtitle}
           </p>
-            <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center px-4">
+            <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center sm:px-4">
             {item?.buttons?.map((btn, index) => (
               <Button
                 variant={activeIndex === index ? "primary" : "light"}

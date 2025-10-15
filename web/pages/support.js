@@ -9,7 +9,7 @@ export default function Support({ supportPageData }) {
 
   return (
     <Layout>
-      <div className="px-6">
+      <div className="sm:px-6 px-4">
         {supportPageData?.hero?.length && (
           <div
             style={{
@@ -26,7 +26,7 @@ export default function Support({ supportPageData }) {
                     {item?.title}
                   </h1>
 
-                  <p className="pt-10 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base">
+                  <p className="pt-10 max-w-3xl mx-auto text-black xl:text-xl lg:text-lg text-base">
                     {item?.subTitle}
                   </p>
                 </div>

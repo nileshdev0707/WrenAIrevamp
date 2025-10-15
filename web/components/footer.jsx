@@ -23,7 +23,7 @@ export default function Footer({ data }) {
                     </Link>
                   )} */}
                   {item?.title && (
-                    <h3 className="text-3xl lg:text-4xl font-medium mt-8 leading-tight">
+                    <h3 className={`text-3xl lg:text-4xl font-medium  leading-tight ${item?.topTitle ? 'mb-8' : 'mt-0'}`}>
                       {item?.title}
                     </h3>
                   )}
@@ -47,14 +47,14 @@ export default function Footer({ data }) {
                 </div>
               </div>
               <div className="justify-end items-center sm:flex hidden">
-                <div className="group-hover:opacity-95 transition-opacity duration-300 overflow-hidden">
+                <div className=" transition-opacity duration-300 overflow-hidden">
                 {url ? (
                   <img
                     width={320}
                     height={320}
                     src={`${url.startsWith("http") ? "" : base}${url}`}
                     alt={item?.name}
-                     className="transition-transform duration-700 ease-out group-hover:scale-106"
+                     className="transition-transform duration-700 ease-out"
                   />
                 ) : (
                   <div className="text-gray-600">{item?.name}</div>

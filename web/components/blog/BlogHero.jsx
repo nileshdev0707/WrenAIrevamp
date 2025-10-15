@@ -6,7 +6,7 @@ export default function BlogHero({ data, blogs }) {
   const featuredPost = blogs.find((post) => post.isFeatured) || blogs[0];
 
   return (
-    <section className="pt-10 md:pt-16 sm::px-6 px-4">
+    <section className="sm:pt-10 pt-5 md:pt-16 sm:px-6 px-4">
       {data?.map((item, index) => {
         const words = item?.title?.split(" ");
         const firstPart = words.slice(0, 3).join(" ");

@@ -5,11 +5,11 @@ export default function Tiers({ tiers, billing }) {
   const getUrl = useLocalizedUrl();
 
   return (
-    <div className="mt-10 grid md:grid-cols-3 gap-6 max-w-6xl mx-auto px-3">
+    <div className="md:mt-16 mt-10 grid lg:grid-cols-3 md:grid-cols-2 gap-6 max-w-7xl mx-auto px-4">
       {tiers?.map((item, index) => (
         <div
           key={index}
-          className={`p-5 lg:p-10 ${item.highlight ? 'pt-0 lg:pt-0' : '' } rounded-xl ring-1 ring-gray-200 bg-white shadow-sm`}
+          className={`p-5 lg:p-10 ${item.highlight ? 'pt-0 lg:pt-0 ring-blue-500' : 'ring-gray-200' } rounded-xl ring-1  bg-white shadow-sm hover:ring-blue-500 `}
         >
           {item?.highlight && (
             <div className="flex justify-end">

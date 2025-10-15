@@ -99,7 +99,7 @@ export default function Work({ data }) {
   }
   return (
     <section ref={sectionRef} className="md:pb-20 md:pt-20 pb-10 pt-5 bg-[#F7FBFE] fade-up">
-      <div className="max-w-6xl mx-auto lg:px-6 sm:px-4 px-2 text-center">
+      <div className="max-w-6xl mx-auto lg:px-6 px-4 text-center">
         <div ref={titleRef} className="fade-up">
           <div className="my-4 inline-flex text-base items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-white px-4 py-2 font-medium text-blue-700">
             <div className="w-2 h-2 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] rounded-full"></div>

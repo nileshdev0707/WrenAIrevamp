@@ -9,7 +9,7 @@ export default function TiersHosted({ tiers }) {
       {tiers?.map((item, index) => (
         <div
           key={index}
-          className={`p-5 lg:p-10 ${item.highlight ? 'pt-0 lg:pt-0' : '' } rounded-xl ring-1 ring-gray-200 bg-white shadow-sm`}
+          className={`p-5 lg:p-10 ${item.highlight ? 'pt-0 lg:pt-0 ring-blue-500' : 'ring-gray-200' } hover:ring-blue-500 rounded-xl ring-1  bg-white shadow-sm`}
         >
           {item?.highlight && (
             <div className="flex justify-end">

@@ -125,7 +125,7 @@ export default function WhatIsWrenAI({ data }) {
                 );
               })}
             </div>
-            <div className="lg:hidden grid sm:grid-cols-2 grid-cols-1 gap-4 pt-5 px-5">
+            <div className="lg:hidden grid sm:grid-cols-2 grid-cols-1 gap-4 pt-5 sm:px-5 px-4">
               {WhatisWrenAIItem?.map((item, i) => {
                 const url = item?.icon?.url;
                 return (

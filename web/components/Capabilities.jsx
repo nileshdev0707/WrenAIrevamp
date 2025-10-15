@@ -35,7 +35,7 @@ export default function Capabilities({ data }) {
 
   return (
     <section className="md:py-22 sm:py-10 py-5">
-      <div className="max-w-7xl mx-auto lg:px-6 sm:px-4 px-2" ref={sectionRef}>
+      <div className="max-w-7xl mx-auto lg:px-6 sm:px-4 px-4" ref={sectionRef}>
         {/* Header */}
         <div className="text-center mb-16">
           <div>

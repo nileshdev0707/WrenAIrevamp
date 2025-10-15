@@ -16,7 +16,7 @@ export default function PrivacyPolicy({ privacyPolicyPageData }) {
       pageTitle="Wren AI | Privacy Policy"
       pageDescription="Wren AI Privacy Policy - How we collect, use, and protect your personal information"
     >
-      <div className="px-6 max-w-6xl mx-auto">
+      <div className="sm:px-6 px-4 max-w-6xl mx-auto">
         {privacyPolicyPageData?.hero?.length && (
           <div
             style={{

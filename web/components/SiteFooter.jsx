@@ -101,9 +101,9 @@ export default function SiteFooter() {
   };
 
   return (
-    <footer className="border-t border-gray-100 py-16">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 pb-10 px-10">
+    <footer className="border-t border-gray-100 md:py-16 sm:py-10 py-5">
+      <div className="max-w-7xl mx-auto md:px-6  px-4">
+        <div className="grid grid-cols-2 lg:grid-cols-5 md:grid-cols-3 sm:gap-8 gap-5 md:pb-10 pb-5 sm:px-10">
           {cols.map((col, i) => (
             <div key={i}>
               <div className="font-semibold mb-3">{col.title}</div>

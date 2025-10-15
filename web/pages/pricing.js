@@ -28,12 +28,11 @@ export default function Pricing({ pricingData }) {
       <div>
         {pricingData?.hero?.length && (
           <div
-            style={{
-              backgroundImage: safeBackgroundImage(heroImage),
-              WebkitBackgroundSize: "100% 100%",
-              backgroundPosition: "center top",
-            }}
-            className="bg-no-repeat py-16 max-w-6xl mx-auto bg-contain"
+          style={{
+            backgroundImage: safeBackgroundImage(heroImage),
+            WebkitBackgroundSize: "contain",
+          }}
+          className="bg-no-repeat sm:py-16 py-10 max-w-6xl mx-auto bg-contain"
           >
             {pricingData?.hero?.length && (
               <Hero
@@ -73,7 +72,7 @@ export default function Pricing({ pricingData }) {
         )}
 
         {/* Trusted Logos */}
-        <div className="py-20 px-3">
+        <div className="md:py-20 py-10 px-4">
           {pricingData?.TrustedBy?.length && (
             <Logos
               items={pricingData?.TrustedBy}
