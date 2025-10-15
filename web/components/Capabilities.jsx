@@ -1,7 +1,6 @@
 import { useRef, useEffect } from "react";
 import { base } from "../service/serviceConfig";
 import { useLocalizedUrl } from "../utils/languageUtils";
-import Badge from "./common/Badge";
 import Button from "./common/Button";
 export default function Capabilities({ data }) {
   if (!data || !Array.isArray(data) || data.length === 0) return null;
@@ -36,13 +35,14 @@ export default function Capabilities({ data }) {
 
   return (
     <section className="md:py-22 sm:py-10 py-5">
-      <div className="max-w-7xl mx-auto lg:px-6 sm:px-4 px-4" ref={sectionRef}>
+      <div className="max-w-7xl mx-auto lg:px-6 sm:px-4 px-2" ref={sectionRef}>
         {/* Header */}
         <div className="text-center mb-16">
           <div>
-            <Badge variant="primary" showDot dotColor="primary">
-              {features.badge}
-            </Badge>
+            <div className="inline-flex text-base  items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] px-4 py-2 font-medium text-blue-700 ">
+              <div className="w-2 h-2 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] rounded-full"></div>
+              <span className="text-black">{features.badge}</span>
+            </div>
           </div>
           <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight md:py-4 py-2 leading-tight">
             {features.title && typeof features.title === "string" ? (
@@ -188,7 +188,7 @@ export default function Capabilities({ data }) {
             </div>
       </div>
       {features.learnMore && Array.isArray(features.learnMore) && features.learnMore.length > 0 && (
-        <div className="flex flex-col sm:flex-row justify-center md:mt-20 sm:mt-10 mt-5 sm:px-8 px-3">
+        <div className="flex flex-col sm:flex-row justify-center md:mt-20 sm:mt-10 mt-5 px-8">
           <Button href={getUrl(features.learnMore[0].url)} variant="primary">
             {features.learnMore[0].label}
           </Button>

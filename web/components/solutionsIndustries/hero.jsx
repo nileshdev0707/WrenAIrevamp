@@ -24,7 +24,7 @@ export default function SolutionsIndustriesHero({ solutionsIndustries }) {
         <p className="mt-5 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base">
           {item?.subTitle}
         </p>
-        <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center sm:px-3  box-border">
+        <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center px-3 box-border">
             {item?.buttonContantBlock?.map((btn, index) => (
               <Button
               key={btn.id}

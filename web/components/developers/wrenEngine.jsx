@@ -7,7 +7,7 @@ export default function WrenEngine({ data }) {
   const [activeIndex, setActiveIndex] = useState(0);
   return (
     <section className="bg-[#F7FBFE] py-10 md:py-20">
-      <div className="max-w-6xl mx-auto xl:px-0 sm:px-8 px-4">
+      <div className="max-w-6xl mx-auto xl:px-0 px-8">
         {data?.map((item) => {
           const selectedDetail = item.wrenEngineDetails?.find(
             (detail) => detail.badge === selected

@@ -25,14 +25,15 @@ export default function Pricing({ pricingData }) {
       seoData={seoData}
       pageTitle="Wren AI | Pricing"
       pageDescription="Tailored solutions for every stage of growth with scalable plans to meet diverse needs.">
-      <div className="relative">
+      <div>
         {pricingData?.hero?.length && (
           <div
             style={{
               backgroundImage: safeBackgroundImage(heroImage),
-              WebkitBackgroundSize: "contain",
+              WebkitBackgroundSize: "100% 100%",
+              backgroundPosition: "center top",
             }}
-            className="bg-no-repeat sm:py-16 py-10 max-w-6xl mx-auto bg-contain"
+            className="bg-no-repeat py-16 max-w-6xl mx-auto bg-contain"
           >
             {pricingData?.hero?.length && (
               <Hero

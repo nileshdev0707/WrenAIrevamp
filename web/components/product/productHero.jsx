@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useLocalizedUrl } from "../../utils/languageUtils";
 import Button from "../common/Button";
-import Badge from "../common/Badge";
 
 export default function ProductHero({ data }) {
   const getUrl = useLocalizedUrl();
@@ -12,8 +11,9 @@ export default function ProductHero({ data }) {
     <section className="py-10 sm:py-16 text-center sm:px-6 px-4">
       {data?.map((item, index) => (
         <div key={item.id}>
-          <Badge variant="primaryGradient" size="sm">{item?.badge}</Badge>
-
+          <button className="btn btn-primary bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-4 py-1 !rounded-full text-sm">
+            {item?.badge}
+          </button>
           <h1 className="text-3xl sm:text-4xl lg:text-6xl font-medium leading-tight mt-5">
             {(item?.title || "Product")
               .split(".")
@@ -30,10 +30,10 @@ export default function ProductHero({ data }) {
               ))}
           </h1>
 
-          <p className="mt-5 lg:px-9 md:px-6 sm:px-4 max-w-4xl mx-auto text-black xl:text-xl lg:text-lg text-base">
+          <p className="mt-5 px-10 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base">
             {item?.subtitle}
           </p>
-            <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center sm:px-4">
+            <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center px-4">
             {item?.buttons?.map((btn, index) => (
               <Button
                 variant={activeIndex === index ? "primary" : "light"}

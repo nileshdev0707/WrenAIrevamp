@@ -16,7 +16,7 @@ export default function TermsOfUse({ termsPageData }) {
       pageTitle="Wren AI | EULA"
       pageDescription="Wren AI - End-user License Agreement"
     >
-      <div className="sm:px-6 px-4 max-w-6xl mx-auto">
+      <div className="px-6 max-w-6xl mx-auto">
         {termsPageData?.hero?.length && (
           <div
             style={{

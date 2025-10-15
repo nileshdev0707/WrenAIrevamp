@@ -17,7 +17,7 @@ export default function BlogCard({ post, showExcerpt = true, size = 'default' })
 
   const imageClasses = size === 'small' ? 'w-full h-32 object-cover' : 'w-full h-50 object-cover';
   const titleClasses = size === 'small' ? 'text-lg font-semibold' : 'lg:text-xl md:text-lg text-base font-bold';
-  const padding = size === 'small' ? 'p-4' : 'md:p-6 p-0 pt-4';
+  const padding = size === 'small' ? 'p-4' : 'p-6';
 
   // Handle both API response formats (with and without attributes wrapper)
   const attributes = post.attributes || post;
@@ -71,18 +71,18 @@ export default function BlogCard({ post, showExcerpt = true, size = 'default' })
           <div className="flex gap-2 flex-wrap">
             {categories.length > 0 ? (
               categories?.map((category, index) => (
-                <div key={index} className="text-sm bg-[#F5F5F5] text-gray-600 font-medium px-2 py-1 rounded-lg">
+                <span key={index} className="text-sm bg-[#F5F5F5] text-gray-600 font-medium px-2 py-1 rounded-lg">
                   {typeof category === 'string' ? category : 'Category'}
-                </div>
+                </span>
               ))
             ) : attributes.category ? (
-              <div className="text-sm text-blue-600 font-medium">
+              <span className="text-sm text-blue-600 font-medium">
                 {typeof attributes.category === 'string' ? attributes.category : 'Category'}
-              </div>
+              </span>
             ) : null}
           </div>
           {attributes.readTime && (
-            <div className="text-sm text-gray-500 ml-3 whitespace-nowrap">{attributes.readTime} min read</div>
+            <span className="text-sm text-gray-500 ml-3">{attributes.readTime} min read</span>
           )}
         </div>
         <h3 className={`${titleClasses} text-gray-900 mb-2`}>

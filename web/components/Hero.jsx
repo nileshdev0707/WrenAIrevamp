@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { base } from "../service/serviceConfig";
 import { useLocalizedUrl } from "../utils/languageUtils";
@@ -58,7 +59,7 @@ export default function Hero({ data }) {
           </div>
          
         </div>
-        <h1 className="my-6 sm:my-8 md:my-10 text-xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[64px] font-medium leading-tight animate-fade-in-up animation-delay-200">
+        <h1 className="my-6 sm:my-8 md:my-10 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[64px] font-medium leading-tight animate-fade-in-up animation-delay-200">
           {headline.split("\n").map((line, i) => (
             <div key={i} className="mb-1 sm:mb-2">
               {line.split(" ").map((word, j) => {
@@ -83,7 +84,7 @@ export default function Hero({ data }) {
             </div>
           ))}
         </h1>
-        <div className="my-4 sm:my-6 md:my-8 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4  animate-fade-in-up animation-delay-400">
+        <div className="my-4 sm:my-6 md:my-8 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4 sm:px-0 animate-fade-in-up animation-delay-400">
           {buttons.map((b, i) => (
             <>
               <Button
@@ -97,12 +98,12 @@ export default function Hero({ data }) {
           ))}
         </div>
 
-        <p className="text-sm font-semibold sm:text-base uppercase tracking-wider text-[#060A1F] max-w-2xl sm:max-w-3xl mx-auto animate-fade-in-up animation-delay-600">
+        <p className="text-sm font-semibold sm:text-base uppercase tracking-wider text-[#060A1F] max-w-2xl sm:max-w-3xl mx-auto px-4 sm:px-0 animate-fade-in-up animation-delay-600">
           {sub}
         </p>
 
         {/* Hero mock image area */}
-        <div className="relative lg:pt-12 md:pt-10 sm:pt-8 pt-5 animate-fade-in-up animation-delay-800">
+        <div className="relative md:pt-12 sm:pt-10 pt-8 animate-fade-in-up animation-delay-800">
           {heroImage && (
             <img
               src={`${heroImage.startsWith("http") ? "" : base}${heroImage}`}

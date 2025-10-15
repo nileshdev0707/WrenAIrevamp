@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { base } from "../../service/serviceConfig";
 import Button from "../common/Button";
-import Badge from "../common/Badge";
+
 const EnterPrise = (data) => {
   const enterPrise = data?.data?.EnterpriseFeaturesBlock[0];
   const words = enterPrise?.title?.split(" ");
@@ -53,10 +53,13 @@ const EnterPrise = (data) => {
   return (
     <div
       ref={sectionRef}
-      className="md:pb-20 md:pt-20 pb-10 pt-5 fade-up max-w-7xl mx-auto lg:px-6 md:px-4 px-4"
+      className="md:pb-20 md:pt-20 pb-10 pt-5 fade-up max-w-7xl mx-auto lg:px-6 md:px-4 px-2"
     >
       <div ref={headerRef} className="text-center fade-up">
-        <Badge variant="primary" className="animate-fade-in-up" showDot dotColor="primary">{enterPrise?.badge}</Badge>
+        <div className="my-4 inline-flex text-base items-center gap-2 rounded-full border border-gradient-to-r from-[#0B8EE5] to-[#0022CB] bg-white px-4 py-2 font-medium text-blue-700">
+          <div className="w-2 h-2 bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] rounded-full"></div>
+          <span className="text-black ">{enterPrise?.badge}</span>
+        </div>
         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[64px] font-medium leading-tight sm:mt-8 mt-5">
           <span className="">{firstPart}</span>
           <br />
@@ -97,7 +100,7 @@ const EnterPrise = (data) => {
         ))}
       </div>
       <div
-        className="flex flex-col sm:flex-row sm:px-6  justify-center md:mt-20 sm:mt-10 mt-5 animate-fade-in-up animation-delay-200"
+        className="flex flex-col sm:flex-row px-6 justify-center md:mt-20 sm:mt-10 mt-5 animate-fade-in-up animation-delay-200"
         onClick={() =>
           window.open(
             enterPrise?.button?.[0]?.url,

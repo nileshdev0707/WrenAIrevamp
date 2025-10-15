@@ -30,9 +30,9 @@ const partner = ({ affiliateProgramData }) => {
               WebkitBackgroundSize: "100% 100%",
               backgroundPosition: "center top",
             }}
-            className="bg-no-repeat sm:py-16 py-10 max-w-7xl mx-auto bg-cover"
+            className="bg-no-repeat py-16 max-w-6xl mx-auto bg-cover"
           >
-            <section className="py-3 sm:py-10 text-center">
+            <section className="py-3 sm:py-16 text-center">
               {affiliateProgramData?.Hero?.map((item, index) => (
                 <div key={index}>
                   <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium leading-tight xl:pt-25 lg:pt-20 md:pt-15 pt-10">
@@ -46,7 +46,7 @@ const partner = ({ affiliateProgramData }) => {
                       )
                     )}
                   </h1>
-                  <p className="sm:pt-10 pt-5 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base">
+                  <p className="pt-10 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base">
                     {item?.subtitle}
                   </p>
                 </div>

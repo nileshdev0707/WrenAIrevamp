@@ -5,7 +5,7 @@ import Button from "../common/Button";
 export default function WhyWrenAI({ data }) {
   const [activeIndex, setActiveIndex] = useState(0);
   return (
-    <div className="py-8 sm:py-16 max-w-6xl mx-auto xl:px-0 sm:px-8 px-4">
+    <div className="py-8 sm:py-16 max-w-6xl mx-auto xl:px-0 px-8">
       {data?.map((item, index) => (
         <div key={index}>
           <div className="text-center">

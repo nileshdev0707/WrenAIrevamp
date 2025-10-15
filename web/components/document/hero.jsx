@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import { safeBackgroundImage } from "../../utils/ssrHelpers";
 import Button from "../common/Button";
-import Badge from "../common/Badge";
 
 export default function DocumentHero({ data }) {
+  const heroImage = data?.[0]?.backgroundimage?.url;
   const [activeIndex, setActiveIndex] = useState(0);
   return (
     <div
-      className="lg:pt-24 md:pt-16 pt-14 pb-10 max-w-6xl mx-auto"
+      style={{
+        backgroundImage: safeBackgroundImage(heroImage),
+        WebkitBackgroundSize: "100%",
+        backgroundPosition: "center top",
+      }}
+      className="bg-no-repeat pt-24 pb-10 max-w-6xl mx-auto bg-contain"
     >
       <section className="md:py-16 text-center sm:px-6 px-4">
         {data?.map((item, index) => {
@@ -16,17 +21,19 @@ export default function DocumentHero({ data }) {
           const secondPart = words.slice(2).join(" ");
           return (
             <div key={index}>
-              <Badge variant="primaryGradient" className="animate-fade-in-up">{item?.badge}</Badge>
+              <button className="animate-fade-in-up btn btn-primary bg-gradient-to-r from-[#0B8EE5] to-[#0022CB] text-white px-4 py-1 !rounded-full text-sm">
+                {item?.badge}
+              </button>
               <h1 className="text-3xl sm:text-4xl lg:text-6xl font-medium leading-tight mt-8">
                 <span>{firstPart}</span>
                 <br />
                 <span className="text-blue-600">{secondPart}</span>
               </h1>
 
-              <p className="mt-7.5 max-w-3xl mx-auto text-black xl:text-xl lg:text-lg text-base">
+              <p className="mt-5 max-w-3xl mx-auto text-black xl:text-xl lg:text-lg text-base">
                 {item?.subtitle}
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 md:mt-14 mt-10 justify-center px-4">
+              <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center px-4">
                 {item?.buttons?.map((btn, index) => (
                   <Button
                     key={btn.id}

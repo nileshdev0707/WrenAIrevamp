@@ -119,7 +119,7 @@ function createBlogGetStaticProps(options = {}) {
       // Extract the actual data from Strapi response structure
       const pageData =
         blogPageData?.data?.attributes ?? blogPageData?.data ?? null;
-      const blogs = blogsData?.data || [];
+      let blogs = blogsData?.data || [];
       const categories = categoriesData?.data || [];
 
       // Build dynamic categories array
@@ -134,6 +134,20 @@ function createBlogGetStaticProps(options = {}) {
           };
         }),
       ];
+
+      // Sort the blogs array by publishedDate in descending order (newest first)
+      blogs.sort(function(a, b) {
+        // We can directly compare the ISO date strings (YYYY-MM-DD)
+        // as string comparison will work correctly for sorting dates in this format.
+        // For descending order, we want b to come before a if b's date is later (greater).
+        if (b.publishedDate < a.publishedDate) {
+          return -1; // b comes first
+        }
+        if (b.publishedDate > a.publishedDate) {
+          return 1;  // a comes first
+        }
+        return 0; // dates are equal
+      });
 
       return {
         props: {

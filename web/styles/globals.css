@@ -3,27 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Equal height cards for Stories component */
-.slick-slide {
-  height: auto !important;
-  display: flex !important;
-  align-items: stretch !important;
-}
-
-.slick-slide > div {
-  height: 100% !important;
-  width: 100% !important;
-}
-
-.slick-track {
-  display: flex !important;
-  align-items: stretch !important;
-}
-
-.slider-main-container .slick-slide {
-  height: auto !important;
-}
-
 html, body, #__next { height: 100%; }
 body { @apply bg-white text-gray-800 antialiased; }
 
@@ -314,20 +293,6 @@ body { @apply bg-white text-gray-800 antialiased; }
   -webkit-text-fill-color: transparent;
   pointer-events: none;
 }
-
-@keyframes pulse-glow-animation {
-  0% {
-    transform: translateY(40px); 
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-} 
-
-.animate-pulse-glow-on-hover{
-  animation:  pulse-glow-animation 0.8s ease-out forwards;
-  opacity: 0;
-  will-change: transform, opacity; 
+.custom-dotted-border {
+    border-style: dashed;
 }

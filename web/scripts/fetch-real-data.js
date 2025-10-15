@@ -90,7 +90,7 @@ async function fetchAllContent() {
     "support-page",
     "blogs",
     "categories",
-    "blog-page"
+    "blog-page",
   ];
 
   for (const locale of LOCALES) {
@@ -105,10 +105,19 @@ async function fetchAllContent() {
 
     for (const contentType of contentTypes) {
       try {
-        const data = await fetchFromStrapi(contentType, {
+        const params = {
           "filters[locale][$eq]": locale,
           populate: "*",
-        });
+        };
+
+        // Add pagination for blogs to fetch all data
+        if (contentType === "blogs") {
+          params["pagination[page]"] = 1;
+          params["pagination[pageSize]"] = 1000;
+          params["sort"] = "publishedDate:desc";
+        }
+
+        const data = await fetchFromStrapi(contentType, params);
 
         if (data && data.data) {
           allContent[locale][contentType] = data;

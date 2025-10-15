@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { base } from "../../service/serviceConfig";
-import Badge from "../common/Badge";
 
 export default function WhatIsWrenAI({ data }) {
   return (
@@ -13,13 +12,18 @@ export default function WhatIsWrenAI({ data }) {
           <div key={index} className="mt-5 lg:p-6">
             <div className="flex items-center justify-center mb-8">
               <div className="text-center">
-                <Badge variant="primary" showDot dotColor="primary" size="md">{badge}</Badge>
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mt-8 sm:px-0 px-4">
+                <button className="border bg-white border-blue-600 text-black px-4 py-2 rounded-full font-medium text-sm shadow-sm">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-blue-600" />
+                    {badge}
+                  </div>
+                </button>
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mt-8">
                   {parts[0]}
                   <span className="text-blue-600">#1 Generative BI</span>
                   {parts[1]}
                 </h1>
-                <p className="text-gray-600 mt-4 sm:px-0 px-4">{subtitle}</p>
+                <p className="text-gray-600 mt-4">{subtitle}</p>
               </div>
             </div>
 
@@ -121,7 +125,7 @@ export default function WhatIsWrenAI({ data }) {
                 );
               })}
             </div>
-            <div className="lg:hidden grid sm:grid-cols-2 grid-cols-1 gap-4 pt-5 sm:px-5 px-4">
+            <div className="lg:hidden grid sm:grid-cols-2 grid-cols-1 gap-4 pt-5 px-5">
               {WhatisWrenAIItem?.map((item, i) => {
                 const url = item?.icon?.url;
                 return (
