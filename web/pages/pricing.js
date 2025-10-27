@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Hero from "../components/pricing/hero";
 import Tiers from "../components/pricing/tiers";
 import ContentBlock from "../components/pricing/contantBlock";
@@ -17,9 +17,14 @@ export default function Pricing({ pricingData }) {
   const heroImage = pricingData?.hero?.[0]?.backgroundimage?.url;
   const tiers =
     selectedPlan === 0 ? pricingData?.tiers : pricingData?.tiersHosted;
-
+  const compareRef = useRef(null);
   // Extract SEO data from product page data
   const seoData = pricingData?.seo;
+  const scrollToComparison = () => {
+    if (compareRef.current) {
+      compareRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <Layout
       seoData={seoData}
@@ -51,13 +56,14 @@ export default function Pricing({ pricingData }) {
                   tiers={pricingData?.tiers}
                   billing={billing}
                   selectedPlan={selectedPlan}
+                  onSeeDetails={scrollToComparison}
                 />
               ) : (
                 <></>
               )
             ) : (
               pricingData?.tiersHosted?.length && (
-                <TiersHosted tiers={pricingData?.tiersHosted} />
+                <TiersHosted tiers={pricingData?.tiersHosted} onSeeDetails={scrollToComparison}/>
               )
             )}
           </div>
@@ -86,7 +92,9 @@ export default function Pricing({ pricingData }) {
         {/* Feature comparison */}
 
         {tiers?.length > 0 && (
-          <ComparePlan tiers={tiers} selectedPlan={selectedPlan} />
+          <div ref={compareRef}>
+            <ComparePlan tiers={tiers} selectedPlan={selectedPlan} />
+          </div>
         )}
 
         {/* FAQ */}

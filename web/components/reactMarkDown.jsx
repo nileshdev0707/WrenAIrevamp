@@ -37,6 +37,9 @@ export default function ReactMarkdownDetails({ data }) {
           {...props}
         />
       ),
+      pre: ({ node, ...props }) => (
+        <pre className="block overflow-x-auto bg-black text-white p-4 my-3" {...props} />
+      ),
     }}
   >
     {data}
