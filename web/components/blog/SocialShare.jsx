@@ -114,18 +114,20 @@ export default function SocialShare({ title, url, blogPageData, post }) {
 
         <div className="flex flex-col gap-5">
           <span className="font-medium text-black text-base">Stay updated</span>
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 18 18"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0 0C9.9411 0 18 8.0589 18 18H15C15 9.7157 8.2843 3 0 3V0ZM0 7C6.07513 7 11 11.9249 11 18H8C8 13.5817 4.41828 10 0 10V7ZM0 14C2.20914 14 4 15.7909 4 18H0V14Z"
-              fill="#B3B3B3"
-            />
-          </svg>
+          <a href="/post/rss.xml">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 18 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0C9.9411 0 18 8.0589 18 18H15C15 9.7157 8.2843 3 0 3V0ZM0 7C6.07513 7 11 11.9249 11 18H8C8 13.5817 4.41828 10 0 10V7ZM0 14C2.20914 14 4 15.7909 4 18H0V14Z"
+                fill="#B3B3B3"
+              />
+            </svg>
+          </a>
         </div>
       </div>
     </div>

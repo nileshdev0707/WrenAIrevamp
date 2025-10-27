@@ -16,7 +16,7 @@ export default function Sla({ slaPageData }) {
       pageTitle="Service Level Agreement - Wren AI"
       pageDescription="Wren AI Service Level Agreement - Terms and conditions for our services"
     >
-      <div className="sm:px-6 px-4 max-w-6xl mx-auto">
+      <div className="px-6 max-w-6xl mx-auto">
         {slaPageData?.hero?.length && (
           <div
             style={{

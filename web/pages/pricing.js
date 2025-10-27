@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import Hero from "../components/pricing/hero";
 import Tiers from "../components/pricing/tiers";
 import ContentBlock from "../components/pricing/contantBlock";
@@ -17,14 +17,9 @@ export default function Pricing({ pricingData }) {
   const heroImage = pricingData?.hero?.[0]?.backgroundimage?.url;
   const tiers =
     selectedPlan === 0 ? pricingData?.tiers : pricingData?.tiersHosted;
-  const compareRef = useRef(null);
+
   // Extract SEO data from product page data
   const seoData = pricingData?.seo;
-  const scrollToComparison = () => {
-    if (compareRef.current) {
-      compareRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
   return (
     <Layout
       seoData={seoData}
@@ -33,11 +28,12 @@ export default function Pricing({ pricingData }) {
       <div>
         {pricingData?.hero?.length && (
           <div
-          style={{
-            backgroundImage: safeBackgroundImage(heroImage),
-            WebkitBackgroundSize: "contain",
-          }}
-          className="bg-no-repeat sm:py-16 py-10 max-w-6xl mx-auto bg-contain"
+            style={{
+              backgroundImage: safeBackgroundImage(heroImage),
+              WebkitBackgroundSize: "100% 100%",
+              backgroundPosition: "center top",
+            }}
+            className="bg-no-repeat py-16 max-w-6xl mx-auto bg-contain"
           >
             {pricingData?.hero?.length && (
               <Hero
@@ -55,19 +51,19 @@ export default function Pricing({ pricingData }) {
                   tiers={pricingData?.tiers}
                   billing={billing}
                   selectedPlan={selectedPlan}
-                  onSeeDetails={scrollToComparison}
                 />
               ) : (
                 <></>
               )
             ) : (
               pricingData?.tiersHosted?.length && (
-                <TiersHosted tiers={pricingData?.tiersHosted} onSeeDetails={scrollToComparison}/>
+                <TiersHosted tiers={pricingData?.tiersHosted} />
               )
             )}
           </div>
         )}
 
+        <div id="credit-pricing"/>
         {/* Content Block */}
         {selectedPlan === 0 ? (
           pricingData?.ContentBlock?.length && (
@@ -78,7 +74,7 @@ export default function Pricing({ pricingData }) {
         )}
 
         {/* Trusted Logos */}
-        <div className="md:py-20 py-10 px-4">
+        <div className="py-20 px-3">
           {pricingData?.TrustedBy?.length && (
             <Logos
               items={pricingData?.TrustedBy}
@@ -90,9 +86,7 @@ export default function Pricing({ pricingData }) {
         {/* Feature comparison */}
 
         {tiers?.length > 0 && (
-          <div ref={compareRef}>
-            <ComparePlan tiers={tiers} selectedPlan={selectedPlan} />
-          </div>
+          <ComparePlan tiers={tiers} selectedPlan={selectedPlan} />
         )}
 
         {/* FAQ */}

@@ -91,6 +91,7 @@ async function fetchAllContent() {
     "blogs",
     "categories",
     "blog-page",
+    "affiliate-agreement-page"
   ];
 
   for (const locale of LOCALES) {

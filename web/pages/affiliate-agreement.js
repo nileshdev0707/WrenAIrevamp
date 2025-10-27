@@ -4,20 +4,21 @@ import { safeBackgroundImage } from "../utils/ssrHelpers";
 import ReactMarkdownDetails from "../components/reactMarkDown";
 import { createCustomGetStaticProps } from "../lib/getStaticProps";
 
-export default function TermsOfUse({ termsPageData }) {
-  const heroImage = termsPageData?.hero?.[0]?.backgroundimage?.url;
+export default function AffiliateAgreement({ affiliateAgreementPageData }) {
+  const heroImage = affiliateAgreementPageData?.Hero?.[0]?.backgroundImage?.url;
 
-  // Extract SEO data from terms page data
-  const seoData = termsPageData?.seo?.[0] || termsPageData?.seo;
+  // Extract SEO data from affiliate agreement page data
+  const seoData =
+    affiliateAgreementPageData?.seo?.[0] || affiliateAgreementPageData?.seo;
 
   return (
     <Layout
       seoData={seoData}
-      pageTitle="Wren AI | EULA"
-      pageDescription="Wren AI - End-user License Agreement"
+      pageTitle="Affiliate Agreement - Wren AI"
+      pageDescription="Wren AI Affiliate Agreement - Terms and conditions for our affiliate program"
     >
       <div className="px-6 max-w-6xl mx-auto">
-        {termsPageData?.hero?.length && (
+        {affiliateAgreementPageData?.Hero?.length && (
           <div
             style={{
               backgroundImage: safeBackgroundImage(heroImage),
@@ -26,31 +27,31 @@ export default function TermsOfUse({ termsPageData }) {
             }}
             className="bg-no-repeat py-16 max-w-6xl mx-auto bg-cover"
           >
-            <section className="py-10 md:py-16 text-center">
-              {termsPageData?.hero?.map((item, index) => (
+            <section className="py-3 sm:py-16 text-center">
+              {affiliateAgreementPageData?.Hero?.map((item, index) => (
                 <div key={index}>
-                  <h1 className="text-3xl sm:text-4xl lg:text-6xl font-medium leading-tight xl:pt-25 lg:pt-20 md:pt-15 pt-10">
-                    {item?.title?.split("EULA").map((part, idx) =>
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium leading-tight xl:pt-25 lg:pt-20 md:pt-15 pt-10">
+                    {item?.title?.split("Affiliate Program").map((part, idx) =>
                       idx === 0 ? (
                         <span key={idx}>
                           {part} <br />
                         </span>
                       ) : (
-                        <span key={idx}>EULA</span>
+                        <span key={idx}>Affiliate Program</span>
                       )
                     )}
                   </h1>
                   <p className="pt-10 max-w-2xl mx-auto text-black xl:text-xl lg:text-lg text-base">
-                    {item?.subtitle}
+                    {item?.subTitle}
                   </p>
                 </div>
               ))}
             </section>
           </div>
         )}
-        {termsPageData?.descriptionDetails && (
+        {affiliateAgreementPageData?.html && (
           <div className="max-w-4xl mx-auto md:py-12">
-            <ReactMarkdownDetails data={termsPageData?.descriptionDetails} />
+            <ReactMarkdownDetails data={affiliateAgreementPageData?.html} />
           </div>
         )}
       </div>
@@ -59,4 +60,6 @@ export default function TermsOfUse({ termsPageData }) {
 }
 
 // Static data loading function
-export const getStaticProps = createCustomGetStaticProps("terms-page");
+export const getStaticProps = createCustomGetStaticProps(
+  "affiliate-agreement-page"
+);

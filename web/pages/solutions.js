@@ -28,7 +28,7 @@ export default function Solutions({ solutionsPageData }) {
       pageTitle="Wren AI | Enterprise-Grade Generative BI Solution"
       pageDescription="Empower your organization with scalable AI-powered analytics, secure deployments, and LLM-agnostic Intelligent AI Modeling — built for data-driven enterprises.">
       {solutionsPageData?.hero?.length > 0 && (
-        <div className="max-w-7xl mx-auto lg:px-6 md:px-4 px-4">
+        <div className="max-w-7xl mx-auto lg:px-6 md:px-4 px-2">
           <SolutionHero data={solutionsPageData} />
           <SolutionsTab
             data={solutionsPageData}

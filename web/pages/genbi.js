@@ -30,7 +30,7 @@ export default function Product({ productPageData }) {
             WebkitBackgroundSize: "100% 100%",
             backgroundPosition: "center top",
           }}
-          className="bg-no-repeat pt-24 max-w-6xl mx-auto bg-content"
+          className="bg-no-repeat pt-24 max-w-6xl mx-auto"
         >
           {/* Product Hero */}
           {productPageData?.productHero?.length && (

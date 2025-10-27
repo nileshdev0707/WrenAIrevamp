@@ -6,7 +6,7 @@ export default function BlogHero({ data, blogs }) {
   const featuredPost = blogs.find((post) => post.isFeatured) || blogs[0];
 
   return (
-    <section className="sm:pt-10 pt-5 md:pt-16 sm:px-6 px-4">
+    <section className="pt-10 md:pt-16 sm::px-6 px-4">
       {data?.map((item, index) => {
         const words = item?.title?.split(" ");
         const firstPart = words.slice(0, 3).join(" ");
@@ -29,7 +29,7 @@ export default function BlogHero({ data, blogs }) {
 
       {featuredPost && (
         <div
-          className="cursor-pointer sm:flex sm:gap-8 md:gap-10 md:px-10 gap-5 lg:pt-22 pt-10 lg:px-20 xl:px-75"
+          className="cursor-pointer sm:flex sm:gap-8 md:gap-10 md:px-10 gap-5 lg:pt-22 pt-10 lg:px-20"
           onClick={() => window.open(`/post/${featuredPost?.slug}`, "_self")}
         >
           <div className="w-full sm:w-1/2">

@@ -23,6 +23,9 @@ export default function ReactMarkdownDetails({ data }) {
       ul: ({ node, ...props }) => (
         <ul className="list-disc list-inside pl-5 space-y-2 mb-4 text-black" {...props} />
       ),
+      ol: ({ node, ...props}) => (
+        <ol className="list-decimal list-inside pl-5 space-y-2 mb-4 text-black" {...props} />
+      ),
       li: ({ node, ...props }) => (
         <li className="text-black" {...props} />
       ),
@@ -33,9 +36,6 @@ export default function ReactMarkdownDetails({ data }) {
           rel="noopener noreferrer"
           {...props}
         />
-      ),
-      pre: ({ node, ...props }) => (
-        <pre className="block overflow-x-auto bg-black text-white p-4 my-3" {...props} />
       ),
     }}
   >

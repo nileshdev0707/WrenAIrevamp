@@ -84,7 +84,7 @@ export default function Blog({
         <div
           style={{
             backgroundImage: safeBackgroundImage(heroImage),
-            WebkitBackgroundSize: "contain",
+            WebkitBackgroundSize: "100% 100%",
             backgroundPosition: "center top",
           }}
           className="bg-no-repeat pt-24 max-w-8xl mx-auto"
@@ -93,7 +93,7 @@ export default function Blog({
         </div>
 
         {/* Blog Content */}
-        <div className="max-w-7xl mx-auto lg:pb-15 pb-10 sm:px-5 px-4">
+        <div className="max-w-7xl mx-auto lg:pb-15 pb-10 px-5">
           {/* Category Filter - only show if not using BlogHero with integrated categories */}
           <CategoryFilter
             categories={categories}

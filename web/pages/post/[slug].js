@@ -134,7 +134,7 @@ export default function BlogPost({ post, relatedPosts, blogPageData }) {
                     `${base}${post.featuredImage.url}`
                   }
                   alt={post.title}
-                  className="w-full h-64 md:h-96 object-cover rounded-lg"
+                  className="w-full h-auto object-cover rounded-lg"
                 />
               </div>
             )}

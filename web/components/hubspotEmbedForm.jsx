@@ -44,7 +44,7 @@ export const HubspotEmbedForm = ({ formId, onLoad, hideClass = false }) => {
     }
 
     return (
-        <div id="hubspotFormContainer" className={hideClass ? '' : "lg:px-20 max-w-3xl mx-auto sm:px-5"}>
+        <div id="hubspotFormContainer" className={hideClass ? '' : "lg:px-20 max-w-3xl mx-auto px-5"}>
             {!scriptLoaded && (
                 <Script
                     id="hubspotFormLibrary"

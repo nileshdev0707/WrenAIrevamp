@@ -3,8 +3,8 @@ import { base } from "../../service/serviceConfig";
 
 export default function OpenSourceDetails({ data }) {
   return (
-    <section className="bg-[#F7FBFE] sm:py-10 py-8 md:pb-15 md:pt-20">
-      <div className="max-w-6xl mx-auto xl:px-0 sm:px-10 px-4">
+    <section className="bg-[#F7FBFE] py-10 md:pb-15 md:pt-20">
+      <div className="max-w-6xl mx-auto xl:px-0 px-10">
         {data?.map((item) => {
           const { WrenAI, wrenEngineAI, image } = item;
           const imageUrl = image?.url;
@@ -29,9 +29,9 @@ export default function OpenSourceDetails({ data }) {
               </div>
 
               {/* Boxes + Center */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:items-center lg:gap-15 sm:gap-8 gap-5 md:mt-10 mt-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:items-center lg:gap-15 gap-8 mt-10">
                 {/* Left box */}
-                <div className="bg-white rounded-xl border border-gray-200 sm:py-6 py-5 sm:px-10 px-5">
+                <div className="bg-white rounded-xl border border-gray-200 py-6 px-10">
                   <h3 className="text-lg font-semibold">{WrenAI?.title}</h3>
                   <p className="text-sm text-gray-500">{WrenAI?.subTitle}</p>
                   <p className="mt-2 text-gray-700 text-sm leading-relaxed pt-5">
@@ -66,7 +66,7 @@ export default function OpenSourceDetails({ data }) {
                 </div>
 
                 {/* Right box */}
-                <div className="bg-white rounded-xl border border-gray-200 sm:py-6 py-5 sm:px-10 px-5">
+                <div className="bg-white rounded-xl border border-gray-200 py-6 px-10">
                   <h3 className="text-lg font-semibold">
                     {wrenEngineAI?.title}
                   </h3>

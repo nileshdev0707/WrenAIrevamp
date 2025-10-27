@@ -7,8 +7,14 @@ export default function DocumentHero({ data }) {
   const [activeIndex, setActiveIndex] = useState(0);
   return (
     <div
+      style={{
+        backgroundImage: safeBackgroundImage(heroImage),
+        WebkitBackgroundSize: "100%",
+        backgroundPosition: "center top",
+      }}
+      className="bg-no-repeat pt-24 pb-10 max-w-6xl mx-auto bg-contain"
     >
-      <section className="md:py-16 text-center sm:px-6 px-4 py-10 sm:mt-10 mt-5">
+      <section className="md:py-16 text-center sm:px-6 px-4">
         {data?.map((item, index) => {
           const words = item?.title?.split(" ");
           const firstPart = words.slice(0, 2).join(" ");
@@ -27,7 +33,7 @@ export default function DocumentHero({ data }) {
               <p className="mt-5 max-w-3xl mx-auto text-black xl:text-xl lg:text-lg text-base">
                 {item?.subtitle}
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 sm:mt-14 mt-8 justify-center sm:px-4">
+              <div className="flex flex-col sm:flex-row gap-3 mt-14 justify-center px-4">
                 {item?.buttons?.map((btn, index) => (
                   <Button
                     key={btn.id}

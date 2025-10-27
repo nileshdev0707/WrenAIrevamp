@@ -7,7 +7,7 @@ export default function HomeCTA({ data, tab }) {
   const getUrl = useLocalizedUrl();
   return (
     <section className={`max-w-7xl mx-auto lg:px-6 sm:py-10 py-4 md:py-16 ${tab === "elite" || tab === "affiliate" ? '' : 'px-4'}`}>
-      <div className="rounded-2xl bg-blue-600 text-white md:px-16 sm:px-8 sm:py-10 py-5 px-4 group transition-colors duration-300">
+      <div className="rounded-2xl bg-blue-600 text-white md:px-16 sm:px-8 py-10 px-4 group transition-colors duration-300">
         {data?.map((item, index) => {
           const url = item.image?.url;
           return (
@@ -23,7 +23,7 @@ export default function HomeCTA({ data, tab }) {
                     </Link>
                   )}
 
-                  <h3 className={`${(tab === "elite" || tab === "affiliate") ? ' md:mt-8 mt-4' : 'mt-0'} md:text-3xl text-2xl lg:text-4xl md:font-medium font-normal  max-w-md group-hover:opacity-95 transition-opacity duration-300`}>
+                  <h3 className="md:text-3xl text-2xl lg:text-4xl md:font-medium font-normal md:mt-8 mt-4 max-w-md group-hover:opacity-95 transition-opacity duration-300">
                     {item?.title}
                   </h3>
 
